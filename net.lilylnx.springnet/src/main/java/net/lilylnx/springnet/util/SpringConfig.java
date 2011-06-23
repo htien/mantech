@@ -27,6 +27,10 @@ public class SpringConfig extends PropertiesConfiguration {
       throw new CommonException(e.getMessage());
     }
   }
+  
+  public String getApplicationPath() {
+    return this.getString(ConfigKeys.APPLICATION_PATH);
+  }
 
   private void loadProps() throws ConfigurationException, Exception {
     this.load(this.getClass().getResourceAsStream(ConfigKeys.SYSTEMGLOBALS_PROPS_PATH));

@@ -18,9 +18,9 @@
 
 	<bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<property name="mappings">
-			<props>
-				<prop key="/index.htm">indexController</prop>
-			</props>
+			<value>
+				/index.htm=indexController
+			</value>
 		</property>
 	</bean>
 

@@ -4,7 +4,7 @@
   <description>SpringNet Project - Java web application based on Spring MVC Framework</description>
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:/spring-config/application-context.xml</param-value>
+    <param-value>classpath:/application.xml</param-value>
   </context-param>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

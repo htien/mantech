@@ -18,7 +18,7 @@
 
 	<bean id="net.lilylnx.springnet.util.SpringConfig" class="net.lilylnx.springnet.util.SpringConfig" autowire="constructor"/>
 	
-	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
+	<bean id="annotationHandlerMapping" class="net.lilylnx.springnet.MyAnnotationHandlerMapping"/>
 	<!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>-->
 	<!--<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>-->
 

@@ -2,3 +2,4 @@
 .springBeans
 bin
 target
+net.lilylnx.springnet/src/main/resources/spring-config/spring-custom.properties

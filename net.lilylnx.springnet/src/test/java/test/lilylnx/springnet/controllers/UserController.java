@@ -22,7 +22,7 @@ import net.lilylnx.springnet.util.ConfigKeys;
  * @version $Id: UserController.java,v 1.0 2011/06/16 16:17:20 lilylnx Exp $
  */
 @Controller
-@RequestMapping("/test/userRegister" + ConfigKeys.EXT)
+@RequestMapping("/test/userRegister")
 @SessionAttributes("user")
 public class UserController {
 

@@ -4,8 +4,6 @@
  */
 package test.lilylnx.springnet.controllers;
 
-import net.lilylnx.springnet.util.ConfigKeys;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,6 +14,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import test.lilylnx.springnet.domains.User;
 import test.lilylnx.springnet.services.UserService;
+
+import net.lilylnx.springnet.util.ConfigKeys;
 
 /**
  * @author Tien Nguyen

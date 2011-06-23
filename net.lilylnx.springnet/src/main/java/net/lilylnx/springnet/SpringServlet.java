@@ -7,12 +7,12 @@ package net.lilylnx.springnet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
-import net.lilylnx.springnet.util.ConfigKeys;
-import net.lilylnx.springnet.util.SpringConfig;
-
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
+
+import net.lilylnx.springnet.util.ConfigKeys;
+import net.lilylnx.springnet.util.SpringConfig;
 
 /**
  * Đây là Servlet chính, kế thừa từ DispatcherServlet của SpringMVC

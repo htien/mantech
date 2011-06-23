@@ -8,10 +8,10 @@ import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Properties;
 
-import net.lilylnx.springnet.core.exceptions.CommonException;
-
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
+
+import net.lilylnx.springnet.core.exceptions.CommonException;
 
 /**
  * @author Tien Nguyen

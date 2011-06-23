@@ -4,10 +4,10 @@
  */
 package test.lilylnx.springnet.controllers;
 
-import net.lilylnx.springnet.util.ConfigKeys;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import net.lilylnx.springnet.util.ConfigKeys;
 
 /**
  * @author Tien Nguyen

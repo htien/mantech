@@ -16,12 +16,12 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-        <property name="mappings">
-            <props>
-                <prop key="/index.htm">indexController</prop>
-            </props>
-        </property>
-    </bean>
+	<bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/index.htm">indexController</prop>
+			</props>
+		</property>
+	</bean>
 
 </beans>

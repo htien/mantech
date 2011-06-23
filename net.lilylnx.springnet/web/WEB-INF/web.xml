@@ -16,7 +16,7 @@
     <servlet-class>net.lilylnx.springnet.SpringServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:/spring-config/springnet.xml</param-value>
+      <param-value>classpath:/springnet.xml</param-value>
     </init-param>
     <load-on-startup>2</load-on-startup>
   </servlet>

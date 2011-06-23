@@ -18,10 +18,11 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
     
-    <import resource="spring/controllers.xml"/>
-    <import resource="spring/services.xml"/>
-    <import resource="spring/urlmappings.xml"/>
-    <import resource="spring/misc.xml"/>
+    <import resource="/spring-config/spring/repositories.xml"/>
+	<import resource="/spring-config/spring/controllers.xml"/>
+	<import resource="/spring-config/spring/services.xml"/>
+	<import resource="/spring-config/spring/urlmappings.xml"/>
+	<import resource="/spring-config/spring/misc.xml"/>
 	
 	<!-- SCANS ALL MATCHING PACKAGES FOR COMPONENTS -->	
 	<context:component-scan base-package="net.lilylnx.springnet.controllers"/>
@@ -29,9 +30,9 @@
 	
 	<!-- ALLOWS FOR ANNOTATION MAPPING FOR CONTROLLERS
 	<mvc:annotation-driven/>-->
-    
-    <!-- ADDS PREFIX AND SUFFIX TO RETURNED VIEWS -->
-    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-        p:prefix="/WEB-INF/views/" p:suffix=".jsp"/>
+	
+	<!-- ADDS PREFIX AND SUFFIX TO RETURNED VIEWS -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/WEB-INF/views/" p:suffix=".jsp"/>
 
 </beans>

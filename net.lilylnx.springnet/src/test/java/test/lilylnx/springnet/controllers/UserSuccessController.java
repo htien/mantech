@@ -4,6 +4,8 @@
  */
 package test.lilylnx.springnet.controllers;
 
+import net.lilylnx.springnet.util.ConfigKeys;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class UserSuccessController {
 
-  @RequestMapping("/test/userSuccess")
+  @RequestMapping("/test/userSuccess" + ConfigKeys.EXT)
   public String redirect() {
     return "/test/userSuccess";
   }

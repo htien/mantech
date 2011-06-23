@@ -4,6 +4,8 @@
  */
 package test.lilylnx.springnet.controllers;
 
+import net.lilylnx.springnet.util.ConfigKeys;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,7 +22,7 @@ import test.lilylnx.springnet.services.UserService;
  * @version $Id: UserController.java,v 1.0 2011/06/16 16:17:20 lilylnx Exp $
  */
 @Controller
-@RequestMapping("/test/userRegister")
+@RequestMapping("/test/userRegister" + ConfigKeys.EXT)
 @SessionAttributes("user")
 public class UserController {
 
@@ -38,7 +40,7 @@ public class UserController {
   @RequestMapping(method = RequestMethod.POST)
   public String onSubmit(@ModelAttribute("user") User user) {
     userService.add(user);
-    return "redirect:/test/userSuccess.htm";
+    return "redirect:/test/userSuccess" + ConfigKeys.EXT;
   }
 
   @Autowired

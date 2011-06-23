@@ -16,6 +16,7 @@ public class ConfigKeys {
   
   public static final String SYSTEMGLOBALS_PROPS_PATH = "/spring-config/SystemGlobals.properties";
   public static final String SPRING_CUSTOM_PROPS_PATH = "/spring-config/spring-custom.properties";
+  public static final String EXT = ".htm";
   
   private ConfigKeys() {}
   

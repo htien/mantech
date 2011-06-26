@@ -1,10 +1,10 @@
 ### Typically *NIX text editors, by default, append '~' to files on saving to make backups
 *~
 
-# Gradle work directory
+### Gradle work directory
 .gradle
 
-### Build output directies
+### Build output directories
 bin
 target
 

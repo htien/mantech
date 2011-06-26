@@ -36,33 +36,36 @@ public class SpringServlet extends DispatcherServlet {
   public SpringServlet() {}
 
   /**
+   * Phương thức init() được thực hiện ngay sau khi servlet này được khởi tạo xong.
    * @see javax.servlet.GenericServlet#init(javax.servlet.ServletConfig)
    */
   @Override
   public void init(ServletConfig config) throws ServletException {
+    super.init(config);
+    
     logger.info("<<< INITIALIZING THE MODULES >>>");
 
-    super.init(config);
-
-    // ContextAttribute name lúc đầu là null, nên gán ConfigKeys để thông qua đó
-    // lấy được ApplicationContext dễ dàng
+    // contextAttribute là null, gán ConfigKeys để thông qua đó lấy được ApplicationContext dễ dàng
     this.setContextAttribute(ConfigKeys.SPRING_CONTEXT);
 
-    // Gắn ApplicationContext vào ServletContext với ConfigKeys
+    // Gắn ApplicationContext vào ServletContext với SPRING_CONTEXT key
     ApplicationContext beanFactory = (ApplicationContext)this.getServletContext()
       .getAttribute(this.getServletContextAttributeName());
     this.getServletContext().setAttribute(ConfigKeys.SPRING_CONTEXT, beanFactory);
 
-    // Lấy SpringConfig từ tập tin cấu hình và gán đường dẫn thực của website vào đó
+    // Lấy SpringConfig bean từ tập tin cấu hình và gán đường dẫn thực của website vào đó
     this.config = (SpringConfig)beanFactory.getBean(SpringConfig.class.getName());
     
     String appPath = this.getServletContext().getRealPath("");
-    logger.info(String.format("Deploy in [%s]", appPath));
     this.config.setProperty(ConfigKeys.APPLICATION_PATH, appPath);
-    
+
+    logger.info(String.format("Deploy in [%s]", appPath));
     logger.info("<<< FINISHED >>>");
   }
 
+  /**
+   * Phương thức này được thực thi với mỗi request từ client.
+   */
   @Override
   protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     super.service(req, resp);

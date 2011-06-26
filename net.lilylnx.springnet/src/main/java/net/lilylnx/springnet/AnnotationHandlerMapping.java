@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMa
  * @author Tien Nguyen
  * @version $Id: MyAnnotationHandlerMapping.java,v 1.0 2011/06/23 21:27:00 lilylnx Exp $
  */
-public class MyAnnotationHandlerMapping extends DefaultAnnotationHandlerMapping {
+public class AnnotationHandlerMapping extends DefaultAnnotationHandlerMapping {
 
   @Override
   protected void addUrlsForPath(Set<String> urls, String path) {

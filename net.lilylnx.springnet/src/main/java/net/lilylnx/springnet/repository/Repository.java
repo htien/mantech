@@ -5,7 +5,7 @@
 package net.lilylnx.springnet.repository;
 
 /**
- * Generic / Các thao tác chung để xử lý kho chứ (repository).
+ * Generic / Các thao tác chung để xử lý kho chứa (repository).
  * 
  * @author Tien Nguyen
  * @version $Id: Repository.java,v 1.0 2011/06/23 1:58:09 lilylnx Exp $

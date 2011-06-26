@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:jee="http://www.springframework.org/schema/jee"
 	xmlns:lang="http://www.springframework.org/schema/lang"
@@ -9,6 +10,7 @@
 	xmlns:task="http://www.springframework.org/schema/task"
 	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
 		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.0.xsd
@@ -18,8 +20,16 @@
 
 	<bean id="net.lilylnx.springnet.util.SpringConfig" class="net.lilylnx.springnet.util.SpringConfig" autowire="constructor"/>
 	
-	<bean id="annotationHandlerMapping" class="net.lilylnx.springnet.MyAnnotationHandlerMapping"/>
+	<bean id="annotationHandlerMapping" class="net.lilylnx.springnet.AnnotationHandlerMapping"/>
 	<!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>-->
 	<!--<bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>-->
+	
+	<!-- Factory Beans -->
+	<bean id="javax.http.servlet.HttpServletRequest" class="net.lilylnx.springnet.core.support.spring.HttpServletRequestFactoryBean">
+	   <aop:scoped-proxy/>
+	</bean>
+	<bean id="javax.http.servlet.HttpServletResponse" class="net.lilylnx.springnet.core.support.spring.HttpServletResponseFactoryBean">
+	   <aop:scoped-proxy/>
+	</bean>
 
 </beans>

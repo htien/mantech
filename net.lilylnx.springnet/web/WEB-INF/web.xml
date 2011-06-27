@@ -4,10 +4,10 @@
   <description>SpringNet Project - Java web application based on Spring MVC Framework</description>
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:/application.xml</param-value>
+    <param-value>classpath:/META-INF/application.xml</param-value>
   </context-param>
   <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    <listener-class>net.lilylnx.springnet.listeners.ContextLoaderListener</listener-class>
   </listener>
 
   <!-- SERVLET FOR HANDLING ALL INCOMING REQUESTS -->
@@ -16,7 +16,7 @@
     <servlet-class>net.lilylnx.springnet.SpringServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:/springnet.xml</param-value>
+      <param-value>classpath:/META-INF/springnet.xml</param-value>
     </init-param>
     <load-on-startup>2</load-on-startup>
   </servlet>

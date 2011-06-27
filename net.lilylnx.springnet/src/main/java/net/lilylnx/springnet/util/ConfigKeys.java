@@ -15,8 +15,8 @@ public class ConfigKeys {
   public static final String CONFIG = "config";
   public static final String HTTP_SERVLET_RESPONSE = "springnet.http.servlet.response";
   
-  public static final String SYSTEMGLOBALS_PROPS_PATH = "/spring-config/SystemGlobals.properties";
-  public static final String SPRING_CUSTOM_PROPS_PATH = "/spring-config/spring-custom.properties";
+  public static final String SYSTEMGLOBALS_PROPS_PATH = "/META-INF/SystemGlobals.properties";
+  public static final String SPRING_CUSTOM_PROPS_PATH = "/META-INF/spring-custom.properties";
   public static final String EXT = ".htm";
   
   private ConfigKeys() {}

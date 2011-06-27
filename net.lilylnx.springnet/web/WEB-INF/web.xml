@@ -1,41 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-  <display-name>net.lilylnx.springnet</display-name>
-  <description>SpringNet Project - Java web application based on Spring MVC Framework</description>
-  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:/META-INF/application.xml</param-value>
-  </context-param>
-  <listener>
-    <listener-class>net.lilylnx.springnet.listeners.ContextLoaderListener</listener-class>
-  </listener>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>net.lilylnx.springnet</display-name>
+	<description>SpringNet Project - Java web application based on Spring MVC Framework</description>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:/META-INF/application.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>net.lilylnx.springnet.listeners.FirstContextListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>net.lilylnx.springnet.listeners.SpringContextLoaderListener</listener-class>
+	</listener>
 
-  <!-- SERVLET FOR HANDLING ALL INCOMING REQUESTS -->
-  <servlet>
-    <servlet-name>springnet</servlet-name>
-    <servlet-class>net.lilylnx.springnet.SpringServlet</servlet-class>
-    <init-param>
-      <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:/META-INF/springnet.xml</param-value>
-    </init-param>
-    <load-on-startup>2</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>springnet</servlet-name>
-    <url-pattern>*.htm</url-pattern>
-  </servlet-mapping>
-  
-  <!-- ERROR PAGE
-  <error-page>
-  	<exception-type>java.lang.Exception</exception-type>
-  	<location>/WEB-INF/views/error.jsp</location>
-  </error-page>-->
-  
-  <session-config>
-  	<session-timeout>15</session-timeout>
-  </session-config>
-  <welcome-file-list>
-    <welcome-file>redirect.jsp</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-  </welcome-file-list>
+	<!-- SERVLET FOR HANDLING ALL INCOMING REQUESTS -->
+	<servlet>
+		<description>SpringNet dispatcher servlet</description>
+		<servlet-name>springnet</servlet-name>
+		<servlet-class>net.lilylnx.springnet.SpringServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:/META-INF/springnet.xml</param-value>
+		</init-param>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springnet</servlet-name>
+		<url-pattern>*.htm</url-pattern>
+	</servlet-mapping>
+
+	<!-- ERROR PAGE
+	<error-page>
+		<exception-type>java.lang.Exception</exception-type> 
+		<location>/WEB-INF/views/error.jsp</location>
+	</error-page>-->
+
+	<session-config>
+		<session-timeout>15</session-timeout>
+	</session-config>
+	<welcome-file-list>
+		<welcome-file>redirect.jsp</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
 </web-app>

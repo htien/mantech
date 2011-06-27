@@ -10,9 +10,7 @@
 	<appender name="springnet.log" class="org.apache.log4j.RollingFileAppender">
 		<param name="MaxFileSize"  value="1024KB"/>
 		<param name="MaxBackupIndex" value="4"/>
-
 		<param name="File" value="/tmp/springnet.log"/>
-		
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%d %-5p [%-c{1}] - %m%n"/>
 	   </layout>

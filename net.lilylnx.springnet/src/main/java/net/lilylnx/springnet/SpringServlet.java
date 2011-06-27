@@ -42,7 +42,7 @@ public class SpringServlet extends DispatcherServlet {
   @Override
   public void init(ServletConfig config) throws ServletException {
     super.init(config);
-    
+
     logger.info("<<< INITIALIZING THE MODULES >>>");
 
     // contextAttribute là null, gán ConfigKeys để thông qua đó lấy được ApplicationContext dễ dàng
@@ -58,8 +58,12 @@ public class SpringServlet extends DispatcherServlet {
     
     String appPath = this.getServletContext().getRealPath("");
     this.config.setProperty(ConfigKeys.APPLICATION_PATH, appPath);
-
-    logger.info(String.format("Deploy in [%s]", appPath));
+    
+    for (String e : beanFactory.getBeanDefinitionNames()) {
+      logger.info("Loaded bean: " + e);
+    }
+    
+    logger.info(String.format("Deployed in [%s]", appPath));
     logger.info("<<< FINISHED >>>");
   }
 

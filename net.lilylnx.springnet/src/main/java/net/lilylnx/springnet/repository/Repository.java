@@ -11,26 +11,26 @@ package net.lilylnx.springnet.repository;
  * @version $Id: Repository.java,v 1.0 2011/06/23 1:58:09 lilylnx Exp $
  */
 public interface Repository<T> {
-  
+
   /**
    * Lấy thực thể của đối tượng dựa theo id.
    * @param id ID cần tìm kiếm
    * @return Thực thể được yêu cầu, hoặc <code>null</code> nếu không tìm thấy
    */
   T get(int id);
-  
+
   /**
    * Thêm một thực thể mới của một đối tượng vào repository.
    * @param entity Thực cần lưu
    */
   void add(T entity);
-  
+
   /**
    * Xóa một thực thể từ repository.
    * @param entity Thực thể cần xóa
    */
   void remove(T entity);
-  
+
   /**
    * Cập nhật thông tin của một thực thể trong repository.
    * @param entity Thực thể cần cập nhật

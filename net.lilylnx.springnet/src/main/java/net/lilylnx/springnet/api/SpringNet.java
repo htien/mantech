@@ -17,10 +17,8 @@ public class SpringNet {
       executionContext.execute();
     }
     catch (Exception e) {
-      // TODO
     }
     finally {
-      // TODO
     }
   }
 

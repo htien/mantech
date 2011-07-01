@@ -20,5 +20,6 @@ target
 
 ### Miscellaneous
 *.log
+*.tar.bz2
 .clover
 /net.lilylnx.springnet/src/main/resources/spring-config/spring-custom.properties

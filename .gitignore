@@ -22,4 +22,5 @@ target
 *.log
 *.tar.bz2
 .clover
+/net.lilylnx.springnet/web/WEB-INF/lib
 /net.lilylnx.springnet/src/main/resources/spring-config/spring-custom.properties

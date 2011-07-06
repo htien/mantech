@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     Jul 4, 2011 1:19:06 AM
+
+     SpringNet
+     Java Web Application
+
+     Tien Nguyen <lilylnx@users.sf.net>
+     ====================================================================== -->
+<project name="springnet-git" default="main" basedir=".">
+	<description>Java Web Application</description>
+	<property file="build.properties" />
+
+	<property environment="env" />
+	<property name="rootdir" value="${ROOTDIR}" />
+	<property name="basedir" value="." />
+
+	<property name="lib.dir" value="${PROJECT_LIB}" />
+	<property name="src.dir" value="${basedir}/src/main/java" />
+	<property name="src.dir.resources" value="${basedir}/src/main/resources" />
+	<property name="src.test.dir" value="${basedir}/src/test/java" />
+	<property name="src.test.dir.resources" value="${basedir}/src/test/resources" />
+	<property name="web.dir" value="${basedir}/web" />
+
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="build.dir.classes" value="${build.dir}/classes" />
+	<property name="build.dir.test-classes" value="${build.dir}/test-classes" />
+
+	<property name="package.name" value="${ant.project.name}-${VERSION}" />
+	<property name="dest.dir" value="${build.dir}/${package.name}" />
+	<property name="dest.dir.classes" value="${dest.dir}/WEB-INF/classes" />
+	<property name="dest.dir.lib" value="${dest.dir}/WEB-INF/lib" />
+	<property name="war.path" value="${dest.dir}.war" />
+
+	<tstamp>
+		<format property="timestamp" pattern="yyyyMMdd" />
+	</tstamp>
+
+	<path id="build.classpath">
+		<fileset dir="${lib.dir}" includes="**/*.jar" />
+		<fileset dir="${TOMCAT_HOME}" includes="**/*.jar" />
+	</path>
+
+	<!-- ================================= 
+          target: main
+         ================================= -->
+	<target name="main" depends="init, compile, package" description="Main target" />
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: depends
+         - - - - - - - - - - - - - - - - - -->
+	<target name="init">
+		<antcall target="clean" />
+	</target>
+
+	<target name="compile" description="Compilation target">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.dir.classes}" />
+		<javac srcdir="${src.dir}" destdir="${build.dir.classes}" includeantruntime="false" debug="true" verbose="false">
+			<classpath refid="build.classpath" />
+		</javac>
+		<copy todir="${build.dir.classes}" overwrite="true">
+			<fileset dir="${src.dir.resources}" />
+		</copy>
+	</target>
+
+	<target name="package" description="Compression target">
+		<copy todir="${dest.dir}" >
+			<fileset dir="${web.dir}" />
+		</copy>
+		<copy todir="${dest.dir.classes}">
+			<fileset dir="${build.dir.classes}" />
+		</copy>
+		<copy todir="${dest.dir.lib}">
+			<fileset dir="${lib.dir}" />
+		</copy>
+		<war destfile="${war.path}" casesensitive="true">
+			<fileset dir="${web.dir}" />
+			<classes dir="${build.dir.classes}" />
+			<lib dir="${lib.dir}" />
+		</war>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+	          target: clean
+         - - - - - - - - - - - - - - - - - -->
+	<target name="clean">
+		<delete failOnError="false" includeEmptyDirs="true" verbose="false">
+			<fileset dir="${build.dir}" />
+		</delete>
+	</target>
+
+</project>

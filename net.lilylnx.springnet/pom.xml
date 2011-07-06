@@ -33,11 +33,12 @@
 	<contributors>
 	</contributors>
 	<properties>
-		<finalName>${project.artifactId}-${project.version}</finalName>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
 	</properties>
 	<build>
+		<directory>target</directory>
+		<finalName>${project.artifactId}-${project.version}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -77,8 +78,7 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.1.1</version>
 				<configuration>
-					<webXml>web/WEB-INF/web.xml</webXml>
-					<packagingExcludes>WEB-INF/web.xml</packagingExcludes>
+					<webappDirectory>${basedir}/web</webappDirectory>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -102,6 +102,11 @@
 				<configuration>
 					<createChecksum>true</createChecksum>
 				</configuration>
+				<executions>
+					<execution>
+						<id>default-install</id>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

@@ -75,9 +75,9 @@
 			<fileset dir="${lib.dir}" />
 		</copy>
 		<war destfile="${war.path}" casesensitive="true">
-			<fileset dir="${web.dir}" />
-			<classes dir="${build.dir.classes}" />
-			<lib dir="${lib.dir}" />
+			<fileset dir="${dest.dir}" />
+			<classes dir="${dest.dir.classes}" />
+			<lib dir="${dest.dir.lib}" />
 		</war>
 	</target>
 

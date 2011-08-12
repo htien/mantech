@@ -15,9 +15,9 @@ import net.lilylnx.springnet.util.ConfigKeys;
 
 /**
  * @author Tien Nguyen
- * @version $Id: FirstContextListener.java,v 1.0 2011/06/28 1:10:35 lilylnx Exp $
+ * @version $Id: ServletContextListenerImpl.java,v 1.0 2011/06/28 1:10:35 lilylnx Exp $
  */
-public class FirstContextListener implements ServletContextListener {
+public class ServletContextListenerImpl implements ServletContextListener {
 
   /* (non-Javadoc)
    * @see javax.servlet.ServletContextListener#contextInitialized(javax.servlet.ServletContextEvent)

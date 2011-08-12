@@ -7,6 +7,7 @@ package net.lilylnx.springnet.listeners;
 import javax.servlet.ServletContextEvent;
 
 import org.apache.log4j.Logger;
+import org.springframework.web.context.ContextLoaderListener;
 
 /**
  * Kế thừa từ ContextLoaderListener của SpringFramework.
@@ -14,7 +15,7 @@ import org.apache.log4j.Logger;
  * @author Tien Nguyen
  * @version $Id: SpringContextLoaderListener.java,v 1.0 2011/06/27 19:35:53 lilylnx Exp $
  */
-public class SpringContextLoaderListener extends org.springframework.web.context.ContextLoaderListener {
+public class SpringContextLoaderListener extends ContextLoaderListener {
 
   private static final Logger logger = Logger.getLogger(SpringContextLoaderListener.class);
 

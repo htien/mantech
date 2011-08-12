@@ -10,7 +10,7 @@
 		<param-value>classpath:/META-INF/application.xml</param-value>
 	</context-param>
 	<listener>
-		<listener-class>net.lilylnx.springnet.listeners.FirstContextListener</listener-class>
+		<listener-class>net.lilylnx.springnet.listeners.ServletContextListenerImpl</listener-class>
 	</listener>
 	<listener>
 		<listener-class>net.lilylnx.springnet.listeners.SpringContextLoaderListener</listener-class>
@@ -23,7 +23,7 @@
 		<servlet-class>net.lilylnx.springnet.SpringServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:/META-INF/springnet.xml</param-value>
+			<param-value>classpath:/META-INF/dispatcher.xml</param-value>
 		</init-param>
 		<load-on-startup>2</load-on-startup>
 	</servlet>

@@ -18,14 +18,17 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-	<!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>-->
+	<!-- ADDS PREFIX AND SUFFIX TO RETURNED VIEWS -->
 	
-	<!-- Factory Beans -->
-	<bean id="javax.servlet.http.HttpServletRequest" class="net.lilylnx.springnet.core.support.spring.HttpServletRequestFactoryBean">
-	   <aop:scoped-proxy/>
-	</bean>
-	<bean id="javax.servlet.http.HttpServletResponse" class="net.lilylnx.springnet.core.support.spring.HttpServletResponseFactoryBean">
-	   <aop:scoped-proxy/>
-	</bean>
+	<!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
+		p:prefix="/WEB-INF/view/" p:suffix=".jsp"/> -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"
+		p:cache="true"
+		p:prefix="" p:suffix=".ftl"
+		p:allowSessionOverride="true"
+		p:exposeSpringMacroHelpers="true"
+		p:exposeRequestAttributes="true"
+		p:exposeSessionAttributes="true" />
+	<import resource="../freemarker.xml"/>
 
 </beans>

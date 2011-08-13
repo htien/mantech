@@ -32,6 +32,11 @@
 		<appender-ref ref="springnet-stdout"/>
 	</category>
 	 -->
+	 
+	<category name="freemarker">
+		<priority value="info"/>
+		<appender-ref ref="springnet-stdout"/>
+	</category>
 
 	<category name="net.lilylnx.springnet">
 		<priority value="info" />

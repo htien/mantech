@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:jee="http://www.springframework.org/schema/jee"
 	xmlns:lang="http://www.springframework.org/schema/lang"
@@ -10,29 +10,28 @@
 	xmlns:task="http://www.springframework.org/schema/task"
 	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-		http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
 		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
 		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.0.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
-    
-    <import resource="spring/repositories.xml"/>
-	<import resource="spring/controllers.xml"/>
-	<import resource="spring/services.xml"/>
-	<import resource="spring/urlmappings.xml"/>
-	<import resource="spring/misc.xml"/>
-	
-	<!-- SCANS ALL MATCHING PACKAGES FOR COMPONENTS -->	
-	<context:component-scan base-package="net.lilylnx.springnet.controllers"/>
-	<context:component-scan base-package="test.lilylnx.springnet.controllers"/>
-	
-	<!-- ALLOWS FOR ANNOTATION MAPPING FOR CONTROLLERS
-	<mvc:annotation-driven/>-->
 
-	<!-- ADDS PREFIX AND SUFFIX TO RETURNED VIEWS -->
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-		p:prefix="/WEB-INF/view/" p:suffix=".jsp"/>
+	<bean id="net.lilylnx.springnet.util.SpringConfig" class="net.lilylnx.springnet.util.SpringConfig" autowire="constructor"/>
+
+	<import resource="spring/misc.xml" />
+	<import resource="spring/repositories.xml" />
+	<import resource="spring/view.xml" />
+	<import resource="spring/controllers.xml" />
+	<import resource="spring/urlmappings.xml" />
+	<import resource="spring/services.xml" />
+
+	<!-- SCANS ALL MATCHING PACKAGES FOR COMPONENTS -->
+	<context:component-scan base-package="net.lilylnx.springnet.controllers" />
+	<context:component-scan base-package="test.lilylnx.springnet.controllers" />
+
+	<!-- ALLOWS FOR ANNOTATION MAPPING FOR CONTROLLERS
+	<mvc:annotation-driven/> -->
 
 </beans>

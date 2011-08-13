@@ -4,9 +4,13 @@
  */
 package net.lilylnx.springnet.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.ParameterizableViewController;
 
@@ -22,7 +26,17 @@ public class IndexController extends ParameterizableViewController {
 
   @Override
   protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
-    return new ModelAndView(getViewName(), "welcomeMsg", message);
+    ModelMap m = new ModelMap();
+
+    // test
+    List<String> list = new ArrayList<String>();
+    list.add("Tien");
+    list.add("Long");
+
+    m.addAttribute("welcomeMsg", message)
+     .addAttribute("listNames", list);
+    
+    return new ModelAndView(getViewName(), m);
   }
 
   public void setMessage(String message) {

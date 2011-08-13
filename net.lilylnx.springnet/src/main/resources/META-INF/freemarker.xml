@@ -18,14 +18,44 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-	<!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>-->
+	<bean id="freemarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer"
+		p:configuration-ref="freemarkerConfig" />
+
+	<bean id="freemarkerConfig" class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean"
+		p:templateLoaderPaths-ref="templateLoaderPaths"
+		p:freemarkerSettings-ref="freemarkerSettings"
+		p:freemarkerVariables-ref="freemarkerVariables" />
+
+	<bean id="contentNegotiatingViewResolver" class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver"
+		p:mediaTypes-ref="mediaTypes" />
 	
-	<!-- Factory Beans -->
-	<bean id="javax.servlet.http.HttpServletRequest" class="net.lilylnx.springnet.core.support.spring.HttpServletRequestFactoryBean">
-	   <aop:scoped-proxy/>
-	</bean>
-	<bean id="javax.servlet.http.HttpServletResponse" class="net.lilylnx.springnet.core.support.spring.HttpServletResponseFactoryBean">
-	   <aop:scoped-proxy/>
-	</bean>
+	<!-- REFERENCES -->
+
+	<bean id="fmXmlEscape" class="freemarker.template.utility.XmlEscape" />
+	<bean id="fmHtmlEscape" class="freemarker.template.utility.HtmlEscape" />
+
+	<util:list id="templateLoaderPaths">
+		<value>/WEB-INF/templates/default/</value>
+	</util:list>
+	
+	<util:map id="mediaTypes">
+		<entry key="html" value="text/html" />
+		<entry key="ftl" value="text/html" />
+		<entry key="xml" value="application/xml" />
+		<entry key="json" value="application/json" />
+	</util:map>
+
+	<util:properties id="freemarkerSettings">
+		<prop key="datetime_format">yyyy/MM/dd</prop>
+		<prop key="default_encoding">UTF-8</prop>
+		<prop key="number_format">#</prop>
+		<prop key="template_update_delay">3</prop>
+		<prop key="whitespace_stripping">true</prop>
+	</util:properties>
+
+	<util:map id="freemarkerVariables">
+		<entry key="xml_escape" value-ref="fmXmlEscape" />
+		<entry key="html_escape" value-ref="fmHtmlEscape"/>
+	</util:map>
 
 </beans>

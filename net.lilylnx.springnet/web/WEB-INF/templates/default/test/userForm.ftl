@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib uri="http://htmlcompressor.googlecode.com/taglib/compressor" prefix="compress" %>
 <compress:html enabled="true">
@@ -36,7 +34,6 @@
 			<tr>
 				<td>Community:</td>
 				<td>
-					<form:checkbox path="community" value="Hibernate" label="Hibernate"/>
 					<form:checkbox path="community" value="Spring" label="Spring"/>
 					<form:checkbox path="community" value="Struts" label="Struts"/>
 				</td>

@@ -13,7 +13,7 @@ import org.springframework.context.ApplicationContextAware;
  * @version $Id: SpringNet.java,v 1.0 2011/06/26 17:08:02 lilylnx Exp $
  */
 public class SpringNet implements ApplicationContextAware {
-  
+
   private static ApplicationContext beanFactory;
   
   public SpringNet() {}

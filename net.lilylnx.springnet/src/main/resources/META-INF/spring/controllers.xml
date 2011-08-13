@@ -16,6 +16,8 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
+	<bean id="annotationHandlerMapping" class="net.lilylnx.springnet.AnnotationHandlerMapping"/>
+
 	<bean id="indexController" class="net.lilylnx.springnet.controllers.IndexController"
 		p:viewName="index" p:message="SpringNet Project. This is my index file."/>
 

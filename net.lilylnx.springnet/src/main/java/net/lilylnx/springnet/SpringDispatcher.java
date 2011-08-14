@@ -23,17 +23,17 @@ import net.lilylnx.springnet.util.SpringConfig;
  * điều khiển các modules của hệ thống, dễ dàng thiết lập và tùy biến.
  * 
  * @author Tien Nguyen
- * @version $Id: SpringServlet.java,v 1.0 2011/06/22 15:30:33 lilylnx Exp $
+ * @version $Id: SpringDispatcher.java,v 1.0 2011/06/22 15:30:33 lilylnx Exp $
  */
-public class SpringServlet extends DispatcherServlet {
+public class SpringDispatcher extends DispatcherServlet {
 
   private static final long serialVersionUID = -6852520526268983459L;
 
-  private static final Logger logger = Logger.getLogger(SpringServlet.class);
+  private static final Logger logger = Logger.getLogger(SpringDispatcher.class);
 
   private SpringConfig config;
 
-  public SpringServlet() {}
+  public SpringDispatcher() {}
 
   /**
    * Phương thức init() được thực hiện ngay sau khi servlet này được khởi tạo xong.

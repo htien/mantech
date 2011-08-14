@@ -19,9 +19,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
 	<!-- ADDS PREFIX AND SUFFIX TO RETURNED VIEWS -->
-	
-	<!-- <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
-		p:prefix="/WEB-INF/view/" p:suffix=".jsp"/> -->
+
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver"
 		p:cache="true"
 		p:prefix="" p:suffix=".ftl"
@@ -29,6 +27,7 @@
 		p:exposeSpringMacroHelpers="true"
 		p:exposeRequestAttributes="true"
 		p:exposeSessionAttributes="true" />
-	<import resource="../freemarker.xml"/>
+
+	<import resource="freemarker.xml"/>
 
 </beans>

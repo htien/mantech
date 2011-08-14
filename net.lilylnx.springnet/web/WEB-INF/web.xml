@@ -20,7 +20,7 @@
 	<servlet>
 		<description>SpringNet dispatcher servlet</description>
 		<servlet-name>springnet</servlet-name>
-		<servlet-class>net.lilylnx.springnet.SpringServlet</servlet-class>
+		<servlet-class>net.lilylnx.springnet.SpringDispatcher</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>classpath:/META-INF/dispatcher.xml</param-value>

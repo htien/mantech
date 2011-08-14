@@ -35,9 +35,10 @@
 	<bean id="fmHtmlEscape" class="freemarker.template.utility.HtmlEscape" />
 
 	<util:list id="templateLoaderPaths">
+		<value>classpath:org/springframework/web/servlet/view/freemarker</value>
 		<value>/WEB-INF/templates/default/</value>
 	</util:list>
-	
+
 	<util:map id="mediaTypes">
 		<entry key="html" value="text/html" />
 		<entry key="ftl" value="text/html" />

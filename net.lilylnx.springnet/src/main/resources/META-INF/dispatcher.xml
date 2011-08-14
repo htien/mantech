@@ -18,19 +18,19 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-	<bean id="net.lilylnx.springnet.util.SpringConfig" class="net.lilylnx.springnet.util.SpringConfig" autowire="constructor"/>
-
 	<import resource="spring/misc.xml" />
 	<import resource="spring/repositories.xml" />
-	<import resource="spring/view.xml" />
 	<import resource="spring/controllers.xml" />
-	<import resource="spring/urlmappings.xml" />
 	<import resource="spring/services.xml" />
+	<import resource="spring/urlmappings.xml" />
 
-	<!-- SCANS ALL MATCHING PACKAGES FOR COMPONENTS -->
+	<bean id="annotationHandlerMapping" class="net.lilylnx.springnet.AnnotationHandlerMapping"/>
+
+	<!-- SCANS ALL MATCHING PACKAGES FOR COMPONENTS -->	
+	
 	<context:component-scan base-package="net.lilylnx.springnet.controllers" />
-	<context:component-scan base-package="test.lilylnx.springnet.controllers" />
-
+	<context:component-scan base-package="test.lilylnx.springnet.controllers" />	
+	
 	<!-- ALLOWS FOR ANNOTATION MAPPING FOR CONTROLLERS
 	<mvc:annotation-driven/> -->
 

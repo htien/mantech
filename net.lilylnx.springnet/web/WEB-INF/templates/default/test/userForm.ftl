@@ -43,6 +43,12 @@
 			<tr><td colspan="2"><input type="submit"/></td></tr>
 		</table>
 	</form:form>
+	<script>
+		function xinchao(name) {
+			alert('Hello ' + name); 
+		}
+		xinchao('Tien');
+	</script>
 </body>
 </html>
 </compress:html>

@@ -56,7 +56,8 @@
 
 	<util:map id="freemarkerVariables">
 		<entry key="xml_escape" value-ref="fmXmlEscape" />
-		<entry key="html_escape" value-ref="fmHtmlEscape"/>
+		<entry key="html_escape" value-ref="fmHtmlEscape" />
+		<entry key="single_line" value="true" />
 	</util:map>
 
 </beans>

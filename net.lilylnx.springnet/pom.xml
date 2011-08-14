@@ -162,6 +162,11 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.googlecode.htmlcompressor</groupId>
+			<artifactId>htmlcompressor</artifactId>
+			<version>1.4</version>
+		</dependency>
 	</dependencies>
 	<reporting>
 		<plugins>

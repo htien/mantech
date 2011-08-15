@@ -11,12 +11,12 @@
 	User Detail
 	<hr/>
 	<table>
-		<tr><td>User Name:</td><td>${user.name}</td></tr>
-		<tr><td>Gender:</td><td>${user.gender}</td></tr>
-		<tr><td>Country:</td><td>${user.country}</td></tr>
-		<tr><td>About You:</td><td>${user.aboutYou}</td></tr>
-		<tr><td>Community:</td><td>${user.community[0]} ${user.community[1]} ${user.community[2]}</td></tr>
-		<tr><td>Mailing List:</td><td>${user.mailingList}</td></tr>
+		<tr><td>User Name:</td><td>${userInfo.name}</td></tr>
+		<tr><td>Gender:</td><td>${userInfo.gender}</td></tr>
+		<tr><td>Country:</td><td>${userInfo.country}</td></tr>
+		<tr><td>About You:</td><td>${userInfo.aboutYou}</td></tr>
+		<tr><td>Community:</td><td>${userInfo.community[0]} ${userInfo.community[1]} ${userInfo.community[2]}</td></tr>
+		<tr><td>Mailing List:</td><td>${userInfo.mailingList}</td></tr>
 	</table>
 </body>
 </html>

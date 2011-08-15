@@ -16,9 +16,9 @@ public class SpringNet implements ApplicationContextAware {
 
   private static ApplicationContext beanFactory;
   
-  public SpringNet() {}
+  private SpringNet() {}
 
-  public Object getComponent(String componentName) {
+  public static Object getComponent(String componentName) {
     return beanFactory.getBean(componentName);
   }
 
@@ -28,6 +28,7 @@ public class SpringNet implements ApplicationContextAware {
   @Override
   public void setApplicationContext(ApplicationContext applicationContext)
       throws BeansException {
+
     beanFactory = applicationContext;
   }
 

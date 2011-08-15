@@ -28,9 +28,7 @@ import net.lilylnx.springnet.util.SpringConfig;
 public class SpringDispatcher extends DispatcherServlet {
 
   private static final long serialVersionUID = -6852520526268983459L;
-
   private static final Logger logger = Logger.getLogger(SpringDispatcher.class);
-
   private SpringConfig config;
 
   public SpringDispatcher() {}
@@ -62,7 +60,7 @@ public class SpringDispatcher extends DispatcherServlet {
     for (String e : beanFactory.getBeanDefinitionNames()) {
       logger.info("Loaded bean: " + e);
     }
-    
+
     logger.info(String.format("Deployed in [%s]", appPath));
     logger.info("<<< FINISHED >>>");
   }

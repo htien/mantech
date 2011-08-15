@@ -23,7 +23,7 @@ import net.lilylnx.springnet.util.ConfigKeys;
  */
 @Controller
 @RequestMapping("/test/userRegister")
-@SessionAttributes("user")
+@SessionAttributes("userInfo")
 public class UserController {
 
   private UserService userService;
@@ -33,18 +33,18 @@ public class UserController {
   @RequestMapping(method = RequestMethod.GET)
   public String showUserForm(ModelMap model) {
     User user = new User();
-    model.addAttribute(user);
+    model.addAttribute("userInfo", user);
     return "/test/userForm";
   }
 
   @RequestMapping(method = RequestMethod.POST)
-  public String onSubmit(@ModelAttribute("user") User user) {
+  public String onSubmit(User user) {
     userService.add(user);
     return "redirect:/test/userSuccess" + ConfigKeys.EXT;
   }
 
   @Autowired
-  public void setUserService(UserService userService) {
+  public void setUserService(@ModelAttribute("userInfo") UserService userService) {
     this.userService = userService;
   }
 

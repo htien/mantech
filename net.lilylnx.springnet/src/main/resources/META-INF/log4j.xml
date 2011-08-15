@@ -21,6 +21,11 @@
 		<appender-ref ref="springnet-stdout"/>
 	</category>
 	
+	<category name="br.com.caelum.vraptor">
+		<priority value="info"/>
+		<appender-ref ref="springnet-stdout"/>
+	</category>
+	
 	<category name="org.hibernate">
 		<priority value="info"/>
 		<appender-ref ref="springnet-stdout"/>

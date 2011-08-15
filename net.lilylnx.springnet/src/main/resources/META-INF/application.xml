@@ -34,5 +34,19 @@
           p:password="${jdbc.password}" /-->
     
     <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
+    
+    <!--<tx:annotation-driven />  
+  
+    <bean id="transactionManager"  
+        class="org.springframework.orm.hibernate3.HibernateTransactionManager">  
+        <property name="sessionFactory" ref="sessionFactory" />  
+    </bean>  
+          
+    <bean id="sessionFactory"  
+        class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">  
+        <property name="configLocation">  
+            <value>classpath:/hibernate.cfg.xml</value>  
+        </property>     
+    </bean>-->  
 
 </beans>

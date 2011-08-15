@@ -1,5 +1,6 @@
+<#import "/macros/spring.ftl" as s />
+<#assign c=JspTaglibs["http://java.sun.com/jsp/jstl/core"]>
 <?xml version="1.0" encoding="UTF-8" ?>
-<#import "spring.ftl" as spring />
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -12,6 +13,7 @@
 		<p>${name_index + 1}. ${name}<#if name_has_next>,</#if></p>
 	</#list>
 	<#assign ext='.htm' />
-	<@spring.url '/index${ext}' />
+	<@s.url '/index${ext}' /><br />
+	<@c.url value='/index${ext}' />
 </body>
 </html>

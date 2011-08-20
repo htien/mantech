@@ -2,7 +2,7 @@
  * Written by Tien Nguyen <lilylnx@users.sf.net>
  * FREE FOR ALL BUT DOES NOT MEAN THERE IS NO PRICE.
  */
-package net.lilylnx.springnet;
+package springframework.lilylnx.springnet.core;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -10,14 +10,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import springframework.lilylnx.springnet.core.support.freemarker.TaglibFreeMarkerView;
+
 import freemarker.template.SimpleHash;
 import freemarker.template.Template;
 import freemarker.template.TemplateBooleanModel;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateModelException;
 import freemarker.template.utility.StandardCompress;
-
-import net.lilylnx.springnet.core.support.freemarker.TaglibFreeMarkerView;
 
 /**
  * @author Tien Nguyen

@@ -2,7 +2,7 @@
  * Written by Tien Nguyen <lilylnx@users.sf.net>
  * FREE FOR ALL BUT DOES NOT MEAN THERE IS NO PRICE.
  */
-package net.lilylnx.springnet.entities;
+package cncaptech.domains;
 
 import java.io.Serializable;
 

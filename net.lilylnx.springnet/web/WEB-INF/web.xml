@@ -3,27 +3,30 @@
 	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
+
 	<display-name>net.lilylnx.springnet</display-name>
 	<description>SpringNet Project - Java web application based on Spring MVC Framework</description>
+	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:/META-INF/application.xml</param-value>
 	</context-param>
+
 	<listener>
-		<listener-class>net.lilylnx.springnet.listeners.ServletContextListenerImpl</listener-class>
+		<listener-class>net.lilylnx.springnet.listeners.StartListener</listener-class>
 	</listener>
+	
 	<listener>
-		<listener-class>net.lilylnx.springnet.listeners.SpringContextLoaderListener</listener-class>
+		<listener-class>net.lilylnx.springnet.listeners.SpringListener</listener-class>
 	</listener>
 
-	<!-- SERVLET FOR HANDLING ALL INCOMING REQUESTS -->
 	<servlet>
 		<description>SpringNet dispatcher servlet</description>
 		<servlet-name>springnet</servlet-name>
-		<servlet-class>net.lilylnx.springnet.SpringDispatcher</servlet-class>
+		<servlet-class>net.lilylnx.springnet.SpringServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:/META-INF/dispatcher.xml</param-value>
+			<param-value>classpath:/META-INF/spring-config.xml</param-value>
 		</init-param>
 		<load-on-startup>2</load-on-startup>
 	</servlet>
@@ -42,6 +45,7 @@
 		<session-timeout>15</session-timeout>
 	</session-config>
 	<welcome-file-list>
+		<welcome-file>/</welcome-file>
 		<welcome-file>redirect.jsp</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>

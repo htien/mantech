@@ -18,6 +18,6 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-	<bean id="userService" class="test.lilylnx.springnet.services.UserServiceImpl"/>
+	<bean id="userService" class="test.lilylnx.springnet.services.UserServiceImpl" />
 
 </beans>

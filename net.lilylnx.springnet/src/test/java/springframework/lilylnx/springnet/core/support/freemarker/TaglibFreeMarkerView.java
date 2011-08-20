@@ -1,7 +1,8 @@
-package net.lilylnx.springnet.core.support.freemarker;
+package springframework.lilylnx.springnet.core.support.freemarker;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +32,7 @@ public class TaglibFreeMarkerView extends FreeMarkerView {
     this.taglibFactory = taglibFactory;
   }
 
-  protected void doRender(Map model, HttpServletRequest request, HttpServletResponse response)
+  protected void doRender(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response)
       throws Exception {
 
     exposeModelAsRequestAttributes(model, request);
@@ -46,10 +47,10 @@ public class TaglibFreeMarkerView extends FreeMarkerView {
     super.doRender(model, request, response);
   }
 
-  protected void exposeModelAsRequestAttributes(Map model, HttpServletRequest request) throws Exception {
-    Iterator it = model.entrySet().iterator();
+  protected void exposeModelAsRequestAttributes(Map<String, Object> model, HttpServletRequest request) throws Exception {
+    Iterator<Entry<String, Object>> it = model.entrySet().iterator();
     while (it.hasNext()) {
-      Map.Entry entry = (Map.Entry)it.next();
+      Entry<String, Object> entry = it.next();
       if (!(entry.getKey() instanceof String)) {
         throw new ServletException("Invalid key [" + entry.getKey() + "] in model Map - only Strings allowed as model keys");
       }

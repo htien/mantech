@@ -18,15 +18,18 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-	<!-- ADDS PREFIX AND SUFFIX TO RETURNED VIEWS -->
+	<import resource="spring/misc.xml" />
+	<import resource="spring/repositories.xml" />
+	<import resource="spring/controllers.xml" />
+	<import resource="spring/services.xml" />
+	<import resource="spring/urlmappings.xml" />
 
-	<bean id="viewResolver" class="net.lilylnx.springnet.SpringViewResolver"
-		p:cache="true"
-		p:prefix="default/" p:suffix=".ftl"
-		p:exposeSpringMacroHelpers="true"
-		p:exposeRequestAttributes="true"
-		p:exposeSessionAttributes="true" />
+	<bean id="net.lilylnx.springnet.core.support.spring.AnnotationHandlerMapping" class="net.lilylnx.springnet.core.support.spring.AnnotationHandlerMapping" />
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/WEB-INF/templates/default/" p:suffix=".jsp" />
 
-	<import resource="freemarker.xml"/>
+	<context:component-scan base-package="cncaptech.controllers" />
+	<context:component-scan base-package="test.lilylnx.springnet.controllers" />
 
 </beans>

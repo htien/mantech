@@ -2,7 +2,7 @@
  * Written by Tien Nguyen <lilylnx@users.sf.net>
  * FREE FOR ALL BUT DOES NOT MEAN THERE IS NO PRICE.
  */
-package net.lilylnx.springnet;
+package net.lilylnx.springnet.core.support.spring;
 
 import java.util.Set;
 

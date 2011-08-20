@@ -35,8 +35,8 @@
 	<bean id="fmHtmlEscape" class="freemarker.template.utility.HtmlEscape" />
 
 	<util:list id="templateLoaderPaths">
-		<value>/WEB-INF/templates/</value>
 		<value>/WEB-INF/</value>
+		<value>/WEB-INF/templates/</value>
 	</util:list>
 
 	<util:map id="mediaTypes">

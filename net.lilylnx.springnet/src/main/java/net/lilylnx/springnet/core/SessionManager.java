@@ -4,7 +4,12 @@
  */
 package net.lilylnx.springnet.core;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
+
+import cncaptech.domains.UserSession;
 
 /**
  * @author Tien Nguyen
@@ -13,6 +18,10 @@ import org.apache.log4j.Logger;
 public class SessionManager {
 
   @SuppressWarnings("unused")
-  private static final Logger logger = Logger.getLogger(SessionManager.class);
+  private static final Logger LOG = Logger.getLogger(SessionManager.class);
+
+  public UserSession refreshSession(HttpServletRequest request, HttpServletResponse response) {
+    return null;
+  }
 
 }

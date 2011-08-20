@@ -4,7 +4,7 @@
  */
 package net.lilylnx.springnet.repository;
 
-import net.lilylnx.springnet.entities.User;
+import cncaptech.domains.User;
 
 /**
  * @author Tien Nguyen

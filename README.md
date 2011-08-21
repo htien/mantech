@@ -12,7 +12,9 @@ Using technologies
 * Client-side: jQuery, Dojo
 
 * Integrated Developement Environment: Eclipse 3.7 (Indigo)
-    with plugins:
+
+    Plugins:
+
   * Spring IDE (http://springide.org/updatesite)
   * Maven + Ant Build
   * EGit

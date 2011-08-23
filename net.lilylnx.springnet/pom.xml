@@ -22,7 +22,7 @@
 			<id>lilylnx</id>
 			<name>Tien Nguyen</name>
 			<email>lilylnx@users.sf.net</email>
-			<url>http://www.assembla.com/profile/lilylnx</url>
+			<url>http://lilylnx.wordpress.com</url>
 			<roles>
 				<role>owner</role>
 				<role>developer</role>
@@ -326,4 +326,18 @@
 	</reporting>
 	<modules>
 	</modules>
+	<profiles>
+		<profile>
+			<id>netbeans-private</id>
+			<activation>
+				<property>
+					<name>netbeans.execution</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<properties>
+				<netbeans.hint.license>lilylnx10</netbeans.hint.license>
+			</properties>
+		</profile>
+	</profiles>
 </project>

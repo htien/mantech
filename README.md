@@ -20,6 +20,8 @@ Using technologies
   * Ant Build (optional)
   * EGit (optional)
 
+* Web Server: Tomcat 7.0.20+
+
 Testing.
 
     Updating...

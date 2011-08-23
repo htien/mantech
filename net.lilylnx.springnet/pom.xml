@@ -21,7 +21,7 @@
 		<developer>
 			<id>lilylnx</id>
 			<name>Tien Nguyen</name>
-			<email>lilylnx@facebook.com</email>
+			<email>lilylnx@users.sf.net</email>
 			<url>http://www.assembla.com/profile/lilylnx</url>
 			<roles>
 				<role>owner</role>
@@ -33,8 +33,10 @@
 	<contributors>
 	</contributors>
 	<properties>
+		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
+	 <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
 	</properties>
 	<build>
 		<directory>target</directory>
@@ -68,9 +70,12 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
+					<encoding>UTF-8</encoding>
 					<source>1.6</source>
 					<target>1.6</target>
-					<encoding>UTF-8</encoding>
+					<compilerArguments>
+						<endorseddirs>${endorsed.dir}</endorseddirs>
+					</compilerArguments>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -78,7 +83,10 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.1.1</version>
 				<configuration>
+					<failOnMissingWebXml>true</failOnMissingWebXml>
 					<warSourceDirectory>${basedir}/web</warSourceDirectory>
+					<webappDirectory>${basedir}/web</webappDirectory>
+					<webXml>${basedir}/web/WEB-INF/web.xml</webXml>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -89,6 +97,9 @@
 					<execution>
 						<id>sign-artifacts</id>
 						<phase>verify</phase>
+						<configuration>
+							<keyname>J2EE Project Verification Key</keyname>
+						</configuration>
 						<goals>
 							<goal>sign</goal>
 						</goals>
@@ -117,9 +128,81 @@
 					<excludePackageNames>jargs</excludePackageNames>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.1</version><!--$NO-MVN-MAN-VER$-->
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${endorsed.dir}</outputDirectory>
+							<silent>true</silent>
+							<artifactItems>
+								<artifactItem>
+									<groupId>javax</groupId>
+									<artifactId>javaee-endorsed-api</artifactId>
+									<version>6.0</version>
+									<type>jar</type>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-dependency-plugin
+										</artifactId>
+										<versionRange>
+											[2.1,)
+										</versionRange>
+										<goals>
+											<goal>copy</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 	<dependencies>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-web-api</artifactId>
+			<version>6.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.2</version>
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
@@ -130,6 +213,16 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
+			<version>3.0.5.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>3.0.5.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
 			<version>3.0.5.RELEASE</version>
 		</dependency>
 		<dependency>
@@ -161,6 +254,11 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-nop</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
 			<groupId>com.google.inject.extensions</groupId>
 			<artifactId>guice-spring</artifactId>
 			<version>3.0</version>
@@ -173,18 +271,39 @@
 			<version>1.4</version>
 		</dependency>
 		<dependency>
-			<groupId>com.jolira</groupId>
-			<artifactId>rhino</artifactId>
-			<version>1.7.3.1</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
 			<groupId>com.yahoo.platform.yui</groupId>
 			<artifactId>yuicompressor</artifactId>
 			<version>2.4.6</version>
 			<type>jar</type>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.javascript</groupId>
+			<artifactId>closure-compiler</artifactId>
+			<version>r1043</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sourceforge.jtds</groupId>
+			<artifactId>jtds</artifactId>
+			<version>1.2.4</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.faces</groupId>
+			<artifactId>jsf-impl</artifactId>
+			<version>1.2</version>
+			<classifier>NIGHTLY_20060227</classifier>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.faces</groupId>
+			<artifactId>jsf-api</artifactId>
+			<version>1.2_02</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.1</version>
 		</dependency>
 	</dependencies>
 	<reporting>

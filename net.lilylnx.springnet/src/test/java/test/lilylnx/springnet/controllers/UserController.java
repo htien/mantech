@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import test.lilylnx.springnet.domains.User;
 import test.lilylnx.springnet.services.UserService;
 
-import net.lilylnx.springnet.util.ConfigKeys;
-
 /**
  * @author Tien Nguyen
  * @version $Id: UserController.java,v 1.0 2011/06/16 16:17:20 lilylnx Exp $
@@ -38,13 +36,13 @@ public class UserController {
   }
 
   @RequestMapping(method = RequestMethod.POST)
-  public String onSubmit(User user) {
+  public String onSubmit(@ModelAttribute("userInfo") User user) {
     userService.add(user);
-    return "redirect:/test/userSuccess" + ConfigKeys.EXT;
+    return "redirect:/test/userSuccess.htm";
   }
 
   @Autowired
-  public void setUserService(@ModelAttribute("userInfo") UserService userService) {
+  public void setUserService(UserService userService) {
     this.userService = userService;
   }
 

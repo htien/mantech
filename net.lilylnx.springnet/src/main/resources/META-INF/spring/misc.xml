@@ -18,14 +18,14 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 	
-	<bean id="net.lilylnx.springnet.SpringNet" class="net.lilylnx.springnet.SpringNet"/>
-	<bean id="net.lilylnx.springnet.core.SessionManager" class="net.lilylnx.springnet.core.SessionManager" autowire="constructor"/>
-	<bean id="net.lilylnx.springnet.extensions.RequestOperationChain" class="net.lilylnx.springnet.extensions.RequestOperationChain">
+	<bean class="net.lilylnx.springnet.SpringNet"/>
+	<bean class="net.lilylnx.springnet.core.SessionManager" autowire="constructor"/>
+	<bean class="net.lilylnx.springnet.extensions.RequestOperationChain">
 		<property name="operations">
 			<list></list>
 		</property>
 	</bean>
-	<bean id="net.lilylnx.springnet.util.SpringConfig" class="net.lilylnx.springnet.util.SpringConfig"/>
+	<bean class="net.lilylnx.springnet.util.SpringConfig"/>
 	
 	<!-- Factory Beans -->
 	<bean id="javax.servlet.http.HttpServletRequest" class="net.lilylnx.springnet.core.support.spring.HttpServletRequestFactoryBean">

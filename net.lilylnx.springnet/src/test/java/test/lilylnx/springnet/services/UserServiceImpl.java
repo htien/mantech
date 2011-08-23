@@ -14,7 +14,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public void add(User user) {
-    System.out.println("User added successfully");
+    System.out.println(String.format("User '%s' added successfully", user.getName()));
   }
 
 }

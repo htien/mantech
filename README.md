@@ -5,19 +5,20 @@ SpringNet - Java Web Application
 Using technologies
 ------------------
 
-* DB Management: MSSQL Server 2008, MySQL 5.x
+* DB Management: SQL Server 2008, MySQL 5.x
 
 * Server-side: Servlet, Spring MVC, JPA with Hibernate, OSGi with ?
 
 * Client-side: jQuery, Dojo
 
-* Integrated Developement Environment: Eclipse 3.7 (Indigo)
+* Integrated Developement Environment: Eclipse 3.7+ (Indigo) or Netbeans 7.0.1+
 
     Plugins:
 
   * Spring IDE (http://springide.org/updatesite)
-  * Maven + Ant Build
-  * EGit
+  * Maven (required)
+  * Ant Build (optional)
+  * EGit (optional)
 
 Testing.
 

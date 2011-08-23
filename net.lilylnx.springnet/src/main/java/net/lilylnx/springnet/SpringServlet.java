@@ -15,6 +15,8 @@ import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
+import net.lilylnx.springnet.core.SessionManager;
+import net.lilylnx.springnet.extensions.RequestOperationChain;
 import net.lilylnx.springnet.util.ConfigKeys;
 import net.lilylnx.springnet.util.SpringConfig;
 
@@ -32,6 +34,8 @@ public class SpringServlet extends DispatcherServlet {
   
   private static final Logger LOG = Logger.getLogger(SpringServlet.class);
   private SpringConfig config;
+  private SessionManager sessionManager;
+  private RequestOperationChain operationChain;
 
   public SpringServlet() {}
 
@@ -53,9 +57,12 @@ public class SpringServlet extends DispatcherServlet {
         .getAttribute(getServletContextAttributeName());
     this.getServletContext().setAttribute(ConfigKeys.SPRING_CONTEXT, beanFactory);
 
-    this.config = (SpringConfig)beanFactory.getBean(SpringConfig.class.getName());
+    this.config = beanFactory.getBean(SpringConfig.class);
     this.config.setProperty(ConfigKeys.APPLICATION_PATH, getServletContext().getRealPath(""));
     
+    this.sessionManager = beanFactory.getBean(SessionManager.class);
+    this.operationChain = beanFactory.getBean(RequestOperationChain.class);
+
     showStuff(beanFactory);
 
     LOG.info("<< COMPLETED! >>");
@@ -67,7 +74,14 @@ public class SpringServlet extends DispatcherServlet {
    */
   @Override
   protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    super.service(req, resp);
+    try {
+      this.sessionManager.refreshSession(req, resp);
+      this.operationChain.callAllOperations();
+      super.service(req, resp);
+    }
+    finally {
+      
+    }
   }
 
   public void showStuff(ApplicationContext beanFactory) {

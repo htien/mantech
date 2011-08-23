@@ -30,7 +30,7 @@ public class IndexController {
 
     model.addAttribute("welcomeMsg", "SpringFramework!")
          .addAttribute("listNames", list);
-    
+
     return "index";
   }
 

@@ -15,13 +15,24 @@
 	<listener>
 		<listener-class>net.lilylnx.springnet.listeners.StartListener</listener-class>
 	</listener>
-	
 	<listener>
 		<listener-class>net.lilylnx.springnet.listeners.SpringListener</listener-class>
 	</listener>
+	<listener>
+		<listener-class>net.lilylnx.springnet.listeners.UserSessionListener</listener-class>
+	</listener>
+
+	<filter>
+		<filter-name>hibernateSessionFilter</filter-name>
+		<filter-class>net.lilylnx.springnet.core.support.hibernate.OpenSessionFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>hibernateSessionFilter</filter-name>
+		<url-pattern>*.htm</url-pattern>
+	</filter-mapping>
 
 	<servlet>
-		<description>SpringNet dispatcher servlet</description>
+		<description>SpringNet Dispatcher</description>
 		<servlet-name>springnet</servlet-name>
 		<servlet-class>net.lilylnx.springnet.SpringServlet</servlet-class>
 		<init-param>

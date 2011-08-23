@@ -24,12 +24,13 @@
 	<import resource="spring/services.xml" />
 	<import resource="spring/urlmappings.xml" />
 
-	<bean id="net.lilylnx.springnet.core.support.spring.AnnotationHandlerMapping" class="net.lilylnx.springnet.core.support.spring.AnnotationHandlerMapping" />
+	<!-- MVC CONFIGURATION -->
+
+	<bean class="net.lilylnx.springnet.core.support.spring.AnnotationHandlerMapping" />
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
 		p:prefix="/WEB-INF/templates/default/" p:suffix=".jsp" />
 
 	<context:component-scan base-package="cncaptech.controllers" />
-	<context:component-scan base-package="test.lilylnx.springnet.controllers" />
 
 </beans>

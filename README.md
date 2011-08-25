@@ -29,9 +29,8 @@ Hướng dẫn mở đề án
 Lưu ý: Eclipse và Netbeans phải được cài đặt plugin hỗ trợ Maven 3 trở lên.
 Đề án được lưu trữ tại Github và Assembla tại URL:
 
-  https://github.com/lilylnx/cncaptech/
-
-  http://www.assembla.com/code/cncaptech/git/nodes
+  * https://github.com/lilylnx/cncaptech/
+  * http://www.assembla.com/code/cncaptech/git/nodes
 
 Sử dụng công cụ Git để tải về. Trên Windows sử dụng msysgit để tải về.
 Sau khi tải về, điều cần làm là sao chép toàn bộ file trong thư mục 'copy-to-project' vào đề án.

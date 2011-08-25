@@ -12,9 +12,12 @@ taglib uri="http://htmlcompressor.googlecode.com/taglib/compressor" prefix="comp
 </head>
 <body>
 	<h1>${welcomeMsg}</h1>
-	<c:forEach items="${listNames}" var="name">
-		<p>${name}</p>
-	</c:forEach>
+	<h2>Student:</h2>
+	<p>
+		ID: ${student.id}<br />
+		Name: ${student.name}<br />
+		Address: ${student.address.city}
+	</p>
 </body>
 </html>
 </compress:html>

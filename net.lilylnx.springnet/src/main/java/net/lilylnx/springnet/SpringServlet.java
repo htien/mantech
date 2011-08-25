@@ -13,10 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import net.lilylnx.springnet.core.SessionManager;
-import net.lilylnx.springnet.extensions.RequestOperationChain;
+import net.lilylnx.springnet.extension.RequestOperationChain;
 import net.lilylnx.springnet.util.ConfigKeys;
 import net.lilylnx.springnet.util.SpringConfig;
 
@@ -56,6 +58,7 @@ public class SpringServlet extends DispatcherServlet {
     ApplicationContext beanFactory = (ApplicationContext)this.getServletContext()
         .getAttribute(getServletContextAttributeName());
     this.getServletContext().setAttribute(ConfigKeys.SPRING_CONTEXT, beanFactory);
+    
 
     this.config = beanFactory.getBean(SpringConfig.class);
     this.config.setProperty(ConfigKeys.APPLICATION_PATH, getServletContext().getRealPath(""));
@@ -74,18 +77,23 @@ public class SpringServlet extends DispatcherServlet {
    */
   @Override
   protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    ServletRequestAttributes attributes = new ServletRequestAttributes(req);
+    
     try {
+      RequestContextHolder.setRequestAttributes(attributes);
+      
       this.sessionManager.refreshSession(req, resp);
       this.operationChain.callAllOperations();
       super.service(req, resp);
     }
     finally {
-      
+      RequestContextHolder.resetRequestAttributes();
+      attributes.requestCompleted();
     }
   }
 
   public void showStuff(ApplicationContext beanFactory) {
-    LOG.info("--- Loaded beans:");
+    LOG.info("--- Loaded beans ---");
     for (String bean : beanFactory.getBeanDefinitionNames()) {
       LOG.info(bean);
     }

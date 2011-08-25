@@ -17,15 +17,24 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
-	
+
 	<bean class="net.lilylnx.springnet.SpringNet"/>
 	<bean class="net.lilylnx.springnet.core.SessionManager" autowire="constructor"/>
-	<bean class="net.lilylnx.springnet.extensions.RequestOperationChain">
+	<bean class="net.lilylnx.springnet.extension.RequestOperationChain">
 		<property name="operations">
 			<list></list>
 		</property>
 	</bean>
 	<bean class="net.lilylnx.springnet.util.SpringConfig"/>
+	
+	<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+		<property name="scopes">
+  			<map>
+				<entry key="request" value="org.springframework.web.context.request.RequestScope"/>
+				<entry key="session" value="org.springframework.web.context.request.SessionScope"/>
+  			</map>
+		</property>
+	</bean>
 	
 	<!-- Factory Beans -->
 	<bean id="javax.servlet.http.HttpServletRequest" class="net.lilylnx.springnet.core.support.spring.HttpServletRequestFactoryBean">

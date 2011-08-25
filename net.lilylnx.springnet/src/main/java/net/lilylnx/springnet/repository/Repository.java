@@ -4,6 +4,8 @@
  */
 package net.lilylnx.springnet.repository;
 
+import java.util.List;
+
 /**
  * Generic / Các thao tác chung để xử lý kho chứa (repository).
  * 
@@ -36,5 +38,25 @@ public interface Repository<T> {
    * @param entity Thực thể cần cập nhật
    */
   void update(T entity);
+  
+  // Bổ sung thêm đồ chơi :D
+  
+  T find(Object id);
+  T find(Object id, boolean locked);
+  
+  List<T> findAll();
+  List<T> findAll(boolean cacheable);
+  List<T> findAll(boolean reverse, String propertyName);
+  List<T> findAll(boolean reverse, String propertyName, boolean cacheable);
+  
+  List<T> findRange(int[] range);
+  List<T> findRange(int[] range, boolean reverse, String propertyName);
+  
+  List<T> select(String where);
+  List<T> select(String[] orders);
+  List<T> select(String where, String[] orders);
+  List<T> select(String where, String[] orders, int[] range);
+  
+  Number count();
 
 }

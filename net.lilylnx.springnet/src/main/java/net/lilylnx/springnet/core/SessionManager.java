@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import cncaptech.domains.UserSession;
+import mantech.domain.UserSession;
 
 /**
  * @author Tien Nguyen

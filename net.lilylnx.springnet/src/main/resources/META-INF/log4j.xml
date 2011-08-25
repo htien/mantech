@@ -35,11 +35,6 @@
 		<priority value="info"/>
 		<appender-ref ref="springnet-stdout"/>
 	</category>
-	
-	<category name="org.apache.commons">
-		<priority value="info"/>
-		<appender-ref ref="springnet-stdout"/>
-	</category>
 
 	<!-- 
 	<category name="org.hibernate.cache">
@@ -47,7 +42,17 @@
 		<appender-ref ref="springnet-stdout"/>
 	</category>
 	 -->
-	 
+	
+	<category name="org.apache.commons">
+		<priority value="info"/>
+		<appender-ref ref="springnet-stdout"/>
+	</category>
+
+	<category name="com.mchange">
+		<priority value="info"/>
+		<appender-ref ref="springnet-stdout"/>
+	</category>
+
 	<category name="freemarker">
 		<priority value="info"/>
 		<appender-ref ref="springnet-stdout"/>

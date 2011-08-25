@@ -11,7 +11,7 @@ import java.util.Properties;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 
-import net.lilylnx.springnet.core.exceptions.CommonException;
+import net.lilylnx.springnet.core.exception.CommonException;
 
 /**
  * @author Tien Nguyen

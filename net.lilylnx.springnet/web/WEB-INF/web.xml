@@ -13,13 +13,13 @@
 	</context-param>
 
 	<listener>
-		<listener-class>net.lilylnx.springnet.listeners.StartListener</listener-class>
+		<listener-class>net.lilylnx.springnet.listener.StartListener</listener-class>
 	</listener>
 	<listener>
-		<listener-class>net.lilylnx.springnet.listeners.SpringListener</listener-class>
+		<listener-class>net.lilylnx.springnet.listener.SpringListener</listener-class>
 	</listener>
 	<listener>
-		<listener-class>net.lilylnx.springnet.listeners.UserSessionListener</listener-class>
+		<listener-class>net.lilylnx.springnet.listener.UserSessionListener</listener-class>
 	</listener>
 
 	<filter>

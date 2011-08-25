@@ -30,7 +30,6 @@ public class OpenSessionFilter implements Filter {
   
   private ServletContext servletContext;
   private SessionFactory sessionFactory;
-  private boolean doFilter = false;
 
   /* (non-Javadoc)
    * @see javax.servlet.Filter#init(javax.servlet.FilterConfig)
@@ -44,12 +43,7 @@ public class OpenSessionFilter implements Filter {
    * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest, javax.servlet.ServletResponse, javax.servlet.FilterChain)
    */
   @Override
-  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-      if (!doFilter) {
-          chain.doFilter(request, response);
-          return;
-      }
-      
+  public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {      
     ensureSessionFactoryIsInitialized();
 
     try {
@@ -89,7 +83,7 @@ public class OpenSessionFilter implements Filter {
   private void ensureSessionFactoryIsInitialized() {
     if (sessionFactory == null) {
       ApplicationContext beanFactory = (ApplicationContext)servletContext.getAttribute(ConfigKeys.SPRING_CONTEXT);
-      sessionFactory = beanFactory.getBean(SessionFactory.class);
+      sessionFactory = (SessionFactory)beanFactory.getBean(SessionFactory.class);
     }
   }
 

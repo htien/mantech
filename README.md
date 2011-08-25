@@ -30,6 +30,7 @@ Lưu ý: Eclipse và Netbeans phải được cài đặt plugin hỗ trợ Mave
 Đề án được lưu trữ tại Github và Assembla tại URL:
 
   https://github.com/lilylnx/cncaptech/
+
   http://www.assembla.com/code/cncaptech/git/nodes
 
 Sử dụng công cụ Git để tải về. Trên Windows sử dụng msysgit để tải về.

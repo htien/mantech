@@ -47,6 +47,27 @@ Nếu cả Eclipse hoặc Netbeans sau khi mở "không báo cáo thiếu librar
 Nếu không xài Maven, thì các library trong classpath bạn phải chịu khó tìm kiếm và tự đưa vào đề án,
 cũng như phải tự tìm sourcecode và javadoc.
 
+### Hiệu chỉnh IDE
+
+Việc quy định quy ước source code khá quan trọng, chẳng hạn phần header của tập tin, phần ghi chú
+tác giả và version (gồm tên tập tin, version, ngày/tháng/năm giờ:phút:giây), một số thứ linh tinh.
+
+Ví dụ:
+
+    /**
+     * Phần mô tả class.
+     * 
+     * @author Tien Nguyen
+     * @version $Id: TenTapTin.java,v 1.0 2011/12/28 1:23:45 lilylnx Exp $
+     */
+
+Ở đây tớ đã export sẵn 2 tập tin `eclipse-preferences.epf` và `netbeans-options.zip`
+chứa phần hiệu chỉnh format, color, template cho 2 IDE.
+
+  * Đối với Eclipse, đưa vào bằng cách: `File > Import... > General > Preferences`,
+    chọn tập tin `.epf`.
+  * Đối với Netbeans, đưa vào bằng cách: `Tools > Options > Import...`,
+    chọn tập tin `.zip`
 
 Testing
 -------

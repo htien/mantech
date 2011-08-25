@@ -75,8 +75,8 @@ Ví dụ: mô tả một Class
       // TODO code here
     }
 
-Trong tập tin `.java`, một <tab> được chuyển thành 2 kí tự space.
-File `.xml` hoặc `.jsp`, một <tab> vẫn được giữ nguyên kí tự 'tab', nhưng có kích thước là 2 kí tự space.
+Trong tập tin `.java`, một `<tab>` được chuyển thành 2 kí tự space.
+File `.xml` hoặc `.jsp`, một `<tab>` vẫn được giữ nguyên kí tự 'tab', nhưng có kích thước là 2 kí tự space.
 
 Trong Eclipse và Netbeans, nên hạn chế dùng tính năng `format` mã nguồn để làm đẹp, nên cố gắng tự mình
 trình bày quy ước một cách tốt nhất.

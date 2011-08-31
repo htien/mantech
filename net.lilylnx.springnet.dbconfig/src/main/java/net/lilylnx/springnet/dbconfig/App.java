@@ -4,17 +4,19 @@
  */
 package net.lilylnx.springnet.dbconfig;
 
-import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
-import it.sauronsoftware.junique.AlreadyLockedException;
-import it.sauronsoftware.junique.JUnique;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+
 import org.jasypt.intf.service.JasyptStatelessService;
+
+import com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel;
+
+import it.sauronsoftware.junique.AlreadyLockedException;
+import it.sauronsoftware.junique.JUnique;
 
 /**
  *

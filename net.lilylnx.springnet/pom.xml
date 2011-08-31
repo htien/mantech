@@ -1,14 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>net.lilylnx.springnet</groupId>
 	<artifactId>springnet-git</artifactId>
 	<version>1.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>SpringNet</name>
+
+	<name>springnet-git</name>
 	<description>Java Web Application</description>
 	<url>http://www.assembla.com/spaces/cncaptech</url>
 	<inceptionYear>2011</inceptionYear>
+
 	<licenses>
 		<license>
 			<name>Apache License 2.0</name>
@@ -17,6 +20,7 @@
 			<comments>springnet is distributed under Apache License 2.0</comments>
 		</license>
 	</licenses>
+
 	<developers>
 		<developer>
 			<id>lilylnx</id>
@@ -30,13 +34,17 @@
 			<timezone>+7</timezone>
 		</developer>
 	</developers>
+
 	<contributors>
 	</contributors>
+
 	<properties>
 		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
+		<netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
 	</properties>
+
 	<build>
 		<directory>target</directory>
 		<finalName>${project.artifactId}-${project.version}</finalName>
@@ -189,6 +197,7 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
 	<dependencies>
 		<dependency>
 			<groupId>javax</groupId>
@@ -345,7 +354,15 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt</artifactId>
+			<version>1.8</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
+
 	<reporting>
 		<plugins>
 			<plugin>
@@ -364,8 +381,10 @@
 			</plugin>
 		</plugins>
 	</reporting>
+
 	<modules>
 	</modules>
+
 	<profiles>
 		<profile>
 			<id>netbeans-private</id>

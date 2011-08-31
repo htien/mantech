@@ -12,6 +12,7 @@ import mantech.repository.StudentRepository;
  */
 public class StudentService {
   
+  @SuppressWarnings("unused")
   private StudentRepository studentRepository;
   
   public StudentService(StudentRepository studentRepository) {

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<bean id="environmentVariablesConfiguration"
+		class="org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig"
+		p:algorithm="PBEWithSHA1AndRC2_40"
+		p:passwordEnvName="SPRINGNET_ENCRYPTION_PWD"
+		p:keyObtentionIterations="1024" />
+
+	<bean id="configurationEncryptor"
+		class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor"
+		p:config-ref="environmentVariablesConfiguration" />
+
+	<bean id="dbPropertyConfigurer"
+		class="org.jasypt.spring.properties.EncryptablePropertyPlaceholderConfigurer"
+		p:location="classpath:/META-INF/database.properties" p:ignoreResourceNotFound="false"
+		autowire="constructor" />
+
+	<!-- HIBERNATE CONFIG -->
+	
+	<util:properties id="hibernateDataSource">
+		<prop key="hibernate.dialect">${db.dialect}</prop>
+		<prop key="hibernate.connection.driver_class">${db.driver}</prop>
+		<prop key="hibernate.connection.url">${db.url}</prop>
+		<prop key="hibernate.connection.username">${db.username}</prop>
+		<prop key="hibernate.connection.password">${db.passwd}</prop>
+		<prop key="hibernate.default_schema">${db.default.schema}</prop>
+		<prop key="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</prop>
+
+		<prop key="hibernate.c3p0.idle_test_period">600</prop>
+		<prop key="hibernate.c3p0.timeout">7200</prop>
+		<prop key="hibernate.c3p0.min_size">10</prop>
+		<prop key="hibernate.c3p0.max_size">50</prop>
+
+		<prop key="hibernate.show_sql">${db.debug.show.sql}</prop>
+		<prop key="hibernate.format_sql">true</prop>
+		<prop key="hibernate.use_sql_comments">true</prop>
+		<prop key="hibernate.cache.use_structured_entries">true</prop>
+		<prop key="hibernate.cache.use_query_cache">${db.cache.enabled}</prop>
+		<prop key="hibernate.cache.use_second_level_cache">${db.cache.enabled}</prop>
+		<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+		<prop key="hibernate.generate_statistics">${db.statistics}</prop>
+	</util:properties>
+
+</beans>

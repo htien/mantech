@@ -52,6 +52,11 @@
 		<priority value="info"/>
 		<appender-ref ref="springnet-stdout"/>
 	</category>
+	
+	<category name="org.jasypt">
+		<priority value="info"/>
+		<appender-ref ref="springnet-stdout"/>
+	</category>
 
 	<category name="freemarker">
 		<priority value="info"/>

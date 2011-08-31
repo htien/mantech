@@ -14,6 +14,10 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import net.lilylnx.springnet.core.exception.CommonException;
 
 /**
+ * Lưu trữ cấu hình hệ thống bằng cách nạp nạp 2 tập tin:
+ * springnet.properties và springnet-custom.properties từ classpath.
+ * Class này được nạp trong lúc khởi động hệ thống.
+ * 
  * @author Tien Nguyen
  * @version $Id: SpringConfig.java,v 1.0 2011/06/22 23:06:30 lilylnx Exp $
  */
@@ -28,12 +32,16 @@ public class SpringConfig extends PropertiesConfiguration {
     }
   }
   
+  /**
+   * Trả về đường dẫn thực của ứng dụng, nơi được deploy.
+   * @return đường dẫn ứng dụng được deploy
+   */
   public String getApplicationPath() {
     return this.getString(ConfigKeys.APPLICATION_PATH);
   }
 
   private void loadProps() throws ConfigurationException, Exception {
-    this.load(this.getClass().getResourceAsStream(ConfigKeys.SYSTEMGLOBALS_PROPS_PATH));
+    this.load(this.getClass().getResourceAsStream(ConfigKeys.SPRING_PROPS_PATH));
     this.loadCustomProperties();
   }
 

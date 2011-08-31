@@ -29,6 +29,7 @@ nbproject
 .clover
 /net.lilylnx.springnet/web/WEB-INF/classes
 /net.lilylnx.springnet/web/WEB-INF/lib
+/net.lilylnx.springnet/database.properties
 /net.lilylnx.springnet/src/main/resources/META-INF/database.properties
 /net.lilylnx.springnet/src/main/resources/META-INF/database.properties.bak
 /net.lilylnx.springnet/src/main/resources/META-INF/springnet-custom.properties

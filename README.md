@@ -1,5 +1,5 @@
 SpringNet - Java Web Application
-========================================
+=================================
 
 
 Using technologies
@@ -75,8 +75,8 @@ Ví dụ: mô tả một Class
       // TODO code here
     }
 
-Trong tập tin `.java`, một `<tab>` được chuyển thành 2 kí tự space.
-Tập tin `.xml` hoặc `.jsp`, một `<tab>` vẫn được giữ nguyên kí tự 'tab', nhưng có kích thước là 2 kí tự space.
+Trong tập tin `.java`, một `tab` được chuyển thành 2 kí tự space.
+Tập tin `.xml` hoặc `.jsp`, một `tab` vẫn được giữ nguyên kí tự 'tab', nhưng có kích thước là 2 kí tự space.
 Nên phân biệt rõ 2 cách hiển thị này để mã nguồn được rõ ràng. Nếu không có thể bị tình trạng, trên cùng một dòng
 vừa tab và space để thụt đầu dòng hỗn độn.
 

@@ -1,36 +1,56 @@
 ### Typically *NIX text editors, by default, append '~' to files on saving to make backups
 *~
 
-### Gradle work directory
-.gradle
+### Archives
+*.tar.bz2
 
-### Build output directories
-bin
-build
-dist
-target
-
-### Eclipse specific files/directories
+### Eclipse
+.settings/
 .classpath
 .metadata
 .project
-.settings
 .springBeans
 
-### NetBeans specific files/directories
+### Gradle
+.gradle
+
+### Java
+*.class
+
+### Maven
+target/
+
+### NetBeans
+bin/
+build/
+dist/
+nbproject/
 .nbattrs
 nb-configuration.xml
 nbactions.xml
 nbactions-my-config.xml
-nbproject
+
+### Windows
+.DS_Store?
+Desktop.ini
+Icon?
+Thumbs.db
+ehthumbs.db
 
 ### Miscellaneous
 *.bak
 *.log
-*.tar.bz2
+*.swp
+*.tmp
 .clover
-classes
-lib
+classes/
+lib/
 database.properties
 springnet-custom.properties
+
+### Exclude
 !/non-project/*
+!/non-project/*/*
+!/non-project/*/*/*
+!/non-project/*/*/*/*
+!/non-project/*/*/*/*/*

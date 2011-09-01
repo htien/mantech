@@ -1,0 +1,25 @@
+### DATABASE CONFIGURATION ###
+
+# JDBC Data Source
+
+db.username = ENC(8tqOaezf+QfE33jrcHOnSg==)
+db.passwd = ENC(RNc2j30hNp2ny4vT01WVYi/dXJeckPmh)
+db.name = ENC(lgBwYhz1t8+R99+jwSxpVE7R/XP52MwM)
+db.url = jdbc:jtds:sqlserver://${db.server.name}:${db.server.port}/${db.name}
+
+db.server.name = localhost
+db.server.port = 1433
+
+# Important Settings
+
+db.default.schema = dbo
+db.dialect = org.hibernate.dialect.SQLServerDialect
+db.driver = net.sourceforge.jtds.jdbc.Driver
+
+# Other Settings
+
+db.statistics = true
+db.cache.enabled = true
+db.debug.show.sql = true
+
+### Tien Nguyen <lilylnx@users.sf.net> ###

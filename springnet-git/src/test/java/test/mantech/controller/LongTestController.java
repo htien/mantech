@@ -16,22 +16,22 @@ import mantech.repository.CategoryRepository;
 /**
  * 
  * @author Long Nguyen
- * @version $Id: LongTest.java,v 1.0 2011/09/07 3:23:07 nguyenlong Exp $
+ * @version $Id: LongTestController.java,v 1.0 2011/09/07 3:23:07 nguyenlong Exp $
  */
 @Controller
-@RequestMapping("/longtest")
-public class LongTest {
+@RequestMapping("/long/test")
+public class LongTestController {
 
   @Autowired
   private CategoryRepository categoryRepo;
 
-  public LongTest() {}
+  public LongTestController() {}
 
   @RequestMapping(method = RequestMethod.GET)
   public String list(ModelMap model) {
     Category lastCate = categoryRepo.getLastCategory();
     model.addAttribute("lastCate", lastCate);
-    return "test/test";
+    return "test/long_test";
   }
 
 }

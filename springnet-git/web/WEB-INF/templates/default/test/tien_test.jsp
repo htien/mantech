@@ -1,5 +1,5 @@
-<%@ include file="layout/header.inc" %>
+<%@ include file="../layout/header.inc" %>
 <compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
-	<h1>${welcomeMsg}</h1>
+	Tien is testing!
 </compress:html>
-<%@ include file="layout/footer.inc" %>
+<%@ include file="../layout/footer.inc" %>

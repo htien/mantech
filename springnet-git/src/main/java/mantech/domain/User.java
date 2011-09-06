@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,12 +19,15 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * 
  * @author Tien Nguyen
  * @version $Id: User.java,v 1.0 2011/06/27 16:05:18 lilylnx Exp $
  */
+@Entity
+@Table(name = "user")
 public class User implements Serializable {
 
   private static final long serialVersionUID = -5466464499894166834L;

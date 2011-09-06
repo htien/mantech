@@ -33,7 +33,7 @@ public class Assignment implements Serializable {
   @Id
   @OneToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "complaint_id", referencedColumnName = "id")
-  private int complaintId;
+  private Complaint complaint;
 
   @Column(name = "begindate", nullable = false)
   private Date beginDate;
@@ -57,12 +57,12 @@ public class Assignment implements Serializable {
 
   public Assignment() {}
 
-  public int getComplaintId() {
-    return complaintId;
+  public Complaint getComplaint() {
+    return complaint;
   }
 
-  public void setComplaintId(int complaintId) {
-    this.complaintId = complaintId;
+  public void setComplaint(Complaint complaint) {
+    this.complaint = complaint;
   }
 
   public Date getBeginDate() {

@@ -13,5 +13,7 @@ import mantech.domain.Category;
  * @version $Id: CategoryRepository.java,v 1.0 2011/09/06 1:56:06 longnguyen Exp $
  */
 public interface CategoryRepository extends Repository<Category> {
+  
+  Category getLastCategory();
 
 }

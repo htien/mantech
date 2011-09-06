@@ -4,7 +4,9 @@
  */
 package mantech.dao;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 
 import net.lilylnx.springnet.core.hibernate.HibernateGenericDAO;
 
@@ -20,5 +22,14 @@ public class CategoryDAO extends HibernateGenericDAO<Category> implements Catego
   public CategoryDAO(SessionFactory sessionFactory) {
     super(sessionFactory);
   }
+
+  @Override
+  public Category getLastCategory() {
+    Criteria criteria = session().createCriteria(getPersist());
+    criteria.addOrder(Order.desc("id")).setMaxResults(1);
+    return (Category)criteria.uniqueResult();
+  }
+  
+  
 
 }

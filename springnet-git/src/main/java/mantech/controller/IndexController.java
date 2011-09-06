@@ -20,7 +20,7 @@ public class IndexController {
   public IndexController() {}
 
   @RequestMapping(method = RequestMethod.GET)
-  public String list(ModelMap model) {
+  public String list(ModelMap model) {    
     model.addAttribute("welcomeMsg", "SpringFramework! & Hello World");
     return "index";
   }

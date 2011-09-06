@@ -68,4 +68,8 @@
 		<appender-ref ref="springnet-stdout" />
 		<appender-ref ref="springnet.log"/>
 	</category>
+	<category name="test.lilylnx.springnet">
+		<priority value="info" />
+		<appender-ref ref="springnet-stdout" />
+	</category>
 </log4j:configuration>

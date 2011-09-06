@@ -4,14 +4,15 @@
  */
 package mantech.repository;
 
-import mantech.domain.Student;
-
 import net.lilylnx.springnet.repository.Repository;
 
+import mantech.domain.CategoryPriority;
+
 /**
+ * 
  * @author Tien Nguyen
- * @version $Id: StudentRepository.java,v 1.0 2011/08/26 0:46:52 lilylnx Exp $
+ * @version $Id: CategoryPriorityRepository.java,v 1.0 2011/09/07 1:56:09 lilylnx Exp $
  */
-public interface StudentRepository extends Repository<Student> {
+public interface CategoryPriorityRepository extends Repository<CategoryPriority> {
 
 }

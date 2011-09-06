@@ -2,6 +2,7 @@
 *~
 
 ### Archives
+*.tar.gz
 *.tar.bz2
 
 ### Eclipse
@@ -28,7 +29,7 @@ nbproject/
 .nbattrs
 nb-configuration.xml
 nbactions.xml
-nbactions-my-config.xml
+nbactions-*.xml
 
 ### Windows
 .DS_Store?

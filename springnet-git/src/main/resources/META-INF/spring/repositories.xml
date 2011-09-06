@@ -18,6 +18,18 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-	<bean id="mantech.repository.StudentRepository" class="mantech.dao.StudentDAO" autowire="constructor" />
+	<bean id="mantech.repository.AssignmentRepository" class="mantech.dao.AssignmentDAO" autowire="constructor" />
+	<bean id="mantech.repository.AssignmentDetailRepository" class="mantech.dao.AssignmentDetailDAO" autowire="constructor" />
+	<bean id="mantech.repository.CategoryRepository" class="mantech.dao.CategoryDAO" autowire="constructor" />
+	<bean id="mantech.repository.CategoryPriorityRepository" class="mantech.dao.CategoryPriorityDAO" autowire="constructor" />
+	<bean id="mantech.repository.ComplaintRepository" class="mantech.dao.ComplaintDAO" autowire="constructor" />
+	<bean id="mantech.repository.ComplaintPriorityRepository" class="mantech.dao.ComplaintPriorityDAO" autowire="constructor" />
+	<bean id="mantech.repository.DepartmentRepository" class="mantech.dao.DepartmentDAO" autowire="constructor" />
+	<bean id="mantech.repository.EquipmentRepository" class="mantech.dao.EquipmentDAO" autowire="constructor" />
+	<bean id="mantech.repository.RequestPasswordRepository" class="mantech.dao.RequestPasswordDAO" autowire="constructor" />
+	<bean id="mantech.repository.SessionRepository" class="mantech.dao.SessionDAO" autowire="constructor" />
+	<bean id="mantech.repository.UserRepository" class="mantech.dao.UserDAO" autowire="constructor" />
+	<bean id="mantech.repository.UserRoleRepository" class="mantech.dao.UserRoleDAO" autowire="constructor" />
+	
 
 </beans>

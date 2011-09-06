@@ -1,4 +1,4 @@
-<%@ taglib uri="http://htmlcompressor.googlecode.com/taglib/compressor" prefix="compress" %><compress:html
+<%@ taglib uri="http://htmlcompressor.googlecode.com/taglib/compressor" prefix="compress"%><compress:html
 	jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

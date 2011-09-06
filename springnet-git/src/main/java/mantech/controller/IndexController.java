@@ -4,20 +4,10 @@
  */
 package mantech.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import mantech.domain.Student;
-import mantech.repository.StudentRepository;
-
-
-
-
-
-
 
 /**
  * @author Tien Nguyen
@@ -27,17 +17,11 @@ import mantech.repository.StudentRepository;
 @RequestMapping("/index")
 public class IndexController {
 
-  @Autowired
-  private StudentRepository studentRepo;
-
   public IndexController() {}
 
   @RequestMapping(method = RequestMethod.GET)
   public String list(ModelMap model) {
-    Student student = studentRepo.get(1); 
-    
-    model.addAttribute("welcomeMsg", "SpringFramework!")
-        .addAttribute("student", student);
+    model.addAttribute("welcomeMsg", "SpringFramework! & Hello World");
     return "index";
   }
 

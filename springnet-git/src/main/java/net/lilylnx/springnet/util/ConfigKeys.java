@@ -24,14 +24,17 @@ public class ConfigKeys {
   public static final String SPRING_CONTEXT = "springnetContext";
   public static final String VERSION = "version";
   
+  public static final String AUTHENTICATION_TYPE = "authentication.type";
+  public static final String LOGIN_AUTHENTICATOR = "login.authenticator";
+  public static final String TYPE_SSO = "sso";
+  
+  public static final String SSO_LOGOUT_REDIRECT = "sso.logout.redirect";
+  
   public static final String ANONYMOUS_USER_ID = "anonymous.userId";
   public static final String ROLE_MANAGER = "roleManager";
   public static final String USER_SESSION = "userSession";
 
   public static final String HTTP_SERVLET_RESPONSE = "springnet.http.servlet.response";
-  public static final String IGNORE_VIEW_MANAGER_REDIRECT = "ignore.viewmanager.redirect";
-  public static final String RENDER_CUSTOM_LOGIC = "render.custom.logic";
-  public static final String RENDER_CUSTOM_COMPONENT = "render.custom.component";
   
   private ConfigKeys() {}
   

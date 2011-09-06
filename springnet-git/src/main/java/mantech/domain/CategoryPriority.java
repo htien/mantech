@@ -5,53 +5,57 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * @author Long Nguyen
+ * @version $Id: CategoryPriority.java,v 1.0 2011/09/6 6:16:50 longnguyen Exp $
+ */
 @Entity
 @Table(name = "category_priority")
 public class CategoryPriority implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+  @Id
+  @Column(name = "id")
+  private byte id;
 
-	@OneToMany
-	@JoinColumn(name = "id")
-	private List<Category> categories;
+  @Column(name = "name", nullable = false, length = 10)
+  private String name;
 
-	@Column(name = "name")
-	private String name;
+  @OneToMany(fetch = FetchType.LAZY)
+  @JoinColumn(name = "id")
+  private List<Category> categories;
+  
+  public CategoryPriority() {}
 
-	public int getId() {
-		return id;
-	}
+  public byte getId() {
+    return id;
+  }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+  public void setId(byte id) {
+    this.id = id;
+  }
 
-	public List<Category> getCategories() {
-		return categories;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setCategories(List<Category> categories) {
-		this.categories = categories;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public String getName() {
-		return name;
-	}
+  public List<Category> getCategories() {
+    return categories;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public void setCategories(List<Category> categories) {
+    this.categories = categories;
+  }
 
 }

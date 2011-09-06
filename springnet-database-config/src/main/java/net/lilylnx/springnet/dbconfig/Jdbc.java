@@ -97,6 +97,9 @@ public class Jdbc {
 
   @Override
   public boolean equals(Object obj) {
+    if (obj == this) {
+      return true;
+    }
     if (obj != null && obj instanceof Jdbc) {
       Jdbc jdbc  = (Jdbc)obj;
       return this.serverName.equals(jdbc.getServerName()) &&

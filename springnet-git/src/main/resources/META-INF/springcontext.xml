@@ -33,7 +33,7 @@
 		</property>
 	</bean>
 
-    <bean id="org.hibernate.SessionFactory"  
+	<bean id="org.hibernate.SessionFactory"  
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
 		p:hibernateProperties-ref="hibernateDataSource"
 		p:packagesToScan="mantech.domain" />
@@ -42,7 +42,7 @@
         class="org.springframework.orm.hibernate3.HibernateTransactionManager"
         p:sessionFactory-ref="org.hibernate.SessionFactory" />
 
-    <tx:annotation-driven />
+	<tx:annotation-driven />
 
 	<import resource="spring/misc.xml" />
 	<import resource="spring/repositories.xml" />

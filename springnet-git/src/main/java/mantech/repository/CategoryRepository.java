@@ -4,9 +4,9 @@
  */
 package mantech.repository;
 
-import mantech.domain.Category;
-
 import net.lilylnx.springnet.repository.Repository;
+
+import mantech.domain.Category;
 
 /**
  * @author Long Nguyen

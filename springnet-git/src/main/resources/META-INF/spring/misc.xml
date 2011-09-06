@@ -18,30 +18,32 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-	<bean class="net.lilylnx.springnet.SpringNet"/>
-	<bean class="net.lilylnx.springnet.core.SessionManager" autowire="constructor"/>
-	<bean class="net.lilylnx.springnet.extension.RequestOperationChain">
+	<bean id="net.lilylnx.springnet.SpringNet" class="net.lilylnx.springnet.SpringNet" />
+	<bean id="net.lilylnx.springnet.core.SessionManager" class="net.lilylnx.springnet.core.SessionManager" />
+	<bean id="net.lilylnx.springnet.extension.RequestOperationChain" class="net.lilylnx.springnet.extension.RequestOperationChain">
 		<property name="operations">
 			<list></list>
 		</property>
 	</bean>
-	<bean class="net.lilylnx.springnet.util.SpringConfig"/>
+	<bean id="net.lilylnx.springnet.sso.LoginAuthenticator" class="net.lilylnx.springnet.sso.DefaultLoginAuthenticator" />
+	<bean id="net.lilylnx.springnet.util.SpringConfig" class="net.lilylnx.springnet.util.SpringConfig" />
 	
-	<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+	<bean id="org.springframework.beans.factory.config.CustomScopeConfigurer"
+		class="org.springframework.beans.factory.config.CustomScopeConfigurer">
 		<property name="scopes">
   			<map>
-				<entry key="request" value="org.springframework.web.context.request.RequestScope"/>
-				<entry key="session" value="org.springframework.web.context.request.SessionScope"/>
+				<entry key="request" value="org.springframework.web.context.request.RequestScope" />
+				<entry key="session" value="org.springframework.web.context.request.SessionScope" />
   			</map>
 		</property>
 	</bean>
 	
 	<!-- Factory Beans -->
 	<bean id="javax.servlet.http.HttpServletRequest" class="net.lilylnx.springnet.core.support.spring.HttpServletRequestFactoryBean">
-	   <aop:scoped-proxy/>
+	   <aop:scoped-proxy />
 	</bean>
 	<bean id="javax.servlet.http.HttpServletResponse" class="net.lilylnx.springnet.core.support.spring.HttpServletResponseFactoryBean">
-	   <aop:scoped-proxy/>
+	   <aop:scoped-proxy />
 	</bean>
 
 </beans>

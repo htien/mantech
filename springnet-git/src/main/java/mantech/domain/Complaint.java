@@ -1,0 +1,145 @@
+package mantech.domain;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+/**
+ * @author Long Nguyen
+ * @version $Id: Complaint.java,v 1.0 2011/09/06 19:10:06 longnguyen Exp $
+ */
+@Entity
+@Table(name = "complaint")
+public class Complaint implements Serializable {
+
+  private static final long serialVersionUID = -7703177115415708202L;
+
+  @Id
+  @Column(name = "id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
+
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "userid", referencedColumnName = "id", nullable = false)
+  private User user;
+
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "equipment_id", referencedColumnName = "id", nullable = false)
+  private Equipment equipment;
+
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "status_id", referencedColumnName = "id", nullable = false)
+  private ComplaintStatus status;
+
+  @Column(name = "title", nullable = false, length = 140)
+  private String title;
+
+  @Column(name = "[content]", nullable = false)
+  private String content;
+
+  @Column(name = "priority", nullable = false)
+  private byte priority;
+
+  @Column(name = "enddate")
+  private Date endDate;
+
+  @Column(name = "createdate", nullable = false)
+  private Date createDate;
+
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "id")
+  private Assignment assignment;
+
+  public Complaint() {}
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+  public Equipment getEquipment() {
+    return equipment;
+  }
+
+  public void setEquipment(Equipment equipment) {
+    this.equipment = equipment;
+  }
+
+  public ComplaintStatus getStatus() {
+    return status;
+  }
+
+  public void setStatus(ComplaintStatus status) {
+    this.status = status;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public String getContent() {
+    return content;
+  }
+
+  public void setContent(String content) {
+    this.content = content;
+  }
+
+  public byte getPriority() {
+    return priority;
+  }
+
+  public void setPriority(byte priority) {
+    this.priority = priority;
+  }
+
+  public Date getEndDate() {
+    return endDate;
+  }
+
+  public void setEndDate(Date endDate) {
+    this.endDate = endDate;
+  }
+
+  public Date getCreateDate() {
+    return createDate;
+  }
+
+  public void setCreateDate(Date createDate) {
+    this.createDate = createDate;
+  }
+
+  public Assignment getAssignment() {
+    return assignment;
+  }
+
+  public void setAssignment(Assignment assignment) {
+    this.assignment = assignment;
+  }
+
+}

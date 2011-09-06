@@ -15,27 +15,27 @@ import javax.persistence.Table;
 
 /**
  * @author Long Nguyen
- * @version $Id: B.java,v 1.0 2011/09/06 19:11:18 longnguyen Exp $
+ * @version $Id: ComplaintStatus.java,v 1.0 2011/09/07 00:44:49 longnguyen Exp $
  */
 @Entity
-@Table(name = "department")
-public class Department implements Serializable {
+@Table(name = "complaint_status")
+public class ComplaintStatus implements Serializable {
 
-  private static final long serialVersionUID = 2338433186378287102L;
+  private static final long serialVersionUID = 1L;
 
   @Id
   @Column(name = "id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private byte id;
 
-  @Column(name = "name", unique = true, nullable = false, length = 20)
+  @Column(name = "name", unique = true, nullable = false, length = 15)
   private String name;
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "id")
-  private List<User> users;
+  private List<Complaint> complaints;
 
-  public Department() {}
+  public ComplaintStatus() {}
 
   public byte getId() {
     return id;
@@ -53,12 +53,12 @@ public class Department implements Serializable {
     this.name = name;
   }
 
-  public List<User> getUsers() {
-    return users;
+  public List<Complaint> getComplaints() {
+    return complaints;
   }
 
-  public void setUsers(List<User> users) {
-    this.users = users;
+  public void setComplaints(List<Complaint> complaints) {
+    this.complaints = complaints;
   }
 
 }

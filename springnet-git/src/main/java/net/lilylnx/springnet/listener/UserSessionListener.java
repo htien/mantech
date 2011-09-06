@@ -8,6 +8,11 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 /**
+ * Lớp dùng để nghe ngóng session của người dùng.
+ * Cụ thể khi 1 người dùng mở 1 phiên làm việc của họ trên website,
+ * hoặc khi session kết thúc thì hệ thống sẽ thực thi phương thức tương ứng
+ * cùng với việc tạo/hủy session.
+ * 
  * @author Tien Nguyen
  * @version $Id: UserSessionListener.java,v 1.0 2011/08/21 8:07:49 lilylnx Exp $
  */

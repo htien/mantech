@@ -31,7 +31,7 @@ public class Category implements Serializable {
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "priority_id", referencedColumnName = "id", nullable = false)
-  private CategoryPriority categoryPriority;
+  private CategoryPriority priority;
 
   @Column(name = "name", unique = true, nullable = false, length = 30)
   private String name;
@@ -50,12 +50,12 @@ public class Category implements Serializable {
     this.id = id;
   }
 
-  public CategoryPriority getCategoryPriority() {
-    return categoryPriority;
+  public CategoryPriority getPriority() {
+    return priority;
   }
 
-  public void setCategoryPriority(CategoryPriority categoryPriority) {
-    this.categoryPriority = categoryPriority;
+  public void setPriority(CategoryPriority priority) {
+    this.priority = priority;
   }
 
   public String getName() {

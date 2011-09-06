@@ -49,7 +49,7 @@ public class Assignment implements Serializable {
 
   @OneToMany(fetch = FetchType.LAZY)
   @JoinColumn(name = "complaint_id")
-  private List<AssignmentDetail> assignmentDetails;
+  private List<AssignmentDetail> details;
 
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(name = "assignment_detail", joinColumns = { @JoinColumn(name = "complaint_id") }, inverseJoinColumns = { @JoinColumn(name = "userid") })
@@ -97,12 +97,12 @@ public class Assignment implements Serializable {
     this.createDate = createDate;
   }
 
-  public List<AssignmentDetail> getAssignmentDetails() {
-    return assignmentDetails;
+  public List<AssignmentDetail> getDetails() {
+    return details;
   }
 
-  public void setAssignmentDetails(List<AssignmentDetail> assignmentDetails) {
-    this.assignmentDetails = assignmentDetails;
+  public void setDetails(List<AssignmentDetail> details) {
+    this.details = details;
   }
 
   public List<User> getUsers() {

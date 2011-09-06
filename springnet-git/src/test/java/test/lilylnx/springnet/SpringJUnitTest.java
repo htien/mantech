@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
+ * 
  * @author Tien Nguyen
  * @version $Id: SpringJUnitTest.java,v 1.0 2011/08/26 3:25:51 lilylnx Exp $
  */

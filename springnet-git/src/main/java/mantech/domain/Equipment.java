@@ -41,8 +41,7 @@ public class Equipment implements Serializable {
   @Column(name = "name", unique = true, nullable = false, length = 50)
   private String name;
 
-  @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name = "id")
+  @OneToMany(mappedBy = "equipment", fetch = FetchType.LAZY)
   private List<Complaint> complaints;
 
   public Equipment() {}

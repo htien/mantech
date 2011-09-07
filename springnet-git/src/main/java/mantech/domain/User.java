@@ -27,7 +27,7 @@ import javax.persistence.Table;
  * @version $Id: User.java,v 1.0 2011/06/27 16:05:18 lilylnx Exp $
  */
 @Entity
-@Table(name = "user")
+@Table(name = "[user]")
 public class User implements Serializable {
 
   private static final long serialVersionUID = -5466464499894166834L;
@@ -51,7 +51,7 @@ public class User implements Serializable {
   @Column(name = "username", unique = true, nullable = false, length = 63)
   private String username;
 
-  @Column(name = "password", nullable = false, length = 255)
+  @Column(name = "passwd", nullable = false, length = 255)
   private String password;
 
   @Column(name = "regdate", nullable = false, updatable = false)
@@ -78,12 +78,10 @@ public class User implements Serializable {
   @Column(name = "status", length = 1)
   private String status;
 
-  @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name = "id")
-  private List<Complaint> complains;
+  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+  private List<Complaint> complaints;
 
-  @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name = "id")
+  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
   private List<RequestPassword> reqPasswds;
 
   @ManyToMany(fetch = FetchType.LAZY)
@@ -204,12 +202,12 @@ public class User implements Serializable {
     this.status = status;
   }
 
-  public List<Complaint> getComplains() {
-    return complains;
+  public List<Complaint> getComplaints() {
+    return complaints;
   }
 
-  public void setComplains(List<Complaint> complains) {
-    this.complains = complains;
+  public void setComplaints(List<Complaint> complaints) {
+    this.complaints = complaints;
   }
 
   public List<RequestPassword> getReqPasswds() {

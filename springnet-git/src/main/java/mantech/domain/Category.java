@@ -30,14 +30,13 @@ public class Category implements Serializable {
   private int id;
 
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "priority_id", referencedColumnName = "id", nullable = false)
+  @JoinColumn(name = "priority_id", nullable = false)
   private CategoryPriority priority;
 
   @Column(name = "name", unique = true, nullable = false, length = 30)
   private String name;
 
-  @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name = "id")
+  @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
   private List<Equipment> equipments;
 
   public Category() {}

@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -31,8 +30,7 @@ public class Department implements Serializable {
   @Column(name = "name", unique = true, nullable = false, length = 20)
   private String name;
 
-  @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name = "id")
+  @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
   private List<User> users;
 
   public Department() {}

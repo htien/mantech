@@ -41,14 +41,15 @@ public class Complaint implements Serializable {
   @JoinColumn(name = "status_id", referencedColumnName = "id", nullable = false)
   private ComplaintStatus status;
 
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "priority_id", referencedColumnName = "id", nullable = false)
+  private CategoryPriority priority;
+
   @Column(name = "title", nullable = false, length = 140)
   private String title;
 
   @Column(name = "[content]", nullable = false)
   private String content;
-
-  @Column(name = "priority", nullable = false)
-  private byte priority;
 
   @Column(name = "enddate")
   private Date endDate;
@@ -94,6 +95,14 @@ public class Complaint implements Serializable {
     this.status = status;
   }
 
+  public CategoryPriority getPriority() {
+    return priority;
+  }
+
+  public void setPriority(CategoryPriority priority) {
+    this.priority = priority;
+  }
+
   public String getTitle() {
     return title;
   }
@@ -108,14 +117,6 @@ public class Complaint implements Serializable {
 
   public void setContent(String content) {
     this.content = content;
-  }
-
-  public byte getPriority() {
-    return priority;
-  }
-
-  public void setPriority(byte priority) {
-    this.priority = priority;
   }
 
   public Date getEndDate() {

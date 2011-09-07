@@ -29,9 +29,13 @@ public class CategoryPriority implements Serializable {
   private String name;
 
   @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name = "id")
+  @JoinColumn(name = "priority_id")
   private List<Category> categories;
-  
+
+  @OneToMany(fetch = FetchType.LAZY)
+  @JoinColumn(name = "priority_id")
+  private List<Complaint> complaints;
+
   public CategoryPriority() {}
 
   public byte getId() {
@@ -56,6 +60,14 @@ public class CategoryPriority implements Serializable {
 
   public void setCategories(List<Category> categories) {
     this.categories = categories;
+  }
+
+  public List<Complaint> getComplaints() {
+    return complaints;
+  }
+
+  public void setComplaints(List<Complaint> complaints) {
+    this.complaints = complaints;
   }
 
 }

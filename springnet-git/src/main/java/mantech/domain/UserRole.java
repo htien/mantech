@@ -32,7 +32,7 @@ public class UserRole implements Serializable {
   private String name;
 
   @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name = "id")
+  @JoinColumn(name = "userid")
   private List<User> users;
 
   public UserRole() {}

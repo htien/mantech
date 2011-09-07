@@ -32,7 +32,7 @@ public class ComplaintStatus implements Serializable {
   private String name;
 
   @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name = "id")
+  @JoinColumn(name = "status_id")
   private List<Complaint> complaints;
 
   public ComplaintStatus() {}

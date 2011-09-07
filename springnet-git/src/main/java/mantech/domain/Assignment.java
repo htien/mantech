@@ -47,8 +47,7 @@ public class Assignment implements Serializable {
   @Column(name = "createdate", nullable = false, insertable = false, updatable = false)
   private Date createDate;
 
-  @OneToMany(fetch = FetchType.LAZY)
-  @JoinColumn(name = "complaint_id")
+  @OneToMany(mappedBy = "assignment", fetch = FetchType.LAZY)
   private List<AssignmentDetail> details;
 
   @ManyToMany(fetch = FetchType.LAZY)

@@ -39,6 +39,10 @@ public class SpringConfig extends PropertiesConfiguration {
   public String getApplicationPath() {
     return this.getString(ConfigKeys.APPLICATION_PATH);
   }
+  
+  public String getServletExt() {
+    return this.getString(ConfigKeys.SERVLET_EXTENSION);
+  }
 
   private void loadProps() throws ConfigurationException, Exception {
     this.load(this.getClass().getResourceAsStream(ConfigKeys.SPRING_PROPS_PATH));

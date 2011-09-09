@@ -4,12 +4,17 @@
  */
 package mantech.dao;
 
-import org.hibernate.SessionFactory;
+import java.util.List;
 
-import net.lilylnx.springnet.core.hibernate.HibernateGenericDAO;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 import mantech.domain.User;
 import mantech.repository.UserRepository;
+
+import net.lilylnx.springnet.core.hibernate.HibernateGenericDAO;
 
 /**
  * 
@@ -39,6 +44,23 @@ public class UserDAO extends HibernateGenericDAO<User> implements UserRepository
   @Override
   public User validateUser(String username, String password) {
     // TODO Auto-generated method stub
+    return null;
+  }
+
+  /**
+   * L^ấy 2 người d`ung từ sau vị trí cụ th^ể trong database.
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<User> getUserByRole() {
+    Criteria crit = session().createCriteria(persistClass, "u").createCriteria("role", "r");
+    crit.add(Restrictions.eq("r.name", "employee"));
+    return crit.list();
+  }
+
+  @Override
+  public List<User> getUsersSumComplaint() {
+    Query q = session().createQuery("select count(, u.* from User u");
     return null;
   }
 

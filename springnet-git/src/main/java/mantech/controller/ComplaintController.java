@@ -35,7 +35,7 @@ public class ComplaintController {
     Date begin = format.parse("2011/09/05");
     Date end = format.parse("2011/09/10");
     byte id = 1;
-    List<Complaint> complaints = complaintRepo.getOrderByCategoryId();
+    List<Complaint> complaints = complaintRepo.sort("equipment.name", false, new int[] { 0, 3});
     model.addAttribute("listComplaint", complaints);
     model.addAttribute("no", noOfComplaintInPeriod());
     model.addAttribute("list", listComplaintDaily(1));

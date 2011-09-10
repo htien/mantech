@@ -29,13 +29,7 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
     super(sessionFactory);
   }
 
-  @SuppressWarnings("unchecked")
-  public List<Complaint> getOrderByCategoryId() {
-    Criteria c = session().createCriteria(persistClass, "a").createCriteria("user").createCriteria("department", "depart").createCriteria("a.priority", "p");
-    // c.addOrder(Order.asc("depart.id"));
-    c.addOrder(Order.asc("p.id"));
-    return c.list();
-  }
+
 
   @SuppressWarnings("unchecked")
   @Override
@@ -57,8 +51,8 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
   @SuppressWarnings("unchecked")
   @Override
   public List<Complaint> getByPriority(byte id) {
-    Criteria c = session().createCriteria(persistClass).createCriteria("priority", "p");
-    c.add(Restrictions.eq("p.id", id));
+    Criteria c = session().createCriteria(persistClass);
+    c.add(Restrictions.eq("priority.id", id));
     return c.list();
   }
 
@@ -84,6 +78,35 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
     Criteria c = session().createCriteria(persistClass).createCriteria("user", "u");
     c.add(Restrictions.ilike("u.lastName", name + "%"));
     return c.list();
+  }
+
+
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<Complaint> sort(String fieldName, boolean order, int[] range) {
+    List<Complaint> listComplaint = null;
+    
+    if (fieldName.contains(".")) {
+      String[] entity = fieldName.split("\\.");
+      String _order = !order ? "asc" : "desc";
+      Query q = session().createQuery("select c from Complaint c left join "
+                + "c." + entity[0].trim() + " e order by e." + entity[1].trim() + " " + _order);
+      if (range != null) {
+        q.setMaxResults(range[1]-range[0]).setFirstResult(range[0]);
+      }
+      listComplaint = q.list();
+    }
+    else {
+      Criteria c = session().createCriteria(persistClass);
+      c.setMaxResults(range[1]-range[0]).setFirstResult(range[0]);
+      if (range != null) {
+        c.addOrder(!order ? Order.asc(fieldName) : Order.asc(fieldName));
+      }
+      listComplaint = c.list();
+    }
+    
+    return listComplaint;
   }
 
 }

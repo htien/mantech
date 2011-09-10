@@ -18,7 +18,7 @@ import mantech.domain.Complaint;
  */
 public interface ComplaintRepository extends Repository<Complaint> {
   
-  List<Complaint> getOrderByCategoryId();
+  List<Complaint> sort(String fieldName, boolean order, int[] range);
   List<Complaint> getByWeekly(Date begin, Date end);
   List<Complaint> getByDepartment(byte id);
   List<Complaint> getByPriority(byte id);

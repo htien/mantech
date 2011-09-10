@@ -18,8 +18,12 @@ import mantech.domain.Complaint;
  */
 public interface ComplaintRepository extends Repository<Complaint> {
   
-  List<Complaint> getComplaintsOrderByCategoryId();
-  List<Complaint> getComplaintWeekly(Date begin, Date end);
-  List<Complaint> getComplaintByDepartment(Byte id);
+  List<Complaint> getOrderByCategoryId();
+  List<Complaint> getByWeekly(Date begin, Date end);
+  List<Complaint> getByDepartment(byte id);
+  List<Complaint> getByPriority(byte id);
+  List<Complaint> searchByFName(String name);
+  List<Complaint> searchStartWithFName(String name);
+  List<Complaint> searchStartWithLName(String name);
   
 }

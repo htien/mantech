@@ -46,4 +46,22 @@ Show Complaint weekly:
 	Number of complaints in department Learning Services:
 	${complaintByDepartment.size()}
 </p>
+<p>
+	List complaints by priority:<br/>
+	<c:forEach items="${complaintByPriority}" var="l">
+		${l.id }: ${l.user.firstName } - ${l.user.role.name}
+		- ${l.user.department.name}
+		- ${l.equipment.name } - ${l.status.name } - ${l.title }
+		-${l.content } - ${l.priority.name } - ${l.createDate } <br />
+	</c:forEach>
+</p>
+<p>
+	List complaints by FirstName:<br/>
+	<c:forEach items="${complaintByFirstName}" var="l">
+		${l.id }: ${l.user.firstName } - ${l.user.role.name}
+		- ${l.user.department.name}
+		- ${l.equipment.name } - ${l.status.name } - ${l.title }
+		-${l.content } - ${l.priority.name } - ${l.createDate } <br />
+	</c:forEach>
+</p>
 </compress:html>

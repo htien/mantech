@@ -34,13 +34,15 @@ public class ComplaintController {
     SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
     Date begin = format.parse("2011/09/05");
     Date end = format.parse("2011/09/10");
-    Byte id = 3;
-    List<Complaint> complaints = complaintRepo.getComplaintsOrderByCategoryId();
+    byte id = 1;
+    List<Complaint> complaints = complaintRepo.getOrderByCategoryId();
     model.addAttribute("listComplaint", complaints);
     model.addAttribute("no", noOfComplaintInPeriod());
     model.addAttribute("list", listComplaintDaily(1));
-    model.addAttribute("complaintInWeek", complaintRepo.getComplaintWeekly(begin, end));
-    model.addAttribute("complaintByDepartment", complaintRepo.getComplaintByDepartment(id));
+    model.addAttribute("complaintInWeek", complaintRepo.getByWeekly(begin, end));
+    model.addAttribute("complaintByDepartment", complaintRepo.getByDepartment(id));
+    model.addAttribute("complaintByPriority",complaintRepo.getByPriority((byte)2));
+    model.addAttribute("complaintByFirstName", complaintRepo.searchByFName("n"));
     return "complaint/list";
   }
 

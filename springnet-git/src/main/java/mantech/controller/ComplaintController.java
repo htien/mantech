@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import mantech.domain.Complaint;
 import mantech.repository.ComplaintRepository;
+import mantech.service.ComplaintService;
 
 /**
  * @author Long Nguyen
@@ -24,6 +25,9 @@ import mantech.repository.ComplaintRepository;
 @Controller
 @RequestMapping("/long/complaint")
 public class ComplaintController {
+  
+  @Autowired
+  private ComplaintService complaintService;
 
   @Autowired
   private ComplaintRepository complaintRepo;
@@ -34,15 +38,22 @@ public class ComplaintController {
     SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
     Date begin = format.parse("2011/09/05");
     Date end = format.parse("2011/09/10");
-    byte id = 1;
-    List<Complaint> complaints = complaintRepo.sort("equipment.name", false, new int[] { 0, 3});
+    Date createDate = format.parse("2011/09/09");
+    List<Complaint> complaints = complaintService.sort("id", false, 2); // trang 1, lay 3 kq, se lay ra id 1, 2, 3
     model.addAttribute("listComplaint", complaints);
     model.addAttribute("no", noOfComplaintInPeriod());
     model.addAttribute("list", listComplaintDaily(1));
     model.addAttribute("complaintInWeek", complaintRepo.getByWeekly(begin, end));
-    model.addAttribute("complaintByDepartment", complaintRepo.getByDepartment(id));
+    model.addAttribute("complaintByDepartment", complaintRepo.getByDepartment((byte)1));
     model.addAttribute("complaintByPriority",complaintRepo.getByPriority((byte)2));
     model.addAttribute("complaintByFirstName", complaintRepo.searchByFName("n"));
+    List<Complaint> complaintsByDate = complaintRepo.searchByDate(createDate);
+    model.addAttribute("complaintByDate", complaintsByDate);
+    List<Complaint> complaintsFromDateToDate = complaintRepo.searchByDate(format.parse("2011/09/09"), 
+                                               format.parse("2011/10/02"));
+    model.addAttribute("complaintsFromDateToDate", complaintsFromDateToDate);
+    List<Complaint> complaintsByYear = complaintRepo.searchByYear(2011);
+    model.addAttribute("complaintYear", complaintsByYear);
     return "complaint/list";
   }
 

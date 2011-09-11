@@ -25,5 +25,8 @@ public interface ComplaintRepository extends Repository<Complaint> {
   List<Complaint> searchByFName(String name);
   List<Complaint> searchStartWithFName(String name);
   List<Complaint> searchStartWithLName(String name);
+  List<Complaint> searchByDate(Date date);
+  List<Complaint> searchByDate(Date from, Date to);
+  List<Complaint> searchByYear(int year);
   
 }

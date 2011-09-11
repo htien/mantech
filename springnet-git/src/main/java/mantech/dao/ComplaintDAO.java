@@ -17,6 +17,7 @@ import mantech.domain.Complaint;
 import mantech.repository.ComplaintRepository;
 
 import net.lilylnx.springnet.core.hibernate.HibernateGenericDAO;
+import net.lilylnx.springnet.util.SpringUtils;
 
 /**
  * 
@@ -28,8 +29,6 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
   public ComplaintDAO(SessionFactory sessionFactory) {
     super(sessionFactory);
   }
-
-
 
   @SuppressWarnings("unchecked")
   @Override
@@ -80,8 +79,6 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
     return c.list();
   }
 
-
-
   @SuppressWarnings("unchecked")
   @Override
   public List<Complaint> sort(String fieldName, boolean order, int[] range) {
@@ -93,20 +90,40 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
       Query q = session().createQuery("select c from Complaint c left join "
                 + "c." + entity[0].trim() + " e order by e." + entity[1].trim() + " " + _order);
       if (range != null) {
-        q.setMaxResults(range[1]-range[0]).setFirstResult(range[0]);
+        q.setMaxResults(range[0]).setFirstResult((range[1]-1)*range[0]);
       }
       listComplaint = q.list();
     }
     else {
       Criteria c = session().createCriteria(persistClass);
-      c.setMaxResults(range[1]-range[0]).setFirstResult(range[0]);
+      c.setMaxResults(range[0]).setFirstResult((range[1]-1)*range[0]);
       if (range != null) {
         c.addOrder(!order ? Order.asc(fieldName) : Order.asc(fieldName));
       }
       listComplaint = c.list();
     }
-    
     return listComplaint;
+  }
+
+  @Override
+  public List<Complaint> searchByDate(Date date) {
+    return searchByDate(date, date);
+  }
+  
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<Complaint> searchByDate(Date from, Date to) {
+    Query q = session().createQuery("from Complaint c where c.createDate >= :from and c.createDate < :to");
+    q.setDate("from", from).setDate("to", SpringUtils.increaseDay(to));
+    return (List<Complaint>)q.list();
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<Complaint> searchByYear(int year) {
+    Query q = session().createQuery("from Complaint c where datepart(year, c.createDate) = :year");
+    q.setInteger("year", year);
+    return (List<Complaint>)q.list();
   }
 
 }

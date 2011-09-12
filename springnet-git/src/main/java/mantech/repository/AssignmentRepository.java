@@ -4,6 +4,8 @@
  */
 package mantech.repository;
 
+import java.util.List;
+
 import net.lilylnx.springnet.repository.Repository;
 
 import mantech.domain.Assignment;
@@ -15,4 +17,8 @@ import mantech.domain.Assignment;
  */
 public interface AssignmentRepository extends Repository<Assignment> {
 
+  List<Assignment> getExist(boolean deleted);
+  List<Assignment> getByUserId(int id);
+  List<Assignment> getCompleted(byte id);
+  
 }

@@ -4,6 +4,8 @@
  */
 package mantech.repository;
 
+import java.util.List;
+
 import net.lilylnx.springnet.repository.Repository;
 
 import mantech.domain.Equipment;
@@ -14,5 +16,7 @@ import mantech.domain.Equipment;
  * @version $Id: EquipmentRepository.java,v 1.0 2011/09/07 1:59:49 lilylnx Exp $
  */
 public interface EquipmentRepository extends Repository<Equipment> {
-
+  
+  public List<Equipment> paginate(int[] range);
+  
 }

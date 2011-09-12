@@ -4,6 +4,9 @@
  */
 package mantech.dao;
 
+import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 
 import net.lilylnx.springnet.core.hibernate.HibernateGenericDAO;
@@ -22,4 +25,12 @@ public class EquipmentDAO extends HibernateGenericDAO<Equipment> implements Equi
     super(sessionFactory);
   }
 
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<Equipment> paginate(int[] range) {
+    Criteria c = session().createCriteria(persistClass);
+    c.setMaxResults(range[0]).setFirstResult((range[1]-1)*range[0]);
+    return c.list();
+  }
+  
 }

@@ -33,10 +33,6 @@ public abstract class HibernateGenericDAO<T> implements Repository<T> {
         .getActualTypeArguments()[0];
     this.sessionFactory = sessionFactory;
   }
-  
-  public Class<T> getPersist() {
-    return persistClass;
-  }
 
   protected Session session() {
     return sessionFactory.getCurrentSession();
@@ -44,7 +40,7 @@ public abstract class HibernateGenericDAO<T> implements Repository<T> {
   
   @SuppressWarnings("unchecked")
   @Override
-  public T get(int id) {
+  public T get(Serializable id) {
     return (T)this.session().get(persistClass, id);
   }
   

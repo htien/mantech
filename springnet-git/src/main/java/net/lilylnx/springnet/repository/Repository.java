@@ -4,6 +4,7 @@
  */
 package net.lilylnx.springnet.repository;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public interface Repository<T> {
    * @param id ID cần tìm kiếm
    * @return Thực thể được yêu cầu, hoặc <code>null</code> nếu không tìm thấy
    */
-  T get(int id);
+  T get(Serializable id);
 
   /**
    * Thêm một thực thể mới của một đối tượng vào repository.

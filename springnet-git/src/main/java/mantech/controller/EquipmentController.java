@@ -4,18 +4,11 @@
  */
 package mantech.controller;
 
-import java.beans.PropertyEditorSupport;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,16 +37,16 @@ public class EquipmentController {
   @Autowired
   private CategoryRepository categoryRepo;
   
-  @InitBinder
-  protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
-    binder.registerCustomEditor(Category.class, "id", new PropertyEditorSupport() {
-      @Override
-      public void setAsText(String text) throws IllegalArgumentException {
-        Category category = categoryRepo.find(Integer.parseInt(text));
-        setValue(category);
-      }
-    });
-  }
+//  @InitBinder
+//  protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
+//    binder.registerCustomEditor(Category.class, "id", new PropertyEditorSupport() {
+//      @Override
+//      public void setAsText(String text) throws IllegalArgumentException {
+//        Category category = categoryRepo.find(Integer.parseInt(text));
+//        setValue(category);
+//      }
+//    });
+//  }
 
   @RequestMapping(value = "/equipment/list", method = RequestMethod.GET)
   public String list(@RequestParam(value = "page", required = false, defaultValue = "1") int page, ModelMap model) {
@@ -81,9 +74,38 @@ public class EquipmentController {
   }
   
   @RequestMapping(value = "/equipment/updateSave", method = RequestMethod.POST)
-  public String updateSave(@ModelAttribute("equipment") Equipment equipment, ModelMap model, BindingResult result) {
-    equipmentRepo.update(equipment);
-    return "/equipment/list";
+  public String updateSave(@RequestParam(value = "id") int id, @RequestParam(value = "catId") int catId,@RequestParam(value = "name") String name, ModelMap model) {
+    //update equipment set  category_id = 3, name = 'Fan' where id = 1
+    
+    Equipment equipment = equipmentRepo.get(id);
+    Category newCate = categoryRepo.get(catId);
+    if (newCate != null) {
+      equipment.setName(name);
+      equipment.setCategory(newCate);
+      equipmentRepo.update(equipment);
+      model.addAttribute("msg", "Update successfully");
+    }
+    else {
+      model.addAttribute("msg", "Update fail");
+    }
+    return update(id, model);
+  }
+  
+  @RequestMapping(value = "/equipment/insert", method = RequestMethod.GET)
+  public String insert(ModelMap model) {
+    List<Category> category = categoryRepo.findAll();
+    model.addAttribute("category", category);
+    return "/equipment/insert";
+  }
+  
+  @RequestMapping(value = "/equipment/insertSave", method = RequestMethod.POST)
+  public String insertSave(@RequestParam(value = "name") String name, @RequestParam(value = "catId") int id, ModelMap model){
+    Category category = categoryRepo.get(id);
+    Equipment equipment = new Equipment();
+    equipment.setName(name);
+    equipment.setCategory(category);
+    equipmentRepo.add(equipment);
+    return "redirect:/equipment/list";
   }
 
 }

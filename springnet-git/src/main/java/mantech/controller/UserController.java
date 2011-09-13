@@ -22,13 +22,12 @@ import mantech.repository.UserRepository;
  * @version $Id: UserController.java,v 1.0 Sep 9, 2011 3:59:57 AM nguyenlong Exp $
  */
 @Controller
-@RequestMapping("/long/user")
 public class UserController {
 
   @Autowired
   private UserRepository userRepo;
   
-  @RequestMapping(method = RequestMethod.GET)
+  @RequestMapping(value = "/user/list", method = RequestMethod.GET)
   public String showUser(ModelMap model){
     List<User> users = userRepo.findAll();
     model.addAttribute("listUser", users);

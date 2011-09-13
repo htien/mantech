@@ -4,12 +4,19 @@
 	compressCss="true" removeIntertagSpaces="true">
 	
 	<h3>Update</h3>
-	<f:form method="post" action = "/springnet/equipment/updateSave.htm" commandName="equipment" >
-		<p><f:input path="name" title="Name"/></p>
+	<p>${msg}></p>
+	<form method="post" action = "/springnet/equipment/updateSave.htm" >
+		<input type="hidden" name="id" value="${equipment.id}" />
+		<p><input value="${equipment.name}" name="name"/></p>
 		<div>
-			<f:select path="category" items="${listCategory}" itemLabel="name" itemValue="id"/>
+			<select name="catId">
+				<c:forEach items="${listCategory}" var="cate">
+					<option value="${cate.id}" <c:if test="${equipment.category.id==cate.id}">selected="selected"</c:if>>${cate.name}</option>
+				</c:forEach>
+			</select>
 		</div>
 		<p><input type="submit" value="Update"/></p>
-	</f:form>
+	</form>
+	<a href="list.htm">Back to List Equipment</a>
 </compress:html>
 <%@ include file="../layout/footer.inc" %>

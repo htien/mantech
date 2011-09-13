@@ -13,9 +13,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+
 
 import mantech.domain.Complaint;
+import mantech.domain.Equipment;
+import mantech.domain.User;
 import mantech.repository.ComplaintRepository;
+import mantech.repository.EquipmentRepository;
+import mantech.repository.UserRepository;
 import mantech.service.ComplaintService;
 
 /**
@@ -23,7 +30,6 @@ import mantech.service.ComplaintService;
  * @version $Id: ComplaintController.java,v 1.0 Sep 9, 2011 12:56:51 AM nguyenlong Exp $
  */
 @Controller
-@RequestMapping("/long/complaint")
 public class ComplaintController {
   
   @Autowired
@@ -31,8 +37,14 @@ public class ComplaintController {
 
   @Autowired
   private ComplaintRepository complaintRepo;
+  
+  @Autowired
+  private EquipmentRepository equipmentRepo;
+  
+  @Autowired
+  private UserRepository userRepo;
 
-  @RequestMapping(method = RequestMethod.GET)
+  @RequestMapping(value = "/complaint/list", method = RequestMethod.GET)
   public String showAll(ModelMap model) throws Exception {
     // Date begin = Calendar.getInstance().getTime();
     SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
@@ -65,4 +77,25 @@ public class ComplaintController {
     return complaintRepo.findRange(new int[] { i - 1, i + 2 }, true, "id");
   }
 
+  @RequestMapping(value = "/complaint/insert", method = RequestMethod.GET)
+  public String insert (@RequestParam(value = "userId") int id, ModelMap model){
+    model.addAttribute("userId", id);
+    List<Equipment> equip = equipmentRepo.findAll();
+    model.addAttribute("list", equip);
+    return "/complaint/insert";
+  }
+  
+  @RequestMapping(value = "/complaint/insertSave", method = RequestMethod.POST)
+  public String insertSave(@RequestParam(value = "equipId") int equipId
+  , @RequestParam(value = "title") String title, @RequestParam(value = "content") String content, ModelMap model) {
+    Complaint complaint = new Complaint();
+    User user = userRepo.get(2);
+    Equipment equipment = equipmentRepo.get(equipId);
+    complaint.setUser(user);
+    complaint.setEquipment(equipment);
+    complaint.setTitle(title);
+    complaint.setContent(content);
+    complaintRepo.insert(complaint);
+    return "redirect:/complaint/list";
+  }
 }

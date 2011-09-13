@@ -88,3 +88,4 @@
 	</c:forEach>
 </p>
 </compress:html>
+<%@ include file="../layout/footer.inc"%>

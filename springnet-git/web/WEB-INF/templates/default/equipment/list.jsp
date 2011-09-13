@@ -43,3 +43,4 @@
 		</tr>
 	</table>
 </compress:html>
+<%@ include file="../layout/footer.inc" %>

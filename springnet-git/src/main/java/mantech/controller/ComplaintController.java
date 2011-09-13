@@ -14,25 +14,28 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import net.lilylnx.springnet.core.exception.ValidationException;
-
-
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import mantech.domain.CategoryPriority;
 import mantech.domain.Complaint;
+import mantech.domain.ComplaintStatus;
 import mantech.domain.Equipment;
 import mantech.domain.User;
+import mantech.repository.CategoryPriorityRepository;
 import mantech.repository.ComplaintRepository;
+import mantech.repository.ComplaintStatusRepository;
 import mantech.repository.EquipmentRepository;
 import mantech.repository.UserRepository;
 import mantech.service.ComplaintService;
+
+import net.lilylnx.springnet.core.exception.ValidationException;
 
 /**
  * @author Long Nguyen
  * @version $Id: ComplaintController.java,v 1.0 Sep 9, 2011 12:56:51 AM nguyenlong Exp $
  */
 @Controller
+@SessionAttributes("complaint")
 public class ComplaintController {
   
   @Autowired
@@ -46,6 +49,12 @@ public class ComplaintController {
   
   @Autowired
   private UserRepository userRepo;
+  
+  @Autowired
+  private ComplaintStatusRepository statusRepo;
+  
+  @Autowired
+  private CategoryPriorityRepository priorityRepo;
 
   @RequestMapping(value = "/complaint/list", method = RequestMethod.GET)
   public String showAll(ModelMap model) throws Exception {
@@ -110,6 +119,40 @@ public class ComplaintController {
       model.addAttribute("errorMsg", e.getMessage());
       return insert(user.getId(), model);
     }
+    return "redirect:/complaint/list";
+  }
+  
+  @RequestMapping("complaint/listComplaint")
+  public String list (ModelMap model) {
+    List<Complaint> complaint = complaintRepo.findAll();
+    model.addAttribute("list", complaint);
+    return "/complaint/listComplaint";
+  }
+  
+  @RequestMapping(value = "/complaint/edit", method = RequestMethod.GET)
+  public String edit(ModelMap model) {
+    Complaint complaint = complaintRepo.get(1);
+    
+    List<CategoryPriority> priority = priorityRepo.findAll(false, "id");
+    List<ComplaintStatus> status = statusRepo.findAll(false, "id");
+    
+    model.addAttribute("complaint", complaint);
+    model.addAttribute("listStatus", status);
+    model.addAttribute("listPriority", priority);
+    return "/complaint/edit";
+  }
+  
+  @RequestMapping(value = "/complaint/editSave", method = RequestMethod.POST)
+  public String editSave(@RequestParam("status") byte statusId, 
+      @RequestParam("priority") byte priorityId, ModelMap model)
+  {
+    Complaint complaint = (Complaint)model.get("complaint");
+    ComplaintStatus status = statusRepo.get(statusId);
+    CategoryPriority priority = priorityRepo.get(priorityId);
+    
+    complaint.setStatus(status);
+    complaint.setPriority(priority);
+    complaintRepo.update(complaint);
     return "redirect:/complaint/list";
   }
 }

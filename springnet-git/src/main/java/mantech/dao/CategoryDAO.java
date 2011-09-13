@@ -25,7 +25,7 @@ public class CategoryDAO extends HibernateGenericDAO<Category> implements Catego
 
   @Override
   public Category getLastCategory() {
-    Criteria criteria = session().createCriteria(getPersist());
+    Criteria criteria = session().createCriteria(persistClass);
     criteria.addOrder(Order.desc("id")).setMaxResults(1);
     return (Category)criteria.uniqueResult();
   }

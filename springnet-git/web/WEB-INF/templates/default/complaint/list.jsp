@@ -48,7 +48,7 @@
 		${l.id}: ${l.user.firstName} - ${l.user.role.name}
 		- ${l.user.department.name}
 		- ${l.equipment.name} - ${l.status.name} - ${l.title}
-		-${l.content} - ${l.priority.name} - ${l.createDate} <br />
+		-${l.content} - ${l.priority.name} - ${l.createDate} <br/>
 	</c:forEach>
 </p>
 <p>

@@ -30,19 +30,19 @@ public class Complaint implements Serializable {
   private int id;
 
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "userid", referencedColumnName = "id", nullable = false)
+  @JoinColumn(name = "userid", referencedColumnName = "id")
   private User user;
 
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "equipment_id", referencedColumnName = "id", nullable = false)
+  @JoinColumn(name = "equipment_id", referencedColumnName = "id")
   private Equipment equipment;
 
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "status_id", referencedColumnName = "id", nullable = false)
+  @JoinColumn(name = "status_id", referencedColumnName = "id", insertable = false)
   private ComplaintStatus status;
 
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "priority_id", referencedColumnName = "id", nullable = false)
+  @JoinColumn(name = "priority_id", referencedColumnName = "id", insertable = false)
   private CategoryPriority priority;
 
   @Column(name = "title", nullable = false, length = 140)
@@ -54,7 +54,7 @@ public class Complaint implements Serializable {
   @Column(name = "enddate")
   private Date endDate;
 
-  @Column(name = "createdate", nullable = false)
+  @Column(name = "createdate", insertable = false)
   private Date createDate;
 
   @OneToOne(fetch = FetchType.LAZY)

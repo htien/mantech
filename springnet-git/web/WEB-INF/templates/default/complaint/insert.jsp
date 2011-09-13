@@ -4,7 +4,7 @@
 	compressCss="true" removeIntertagSpaces="true">
 
 	<h1>Insert New Complaint</h1>
-	
+	<p style="color:darkred">${errorMsg}</p>
 	<form method="post" action="/springnet/complaint/insertSave.htm">
 		User Name: <input type="text" value="${userId}" name="userId"/><br/>
 		Equipment:	
@@ -13,8 +13,8 @@
 					<option value="${l.id}">${l.name}</option>
 				</c:forEach>
 			</select><br/>
-		Title: <input type="text" name = "title"/><br/>
-		Content: <textarea rows="8" cols="30" name="content"></textarea><br/>
+		Title: <input type="text" name="title" value="${complaint.title}"/><br/>
+		Content: <textarea rows="8" cols="30" name="content">${complaint.content}</textarea><br/>
 		<input type="submit" value="Add"/>
 	</form>
 

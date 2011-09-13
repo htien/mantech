@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import net.lilylnx.springnet.core.exception.ValidationException;
 
 
+
+import mantech.domain.CategoryPriority;
 import mantech.domain.Complaint;
 import mantech.domain.Equipment;
 import mantech.domain.User;
@@ -86,16 +89,27 @@ public class ComplaintController {
   }
   
   @RequestMapping(value = "/complaint/insertSave", method = RequestMethod.POST)
-  public String insertSave(@RequestParam(value = "equipId") int equipId
-  , @RequestParam(value = "title") String title, @RequestParam(value = "content") String content, ModelMap model) {
+  public String insertSave(@RequestParam(value = "equipId") int equipId,
+      @RequestParam(value = "title") String title,
+      @RequestParam(value = "content") String content, ModelMap model)
+  {
     Complaint complaint = new Complaint();
     User user = userRepo.get(2);
     Equipment equipment = equipmentRepo.get(equipId);
+    CategoryPriority priority = equipment.getCategory().getPriority();
     complaint.setUser(user);
     complaint.setEquipment(equipment);
+    complaint.setPriority(priority);
     complaint.setTitle(title);
     complaint.setContent(content);
-    complaintRepo.insert(complaint);
+    try {
+      complaintService.insert(complaint);
+    }
+    catch (ValidationException e) {
+      model.addAttribute("complaint", complaint);
+      model.addAttribute("errorMsg", e.getMessage());
+      return insert(user.getId(), model);
+    }
     return "redirect:/complaint/list";
   }
 }

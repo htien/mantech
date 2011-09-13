@@ -42,7 +42,7 @@ public class Complaint implements Serializable {
   private ComplaintStatus status;
 
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "priority_id", referencedColumnName = "id", insertable = false)
+  @JoinColumn(name = "priority_id", referencedColumnName = "id")
   private CategoryPriority priority;
 
   @Column(name = "title", nullable = false, length = 140)

@@ -126,15 +126,4 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
     return (List<Complaint>)q.list();
   }
 
-  @Override
-  public void insert(Complaint complaint) {
-    Query q = session().createQuery("insert into Complaint(title, user, equipment, content) " +
-    		"values (:title, :user, :equipment, :content)");
-    q.setString("title", complaint.getTitle());
-    q.setEntity("user", complaint.getUser());
-    q.setEntity("equipment", complaint.getEquipment());
-    q.setString("content", complaint.getContent());
-    q.executeUpdate();
-  }
-
 }

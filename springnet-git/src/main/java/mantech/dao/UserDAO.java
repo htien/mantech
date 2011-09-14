@@ -6,15 +6,12 @@ package mantech.dao;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.SessionFactory;
-import org.hibernate.criterion.Restrictions;
+
+import net.lilylnx.springnet.core.hibernate.HibernateGenericDAO;
 
 import mantech.domain.User;
 import mantech.repository.UserRepository;
-
-import net.lilylnx.springnet.core.hibernate.HibernateGenericDAO;
 
 /**
  * 
@@ -47,21 +44,26 @@ public class UserDAO extends HibernateGenericDAO<User> implements UserRepository
     return null;
   }
 
-  /**
-   * L^ấy 2 người d`ung từ sau vị trí cụ th^ể trong database.
+  /*
+   * (non-Javadoc)
+   * @see mantech.repository.UserRepository#getUserByRole(int)
    */
   @SuppressWarnings("unchecked")
   @Override
-  public List<User> getUserByRole() {
-    Criteria crit = session().createCriteria(persistClass, "u").createCriteria("role", "r");
-    crit.add(Restrictions.eq("r.name", "employee"));
-    return crit.list();
+  public List<User> getUserByRole(int id) {
+    return session().createQuery("from User u inner join u.role r where r.id = :id")
+        .setInteger("id", id).list();
   }
 
+  /*s
+   * (non-Javadoc)
+   * @see mantech.repository.UserRepository#getUserByRole(java.lang.String)
+   */
+  @SuppressWarnings("unchecked")
   @Override
-  public List<User> getUsersSumComplaint() {
-    Query q = session().createQuery("select count(, u.* from User u");
-    return null;
+  public List<User> getUserByRole(String name) {
+    return session().createQuery("from User u inner join u.role r where r.name = :name")
+        .setString("name", name).list();
   }
 
 }

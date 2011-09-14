@@ -13,11 +13,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-import mantech.domain.Complaint;
-import mantech.repository.ComplaintRepository;
-
 import net.lilylnx.springnet.core.hibernate.HibernateGenericDAO;
 import net.lilylnx.springnet.util.SpringUtils;
+
+import mantech.domain.Complaint;
+import mantech.repository.ComplaintRepository;
 
 /**
  * 
@@ -33,50 +33,47 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
   @SuppressWarnings("unchecked")
   @Override
   public List<Complaint> getByWeekly(Date begin, Date end) {
-    // Criteria c = session().createCriteria(persistClass);
-    // c.add(Restrictions.between("createDate", begin, end));
-    Query q = session().createQuery("from Complaint as u where datediff(day, u.createDate, :end) >= 0 and datediff(day, u.createDate, :end) <= 7").setDate("end", end);
-    return (List<Complaint>)q.list();
+    return session().createQuery("from Complaint as u where" +
+    		" datediff(day, u.createDate, :end) >= 0 and datediff(day, u.createDate, :end) <= 7")
+    		.setDate("end", end).list();
   }
 
   @SuppressWarnings("unchecked")
   @Override
   public List<Complaint> getByDepartment(byte id) {
-    Criteria c = session().createCriteria(persistClass).createCriteria("user").createCriteria("department", "depart");
-    c.add(Restrictions.eq("depart.id", id));
-    return c.list();
+    return session().createCriteria(persistClass).createCriteria("user").createCriteria("department", "depart")
+        .add(Restrictions.eq("depart.id", id)).list();
   }
 
   @SuppressWarnings("unchecked")
   @Override
   public List<Complaint> getByPriority(byte id) {
-    Criteria c = session().createCriteria(persistClass);
-    c.add(Restrictions.eq("priority.id", id));
-    return c.list();
+    return session().createCriteria(persistClass)
+        .add(Restrictions.eq("priority.id", id)).list();
   }
 
   @SuppressWarnings("unchecked")
   @Override
   public List<Complaint> searchByFName(String name) {
-    Criteria c = session().createCriteria(persistClass).createCriteria("user", "u");
-    c.add(Restrictions.ilike("u.firstName", "%" + name + "%"));
-    return c.list();
+    return session().createCriteria(persistClass).createCriteria("user", "u")
+        .add(Restrictions.ilike("u.firstName", "%" + name + "%"))
+        .list();
   }
 
   @SuppressWarnings("unchecked")
   @Override
   public List<Complaint> searchStartWithFName(String name) {
-    Criteria c = session().createCriteria(persistClass).createCriteria("user", "u");
-    c.add(Restrictions.ilike("u.firstName", name + "%"));
-    return c.list();
+    return session().createCriteria(persistClass).createCriteria("user", "u")
+        .add(Restrictions.ilike("u.firstName", name + "%"))
+        .list();
   }
 
   @SuppressWarnings("unchecked")
   @Override
   public List<Complaint> searchStartWithLName(String name) {
-    Criteria c = session().createCriteria(persistClass).createCriteria("user", "u");
-    c.add(Restrictions.ilike("u.lastName", name + "%"));
-    return c.list();
+    return session().createCriteria(persistClass).createCriteria("user", "u")
+        .add(Restrictions.ilike("u.lastName", name + "%"))
+        .list();
   }
 
   @SuppressWarnings("unchecked")
@@ -102,6 +99,7 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
       }
       listComplaint = c.list();
     }
+
     return listComplaint;
   }
 
@@ -113,17 +111,16 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
   @SuppressWarnings("unchecked")
   @Override
   public List<Complaint> searchByDate(Date from, Date to) {
-    Query q = session().createQuery("from Complaint c where c.createDate >= :from and c.createDate < :to");
-    q.setDate("from", from).setDate("to", SpringUtils.increaseDay(to));
-    return (List<Complaint>)q.list();
+    return session().createQuery("from Complaint c where c.createDate >= :from and c.createDate < :to")
+        .setDate("from", from).setDate("to", SpringUtils.increaseDay(to))
+        .list();
   }
 
   @SuppressWarnings("unchecked")
   @Override
   public List<Complaint> searchByYear(int year) {
-    Query q = session().createQuery("from Complaint c where datepart(year, c.createDate) = :year");
-    q.setInteger("year", year);
-    return (List<Complaint>)q.list();
+    return session().createQuery("from Complaint c where datepart(year, c.createDate) = :year")
+        .setInteger("year", year).list();
   }
 
 }

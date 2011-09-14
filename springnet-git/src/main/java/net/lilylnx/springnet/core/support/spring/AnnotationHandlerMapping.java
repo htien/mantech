@@ -13,7 +13,7 @@ import net.lilylnx.springnet.util.SpringConfig;
 
 /**
  * @author Tien Nguyen
- * @version $Id: MyAnnotationHandlerMapping.java,v 1.0 2011/06/23 21:27:00 lilylnx Exp $
+ * @version $Id: AnnotationHandlerMapping.java,v 1.0 2011/06/23 21:27:00 lilylnx Exp $
  */
 public class AnnotationHandlerMapping extends DefaultAnnotationHandlerMapping {
   

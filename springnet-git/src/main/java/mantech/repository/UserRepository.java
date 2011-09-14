@@ -19,7 +19,7 @@ public interface UserRepository extends Repository<User> {
 
   User getByUsername(String username);
   User validateUser(String username, String password);
-  List<User> getUserByRole();
-  List<User> getUsersSumComplaint();
+  List<User> getUserByRole(int id);
+  List<User> getUserByRole(String name);
 
 }

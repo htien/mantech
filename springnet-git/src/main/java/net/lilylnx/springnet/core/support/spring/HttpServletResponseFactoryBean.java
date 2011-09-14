@@ -14,7 +14,7 @@ import net.lilylnx.springnet.util.ConfigKeys;
 
 /**
  * @author Tien Nguyen
- * @version $Id: HttpServletResponseFactoryBean.java,v 1.0 Jun 26, 2011 6:47:05 PM lilylnx Exp $
+ * @version $Id: HttpServletResponseFactoryBean.java,v 1.0 2011/06/26 18:47:05 lilylnx Exp $
  */
 public class HttpServletResponseFactoryBean implements FactoryBean<Object> {
 

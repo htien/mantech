@@ -58,7 +58,6 @@ public class SpringServlet extends DispatcherServlet {
     ApplicationContext beanFactory = (ApplicationContext)this.getServletContext()
         .getAttribute(getServletContextAttributeName());
     this.getServletContext().setAttribute(ConfigKeys.SPRING_CONTEXT, beanFactory);
-    
 
     this.config = beanFactory.getBean(SpringConfig.class);
     this.config.setProperty(ConfigKeys.APPLICATION_PATH, getServletContext().getRealPath(""));
@@ -92,7 +91,7 @@ public class SpringServlet extends DispatcherServlet {
     }
   }
 
-  public void showStuff(ApplicationContext beanFactory) {
+  private void showStuff(ApplicationContext beanFactory) {
     LOG.info("--- Loaded beans ---");
     for (String bean : beanFactory.getBeanDefinitionNames()) {
       LOG.info(bean);

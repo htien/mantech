@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -58,7 +59,7 @@ public class Complaint implements Serializable {
   private Date createDate;
 
   @OneToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "id")
+  @PrimaryKeyJoinColumn(name = "id")
   private Assignment assignment;
 
   public Complaint() {}

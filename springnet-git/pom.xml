@@ -210,15 +210,14 @@
 		<dependency>
 			<groupId>javax.faces</groupId>
 			<artifactId>jsf-api</artifactId>
-			<version>1.2_02</version>
+			<version>1.2_15</version>
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.faces</groupId>
 			<artifactId>jsf-impl</artifactId>
-			<version>1.2</version>
-			<classifier>NIGHTLY_20060227</classifier>
+			<version>1.2_15</version>
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>

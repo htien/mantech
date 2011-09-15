@@ -16,7 +16,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -31,9 +30,8 @@ public class Assignment implements Serializable {
   private static final long serialVersionUID = -6955930714914496180L;
 
   @Id
-  @OneToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name = "complaint_id", referencedColumnName = "id")
-  private Complaint complaint;
+  @Column(name = "complaint_id", unique = true)
+  private int complaintId;
 
   @Column(name = "begindate", nullable = false)
   private Date beginDate;
@@ -56,12 +54,12 @@ public class Assignment implements Serializable {
 
   public Assignment() {}
 
-  public Complaint getComplaint() {
-    return complaint;
+  public int getComplaintId() {
+    return complaintId;
   }
 
-  public void setComplaint(Complaint complaint) {
-    this.complaint = complaint;
+  public void setComplaintId(int complaintId) {
+    this.complaintId = complaintId;
   }
 
   public Date getBeginDate() {

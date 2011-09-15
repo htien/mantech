@@ -197,9 +197,8 @@ public abstract class HibernateGenericDAO<T> implements Repository<T> {
 
   @Override
   public Number count() {
-    Criteria c = this.session().createCriteria(persistClass);
-    c.setProjection(Projections.rowCount());
-    return (Number)c.uniqueResult();
+    return (Number)session().createCriteria(persistClass)
+        .setProjection(Projections.rowCount()).uniqueResult();
   }
 
 }

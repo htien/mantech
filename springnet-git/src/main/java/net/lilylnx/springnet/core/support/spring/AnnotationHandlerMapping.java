@@ -22,6 +22,9 @@ public class AnnotationHandlerMapping extends DefaultAnnotationHandlerMapping {
 
   @Override
   protected void addUrlsForPath(Set<String> urls, String path) {
+    if (path.equals("/")) {
+      urls.add(path);
+    }
     if (path.indexOf(".") == -1 && !path.endsWith("/") ) {
       urls.add(path + config.getServletExt());
     }

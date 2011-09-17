@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @version $Id: IndexController.java,v 1.0 2011/06/07 23:56:07 lilylnx Exp $
  */
 @Controller
-@RequestMapping("/index")
+@RequestMapping({"/", "/index"})
 public class IndexController {
 
   public IndexController() {}
@@ -22,7 +22,7 @@ public class IndexController {
   @RequestMapping(method = RequestMethod.GET)
   public String list(ModelMap model) {    
     model.addAttribute("welcomeMsg", "SpringFramework! & Hello World");
-    return "index";
+    return "__index";
   }
 
 }

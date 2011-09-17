@@ -45,6 +45,19 @@
 		<servlet-name>springnet</servlet-name>
 		<url-pattern>*.jsf</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>springnet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description>Default Servlet</description>
+		<servlet-name>default</servlet-name>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/_/*</url-pattern>
+	</servlet-mapping>
 
 	<!-- ERROR PAGE
 	<error-page>

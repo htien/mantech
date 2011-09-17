@@ -85,7 +85,7 @@ public class SpringServlet extends DispatcherServlet {
       
       this.sessionManager.refreshSession(req, resp);
       this.operationChain.callAllOperations();
-      this.loadStuff();
+      this.loadDefaultProps();
 
       super.service(req, resp);
     }
@@ -95,11 +95,14 @@ public class SpringServlet extends DispatcherServlet {
     }
   }
   
-  private void loadStuff() {
+  private void loadDefaultProps() {
     ViewResolver viewResolver = (ViewResolver)SpringNet.getComponent("viewResolver");
     Map<String, Object> defaultAttributes = viewResolver.getAttributesMap();
+    defaultAttributes.put("webName", config.getString("web.name"));
     defaultAttributes.put("contextPath", config.getString("web.link"));
     defaultAttributes.put("ext", config.getString("servlet.extension"));
+    defaultAttributes.put("encoding", config.getString("encoding"));
+    defaultAttributes.put("config", config);
   }
 
   private void showStuff(ApplicationContext beanFactory) {

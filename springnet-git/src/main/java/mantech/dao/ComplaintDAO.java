@@ -13,11 +13,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
-import net.lilylnx.springnet.core.hibernate.HibernateGenericDAO;
-import net.lilylnx.springnet.util.SpringUtils;
-
 import mantech.domain.Complaint;
 import mantech.repository.ComplaintRepository;
+
+import net.lilylnx.springnet.core.hibernate.HibernateGenericDAO;
+import net.lilylnx.springnet.util.SpringUtils;
 
 /**
  * 
@@ -121,6 +121,13 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
   public List<Complaint> searchByYear(int year) {
     return session().createQuery("from Complaint c where datepart(year, c.createDate) = :year")
         .setInteger("year", year).list();
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<Complaint> getComplaintByAssignment() {
+    Query q = session().createQuery("select c from Complaint c inner join c.assignment");
+    return q.list();
   }
 
 }

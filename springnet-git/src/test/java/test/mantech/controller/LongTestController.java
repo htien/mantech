@@ -14,6 +14,4 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class LongTestController {
 
-  public LongTestController() {}
-
 }

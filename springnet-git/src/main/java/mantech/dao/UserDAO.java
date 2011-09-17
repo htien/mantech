@@ -6,12 +6,13 @@ package mantech.dao;
 
 import java.util.List;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.hibernate.SessionFactory;
-
-import net.lilylnx.springnet.core.hibernate.HibernateGenericDAO;
 
 import mantech.domain.User;
 import mantech.repository.UserRepository;
+
+import net.lilylnx.springnet.core.hibernate.HibernateGenericDAO;
 
 /**
  * 
@@ -64,6 +65,14 @@ public class UserDAO extends HibernateGenericDAO<User> implements UserRepository
   public List<User> getUserByRole(String name) {
     return session().createQuery("from User u inner join u.role r where r.name = :name")
         .setString("name", name).list();
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<User> getUsers(int... ids) {
+    return session().createQuery("from User u where u.id in (:ids)")
+        .setParameterList("ids", ArrayUtils.toObject(ids))
+        .list();
   }
 
 }

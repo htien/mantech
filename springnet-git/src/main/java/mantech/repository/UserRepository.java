@@ -21,5 +21,6 @@ public interface UserRepository extends Repository<User> {
   User validateUser(String username, String password);
   List<User> getUserByRole(int id);
   List<User> getUserByRole(String name);
+  List<User> getUsers(int... ids);
 
 }

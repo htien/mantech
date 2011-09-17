@@ -43,7 +43,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>springnet</servlet-name>
-		<url-pattern>*.htm</url-pattern>
+		<url-pattern>*.jsf</url-pattern>
 	</servlet-mapping>
 
 	<!-- ERROR PAGE

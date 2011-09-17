@@ -15,7 +15,7 @@ import org.springframework.context.ApplicationContextAware;
 public class SpringNet implements ApplicationContextAware {
 
   private static ApplicationContext beanFactory;
-  
+
   private SpringNet() {}
 
   public static Object getComponent(String componentName) {

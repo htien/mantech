@@ -5,6 +5,7 @@
 package net.lilylnx.springnet;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -18,6 +19,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import net.lilylnx.springnet.core.SessionManager;
+import net.lilylnx.springnet.core.support.spring.ViewResolver;
 import net.lilylnx.springnet.extension.RequestOperationChain;
 import net.lilylnx.springnet.util.ConfigKeys;
 import net.lilylnx.springnet.util.SpringConfig;
@@ -83,12 +85,21 @@ public class SpringServlet extends DispatcherServlet {
       
       this.sessionManager.refreshSession(req, resp);
       this.operationChain.callAllOperations();
+      this.loadStuff();
+
       super.service(req, resp);
     }
     finally {
       RequestContextHolder.resetRequestAttributes();
       attributes.requestCompleted();
     }
+  }
+  
+  private void loadStuff() {
+    ViewResolver viewResolver = (ViewResolver)SpringNet.getComponent("viewResolver");
+    Map<String, Object> defaultAttributes = viewResolver.getAttributesMap();
+    defaultAttributes.put("contextPath", config.getString("web.link"));
+    defaultAttributes.put("ext", config.getString("servlet.extension"));
   }
 
   private void showStuff(ApplicationContext beanFactory) {

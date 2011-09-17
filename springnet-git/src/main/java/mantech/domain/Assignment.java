@@ -30,7 +30,7 @@ public class Assignment implements Serializable {
   private static final long serialVersionUID = -6955930714914496180L;
 
   @Id
-  @Column(name = "complaint_id", unique = true)
+  @Column(name = "complaint_id")
   private int complaintId;
 
   @Column(name = "begindate", nullable = false)

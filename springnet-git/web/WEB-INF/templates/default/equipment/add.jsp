@@ -5,7 +5,7 @@
 	
 	<h1>Insert</h1>
 	<p>${msg}</p>
-	<form method="post" action="addSave${ext}">
+	<form method="post" action="addSave">
 		<input name="name"/>
 		<select name="catId">
 			<c:forEach items="${category}" var="cate">

@@ -1,0 +1,13 @@
+{
+"path": {
+	"scripts": [
+		"/_/js/facebox/facebox.js",
+		"/_/js/__global.js",
+		"/_/js/common.js"
+	],
+	"css": [
+		"/_/js/facebox/facebox.css",
+		"/_/css/main.css"
+	]
+}
+}

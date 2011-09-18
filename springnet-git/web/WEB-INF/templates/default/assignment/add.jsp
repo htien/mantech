@@ -11,7 +11,7 @@
 	
 	<h1>Add new Assignment</h1>
 	
-	<form method="post" action="assignment/addSave${ext}">
+	<form method="post" action="assignment/addSave">
 		Begin Date: <input type="text" name="beginDate"/><br/>
 		Duration: <input type="text" name="duration"/><br/>
 		User Id:

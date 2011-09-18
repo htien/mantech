@@ -53,6 +53,7 @@
 	<servlet>
 		<description>Default Servlet</description>
 		<servlet-name>default</servlet-name>
+		<load-on-startup>3</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>

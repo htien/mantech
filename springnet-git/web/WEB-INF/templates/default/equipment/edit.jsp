@@ -5,7 +5,7 @@
 	
 	<h3>Update</h3>
 	<p>${msg}></p>
-	<form method="post" action = "editSave${ext}" >
+	<form method="post" action = "editSave" >
 		<input type="hidden" name="id" value="${equipment.id}" />
 		<p><input value="${equipment.name}" name="name"/></p>
 		<div>

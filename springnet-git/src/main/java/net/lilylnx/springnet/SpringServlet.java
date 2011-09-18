@@ -5,6 +5,8 @@
 package net.lilylnx.springnet;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.ServletConfig;
@@ -85,7 +87,7 @@ public class SpringServlet extends DispatcherServlet {
       
       this.sessionManager.refreshSession(req, resp);
       this.operationChain.callAllOperations();
-      this.loadDefaultProps();
+      this.putDefaultProps();
 
       super.service(req, resp);
     }
@@ -95,14 +97,28 @@ public class SpringServlet extends DispatcherServlet {
     }
   }
   
-  private void loadDefaultProps() {
+  /**
+   * Đưa một số key/value cho view.
+   */
+  private void putDefaultProps() {
     ViewResolver viewResolver = (ViewResolver)SpringNet.getComponent("viewResolver");
     Map<String, Object> defaultAttributes = viewResolver.getAttributesMap();
-    defaultAttributes.put("webName", config.getString("web.name"));
-    defaultAttributes.put("contextPath", config.getString("web.link"));
+    Date now = Calendar.getInstance().getTime();
+    
+    defaultAttributes.put("name", config.getString("name"));
+    defaultAttributes.put("version", config.getString("version"));
+    defaultAttributes.put("webpage", config.getString("link.webpage"));
+    defaultAttributes.put("contextPath", config.getString("context.path"));
     defaultAttributes.put("ext", config.getString("servlet.extension"));
     defaultAttributes.put("encoding", config.getString("encoding"));
+    defaultAttributes.put("dateTimeFormat", config.getString("dateTime.format"));
+    defaultAttributes.put("now", now);
+    defaultAttributes.put("timestamp", new Long(System.currentTimeMillis()));
     defaultAttributes.put("config", config);
+    
+    defaultAttributes.put("pageTitle", config.getString("web.page.title"));
+    defaultAttributes.put("metaKeywords", config.getString("web.page.metatag.keywords"));
+    defaultAttributes.put("metaDescription", config.getString("web.page.metatag.description"));
   }
 
   private void showStuff(ApplicationContext beanFactory) {

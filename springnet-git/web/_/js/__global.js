@@ -45,7 +45,7 @@ jTien.f = jTien.prototype = {
 	
 	completeFormAction: function() {
 		$('form').attr('action', function() {
-			var action = $(this).attr('action');
+			var action = $ctx + $(this).attr('action');
 			return !action.endsWith($ext) ? action + $ext : action; 
 		});
 	},

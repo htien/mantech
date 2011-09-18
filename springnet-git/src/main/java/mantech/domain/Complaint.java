@@ -2,6 +2,7 @@ package mantech.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -59,8 +61,12 @@ public class Complaint implements Serializable {
   private Date createDate;
 
   @OneToOne(fetch = FetchType.LAZY)
-  @PrimaryKeyJoinColumn(name = "id")
+  @PrimaryKeyJoinColumn(name = "complaint_id")
   private Assignment assignment;
+
+  @OneToMany(fetch = FetchType.EAGER)
+  @JoinColumn(name = "id")
+  private List<AssignmentDetail> details;
 
   public Complaint() {}
 
@@ -142,6 +148,14 @@ public class Complaint implements Serializable {
 
   public void setAssignment(Assignment assignment) {
     this.assignment = assignment;
+  }
+
+  public List<AssignmentDetail> getDetails() {
+    return details;
+  }
+
+  public void setDetails(List<AssignmentDetail> details) {
+    this.details = details;
   }
 
 }

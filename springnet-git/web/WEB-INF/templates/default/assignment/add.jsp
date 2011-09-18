@@ -2,7 +2,7 @@
 <%@ include file="../layout/top.inc"%>
 <compress:html jsCompressor="closure" compressJavaScript="true"
 	compressCss="true" removeIntertagSpaces="true">
-	
+
 	<style>
 		.grid {border: 1px solid #000; border-collapse: collapse;}
 		.grid th, .grid td {border: 1px solid #000; border-collapse: collapse; padding: 1px 2px;}
@@ -11,7 +11,7 @@
 	
 	<h1>Add new Assignment</h1>
 	
-	<form method="post" action="/springnet/assignment/insertSave.htm">
+	<form method="post" action="assignment/addSave${ext}">
 		Begin Date: <input type="text" name="beginDate"/><br/>
 		Duration: <input type="text" name="duration"/><br/>
 		User Id:

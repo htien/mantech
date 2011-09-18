@@ -5,12 +5,12 @@
 
 	<h1>Insert New Complaint</h1>
 	<p style="color:darkred">${errorMsg}</p>
-	<form method="post" action="/springnet/complaint/insertSave.htm">
+	<form method="post" action="complaint/addSave${ext}">
 		User Name: <input type="text" value="${userId}" name="userId"/><br/>
 		Equipment:	
 			<select name="equipId">
-				<c:forEach items="${list}" var="l">
-					<option value="${l.id}">${l.name}</option>
+				<c:forEach items="${list}" var="equip">
+					<option value="${equip.id}">${equip.name}</option>
 				</c:forEach>
 			</select><br/>
 		Title: <input type="text" name="title" value="${complaint.title}"/><br/>

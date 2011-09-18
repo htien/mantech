@@ -5,7 +5,7 @@
 	
 	<h1>Insert</h1>
 	<p>${msg}</p>
-	<form method="post" action="/springnet/equipment/insertSave.htm">
+	<form method="post" action="addSave${ext}">
 		<input name="name"/>
 		<select name="catId">
 			<c:forEach items="${category}" var="cate">

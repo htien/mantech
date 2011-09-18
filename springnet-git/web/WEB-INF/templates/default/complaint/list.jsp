@@ -11,10 +11,10 @@
 
 <p>
 	Page 1:<br/>
-	<c:forEach items="${list}" var="list">
-		${list.id}: ${list.user.firstName} ${list.equipment.name} ${list.title} 
-		--- <c:forEach items="${list.assignment.details}" var="l">
-				${l.user.firstName} ,
+	<c:forEach items="${list}" var="comp">
+		${comp.id}: ${comp.user.firstName} ${comp.equipment.name} ${comp.title} 
+		--- <c:forEach items="${comp.details}" var="detail">
+				${detail.user.firstName} ,
 			</c:forEach>
 		<br />
 	</c:forEach>

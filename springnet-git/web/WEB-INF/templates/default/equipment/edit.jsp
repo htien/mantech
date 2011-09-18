@@ -5,7 +5,7 @@
 	
 	<h3>Update</h3>
 	<p>${msg}></p>
-	<form method="post" action = "/springnet/equipment/updateSave.htm" >
+	<form method="post" action = "editSave${ext}" >
 		<input type="hidden" name="id" value="${equipment.id}" />
 		<p><input value="${equipment.name}" name="name"/></p>
 		<div>

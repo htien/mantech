@@ -29,5 +29,6 @@ public interface ComplaintRepository extends Repository<Complaint> {
   List<Complaint> searchByDate(Date date);
   List<Complaint> searchByDate(Date from, Date to);
   List<Complaint> searchByYear(int year);
+  int insert(Complaint complaint);
   
 }

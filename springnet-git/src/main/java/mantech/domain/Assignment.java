@@ -15,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -44,9 +43,6 @@ public class Assignment implements Serializable {
 
   @Column(name = "createdate", nullable = false, insertable = false, updatable = false)
   private Date createDate;
-
-  @OneToMany(mappedBy = "assignment", fetch = FetchType.LAZY)
-  private List<AssignmentDetail> details;
 
   @ManyToMany(fetch = FetchType.LAZY)
   @JoinTable(name = "assignment_detail", joinColumns = { @JoinColumn(name = "complaint_id") }, inverseJoinColumns = { @JoinColumn(name = "userid") })
@@ -92,14 +88,6 @@ public class Assignment implements Serializable {
 
   public void setCreateDate(Date createDate) {
     this.createDate = createDate;
-  }
-
-  public List<AssignmentDetail> getDetails() {
-    return details;
-  }
-
-  public void setDetails(List<AssignmentDetail> details) {
-    this.details = details;
   }
 
   public List<User> getUsers() {

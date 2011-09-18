@@ -1,6 +1,6 @@
 <%@ include file="../layout/header.inc" %>
 <%@ include file="../layout/top.inc" %>
-<f:form action="editSave.htm" commandName="category">
+<f:form action="editSave${ext}" commandName="category">
 	<h2>Update new category</h2>
 	<c:if test="${msg != null}">${msg}</c:if>
 	<c:choose>

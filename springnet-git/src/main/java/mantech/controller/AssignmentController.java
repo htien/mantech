@@ -57,21 +57,23 @@ public class AssignmentController {
     return "assignment/list";
   }
   
-  @RequestMapping (value = "/assignment/insert", method = RequestMethod.GET)
+  @RequestMapping (value = "/assignment/add", method = RequestMethod.GET)
   public String insert(ModelMap model) {
     List<Complaint> complaint = complaintRepo.findAll();
     model.addAttribute("listComplaint", complaint);
-    return "/assignment/insert";
+    return "/assignment/add";
   }
   
-  @RequestMapping (value = "/assignment/insertSave", method = RequestMethod.POST)
+  @RequestMapping (value = "/assignment/addSave", method = RequestMethod.POST)
   public String insertSave(@RequestParam(value="userId") int[] userId, @RequestParam(value="beginDate") Date beginDate,
       @RequestParam(value="duration") short duration)
   {  
     List<User> users = userRepo.getUsers(userId);
-    Complaint complaint = complaintRepo.get(4);
+    Complaint complaint = complaintRepo.get(11);
     
     Assignment assignment = new Assignment();
+    System.out.println(assignment != null);
+    System.out.println(complaint != null);
     assignment.setComplaintId(complaint.getId());
     assignment.setUsers(users);
     assignment.setBeginDate(beginDate);

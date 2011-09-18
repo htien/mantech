@@ -5,7 +5,7 @@
 
 	<h1>Insert New Complaint</h1>
 	<p style="color:darkred">${errorMsg}</p>
-	<form method="post" action="complaint/addSave">
+	<form method="post" action="/complaint/addSave">
 		User Name: <input type="text" value="${userId}" name="userId"/><br/>
 		Equipment:	
 			<select name="equipId">

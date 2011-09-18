@@ -4,7 +4,7 @@
 	compressCss="true" removeIntertagSpaces="true">
 
 	<h1>Update</h1>
-	<form method="post" action="complaint/editSave">
+	<form method="post" action="/complaint/editSave">
 		<input type="text" name="id" value="${complaint.id}" readonly="readonly"/>
 		<select name="status">
 			<c:forEach items="${listStatus}" var="ls">

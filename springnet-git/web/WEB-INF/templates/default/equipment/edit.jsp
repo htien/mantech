@@ -17,6 +17,6 @@
 		</div>
 		<p><input type="submit" value="Update"/></p>
 	</form>
-	<a href="list.htm">Back to List Equipment</a>
+	<a href="list${ext}">Back to List Equipment</a>
 </compress:html>
 <%@ include file="../layout/footer.inc" %>

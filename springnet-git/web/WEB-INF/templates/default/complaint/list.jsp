@@ -19,6 +19,18 @@
 		<br />
 	</c:forEach>
 </p>
+
+<p>
+	<h3>List complaint without assignment</h3>
+	<c:forEach items="${listComplaintWaiting}" var="comp">
+		${comp.id}: ${comp.user.firstName} - ${comp.user.role.name}
+		- ${comp.user.department.name}
+		- ${comp.equipment.name} - ${comp.status.name} - ${comp.title}
+		-${comp.content} - ${comp.priority.name} - ${comp.createDate} 
+		<a href="assignment/add${ext}?compId=${comp.id}">Assign</a><br />
+	</c:forEach>	
+</p>
+
 <h1>No of Complaint: ${no}</h1>
 <p>
 	<h3>Sort Complaints by id or equipment:</h3>

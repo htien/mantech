@@ -27,7 +27,7 @@
 		</c:if>
 		<c:if test="${msg == null}">
 		<c:forEach items="${listEquipment}" var="l">
-			<tr class="row" onclick="return window.location.href='update.htm?id=${l.id}'">
+			<tr class="row" onclick="return window.location.href='equipment/edit${ext}?id=${l.id}'">
 				<td>${l.id}</td>
 				<td>${l.name}</td>
 				<td>${l.category.name}</td>
@@ -37,7 +37,7 @@
 		<tr>
 			<td colspan = "3">
 				<c:forEach begin="1" end="${pageCount}" var="page">
-					<a class="page" href="?page=${page}">${page}</a>
+					<a class="page" href="equipment/list${ext}?page=${page}">${page}</a>
 				</c:forEach>
 			</td>
 		</tr>

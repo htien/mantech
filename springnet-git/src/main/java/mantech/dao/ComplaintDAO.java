@@ -132,14 +132,38 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
 
   @Override
   public int insert(Complaint complaint) {
-    return session().createQuery("insert into Complaint(user, equipment, priority, title, content)" +
-    		" select :user, :equipment, :priority, :title, :content")
-    		.setParameter("user", complaint.getUser())
-    		.setParameter("equipment", complaint.getEquipment())
-    		.setParameter("priority", complaint.getPriority())
+    return session().createSQLQuery("insert into complaint" +
+    		"(userid, equipment_id, title, [content], priority_id) " +
+    		"values(:userid, :equipment_id, :title, :content, :priority_id)")
+    		.setInteger("userid", complaint.getUser().getId())
+    		.setInteger("equipment_id", complaint.getEquipment().getId())
     		.setString("title", complaint.getTitle())
     		.setString("content", complaint.getContent())
+    		.setInteger("priority_id", complaint.getPriority().getId())
     		.executeUpdate();
   }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<Complaint> getWithoutAssignment() {
+    return session().createQuery("select c from Complaint c where c.id not in (select complaintId from Assignment)")
+        .list();
+  }
+
+  @Override
+  public boolean isExist(int id) {
+    return ((Long)session().createQuery("select count(id) from Complaint where id = :id")
+        .setInteger("id", id).uniqueResult()).longValue() > 0;
+  }
+  
+  @Override
+  public boolean hasAssignmentId(int id) {    
+    return ((Long)session().createQuery("select count(complaintId) from Assignment where complaintId = :id")
+        .setInteger("id", id).uniqueResult()).longValue() > 0;
+  }
+
+
+  
+  
 
 }

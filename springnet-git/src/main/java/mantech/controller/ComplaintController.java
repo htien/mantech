@@ -78,6 +78,9 @@ public class ComplaintController {
     model.addAttribute("complaintsFromDateToDate", complaintsFromDateToDate);
     List<Complaint> complaintsByYear = complaintRepo.searchByYear(2011);
     model.addAttribute("complaintYear", complaintsByYear);
+    
+    List<Complaint> complaintWaiting = complaintRepo.getWithoutAssignment();
+    model.addAttribute("listComplaintWaiting", complaintWaiting);
     return "complaint/list";
   }
 
@@ -91,6 +94,7 @@ public class ComplaintController {
 
   @RequestMapping(value = "/complaint/add", method = RequestMethod.GET)
   public String insert (@RequestParam(value = "uid") int id, ModelMap model){
+    
     model.addAttribute("userId", id);
     List<Equipment> equip = equipmentRepo.findAll();
     model.addAttribute("list", equip);
@@ -153,7 +157,7 @@ public class ComplaintController {
     Complaint complaint = (Complaint)model.get("complaint");
     ComplaintStatus status = statusRepo.get(statusId);
     CategoryPriority priority = priorityRepo.get(priorityId);
-    
+
     complaint.setStatus(status);
     complaint.setPriority(priority);
     complaintRepo.update(complaint);

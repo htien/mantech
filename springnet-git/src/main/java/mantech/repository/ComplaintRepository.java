@@ -23,12 +23,15 @@ public interface ComplaintRepository extends Repository<Complaint> {
   List<Complaint> getByDepartment(byte id);
   List<Complaint> getByPriority(byte id);
   List<Complaint> getComplaintByAssignment();
+  List<Complaint> getWithoutAssignment();
   List<Complaint> searchByFName(String name);
   List<Complaint> searchStartWithFName(String name);
   List<Complaint> searchStartWithLName(String name);
   List<Complaint> searchByDate(Date date);
   List<Complaint> searchByDate(Date from, Date to);
   List<Complaint> searchByYear(int year);
+  boolean isExist(int id);
+  boolean hasAssignmentId(int id);
   int insert(Complaint complaint);
   
 }

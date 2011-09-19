@@ -58,22 +58,31 @@ public class AssignmentController {
   }
   
   @RequestMapping (value = "/assignment/add", method = RequestMethod.GET)
-  public String insert(ModelMap model) {
-    List<Complaint> complaint = complaintRepo.findAll();
-    model.addAttribute("listComplaint", complaint);
-    return "/assignment/add";
+  public String insert(@RequestParam(value = "compId") int compId, ModelMap model) {
+    if (complaintRepo.isExist(compId)){
+      if (!complaintRepo.hasAssignmentId(compId)){
+        List<Complaint> complaint = complaintRepo.findAll();
+        model.addAttribute("listComplaint", complaint);
+        return "/assignment/add";
+      }else{
+        return "redirect:/complaint/list";
+      }
+    }
+    else{
+      return "redirect:/complaint/list";
+    }
+    
   }
   
   @RequestMapping (value = "/assignment/addSave", method = RequestMethod.POST)
   public String insertSave(@RequestParam(value="userId") int[] userId, @RequestParam(value="beginDate") Date beginDate,
       @RequestParam(value="duration") short duration)
   {  
+    int Complaintid = 0;
     List<User> users = userRepo.getUsers(userId);
-    Complaint complaint = complaintRepo.get(11);
+    Complaint complaint = complaintRepo.get(Complaintid);
     
     Assignment assignment = new Assignment();
-    System.out.println(assignment != null);
-    System.out.println(complaint != null);
     assignment.setComplaintId(complaint.getId());
     assignment.setUsers(users);
     assignment.setBeginDate(beginDate);

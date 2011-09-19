@@ -50,7 +50,12 @@ public class EquipmentController {
 
   @RequestMapping(value = "/equipment/list", method = RequestMethod.GET)
   public String list(@RequestParam(value = "page", required = false, defaultValue = "1") int page, ModelMap model) {
-    int pageCount = equipmentRepo.count().intValue() / 3;
+    int pageCount;
+    if (equipmentRepo.count().intValue() % 3 == 0)
+      pageCount = equipmentRepo.count().intValue() / 3;
+    else
+      pageCount = (equipmentRepo.count().intValue() / 3) + 1;
+    System.out.println(equipmentRepo.count().intValue());
     model.addAttribute("pageCount", pageCount);
 
     if (page < 1 || page > pageCount) {

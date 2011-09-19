@@ -22,8 +22,8 @@ public interface ComplaintRepository extends Repository<Complaint> {
   List<Complaint> getByWeekly(Date begin, Date end);
   List<Complaint> getByDepartment(byte id);
   List<Complaint> getByPriority(byte id);
-  List<Complaint> getComplaintByAssignment();
-  List<Complaint> getWithoutAssignment();
+  List<Complaint> getByAssignment();
+  List<Complaint> getWaitingComplaint();
   List<Complaint> searchByFName(String name);
   List<Complaint> searchStartWithFName(String name);
   List<Complaint> searchStartWithLName(String name);

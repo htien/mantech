@@ -79,8 +79,8 @@ public class ComplaintController {
     List<Complaint> complaintsByYear = complaintRepo.searchByYear(2011);
     model.addAttribute("complaintYear", complaintsByYear);
     
-    List<Complaint> complaintWaiting = complaintRepo.getWithoutAssignment();
-    model.addAttribute("listComplaintWaiting", complaintWaiting);
+    List<Complaint> listWaitingComplaint = complaintRepo.getWaitingComplaint();
+    model.addAttribute("listComplaintWaiting", listWaitingComplaint);
     return "complaint/list";
   }
 

@@ -125,16 +125,15 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
 
   @SuppressWarnings("unchecked")
   @Override
-  public List<Complaint> getComplaintByAssignment() {
+  public List<Complaint> getByAssignment() {
     Query q = session().createQuery("select c from Complaint c inner join c.assignment");
     return q.list();
   }
 
   @Override
   public int insert(Complaint complaint) {
-    return session().createSQLQuery("insert into complaint" +
-    		"(userid, equipment_id, title, [content], priority_id) " +
-    		"values(:userid, :equipment_id, :title, :content, :priority_id)")
+    return session().createSQLQuery("insert into complaint(userid, equipment_id, title, [content], priority_id)" +
+    		" values (:userid, :equipment_id, :title, :content, :priority_id)")
     		.setInteger("userid", complaint.getUser().getId())
     		.setInteger("equipment_id", complaint.getEquipment().getId())
     		.setString("title", complaint.getTitle())
@@ -145,7 +144,7 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
 
   @SuppressWarnings("unchecked")
   @Override
-  public List<Complaint> getWithoutAssignment() {
+  public List<Complaint> getWaitingComplaint() {
     return session().createQuery("select c from Complaint c where c.id not in (select complaintId from Assignment)")
         .list();
   }

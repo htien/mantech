@@ -2,9 +2,8 @@
 <%@ include file="../layout/top.inc"%>
 <compress:html jsCompressor="closure" compressJavaScript="true"
 	compressCss="true" removeIntertagSpaces="true">
-	
 	<h3>Update</h3>
-	<p>${msg}></p>
+	<p>${msg}</p>
 	<form method="post" action = "/equipment/editSave" >
 		<input type="hidden" name="id" value="${equipment.id}" />
 		<p><input value="${equipment.name}" name="name"/></p>
@@ -17,6 +16,6 @@
 		</div>
 		<p><input type="submit" value="Update"/></p>
 	</form>
-	<a href="list${ext}">Back to List Equipment</a>
+	<a href="${contextPath}/equipment/list${ext}">Back to List Equipment</a>
 </compress:html>
 <%@ include file="../layout/footer.inc" %>

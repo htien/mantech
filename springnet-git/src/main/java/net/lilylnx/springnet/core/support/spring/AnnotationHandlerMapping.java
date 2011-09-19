@@ -16,7 +16,7 @@ import net.lilylnx.springnet.util.SpringConfig;
  * @version $Id: AnnotationHandlerMapping.java,v 1.0 2011/06/23 21:27:00 lilylnx Exp $
  */
 public class AnnotationHandlerMapping extends DefaultAnnotationHandlerMapping {
-  
+
   @Autowired
   private SpringConfig config;
 
@@ -25,7 +25,7 @@ public class AnnotationHandlerMapping extends DefaultAnnotationHandlerMapping {
     if (path.equals("/")) {
       urls.add(path);
     }
-    if (path.indexOf(".") == -1 && !path.endsWith("/") ) {
+    if (path.indexOf(".") == -1 && !path.endsWith("/")) {
       urls.add(path + config.getServletExt());
     }
   }

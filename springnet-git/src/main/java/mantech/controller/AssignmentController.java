@@ -37,9 +37,9 @@ public class AssignmentController {
   @Autowired
   private ComplaintRepository complaintRepo;
   
-  @RequestMapping (value = "/assignment/list", method = RequestMethod.GET)
+  @RequestMapping (value = {"/assignment", "/assignment/list"}, method = RequestMethod.GET)
   public String list(ModelMap model) {
-    List<Complaint> listComplaint = complaintRepo.getComplaintByAssignment();
+    List<Complaint> listComplaint = complaintRepo.getByAssignment();
     List<Complaint> listAllComplaint = complaintRepo.findAll();
     
     model.addAttribute("listComplaint", listComplaint);

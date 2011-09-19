@@ -27,7 +27,7 @@ public class UserController {
   @Autowired
   private UserRepository userRepo;
   
-  @RequestMapping(value = "/user/list", method = RequestMethod.GET)
+  @RequestMapping(value = {"/user", "/user/list"}, method = RequestMethod.GET)
   public String showUser(ModelMap model){
     List<User> users = userRepo.findAll();
     model.addAttribute("listUser", users);

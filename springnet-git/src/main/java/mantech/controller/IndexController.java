@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @version $Id: IndexController.java,v 1.0 2011/06/07 23:56:07 lilylnx Exp $
  */
 @Controller
-@RequestMapping({"/", "/index"})
+@RequestMapping({"/", "/index", "/home", "/default"})
 public class IndexController {
 
   public IndexController() {}

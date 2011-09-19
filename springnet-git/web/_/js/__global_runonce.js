@@ -40,8 +40,16 @@ function include(url, callback) { // use jQuery.getScript(url, [callback]) inste
  */
 function __loadScripts() {
 	$.ajaxSetup({ async : false, cache : true });
-	$.each($json.path.scripts, function(idx, el) { $.getScript($ctx + el); });
-	$.each($json.path.css, function(idx, el) { importCss($ctx + el); });
+	$.each($json.path.scripts, function(idx, el) {
+		var _path = $ctx + el;
+		console.log('Loading javascript from resource [' + _path + ']');
+		$.getScript(_path);
+	});
+	$.each($json.path.css, function(idx, el) {
+		var _path = $ctx + el;
+		console.log('Loading stylesheet from resource [' + _path + ']');
+		importCss(_path);
+	});
 	$.ajaxSetup({ async : true });
 }
 

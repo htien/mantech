@@ -40,10 +40,12 @@ jTien.f = jTien.prototype = {
 
 	/** Turn off autocomplete for input text */
 	autocompleteOff: function() {
+		console.log('Tắt chế độ autocomplete="off" trên input[type=text].');
 		$('input[type=text].off').attr('autocomplete', 'off');
 	},
 	
 	completeFormAction: function() {
+		console.log('Tự động gán "' + $ext + '" vào form[action].');
 		$('form').attr('action', function() {
 			var action = $ctx + $(this).attr('action');
 			return !action.endsWith($ext) ? action + $ext : action; 
@@ -54,6 +56,7 @@ jTien.f = jTien.prototype = {
 	disableDrag: function(elements) {
 		var tags = $.parseJSON(elements).tags;
 		$.each(tags, function(idx, el) {
+			console.log('Không cho phép drag trên thẻ "' + el + '"');
 			$(el).live('mousedown', $false);
 		});
 	},

@@ -57,6 +57,7 @@ function __loadScripts() {
  * Load json resource
  */
 function __loadResource(url) {
+	console.log("Loading resource from [" + url + "]");
 	var _json = null;
 	$.ajax({
 		url: url,

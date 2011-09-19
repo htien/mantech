@@ -56,7 +56,7 @@ public class ComplaintController {
   @Autowired
   private CategoryPriorityRepository priorityRepo;
 
-  @RequestMapping(value = "/complaint/list", method = RequestMethod.GET)
+  @RequestMapping(value = {"/complaint", "/complaint/list"}, method = RequestMethod.GET)
   public String showAll(ModelMap model) throws Exception {
     // Date begin = Calendar.getInstance().getTime();
     SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");

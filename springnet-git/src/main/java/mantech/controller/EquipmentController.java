@@ -36,19 +36,8 @@ public class EquipmentController {
   
   @Autowired
   private CategoryRepository categoryRepo;
-  
-//  @InitBinder
-//  protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
-//    binder.registerCustomEditor(Category.class, "id", new PropertyEditorSupport() {
-//      @Override
-//      public void setAsText(String text) throws IllegalArgumentException {
-//        Category category = categoryRepo.find(Integer.parseInt(text));
-//        setValue(category);
-//      }
-//    });
-//  }
 
-  @RequestMapping(value = "/equipment/list", method = RequestMethod.GET)
+  @RequestMapping(value = {"/equipment", "/equipment/list"}, method = RequestMethod.GET)
   public String list(@RequestParam(value = "page", required = false, defaultValue = "1") int page, ModelMap model) {
     int pageCount;
     if (equipmentRepo.count().intValue() % 3 == 0)

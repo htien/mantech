@@ -30,7 +30,7 @@
   padding: 20px 40px 30px;
   font-size: 13px;
   background-color: #fff;
-  border: 1px solid #acacac;
+  border: 1px solid #ccc;
   border-top: 1px solid #999;  
 }
 
@@ -68,6 +68,7 @@
 
 #signin-box span.error {
   display: block;
+  margin-top: 3px;
   font-size: 11px;
 }
 

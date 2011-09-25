@@ -13,6 +13,7 @@
 				</label>
 			</div>
 			<div id="signin" class="g-b g-b-b sm">Sign in</div>
+			<div id="test" class="g-b g-b-b sm">Test</div>
 			<span id="loginMsg">${loginMsg}</span>
 		</form>
 	</div>

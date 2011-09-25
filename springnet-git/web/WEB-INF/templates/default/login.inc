@@ -12,9 +12,14 @@
 					<input type="password" id="passwd" class="g-t" name="passwd" value="" />
 				</label>
 			</div>
-			<div id="signin" class="g-b g-b-b sm">Sign in</div>
-			<div id="test" class="g-b g-b-b sm">Test</div>
+			<div id="signin" class="g-b g-b-b">Sign in</div>
 			<span id="loginMsg">${loginMsg}</span>
+			<p></p>
+			<div>
+				<div id="test1" class="g-b g-b-r">Closure Dialog</div>
+				<div id="test2" class="g-b g-b-r">JQuery Dialog</div>
+			</div>
 		</form>
 	</div>
 </div>
+<div id="ui-dialog"></div>

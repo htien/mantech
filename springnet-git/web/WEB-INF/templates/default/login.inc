@@ -4,7 +4,7 @@
 		<form id="signin-form" class="off" action="/" method="post">
 			<div>
 				<label title="Account ID (Username OR Email)">
-					<strong class="id-label">ID:</strong>
+					<strong class="id-label">ID</strong>
 					<input type="text" id="id" class="g-t" name="id" value="" />
 				</label>
 				<label title="Your password for signing in">

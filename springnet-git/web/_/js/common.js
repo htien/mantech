@@ -16,10 +16,6 @@ $.validator.setDefaults({
 });
 
 $.each(json.ids, function(idx, el) {
-	/* Xóa nội dung khi đặt focus trên Login textbox */
-	$('#' + el).focus(function() {
-		$(this).val('');
-	});
 });
 
 /* Xử lý login */
@@ -38,11 +34,16 @@ $('#signin').live('click', function() {
 			id: { required: 'Enter your ID (username, email).', minlength: $.format('ID, at least {0} characters.') },
 			passwd: { required: 'Enter your Password.', minlength: $.format('Password, at least {0} characters.') }
 		},
-		highlight : function(element, errorClass) {
-			$('#signin-box').stop(true, true).effect('shake', { times:2, distance:8 }, 50);
+		highlight : function(el, errorClass, validClass) {
+			$(el).addClass(errorClass).removeClass(validClass);
+			$(el.form).find('span[class~=' + el.id + ']').addClass(errorClass);
+			$('#signin-box').stop(true, true).effect('shake', { times:2, distance:5 }, 50);
+		},
+		unhighlight: function(el, errorClass, validClass) {
+			$(el).addClass(validClass).removeClass(errorClass);
+			$(el.form).find('span[class~=' + el.id + ']').removeClass(errorClass);
 		},
 		invalidHandler: function(form, validator) {
-			$('#loginMsg').html('Invalid!');
 		},
 		submitHandler: function(form) {
 			form.submit();

@@ -1,12 +1,19 @@
 {
 "path": {
 	"scripts": [
-		"/_/js/facebox/facebox.js",
+		"/_/js/jquery-ui-1.8.16.min.js",
+		"/_/js/jquery.validate.js",
+		"/_/js/jquery.validate.additional.js",
+		"/_/facebox/facebox.js",
 		"/_/js/__global.js",
 		"/_/js/common.js"
 	],
 	"css": [
-		"/_/js/facebox/facebox.css",
+		"/_/css/reset.css",
+		"/_/facebox/facebox.css",
+		"/_/closure/goog/css/dialog.css",
+		"/_/css/common.css",
+		"/_/css/common-ui.css",
 		"/_/css/main.css"
 	]
 }

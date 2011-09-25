@@ -1,7 +1,9 @@
+goog.require('goog.ui.Dialog');
+
 $(function() {
 	jTien.f.autocompleteOff();
 	jTien.f.completeFormAction();
-	jTien.f.disableDrag('{"tags":["a", "img"]}');
+	jTien.f.disableDrag('{"tags":["a", "img"], "classes":["g-b"]}');
 });
 
 /**
@@ -40,21 +42,37 @@ jTien.f = jTien.prototype = {
 
 	/** Turn off autocomplete for input text */
 	autocompleteOff: function() {
+		if ($debug && !isIEBrowser()) {
+			console.log('Assigned autocomplete="off" on input[type=text].');
+		}
+		$('form.off').attr('autocomplete', 'off');
 		$('input[type=text].off').attr('autocomplete', 'off');
 	},
 	
 	completeFormAction: function() {
+		if ($debug && !isIEBrowser()) {
+			console.log('Auto assigning "' + $ext + '" for form[action].');
+		}
 		$('form').attr('action', function() {
 			var action = $ctx + $(this).attr('action');
-			return !action.endsWith($ext) ? action + $ext : action; 
+			return !action.endsWith("/") && !action.endsWith($ext) ? action + $ext : action;
 		});
 	},
 	
 	/** Prevent from dragging <link> and <image> */
 	disableDrag: function(elements) {
-		var tags = $.parseJSON(elements).tags;
-		$.each(tags, function(idx, el) {
+		var json = $.parseJSON(elements); 
+		$.each(json.tags, function(idx, el) {
+			if ($debug && !isIEBrowser()) {
+				console.log('Diabled dragging on tag: "' + el + '"');
+			}
 			$(el).live('mousedown', $false);
+		});
+		$.each(json.classes, function(idx, el) {
+			if ($debug && !isIEBrowser()) {
+				console.log('Diabled dragging on class: ".' + el + '"');
+			}
+			$('.' + el).live('mousedown', $false);
 		});
 	},
 	

@@ -52,4 +52,17 @@ $('#signin').live('click', function() {
 	frm.submit();
 });
 
+var dialog = null;
+
+$('#test').live('click', function() {
+	if (!dialog) {
+		dialog = new goog.ui.Dialog();
+	}
+	dialog.setTitle('I have an Iframe mask :)');
+	dialog.setContent('Some windowed elements leak through standard divs so ' +
+		'we add an iframe to mask the nasties.');
+	dialog.setButtonSet(goog.ui.Dialog.ButtonSet.YES_NO_CANCEL);
+	dialog.setVisible(true);
+});
+
 });

@@ -1,3 +1,5 @@
+goog.require('goog.ui.Dialog');
+
 $(function() {
 	jTien.f.autocompleteOff();
 	jTien.f.completeFormAction();

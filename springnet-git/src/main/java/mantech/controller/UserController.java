@@ -31,7 +31,6 @@ public class UserController {
   public String showUser(ModelMap model){
     List<User> users = userRepo.findAll();
     model.addAttribute("listUser", users);
-    
-    return "user/user";
+    return "user/list";
   }
 }

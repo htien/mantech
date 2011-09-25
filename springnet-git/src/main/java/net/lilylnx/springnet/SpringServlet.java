@@ -5,6 +5,9 @@
 package net.lilylnx.springnet;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Map;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -18,6 +21,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import net.lilylnx.springnet.core.SessionManager;
+import net.lilylnx.springnet.core.support.spring.ViewResolver;
 import net.lilylnx.springnet.extension.RequestOperationChain;
 import net.lilylnx.springnet.util.ConfigKeys;
 import net.lilylnx.springnet.util.SpringConfig;
@@ -58,7 +62,6 @@ public class SpringServlet extends DispatcherServlet {
     ApplicationContext beanFactory = (ApplicationContext)this.getServletContext()
         .getAttribute(getServletContextAttributeName());
     this.getServletContext().setAttribute(ConfigKeys.SPRING_CONTEXT, beanFactory);
-    
 
     this.config = beanFactory.getBean(SpringConfig.class);
     this.config.setProperty(ConfigKeys.APPLICATION_PATH, getServletContext().getRealPath(""));
@@ -84,6 +87,8 @@ public class SpringServlet extends DispatcherServlet {
       
       this.sessionManager.refreshSession(req, resp);
       this.operationChain.callAllOperations();
+      this.putDefaultProps();
+
       super.service(req, resp);
     }
     finally {
@@ -91,8 +96,32 @@ public class SpringServlet extends DispatcherServlet {
       attributes.requestCompleted();
     }
   }
+  
+  /**
+   * Đưa một số key/value cho view.
+   */
+  private void putDefaultProps() {
+    ViewResolver viewResolver = (ViewResolver)SpringNet.getComponent("viewResolver");
+    Map<String, Object> defaultAttributes = viewResolver.getAttributesMap();
+    Date now = Calendar.getInstance().getTime();
+    
+    defaultAttributes.put("name", config.getString("name"));
+    defaultAttributes.put("version", config.getString("version"));
+    defaultAttributes.put("webpage", config.getString("link.webpage"));
+    defaultAttributes.put("contextPath", config.getString("context.path"));
+    defaultAttributes.put("ext", config.getString("servlet.extension"));
+    defaultAttributes.put("encoding", config.getString("encoding"));
+    defaultAttributes.put("dateTimeFormat", config.getString("dateTime.format"));
+    defaultAttributes.put("now", now);
+    defaultAttributes.put("timestamp", new Long(System.currentTimeMillis()));
+    defaultAttributes.put("config", config);
+    
+    defaultAttributes.put("pageTitle", config.getString("web.page.title"));
+    defaultAttributes.put("metaKeywords", config.getString("web.page.metatag.keywords"));
+    defaultAttributes.put("metaDescription", config.getString("web.page.metatag.description"));
+  }
 
-  public void showStuff(ApplicationContext beanFactory) {
+  private void showStuff(ApplicationContext beanFactory) {
     LOG.info("--- Loaded beans ---");
     for (String bean : beanFactory.getBeanDefinitionNames()) {
       LOG.info(bean);

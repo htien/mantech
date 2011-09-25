@@ -13,7 +13,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
  * @author Tien Nguyen
- * @version $Id: HttpServletRequestFactoryBean.java,v 1.0 Jun 26, 2011 6:06:59 PM lilylnx Exp $
+ * @version $Id: HttpServletRequestFactoryBean.java,v 1.0 2011/06/26 18:06:59 lilylnx Exp $
  */
 public class HttpServletRequestFactoryBean implements FactoryBean<Object> {
 

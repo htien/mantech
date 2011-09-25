@@ -56,7 +56,7 @@ public class ComplaintController {
   @Autowired
   private CategoryPriorityRepository priorityRepo;
 
-  @RequestMapping(value = "/complaint/list", method = RequestMethod.GET)
+  @RequestMapping(value = {"/complaint", "/complaint/list"}, method = RequestMethod.GET)
   public String showAll(ModelMap model) throws Exception {
     // Date begin = Calendar.getInstance().getTime();
     SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
@@ -78,6 +78,9 @@ public class ComplaintController {
     model.addAttribute("complaintsFromDateToDate", complaintsFromDateToDate);
     List<Complaint> complaintsByYear = complaintRepo.searchByYear(2011);
     model.addAttribute("complaintYear", complaintsByYear);
+    
+    List<Complaint> listWaitingComplaint = complaintRepo.getWaitingComplaint();
+    model.addAttribute("listComplaintWaiting", listWaitingComplaint);
     return "complaint/list";
   }
 
@@ -89,15 +92,16 @@ public class ComplaintController {
     return complaintRepo.findRange(new int[] { i - 1, i + 2 }, true, "id");
   }
 
-  @RequestMapping(value = "/complaint/insert", method = RequestMethod.GET)
-  public String insert (@RequestParam(value = "userId") int id, ModelMap model){
+  @RequestMapping(value = "/complaint/add", method = RequestMethod.GET)
+  public String insert (@RequestParam(value = "uid") int id, ModelMap model){
+    
     model.addAttribute("userId", id);
     List<Equipment> equip = equipmentRepo.findAll();
     model.addAttribute("list", equip);
-    return "/complaint/insert";
+    return "/complaint/add";
   }
   
-  @RequestMapping(value = "/complaint/insertSave", method = RequestMethod.POST)
+  @RequestMapping(value = "/complaint/addSave", method = RequestMethod.POST)
   public String insertSave(@RequestParam(value = "equipId") int equipId,
       @RequestParam(value = "title") String title,
       @RequestParam(value = "content") String content, ModelMap model)
@@ -118,6 +122,10 @@ public class ComplaintController {
       model.addAttribute("complaint", complaint);
       model.addAttribute("errorMsg", e.getMessage());
       return insert(user.getId(), model);
+    }
+    catch (Exception e) {
+      model.addAttribute("errorMsg", e.getMessage());
+      e.printStackTrace();
     }
     return "redirect:/complaint/list";
   }
@@ -149,7 +157,7 @@ public class ComplaintController {
     Complaint complaint = (Complaint)model.get("complaint");
     ComplaintStatus status = statusRepo.get(statusId);
     CategoryPriority priority = priorityRepo.get(priorityId);
-    
+
     complaint.setStatus(status);
     complaint.setPriority(priority);
     complaintRepo.update(complaint);

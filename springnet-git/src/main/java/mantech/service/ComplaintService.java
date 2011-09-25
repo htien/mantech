@@ -41,7 +41,7 @@ public class ComplaintService {
       throw new ValidationException("A complaint must be content");
     }
 
-    complaintRepo.add(complaint);
+    complaintRepo.insert(complaint);
   }
 
 }

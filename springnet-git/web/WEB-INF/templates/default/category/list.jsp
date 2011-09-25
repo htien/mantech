@@ -17,7 +17,7 @@
 		<tr>
 			<td>${l.id}</td>
 			<td>${l.name}</td>
-			<td><a href="edit.htm?catId=${l.id}">update</a>
+			<td><a href="category/edit${ext}?catId=${l.id}">update</a>
 			</td>
 		</tr>
 	</c:forEach>

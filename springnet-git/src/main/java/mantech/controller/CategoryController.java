@@ -29,7 +29,7 @@ public class CategoryController {
   @Autowired
   private CategoryRepository categoryRepo;
 
-  @RequestMapping(value="/category/list", method = RequestMethod.GET)
+  @RequestMapping(value = {"/category", "/category/list"}, method = RequestMethod.GET)
   public String list(ModelMap model){
     List<Category> list = categoryRepo.findAll();
     model.addAttribute("list",list);
@@ -51,7 +51,7 @@ public class CategoryController {
   }
   
   @RequestMapping(value = "/category/editSave", method = RequestMethod.GET)
-  public String againstUpdateSave(ModelMap model) {
+  public String updateSave(ModelMap model) {
     return "redirect:" + list(model);
   }
 

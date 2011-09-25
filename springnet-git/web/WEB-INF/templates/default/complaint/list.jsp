@@ -11,14 +11,26 @@
 
 <p>
 	Page 1:<br/>
-	<c:forEach items="${list}" var="list">
-		${list.id}: ${list.user.firstName} ${list.equipment.name} ${list.title} 
-		--- <c:forEach items="${list.assignment.details}" var="l">
-				${l.user.firstName} ,
+	<c:forEach items="${list}" var="comp">
+		${comp.id}: ${comp.user.firstName} ${comp.equipment.name} ${comp.title} 
+		--- <c:forEach items="${comp.details}" var="detail">
+				${detail.user.firstName} ,
 			</c:forEach>
 		<br />
 	</c:forEach>
 </p>
+
+<p>
+	<h3>List complaint without assignment</h3>
+	<c:forEach items="${listComplaintWaiting}" var="comp">
+		${comp.id}: ${comp.user.firstName} - ${comp.user.role.name}
+		- ${comp.user.department.name}
+		- ${comp.equipment.name} - ${comp.status.name} - ${comp.title}
+		-${comp.content} - ${comp.priority.name} - ${comp.createDate} 
+		<a href="assignment/add${ext}?compId=${comp.id}">Assign</a><br />
+	</c:forEach>	
+</p>
+
 <h1>No of Complaint: ${no}</h1>
 <p>
 	<h3>Sort Complaints by id or equipment:</h3>

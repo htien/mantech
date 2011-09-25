@@ -23,6 +23,8 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 import net.lilylnx.springnet.util.ConfigKeys;
 
 /**
+ * Bộ lọc chủ yếu dùng để đóng/mở Hibernate session.
+ * 
  * @author Tien Nguyen
  * @version $Id: OpenSessionFilter.java,v 1.0 2011/08/21 7:49:25 lilylnx Exp $
  */

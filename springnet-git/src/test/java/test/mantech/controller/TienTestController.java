@@ -4,10 +4,16 @@
  */
 package test.mantech.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import mantech.domain.Complaint;
+import mantech.repository.ComplaintRepository;
 
 /**
  * 
@@ -15,13 +21,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @version $Id: TienTestController.java,v 1.0 2011/09/07 4:35:11 lilylnx Exp $
  */
 @Controller
-@RequestMapping("/tien/test")
 public class TienTestController {
-  
+
+  @Autowired
+  private ComplaintRepository complaintRepo;
+
   public TienTestController() {}
-  
-  @RequestMapping(method = RequestMethod.GET)
+
+  @RequestMapping(value = "/tien/test", method = RequestMethod.GET)
   public String list(ModelMap model) {
+    List<Complaint> listComplaint = complaintRepo.findAll();
+    for (Complaint c : listComplaint) {
+      try {
+        c.getAssignment().getComplaintId();
+      }
+      catch (Exception e) {
+        c.setAssignment(null);
+      }
+    }
     return "test/tien_test";
   }
 

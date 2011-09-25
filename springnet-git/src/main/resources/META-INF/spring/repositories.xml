@@ -30,6 +30,5 @@
 	<bean id="mantech.repository.SessionRepository" class="mantech.dao.SessionDAO" autowire="constructor" />
 	<bean id="mantech.repository.UserRepository" class="mantech.dao.UserDAO" autowire="constructor" />
 	<bean id="mantech.repository.UserRoleRepository" class="mantech.dao.UserRoleDAO" autowire="constructor" />
-	
 
 </beans>

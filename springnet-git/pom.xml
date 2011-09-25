@@ -138,7 +138,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.1</version><!--$NO-MVN-MAN-VER$-->
+				<version>2.1</version><!--$NO-MVN-MAN-VER$ -->
 				<executions>
 					<execution>
 						<phase>validate</phase>
@@ -163,7 +163,8 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -209,15 +210,14 @@
 		<dependency>
 			<groupId>javax.faces</groupId>
 			<artifactId>jsf-api</artifactId>
-			<version>1.2_02</version>
+			<version>1.2_15</version>
 			<type>jar</type>
 			<scope>provided</scope>
-		</dependency>		
+		</dependency>
 		<dependency>
 			<groupId>javax.faces</groupId>
 			<artifactId>jsf-impl</artifactId>
-			<version>1.2</version>
-			<classifier>NIGHTLY_20060227</classifier>
+			<version>1.2_15</version>
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
@@ -406,4 +406,10 @@
 			</properties>
 		</profile>
 	</profiles>
+
+	<dependencyManagement>
+		<dependencies>
+
+		</dependencies>
+	</dependencyManagement>
 </project>

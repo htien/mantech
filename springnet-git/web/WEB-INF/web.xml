@@ -28,7 +28,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>hibernateSessionFilter</filter-name>
-		<url-pattern>*.htm</url-pattern>
+		<url-pattern>*.cfm</url-pattern>
 	</filter-mapping>
 
 	<servlet>
@@ -43,7 +43,21 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>springnet</servlet-name>
-		<url-pattern>*.htm</url-pattern>
+		<url-pattern>*.cfm</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>springnet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<description>Default Servlet</description>
+		<servlet-name>default</servlet-name>
+		<load-on-startup>3</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/_/*</url-pattern>
 	</servlet-mapping>
 
 	<!-- ERROR PAGE

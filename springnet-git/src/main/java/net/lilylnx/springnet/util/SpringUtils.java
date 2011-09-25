@@ -1,5 +1,5 @@
 /**
- * Written by Long Nguyen <chautinhlong@gmail.com>
+ * Written by Tien Nguyen <lilylnx@users.sf.net>
  * FREE FOR ALL BUT DOES NOT MEAN THERE IS NO PRICE.
  */
 package net.lilylnx.springnet.util;
@@ -9,33 +9,41 @@ import java.util.Date;
 
 /**
  * 
- * @author Long Nguyen
- * @version $Id: SpringUtils.java,v 1.0 2011/09/12 01:16:51 nguyenlong Exp $
+ * @author Tien Nguyen
+ * @version $Id: SpringUtils.java,v 1.0 2011/09/12 01:16:51 lilylnx Exp $
  */
 public class SpringUtils {
-  
-  /**
-   * Increase 1 day by default.
-   */
-  public static Date increaseDay(Date date) {
+
+  public static Date increaseDay(final Date date) {
     return increaseDay(date, 1);
   }
+
+  public static Date increaseDay(final Date date, int numOfDays) {
+    return increateDate(Calendar.DATE, date, numOfDays);
+  }
   
-  /**
-   * Increase n days.
-   * 
-   * @param date
-   * @param numOfDays
-   * @return
-   */
-  public static Date increaseDay(Date date, int numOfDays) {
-    if (numOfDays < 0) {
-      numOfDays = 0;
-    }
-    
+  public static Date increaseMonth(final Date date) {
+    return increaseMonth(date, 1);
+  }
+  
+  public static Date increaseMonth(final Date date, int numOfMonths) {
+    return increateDate(Calendar.MONTH, date, numOfMonths);
+  }
+  
+  public static Date increaseYear(final Date date) {
+    return increaseYear(date, 1);
+  }
+  
+  public static Date increaseYear(final Date date, int numOfYear) {
+    return increateDate(Calendar.YEAR, date, numOfYear);
+  }
+  
+  private static Date increateDate(int dateType, final Date date, int num) {
+    num = num < 0 ? 0 : num;
+
     Calendar calendar = Calendar.getInstance();
     calendar.setTime(date);
-    calendar.add(Calendar.DATE, numOfDays);
+    calendar.add(dateType, num);
     return calendar.getTime();
   }
 

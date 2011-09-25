@@ -1,13 +1,23 @@
 #blueBar {
   padding: 10px 0;
   color: #fff;
-  background-color: #036;
+  background-color: #2b4f82;
 }
 
 #blueBar #companyName {
   text-align: center;
-  font-family: MetaBold, Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 30px;
+}
+
+#companyName sup {
+  margin-right: 10px;
+  font-size: 18px;
+  vertical-align: 9px;
+}
+
+#companyName span {
+  font-family: MetaBold, Arial, sans-serif;
   font-weight: bold;
 }
 

@@ -116,3 +116,8 @@ ol.nobullets, ul.nobullets {
 .w100 {
   width: 100%;
 }
+
+.gg-popup-msg {
+  margin-top: 15px;
+  font-size: 14px;
+}

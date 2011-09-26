@@ -8,9 +8,23 @@
   -moz-box-shadow: 0 4px 16px rgba(0,0,0,.2);
 }
 
+.ui-button.ui-state-hover, .ui-button.ui-state-focus {
+  background: #fff;
+  border: 1px solid #bbb;
+  box-shadow: 0 1px 1px rgba(0,0,0,.2);
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  -moz-box-shadow: 0 1px 1px rgba(0,0,0,.2);
+}
+
+.ui-button.ui-state-active {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.2);
+}
+
 .ui-dialog .ui-dialog-titlebar {
-  padding: 1em 3em .8em 3em;
+  padding: 1.5em 3em .5em 3em;
+  background: #fff;
   border-color: #fff;
+  cursor: default;
 }
 
 .ui-dialog .ui-dialog-title {
@@ -19,11 +33,16 @@
 }
 
 .ui-dialog .ui-dialog-content {
-  padding: 1.5em 3em;
+  padding: 0 3em 1.5em;
 }
 
 .ui-dialog .ui-dialog-buttonpane {
   padding-right: 3em;
+}
+
+.ui-dialog .ui-dialog-buttonpane button {
+  outline: none;
+  cursor: default;
 }
 
 .ui-dialog .ui-dialog-titlebar-close {

@@ -37,15 +37,17 @@ $(function() {
 			highlight : function(el, errorClass, validClass) {
 				$(el).addClass(errorClass).removeClass(validClass);
 				$(el.form).find('span[class~=' + el.id + ']').addClass(errorClass);
-				$('#signin-box').stop(true, true).effect('shake', { times:2, distance:5 }, 50);
 			},
 			unhighlight: function(el, errorClass, validClass) {
 				$(el).addClass(validClass).removeClass(errorClass);
 				$(el.form).find('span[class~=' + el.id + ']').removeClass(errorClass);
 			},
 			invalidHandler: function(form, validator) {
+				$('#signin-box').stop(true, true);
+				$('#signin-box').effect('shake', { times:2, distance:5 }, 50);
 			},
 			submitHandler: function(form) {
+				alert('a');
 				form.submit();
 			}
 		});
@@ -54,22 +56,7 @@ $(function() {
 	
 	/* Xử lý nút Test1 Test2 */
 	
-	var dialog1 = null, dialog2 = null;
-	var uiDialogOpts = {
-			title: 'JQuery Ajax Dialog',
-			modal: true,
-			autoOpen: false,
-			width: 720,
-			height: 300,
-			open: function() {
-				$('#ui-dialog').load($ctx + '/user' + $ext);
-			},
-			buttons: {
-				'OK': function() {
-					$(this).dialog('destroy');
-				}
-			}
-	};
+	var dialog1 = null;
 	
 	$('#test1').live('click', function() {
 		if (!dialog1) {
@@ -83,11 +70,14 @@ $(function() {
 	});
 	
 	$('#test2').live('click', function() {
-		if (!dialog2) {
-			dialog2 = $('#ui-dialog');
-		}
-		dialog2.dialog(uiDialogOpts);
-		dialog2.dialog('open');
+		var url = $ctx + '/user' + $ext;
+		jTien.callAjaxDlg(url, {
+			buttons: {
+				'Close': function() {
+					$(this).dialog('destroy');
+				}
+			}
+		});
 		return false;
 	});
 

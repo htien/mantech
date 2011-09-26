@@ -1,5 +1,21 @@
+/* === Load required Google Closure Library === */
+
 goog.require('goog.ui.Dialog');
 
+/* === Initialize global variables === */
+
+var $dialog = $('<div id="jdialog"></div>');
+var $dialogOpts = {
+		title: 'JQuery Ajax Dialog',
+		autoOpen: false,
+		draggable: true,
+		modal: true,
+		resizable: false,
+		width: 'auto',
+		height: 'auto'
+};
+
+/* === Execute default methods === */
 $(function() {
 	jTien.f.autocompleteOff();
 	jTien.f.completeFormAction();
@@ -37,6 +53,19 @@ jTien.fn.init.prototype = jTien.fn;
 jTien.ajaxConnect = jTien.prototype = function() {
 	alert('a');
 };
+
+jTien.callAjaxDlg = jTien.prototype = function(url, dialogOpts) {
+	$.get(url, {}, function(data) {
+		$dialog.html(data);
+		$dialog.dialog($dialogOpts);
+
+		if (typeof dialogOpts == 'object') {
+			$dialog.dialog(dialogOpts);
+		}
+		
+		$dialog.dialog('open');
+	});
+},
 
 jTien.f = jTien.prototype = {
 

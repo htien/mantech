@@ -22,4 +22,3 @@
 		</form>
 	</div>
 </div>
-<div id="ui-dialog"></div>

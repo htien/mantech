@@ -5,11 +5,7 @@
 	.grid th, .grid td {border: 1px solid #000; border-collapse: collapse}
 </style>
 
-<h1>List of user</h1>
-<table class = "grid">
-	<tr>
-		<th colspan = "9">List of Users</th>
-	</tr>
+<table class="grid">
 	<tr>
 		<th>Username</th>
 		<th>Role</th>
@@ -37,4 +33,3 @@
 </table>
 
 </compress:html>
-<%@ include file="../layout/footer.inc"%>

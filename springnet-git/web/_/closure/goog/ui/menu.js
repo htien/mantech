@@ -184,7 +184,7 @@ goog.ui.Menu.prototype.containsElement = function(element) {
  * Adds a new menu item at the end of the menu.
  * @param {goog.ui.MenuHeader|goog.ui.MenuItem|goog.ui.MenuSeparator} item Menu
  *     item to add to the menu.
- * @deprecated Use {@link #addChild} instead.
+ * @deprecated Use {@link #addChild} instead, with true for the second argument.
  */
 goog.ui.Menu.prototype.addItem = function(item) {
   this.addChild(item, true);
@@ -196,7 +196,8 @@ goog.ui.Menu.prototype.addItem = function(item) {
  * @param {goog.ui.MenuHeader|goog.ui.MenuItem|goog.ui.MenuSeparator} item Menu
  *     item to add to the menu.
  * @param {number} n Index at which to insert the menu item.
- * @deprecated Use {@link #addChildAt} instead.
+ * @deprecated Use {@link #addChildAt} instead, with true for the third
+ *     argument.
  */
 goog.ui.Menu.prototype.addItemAt = function(item, n) {
   this.addChildAt(item, n, true);
@@ -429,7 +430,12 @@ goog.ui.Menu.prototype.decorateContent = function(element) {
   var renderer = this.getRenderer();
   var contentElements = this.getDomHelper().getElementsByTagNameAndClass('div',
       goog.getCssName(renderer.getCssClass(), 'content'), element);
-  for (var el, i = 0; el = contentElements[i]; i++) {
-    renderer.decorateChildren(this, el);
+
+  // Some versions of IE do not like it when you access this nodeList
+  // with invalid indices. See
+  // http://code.google.com/p/closure-library/issues/detail?id=373
+  var length = contentElements.length;
+  for (var i = 0; i < length; i++) {
+    renderer.decorateChildren(this, contentElements[i]);
   }
 };

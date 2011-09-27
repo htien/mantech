@@ -8,8 +8,8 @@
 
 @font-face {
   font-family: 'MetaBold';
-  src: url('../img/fonts/MetaWebPro-Bold.eot');
-  src: local('☺'), url('../img/fonts/MetaWebPro-Bold.woff') format('woff');
+  src: url('images/fonts/MetaWebPro-Bold.eot');
+  src: local('☺'), url('images/fonts/MetaWebPro-Bold.woff') format('woff');
   font-weight: bold;
 }
 

@@ -1,21 +1,19 @@
 {
 "path": {
 	"css": [
-		"/_/css/reset.css",
-		"/_/css/closure-theme/jquery-ui-1.8.16.css",
+		"/_/default/css/reset.css",
+		"/_/jquery/css/closure-theme/jquery-ui-1.8.16.css",
 		"/_/closure/goog/css/dialog.css",
-		"/_/facebox/facebox.css",
-		"/_/css/common.css",
-		"/_/css/common-ui.css",
-		"/_/css/main.css"
+		"/_/default/css/common.css",
+		"/_/default/css/common-ui.css",
+		"/_/default/css/main.css"
 	],
 	"scripts": [
-		"/_/js/jquery-ui-1.8.16.js",
-		"/_/js/jquery.validate.js",
-		"/_/js/jquery.validate.additional.js",
-		"/_/facebox/facebox.js",
-		"/_/js/__global.js",
-		"/_/js/common.js"
+		"/_/jquery/jquery-ui-1.8.16.js",
+		"/_/jquery/jquery.validate.js",
+		"/_/jquery/jquery.validate.additional.js",
+		"/_/default/__global.js",
+		"/_/default/common.js"
 	]
 }
 }

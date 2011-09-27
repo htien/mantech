@@ -1,9 +1,11 @@
 <%@ include file="../layout/top.inc"%><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
 <style>
-	.grid {border: 1px solid #000; border-collapse: collapse;}
+	.grid {margin-top: 15px; border: 1px solid #000; border-collapse: collapse;}
 	.grid th, .grid td {border: 1px solid #000; border-collapse: collapse}
 </style>
+
+<p class="gg-popup-msg"><strong>List of Users</strong></p>
 
 <table class="grid">
 	<tr>

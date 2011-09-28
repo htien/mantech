@@ -1,15 +1,13 @@
 <%@ include file="../layout/top.inc"%><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
 <style>
-	.grid {border: 1px solid #000; border-collapse: collapse;}
+	.grid {margin-top: 15px; border: 1px solid #000; border-collapse: collapse;}
 	.grid th, .grid td {border: 1px solid #000; border-collapse: collapse}
 </style>
 
-<h1>List of user</h1>
-<table class = "grid">
-	<tr>
-		<th colspan = "9">List of Users</th>
-	</tr>
+<p class="gg-popup-msg"><strong>List of Users</strong></p>
+
+<table class="grid">
 	<tr>
 		<th>Username</th>
 		<th>Role</th>
@@ -37,4 +35,3 @@
 </table>
 
 </compress:html>
-<%@ include file="../layout/footer.inc"%>

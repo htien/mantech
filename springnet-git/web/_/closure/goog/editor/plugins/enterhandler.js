@@ -41,8 +41,8 @@ goog.require('goog.userAgent');
  * is reasonable) what happens when you hit enter. This also handles the
  * special casing of hitting enter in a blockquote.
  *
- * In IE and Safari, the resulting HTML uses one DIV tag per line.  In FireFox,
- * the resulting HTML uses BR tags at the end of each line.
+ * In IE, Webkit, and Opera, the resulting HTML uses one DIV tag per line. In
+ * Firefox, the resulting HTML uses BR tags at the end of each line.
  *
  * @constructor
  * @extends {goog.editor.Plugin}
@@ -53,9 +53,31 @@ goog.editor.plugins.EnterHandler = function() {
 goog.inherits(goog.editor.plugins.EnterHandler, goog.editor.Plugin);
 
 
-/** @inheritDoc */
+/**
+ * The type of block level tag to add on enter, for browsers that support
+ * specifying the default block-level tag. Can be overriden by subclasses; must
+ * be either DIV or P.
+ * @type {goog.dom.TagName}
+ * @protected
+ */
+goog.editor.plugins.EnterHandler.prototype.tag = goog.dom.TagName.DIV;
+
+
+/** @override */
 goog.editor.plugins.EnterHandler.prototype.getTrogClassId = function() {
   return 'EnterHandler';
+};
+
+
+/** @override */
+goog.editor.plugins.EnterHandler.prototype.enable = function(fieldObject) {
+  goog.base(this, 'enable', fieldObject);
+
+  if (goog.editor.BrowserFeature.SUPPORTS_OPERA_DEFAULTBLOCK_COMMAND &&
+      (this.tag == goog.dom.TagName.P || this.tag == goog.dom.TagName.DIV)) {
+    var doc = this.getFieldDomHelper().getDocument();
+    doc.execCommand('opera-defaultBlock', false, this.tag);
+  }
 };
 
 
@@ -238,7 +260,7 @@ goog.editor.plugins.EnterHandler.prototype.deleteBrGecko = function(e) {
 };
 
 
-/** @inheritDoc */
+/** @override */
 goog.editor.plugins.EnterHandler.prototype.handleKeyPress = function(e) {
   // If a dialog doesn't have selectable field, Gecko grabs the event and
   // performs actions in editor window. This solves that problem and allows

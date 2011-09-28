@@ -17,9 +17,8 @@
 			<p></p>
 			<div>
 				<div id="test1" class="g-b g-b-r">Closure Dialog</div>
-				<div id="test2" class="g-b g-b-r">JQuery Dialog</div>
+				<div id="test2" class="g-b g-b-r" style="margin-right:0">JQuery Dialog</div>
 			</div>
 		</form>
 	</div>
 </div>
-<div id="ui-dialog"></div>

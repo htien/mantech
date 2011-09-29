@@ -41,28 +41,38 @@
 }
 
 .ui-dialog .ui-dialog-titlebar {
-  padding: 1.5em 3em .5em 3em;
+  /*padding: 1.5em 3em .5em 3em;*/
+  margin-bottom: 8px;
+  padding: 30px 42px 0 40px;
   background: #fff;
   border-color: #fff;
   cursor: default;
 }
 
 .ui-dialog .ui-dialog-title {
-  font-size: 18px;
+  line-height: 24px;
+  font-size: 16px;
   font-weight: normal;
+  color: #222;
 }
 
 .ui-dialog .ui-dialog-content {
-  padding: 0 3em 1.5em;
+  padding: 0 42px;
 }
 
 .ui-dialog .ui-dialog-buttonpane {
-  padding-right: 3em;
+  padding: 15px 42px 30px 42px;
+  border-width: 0;
 }
 
 .ui-dialog .ui-dialog-buttonpane button {
+  margin: 0 8px 0 0;
   outline: none;
   cursor: default;
+}
+
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+  float: left;
 }
 
 .ui-dialog .ui-dialog-titlebar-close {

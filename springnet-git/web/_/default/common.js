@@ -9,20 +9,22 @@ function renderPage(url) {
 
 $(function() {
 	
-	var ids = '{"ids":["id", "passwd"]}';
-	var json = $.parseJSON(ids);
-	
-	$.each(json.ids, function(idx, el) {
+	/* Reset button */
+
+	$('#signin-box').delegate('#signin-form #reset', 'click', function(evt) {
+		jTien.resetForm('signin-form');
 	});
-	
+
 	/* Xử lý login */
 	
 	$('#signin').live('click', function(evt) {
 		if ($debug && !isIEBrowser()) {
 			console.log('#' + this.id + ' button is clicked.');
 		}
-		var frm = $('#signin-form');
-		frm.validate({
+		
+		var loginForm = $('#signin-form');
+		
+		loginForm.validate({
 			rules: {
 				id: { required: true, minlength: 2 },
 				passwd: { required: true, minlength: 3 }
@@ -32,29 +34,29 @@ $(function() {
 				passwd: { required: 'Enter your Password.', minlength: $.format('Password, at least {0} characters.') }
 			},
 			invalidHandler: function(form, validator) {
-				$('#signin-box').stop(true, true);
-				$('#signin-box').effect('shake', { times:2, distance:5 }, 50);
+				$('#signin-box').stop(true, true).effect('shake', { times:2, distance:5 }, 50);
 			},
-			submitHandler: function(form) {
-				form.submit();
+			submitHandler: function(frm) {
+				frm.ajaxSubmit();
 			}
 		});
-		frm.submit();
+		
+		loginForm.submit();
 	});
 	
 	/* Xử lý nút Test1 Test2 */
 	
-	var dialog1 = null;
+	var googDialog = null;
 	
 	$('#test1').live('click', function() {
-		if (!dialog1) {
-			dialog1 = new goog.ui.Dialog();
+		if (!googDialog) {
+			googDialog = new goog.ui.Dialog();
 		}
-		dialog1.setTitle('I have an Iframe mask :)');
-		dialog1.setContent('Some windowed elements leak through standard divs so ' +
+		googDialog.setTitle('I have an Iframe mask :)');
+		googDialog.setContent('Some windowed elements leak through standard divs so ' +
 			'we add an iframe to mask the nasties.');
-		dialog1.setButtonSet(goog.ui.Dialog.ButtonSet.OK);
-		dialog1.setVisible(true);
+		googDialog.setButtonSet(goog.ui.Dialog.ButtonSet.OK);
+		googDialog.setVisible(true);
 	});
 	
 	$('#test2').live('click', function() {

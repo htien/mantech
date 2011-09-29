@@ -59,13 +59,25 @@ $(function() {
 	
 	$('#test2').live('click', function() {
 		var url = $ctx + '/user' + $ext;
-		jTien.callJqDialog(url, {
+		var dlgConfirm = jTien.callJqDialog('dlg-confirm',
+				'Are you sure you want to delete selected topic?', {
+			title: 'Delete Topic Confirmation',
 			buttons: {
-				'Close': function() {
+				'OK': function() {
+					jTien.callJqDialog('dlg-confirm', url, {
+						buttons: {
+							'Close': function() {
+								$(this).dialog('destroy');
+							}
+						}
+					});
+				},
+				'Cancel': function() {
 					$(this).dialog('destroy');
 				}
 			}
 		});
+		dlgConfirm.dialog('open');
 		return false;
 	});
 

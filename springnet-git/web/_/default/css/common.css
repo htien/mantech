@@ -118,7 +118,6 @@ ol.nobullets, ul.nobullets {
 }
 
 .gg-popup-msg {
-  margin-top: 15px;
-  padding-right: 100px;
-  font-size: 15px;
+  padding: 8px 100px 8px 0;
+  color: #222;
 }

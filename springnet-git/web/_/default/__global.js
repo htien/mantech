@@ -1,11 +1,13 @@
 /* === Load required Google Closure Library === */
 
-goog.require('goog.ui.Dialog');
+goog.require('goog.editor.Field');
+goog.require('goog.ui.editor.DefaultToolbar');
+//goog.require('goog.ui.editor.ToolbarController');
+//goog.require('goog.ui.Dialog');
 
 
 /* === Initialize global variables === */
 
-var $dialog = $('<div></div>');
 var $dialogOpts = {
 		title: 'Mantech Help Desk',
 		autoOpen: false,
@@ -13,7 +15,7 @@ var $dialogOpts = {
 		modal: true,
 		resizable: false,
 		position: 'center',
-		//minWidth: 460,
+		minWidth: 460,
 		minHeight: 160,
 		width: 'auto',
 		height: 'auto'
@@ -89,7 +91,7 @@ jTien.ajaxConnect = jTien.prototype = function() {
 	alert('a');
 };
 
-jTien.callJqDialog = jTien.prototype = function(url, settings, dlgOpts) {
+jTien.callJqDialog = jTien.prototype = function(id, url, settings, dlgOpts) {
 	var isUrl = /^(\/|http:\/\/|https:\/\/|ftp:\/\/)/.test(url);
 	if (dlgOpts == undefined) {
 		dlgOpts = settings;
@@ -101,7 +103,8 @@ jTien.callJqDialog = jTien.prototype = function(url, settings, dlgOpts) {
 	var responseText =  isUrl
 			? $.ajax(url, settings).responseText
 			: '<p class="gg-popup-msg">' + url + '</p>';
-	jTien.f.createJqDialog(responseText, dlgOpts).dialog('open');
+	var dlg = jTien.f.createJqDialog(id, responseText, dlgOpts); 
+	return dlg;
 };
 
 jTien.f = jTien.prototype = {
@@ -159,13 +162,16 @@ jTien.f = jTien.prototype = {
 		// TODO Create ajaxSubmit() method
 	},
 	
-	createJqDialog: function(data, dlgOpts) {
-		$dialog.html(data);
-		$dialog.dialog($dialogOpts);
+	createJqDialog: function(id, data, dlgOpts) {
+		var dlg = document.getElementById(id) == null
+				? $('<div id="' + id + '"></div>')
+				: $('#' + id);
+		dlg.html(data);
+		dlg.dialog($dialogOpts);
 		if (typeof dlgOpts === 'object') {
-			$dialog.dialog(dlgOpts);
+			dlg.dialog(dlgOpts);
 		}
-		return $dialog;
+		return dlg;
 	}
 };
 

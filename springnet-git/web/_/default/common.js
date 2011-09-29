@@ -4,23 +4,20 @@ function renderPage(url) {
 	});
 };
 
+
+/* === Document Ready for assigning events === */
+
 $(function() {
 	
 	var ids = '{"ids":["id", "passwd"]}';
 	var json = $.parseJSON(ids);
-	
-	$.validator.setDefaults({
-		debug:$debug,
-		errorClass:'error', validClass:'valid',
-		onkeyup:false, onfocusout:false
-	});
 	
 	$.each(json.ids, function(idx, el) {
 	});
 	
 	/* Xử lý login */
 	
-	$('#signin').live('click', function() {
+	$('#signin').live('click', function(evt) {
 		if ($debug && !isIEBrowser()) {
 			console.log('#' + this.id + ' button is clicked.');
 		}
@@ -34,20 +31,11 @@ $(function() {
 				id: { required: 'Enter your ID (username, email).', minlength: $.format('ID, at least {0} characters.') },
 				passwd: { required: 'Enter your Password.', minlength: $.format('Password, at least {0} characters.') }
 			},
-			highlight : function(el, errorClass, validClass) {
-				$(el).addClass(errorClass).removeClass(validClass);
-				$(el.form).find('span[class~=' + el.id + ']').addClass(errorClass);
-			},
-			unhighlight: function(el, errorClass, validClass) {
-				$(el).addClass(validClass).removeClass(errorClass);
-				$(el.form).find('span[class~=' + el.id + ']').removeClass(errorClass);
-			},
 			invalidHandler: function(form, validator) {
 				$('#signin-box').stop(true, true);
 				$('#signin-box').effect('shake', { times:2, distance:5 }, 50);
 			},
 			submitHandler: function(form) {
-				alert('a');
 				form.submit();
 			}
 		});
@@ -71,7 +59,7 @@ $(function() {
 	
 	$('#test2').live('click', function() {
 		var url = $ctx + '/user' + $ext;
-		jTien.callAjaxDlg(url, {
+		jTien.callJqDialog(url, {
 			buttons: {
 				'Close': function() {
 					$(this).dialog('destroy');

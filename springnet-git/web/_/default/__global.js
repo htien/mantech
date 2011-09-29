@@ -2,25 +2,60 @@
 
 goog.require('goog.ui.Dialog');
 
+
 /* === Initialize global variables === */
 
-var $dialog = $('<div id="jdialog"></div>');
+var $dialog = $('<div></div>');
 var $dialogOpts = {
-		title: 'JQuery Ajax Dialog',
+		title: 'Mantech Help Desk',
 		autoOpen: false,
 		draggable: true,
 		modal: true,
 		resizable: false,
+		position: 'center',
+		//minWidth: 460,
+		minHeight: 160,
 		width: 'auto',
 		height: 'auto'
 };
+var $validateOpts = {
+		debug: $debug,
+		errorClass: 'error', validClass: 'valid',
+		onkeyup: false, onfocusout: false,
+		highlight : function(el, errorClass, validClass) {
+			$(el).addClass(errorClass).removeClass(validClass);
+			$(el.form).find('span[class~=' + el.id + ']').addClass(errorClass);
+		},
+		unhighlight: function(el, errorClass, validClass) {
+			$(el).addClass(validClass).removeClass(errorClass);
+			$(el.form).find('span[class~=' + el.id + ']').removeClass(errorClass);
+		}
+};
+
+/* === Initialize default === */
+
+$.ajaxSetup({
+	statusCode: {
+		404: function() {
+			alert('Page not found.');
+		}
+	}
+});
+$.validator.setDefaults($validateOpts);
 
 /* === Execute default methods === */
+
 $(function() {
 	jTien.f.autocompleteOff();
 	jTien.f.completeFormAction();
 	jTien.f.disableDrag('{"tags":["a", "img"], "classes":["g-b"]}');
 });
+
+
+
+/*
+	=== SPRINGNET JAVASCRIPT LIBRARY ===
+*/
 
 /**
  * endsWith method for javascript String object, same as Java.
@@ -54,18 +89,20 @@ jTien.ajaxConnect = jTien.prototype = function() {
 	alert('a');
 };
 
-jTien.callAjaxDlg = jTien.prototype = function(url, dialogOpts) {
-	$.get(url, {}, function(data) {
-		$dialog.html(data);
-		$dialog.dialog($dialogOpts);
-
-		if (typeof dialogOpts == 'object') {
-			$dialog.dialog(dialogOpts);
-		}
-		
-		$dialog.dialog('open');
-	});
-},
+jTien.callJqDialog = jTien.prototype = function(url, settings, dlgOpts) {
+	var isUrl = /^(\/|http:\/\/|https:\/\/|ftp:\/\/)/.test(url);
+	if (dlgOpts == undefined) {
+		dlgOpts = settings;
+		settings = isUrl ? {} : undefined;
+	}
+	if (typeof settings === 'object') {
+		settings.async = false;
+	}
+	var responseText =  isUrl
+			? $.ajax(url, settings).responseText
+			: '<p class="gg-popup-msg">' + url + '</p>';
+	jTien.f.createJqDialog(responseText, dlgOpts).dialog('open');
+};
 
 jTien.f = jTien.prototype = {
 
@@ -119,7 +156,16 @@ jTien.f = jTien.prototype = {
 	},
 	
 	ajaxSubmit: function() {
-		
+		// TODO Create ajaxSubmit() method
+	},
+	
+	createJqDialog: function(data, dlgOpts) {
+		$dialog.html(data);
+		$dialog.dialog($dialogOpts);
+		if (typeof dlgOpts === 'object') {
+			$dialog.dialog(dlgOpts);
+		}
+		return $dialog;
 	}
 };
 

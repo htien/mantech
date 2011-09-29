@@ -54,7 +54,7 @@ public class User implements Serializable {
   @Column(name = "passwd", nullable = false, length = 255)
   private String password;
 
-  @Column(name = "regdate", nullable = false, updatable = false)
+  @Column(name = "regdate", nullable = false, insertable = false, updatable = false)
   private Date regDate;
 
   @Column(name = "lastvisit", insertable = false)
@@ -75,7 +75,7 @@ public class User implements Serializable {
   @Column(name = "homeaddr", length = 70)
   private String homeAddress;
 
-  @Column(name = "status", length = 1)
+  @Column(name = "status", length = 1, insertable = false)
   private String status;
 
   @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)

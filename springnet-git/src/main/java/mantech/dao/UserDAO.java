@@ -7,6 +7,7 @@ package mantech.dao;
 import java.util.List;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.validator.EmailValidator;
 import org.hibernate.SessionFactory;
 
 import mantech.domain.User;
@@ -73,6 +74,25 @@ public class UserDAO extends HibernateGenericDAO<User> implements UserRepository
     return session().createQuery("from User u where u.id in (:ids)")
         .setParameterList("ids", ArrayUtils.toObject(ids))
         .list();
+  }
+
+  @Override
+  public boolean isExistUser(int id) {
+    return ((Long)session().createQuery("select count(u) from User u where u.id = :id")
+        .setInteger("id", id).uniqueResult()).byteValue() > 0;
+  }
+  
+  @Override
+  public boolean isExistUser(String unameOrEmail) {
+    String hql = "select count(u) from User u where u.{field} = :value";
+    if (EmailValidator.getInstance().isValid(unameOrEmail)) {
+      hql = hql.replace("{field}", "email");
+    }
+    else {
+      hql = hql.replace("{field}", "username");
+    }
+    return ((Long)session().createQuery(hql).setString("value", unameOrEmail)
+        .uniqueResult()).byteValue() > 0;
   }
 
 }

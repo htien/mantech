@@ -161,8 +161,4 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
         .setInteger("id", id).uniqueResult()).longValue() > 0;
   }
 
-
-  
-  
-
 }

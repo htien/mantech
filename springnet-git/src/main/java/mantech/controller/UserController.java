@@ -11,11 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-
-
+import mantech.domain.Department;
 import mantech.domain.User;
+import mantech.domain.UserRole;
+import mantech.repository.DepartmentRepository;
 import mantech.repository.UserRepository;
+import mantech.repository.UserRoleRepository;
 
 /**
  * @author Long Nguyen
@@ -27,10 +30,64 @@ public class UserController {
   @Autowired
   private UserRepository userRepo;
   
+  @Autowired
+  private UserRoleRepository roleRepo;
+  
+  @Autowired
+  private DepartmentRepository departmentRepo;
+  
   @RequestMapping(value = {"/user", "/user/list"}, method = RequestMethod.GET)
   public String showUser(ModelMap model){
     List<User> users = userRepo.findAll();
     model.addAttribute("listUser", users);
     return "user/list";
+  }
+  
+  @RequestMapping(value="/user/add", method = RequestMethod.GET)
+  public String insert(ModelMap model) {
+    List<Department> departs = departmentRepo.findAll();
+    List<UserRole> roles = roleRepo.findAll();
+    
+    model.addAttribute("departList", departs);
+    model.addAttribute("roleList", roles);
+    return "user/add";
+  }
+  
+  @RequestMapping(value = "/user/addSave", method = RequestMethod.POST)
+  public String insertSave(@RequestParam(value = "username") String username,
+                            @RequestParam(value = "passwd") String pass,
+                            @RequestParam(value = "email") String email,
+                            @RequestParam(value = "department") byte departId,
+                            @RequestParam(value = "role") byte roleId,
+                            @RequestParam(value = "firstName") String firstName,
+                            @RequestParam(value = "lastName") String lastName,
+                            @RequestParam(value = "gender") String gender,
+                            @RequestParam(value = "address") String address,
+                            ModelMap model) {
+    
+    Department department = departmentRepo.get(departId);
+    UserRole role = roleRepo.get(roleId);
+    
+//    if (userRepo.isExistUser(100)) {
+//      model.addAttribute("msg", "The User ID is used.");
+//      //A(??)
+//      return "msg";
+//    }
+    
+    User user = new User();
+    user.setUsername(username);
+    user.setPassword(pass);
+    user.setEmail(email); 
+    user.setFirstName(firstName);
+    user.setLastName(lastName);
+    user.setGender(gender);
+    user.setDepartment(department);
+    user.setHomeAddress(address);
+    user.setRole(role);
+    
+    userRepo.add(user);
+    
+//    model.addAttribute("msg", "Insert thanh cong!");
+    return "redirect:/user/list";
   }
 }

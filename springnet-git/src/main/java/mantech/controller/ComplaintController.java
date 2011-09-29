@@ -94,8 +94,8 @@ public class ComplaintController {
 
   @RequestMapping(value = "/complaint/add", method = RequestMethod.GET)
   public String insert (@RequestParam(value = "uid") int id, ModelMap model){
-    
-    model.addAttribute("userId", id);
+    User user = userRepo.get(id);
+    model.addAttribute("user", user);
     List<Equipment> equip = equipmentRepo.findAll();
     model.addAttribute("list", equip);
     return "/complaint/add";

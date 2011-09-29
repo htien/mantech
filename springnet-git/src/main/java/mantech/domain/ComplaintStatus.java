@@ -22,6 +22,11 @@ import javax.persistence.Table;
 public class ComplaintStatus implements Serializable {
 
   private static final long serialVersionUID = 1L;
+  
+  public static final byte WAITING = 1;
+  public static final byte ACCEPTED = 2;
+  public static final byte REJECTED = 3;
+  public static final byte COMPLETED = 4;
 
   @Id
   @Column(name = "id")

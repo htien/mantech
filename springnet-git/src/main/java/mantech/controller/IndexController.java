@@ -30,7 +30,7 @@ public class IndexController {
   public String login(HttpServletRequest request, ModelMap model) {
     String id = request.getParameter("id");
     String passwd = request.getParameter("passwd");
-    
+    System.out.println(id + ' ' + passwd);
     if (id.equals("nvhtien") && passwd.equals("123")) {
       model.addAttribute("loginMsg", "Logged in!");
     }

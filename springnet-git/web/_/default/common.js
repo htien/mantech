@@ -11,18 +11,18 @@ $(function() {
 	
 	/* Reset button */
 
-	$('#signin-box').delegate('#signin-form #reset', 'click', function(evt) {
+	$('#signin-form').delegate('#reset', 'click', function(evt) {
 		jTien.resetForm('signin-form');
 	});
 
 	/* Xử lý login */
 	
-	$('#signin').live('click', function(evt) {
+	$('#signin-form').delegate('#signin', 'click', function(evt) {
 		if ($debug && !isIEBrowser()) {
 			console.log('#' + this.id + ' button is clicked.');
 		}
 		
-		var loginForm = $('#signin-form');
+		var loginForm = $(this).parents('form');
 		
 		loginForm.validate({
 			rules: {
@@ -37,7 +37,7 @@ $(function() {
 				$('#signin-box').stop(true, true).effect('shake', { times:2, distance:5 }, 50);
 			},
 			submitHandler: function(frm) {
-				frm.ajaxSubmit();
+				jTien.ajaxSubmit(frm);
 			}
 		});
 		

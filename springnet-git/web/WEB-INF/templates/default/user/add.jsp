@@ -1,16 +1,6 @@
 <%@ include file="../layout/header.inc"%>
 <compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
-<style type="text/css">
-
-.g-f { margin:20px 20px; }
-#title { font-weight:bold; font-size:20px; text-align:center; margin-top:10px; }
-.row { margin-bottom:12px; }
-.row strong { display:inline-block; vertical-lign:top; margin-top:4px; width:90px; font-weight:bold; }
-/* .row input[type=text] { margin-right:10px; } */
-
-</style>
-
 <div id="adduser_pagelet" class="g-pl">
 	<div id="adduser-box" class="box">
 		<h2 id="title">Add New User</h2>

@@ -24,13 +24,10 @@
 	<script type="text/javascript">
 		var frm;
 		var dialogOpts = {
-			modal: true,
-			resizable: false,
-			title: "New Assignment",
-			width: 350,
+			title: "Add New Assignment",
 			buttons: {
 				'Create': function() {
-					Submit(this, frm);
+					submit(this, frm);
 					$(this).dialog("destroy");
 				},
 				'Cancel': function() {
@@ -40,29 +37,46 @@
 		};
 		var validOpts = {
 			rules: {
-				beginDate: "required",
-				duration: {
-					required: true
+				beginDate: {
+					required: true,
+					vietnameseDate: true
 				},
-				userId: "required"
+				duration: {
+					required: true,
+					digits: true
+				},
+				userId: {
+					required: true
+				}
 			},
 			messages: {
-				beginDate: "Please enter the begin Date!",
-				duration: "Please enter the duration!",
-				userId: "Please choose the technician to assign!"
+				beginDate: {
+					required: 'Please enter the begin Date!',
+					vietnameseDate: 'Invalidate date format for Begin Date.'
+				},
+				duration: {
+					required: 'Please enter the duration!',
+					digits: 'Must a positive number'
+				},
+				userId: {
+					required: 'Please choose the technician to assign!'
+				}
 			}
 		};
 		
-		function Submit(dialog, form) {
+		$.validator.addMethod('vietnameseDate', function(value, element) {
+			return value.match(/^\d\d\d\d\/\d\d?\/\d\d?$/);
+		}, 'Invalidate date format yyyy/MM/dd');
+		
+		function submit(dialog, form) {
 			$.ajax( {
 				async: false,
 				type: form.attr("method"),
 				url: form.attr("action"),
 				data: form.serialize(),
 				success: function(data, textCode, xhr) {
-					Reset();
+					reset();
 					$(dialog).dialog("destroy");
-					
 				},
 				error: function(data) {
 					$(dialog).dialog("destroy");
@@ -70,8 +84,9 @@
 			});
 		};
 		
-		function Reset() {
-			$("#form :input[type=text]").val("");
+		function reset(form) {
+			form[0].reset();
+			form.find(':input:visible:enabled:first').focus();
 		};
 	
 		$(function() {
@@ -79,13 +94,12 @@
 				frm = $("#add-form");
 				frm.validate(validOpts);
 				if(frm.valid()) {
-					$("#dialog-confirm").dialog(dialogOpts);
-					$("#dialog-confirm").dialog("open");
+					jTien.callJqDialog('dialog-confirm', 'Are you sure you want to add new assignment?',
+							dialogOpts).dialog('open');
 				}
 			});
 			$("#btnReset").live('click', function() {
-				frm = $("#add-form");
-				Reset();
+				reset(frm);
 			});
 		});
 	</script>
@@ -172,7 +186,6 @@
 				</label>
 			</div>
 		</div>
-		<div id="dialog-confirm" style="display:none;">Are You Sure!</div>
 	</div>
 	
 <!-- 		<table class="grid"> -->

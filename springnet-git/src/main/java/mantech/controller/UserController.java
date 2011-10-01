@@ -37,7 +37,7 @@ public class UserController {
   private DepartmentRepository departmentRepo;
   
   @RequestMapping(value = {"/user", "/user/list"}, method = RequestMethod.GET)
-  public String showUser(ModelMap model){
+  public String list(ModelMap model){
     List<User> users = userRepo.findAll();
     model.addAttribute("listUser", users);
     return "user/list";

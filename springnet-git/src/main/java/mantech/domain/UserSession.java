@@ -20,18 +20,10 @@ public class UserSession {
 
   private static final Logger LOG = Logger.getLogger(UserSession.class);
 
-  private String sessionId;
   private User user;
+  private String sessionId;
 
   public UserSession() {}
-
-  public String getSessionId() {
-    return sessionId;
-  }
-
-  public void setSessionId(String sessionId) {
-    this.sessionId = sessionId;
-  }
 
   public User getUser() {
     return user;
@@ -52,6 +44,14 @@ public class UserSession {
         LOG.warn(writer.toString());
       }
     }
+  }
+
+  public String getSessionId() {
+    return sessionId;
+  }
+
+  public void setSessionId(String sessionId) {
+    this.sessionId = sessionId;
   }
 
 }

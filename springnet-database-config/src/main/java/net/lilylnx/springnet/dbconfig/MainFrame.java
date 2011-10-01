@@ -12,8 +12,8 @@ import javax.swing.JOptionPane;
 
 import org.apache.commons.lang3.StringUtils;
 
-import net.lilylnx.jcafe.JCafeUtil;
-import net.lilylnx.jcafe.JPaneUtil;
+import net.lilylnx.jcafe.JCafeUtils;
+import net.lilylnx.jcafe.JPaneUtils;
 
 /**
  *
@@ -30,7 +30,7 @@ public class MainFrame extends JFrame {
     super("SpringNet Database Configuration");
     initComponents();
     setFrameConfig();
-    JPaneUtil.addPanel(pCenter, pJdbc);
+    JPaneUtils.addPanel(pCenter, pJdbc);
   }
   
   public void actionAfterTestConn(){
@@ -55,24 +55,24 @@ public class MainFrame extends JFrame {
   }
   
   public void goJdbcPanel() {
-    JPaneUtil.addPanel(pCenter, pJdbc);
+    JPaneUtils.addPanel(pCenter, pJdbc);
   }
   
   public void goSuccessPanel(String message) {
     lbSuccessMsg.setText(message);
-    JPaneUtil.addPanel(pCenter, pSuccess);
+    JPaneUtils.addPanel(pCenter, pSuccess);
   }
   
   private void goImpSettingsPanel() {
-    JPaneUtil.addPanel(pCenter, pImpSets);
+    JPaneUtils.addPanel(pCenter, pImpSets);
   }
   
   private void goConnectingPanel() {
-    JPaneUtil.addPanel(pCenter, pConnecting);
+    JPaneUtils.addPanel(pCenter, pConnecting);
   }
   
   private void goHelpPanel() {
-    JPaneUtil.addPanel(pCenter, pHelp);
+    JPaneUtils.addPanel(pCenter, pHelp);
   }
   
   private void quit() {
@@ -88,7 +88,7 @@ public class MainFrame extends JFrame {
   }
   
   private void setFrameIcon(String url) {
-    setIconImage(JCafeUtil.loadImageIcon(this, url).getImage());
+    setIconImage(JCafeUtils.loadImageIcon(this, url).getImage());
   }
   
   private void create() {

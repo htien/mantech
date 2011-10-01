@@ -55,6 +55,13 @@ public class ComplaintController {
   
   @Autowired
   private CategoryPriorityRepository priorityRepo;
+  
+  @RequestMapping("complaint/listComplaint")
+  public String list(ModelMap model) {
+    List<Complaint> complaint = complaintRepo.findAll();
+    model.addAttribute("list", complaint);
+    return "/complaint/listComplaint";
+  }
 
   @RequestMapping(value = {"/complaint", "/complaint/list"}, method = RequestMethod.GET)
   public String showAll(ModelMap model) throws Exception {
@@ -93,7 +100,7 @@ public class ComplaintController {
   }
 
   @RequestMapping(value = "/complaint/add", method = RequestMethod.GET)
-  public String insert (@RequestParam(value = "uid") int id, ModelMap model){
+  public String insert(@RequestParam(value = "uid") int id, ModelMap model){
     User user = userRepo.get(id);
     model.addAttribute("user", user);
     List<Equipment> equip = equipmentRepo.findAll();
@@ -130,15 +137,8 @@ public class ComplaintController {
     return "redirect:/complaint/list";
   }
   
-  @RequestMapping("complaint/listComplaint")
-  public String list (ModelMap model) {
-    List<Complaint> complaint = complaintRepo.findAll();
-    model.addAttribute("list", complaint);
-    return "/complaint/listComplaint";
-  }
-  
   @RequestMapping(value = "/complaint/edit", method = RequestMethod.GET)
-  public String edit(ModelMap model) {
+  public String update(ModelMap model) {
     Complaint complaint = complaintRepo.get(1);
     
     List<CategoryPriority> priority = priorityRepo.findAll(false, "id");
@@ -151,7 +151,7 @@ public class ComplaintController {
   }
   
   @RequestMapping(value = "/complaint/editSave", method = RequestMethod.POST)
-  public String editSave(@RequestParam("status") byte statusId, 
+  public String updateSave(@RequestParam("status") byte statusId, 
       @RequestParam("priority") byte priorityId, ModelMap model)
   {
     Complaint complaint = (Complaint)model.get("complaint");

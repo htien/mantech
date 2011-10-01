@@ -93,13 +93,16 @@ public class EquipmentController {
   }
   
   @RequestMapping(value = "/equipment/addSave", method = RequestMethod.POST)
-  public String insertSave(@RequestParam(value = "name") String name, @RequestParam(value = "catId") int id, ModelMap model){
+  public String insertSave(@RequestParam(value = "name") String name, @RequestParam(value = "catId") int id,
+        ModelMap model) {
     Category category = categoryRepo.get(id);
     Equipment equipment = new Equipment();
     equipment.setName(name);
     equipment.setCategory(category);
     equipmentRepo.add(equipment);
-    return "redirect:/equipment/list";
+    
+    model.addAttribute("msg", "Added Equipment Successfully!");
+    return "msg";
   }
 
 }

@@ -26,7 +26,7 @@ var $validateOpts = {
 		onkeyup: false, onfocusout: false,
 		highlight : function(el, errorClass, validClass) {
 			$(el).addClass(errorClass).removeClass(validClass);
-			$(el.form).find('span[class~=' + el.id + ']').addClass(errorClass);
+			$(el).next('span[class~=' + el.id + ']').addClass(errorClass);
 		},
 		unhighlight: function(el, errorClass, validClass) {
 			$(el).addClass(validClass).removeClass(errorClass);
@@ -98,7 +98,7 @@ jTien.resetForm = jTien.prototype = function(form) {
 			? /^#/.test(form) ? $(form) : $('#' + form)
 			: form;
 	_form[0].reset();
-	_form.find(':input:visible:enabled:first').focus();
+	_form.find(':input[class!=unfocus]:visible:enabled:first').focus();
 	return _form;
 };
 

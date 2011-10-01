@@ -3,7 +3,7 @@
 
 <div id="adduser_pagelet" class="g-pl">
 	<div id="adduser-box" class="box">
-		<h2 id="title">Add New User</h2>
+		<h2 class="title">Add New User</h2>
 		<form id="adduser-form" class="g-f" method="post" action="/user/addSave">
 			<p id="msg"></p>				
 			<div>
@@ -73,8 +73,10 @@
 					</label>
 				</div>
 			</div>
-			<div id="btnAdd" class="g-b g-b-b">Add new user</div>
-			<div id="btnReset" class="g-b g-b-r">Reset</div>
+			<div>
+				<div id="btnAdd" class="g-b g-b-r">Add new user</div>
+				<div id="btnReset" class="g-b g-b-b">Reset</div>
+			</div>
 		</form>
 	</div>
 </div>

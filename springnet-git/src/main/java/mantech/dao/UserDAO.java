@@ -53,7 +53,7 @@ public class UserDAO extends HibernateGenericDAO<User> implements UserRepository
   @SuppressWarnings("unchecked")
   @Override
   public List<User> getUserByRole(int id) {
-    return session().createQuery("from User u inner join u.role r where r.id = :id")
+    return session().createQuery("select u from User u inner join u.role r where r.id = :id")
         .setInteger("id", id).list();
   }
 
@@ -64,7 +64,7 @@ public class UserDAO extends HibernateGenericDAO<User> implements UserRepository
   @SuppressWarnings("unchecked")
   @Override
   public List<User> getUserByRole(String name) {
-    return session().createQuery("from User u inner join u.role r where r.name = :name")
+    return session().createQuery("select u from User u inner join u.role r where r.name = :name")
         .setString("name", name).list();
   }
 

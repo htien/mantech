@@ -118,7 +118,8 @@ input[type=text].g-t:focus, input[type=password].g-t:focus {
 
 /* --- */
 
-input[type=text].error, input[type=password].error {
+input[type=text].error, input[type=password].error,
+textarea.error {
   border: 1px solid #dd4b39 !important;
 }
 

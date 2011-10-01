@@ -67,8 +67,10 @@ public class AssignmentController {
     if (complaintRepo.isExist(compId)) {
       if (!complaintRepo.hasAssignmentId(compId)) {
         List<Complaint> complaints = complaintRepo.findAll();
+        List<User> users = userRepo.getUserByRole("technician");
         Complaint complaint = complaintRepo.get(compId);
         
+        model.addAttribute("technicians", users);
         model.addAttribute("complaint", complaint);
         model.addAttribute("compId", compId);
         model.addAttribute("listComplaint", complaints);

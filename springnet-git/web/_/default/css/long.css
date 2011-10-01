@@ -1,5 +1,5 @@
-.g-f { margin:20px 20px; }
-#title { font-weight:bold; font-size:20px; text-align:center; margin-top:10px; }
-.row { margin-bottom:12px; }
-.row strong { display:inline-block; vertical-lign:top; margin-top:4px; width:90px; font-weight:bold; }
-.row input[type=text] { margin-right:10px; }
+.g-f { margin:20px; }
+.box .title { font-weight:bold; font-size:20px; text-align:center; margin-top:10px; }
+.box .row { margin-bottom:12px; }
+.box .row strong { display:inline-block; vertical-align:baseline; margin-top:4px; width:90px; font-weight:bold; }
+.box .row input[type=text] { margin-right:10px; }

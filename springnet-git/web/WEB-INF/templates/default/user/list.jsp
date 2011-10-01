@@ -6,8 +6,6 @@
 	.grid th, .grid td {border: 1px solid #000; border-collapse: collapse}
 </style>
 
-<p class="gg-popup-msg"><strong>List of Users</strong></p>
-
 <table class="grid">
 	<tr>
 		<th>Username</th>

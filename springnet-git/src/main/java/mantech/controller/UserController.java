@@ -90,4 +90,35 @@ public class UserController {
 //    model.addAttribute("msg", "Insert thanh cong!");
     return "redirect:/user/list";
   }
+  
+  @RequestMapping(value = "/user/edit", method = RequestMethod.GET)
+  public String update(@RequestParam("uId") int id, ModelMap modal) {
+    List<Department> departs = departmentRepo.findAll();
+    List<UserRole> roles = roleRepo.findAll();
+    User user = userRepo.get(id);
+    Department depart = user.getDepartment();
+    modal.addAttribute("departList", departs);
+    modal.addAttribute("roleList", roles);
+    modal.addAttribute("user", user);
+    modal.addAttribute("depart", depart);
+    return "user/edit";
+  }
+  
+  @RequestMapping(value = "/user/editSave", method = RequestMethod.POST)
+  public String updateSave(@RequestParam("uid") int userId, 
+                      @RequestParam("email") String email,
+                      @RequestParam("department") byte depart,
+                      @RequestParam("role") byte role,
+                      @RequestParam("address") String address) {
+    User user = userRepo.get(userId);
+    user.setEmail(email);
+    Department department = departmentRepo.get(depart);
+    user.setDepartment(department);
+    UserRole uRole = roleRepo.get(role);
+    user.setRole(uRole);
+    user.setHomeAddress(address);
+    userRepo.add(user);
+    return "msg";
+  }
 }
+  

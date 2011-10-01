@@ -105,7 +105,8 @@
 						<id>sign-artifacts</id>
 						<phase>verify</phase>
 						<configuration>
-							<keyname>J2EE Project Verification Key</keyname>
+							<keyname>D55D287D J2EE Project Verification Key</keyname>
+							<passphrase>${gpg.passphrase}</passphrase>
 						</configuration>
 						<goals>
 							<goal>sign</goal>
@@ -200,6 +201,13 @@
 	</build>
 
 	<dependencies>
+		<dependency>
+			<groupId>net.lilylnx.jcafe</groupId>
+			<artifactId>libjcafe</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
@@ -384,6 +392,11 @@
 		</dependency>
 	</dependencies>
 
+	<dependencyManagement>
+		<dependencies>
+		</dependencies>
+	</dependencyManagement>
+
 	<reporting>
 		<plugins>
 			<plugin>
@@ -421,9 +434,21 @@
 		</profile>
 	</profiles>
 
-	<dependencyManagement>
-		<dependencies>
+	<repositories>
+		<repository>
+			<id>jboss-public-repository-group</id>
+			<name>JBoss Public Maven Repository Group</name>
+			<url>https://repository.jboss.org/nexus/content/groups/public/</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
 
-		</dependencies>
-	</dependencyManagement>
 </project>

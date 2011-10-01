@@ -13,7 +13,7 @@
 				<div class="row">
 					<label>
 						<strong>Equipment: </strong>	
-						<select name="equipId" class="unfocus">
+						<select name="equipId" class="noreset">
 							<c:forEach items="${list}" var="equip">
 								<option value="${equip.id}">${equip.name}</option>
 							</c:forEach>

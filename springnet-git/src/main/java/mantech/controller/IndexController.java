@@ -4,12 +4,16 @@
  */
 package mantech.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author Tien Nguyen
@@ -26,18 +30,17 @@ public class IndexController {
     return "__index";
   }
   
-  @RequestMapping(value = "/", method = RequestMethod.POST)
-  public String login(HttpServletRequest request, ModelMap model) {
-    String id = request.getParameter("id");
-    String passwd = request.getParameter("passwd");
-    System.out.println(id + ' ' + passwd);
+  @RequestMapping(value = "/login", method = RequestMethod.POST)
+  public String login(@RequestParam("id") String id, @RequestParam("passwd") String passwd,
+      HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+
     if (id.equals("nvhtien") && passwd.equals("123")) {
-      model.addAttribute("loginMsg", "Logged in!");
+      model.addAttribute("msg", "Logged in.");
     }
     else {
-      model.addAttribute("loginMsg", "Access Denied!");
+      model.addAttribute("msg", "Access Denied.");
     }
-    return list(model);
+    return "msg";
   }
 
 }

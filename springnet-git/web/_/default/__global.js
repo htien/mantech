@@ -15,12 +15,21 @@ var $dialogOpts = {
 		modal: true,
 		resizable: false,
 		position: 'center',
-		minWidth: 460,
-		minHeight: 160,
+		minWidth: 390,
+		minHeight: 190,
 		width: 'auto',
-		height: 'auto'
-};
-var $validateOpts = {
+		height: 'auto',
+		closeOnEscape: false,
+		open: function(evt, ui) {
+			$('.ui-dialog-titlebar-close').remove();
+		},
+		buttons: {
+			'Close': function() {
+				$(this).dialog('destroy');
+			}
+		}
+},
+$validateOpts = {
 		debug: $debug,
 		errorClass: 'error', validClass: 'valid',
 		onkeyup: false, onfocusout: false,
@@ -39,10 +48,10 @@ var $validateOpts = {
 $.ajaxSetup({
 	statusCode: {
 		404: function() {
-			alert('Page not found.');
+			jTien.callJqDialog('server-msg', 'Page not found. Please try again later.', {title: 'HTTP Response 404'}).dialog('open');
 		},
 		500: function() {
-			alert('Server is busy.');
+			jTien.callJqDialog('server-msg', 'Server is error. Please try again later.', {title: 'HTTP Response 500'}).dialog('open');
 		}
 	}
 });
@@ -98,7 +107,7 @@ jTien.resetForm = jTien.prototype = function(form) {
 			? /^#/.test(form) ? $(form) : $('#' + form)
 			: form;
 	_form[0].reset();
-	_form.find(':input[class!=unfocus]:visible:enabled:first').focus();
+	_form.find(':input[class!=noreset]:visible:enabled:first').focus();
 	return _form;
 };
 
@@ -175,11 +184,12 @@ jTien.f = jTien.prototype = {
 	},
 	
 	ajaxSubmit: function(form) {
+		var _form = form instanceof HTMLFormElement ? $(form) : form;
 		var settings = {
 			async: false,
-			type: form.attr('method'),
-			url: form.attr('action'),
-			data: form.serialize()
+			type: _form.attr('method'),
+			url: _form.attr('action'),
+			data: _form.serialize()
 		};
 		return $.ajax(settings);
 	},

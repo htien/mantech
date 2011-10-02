@@ -7,48 +7,71 @@ function renderPage(url) {
 
 /* === Document Ready for assigning events === */
 
-$(function() {
+$('#signin_pagelet').ready(function() {
+	
+	var signInBox = '#signin-box',
+		signInForm = '#signin-form',
+		signInButton = '#signin',
+		resetButton = '#reset';
 	
 	/* Reset button */
 
-	$('#signin-box').delegate('#signin-form #reset', 'click', function(evt) {
-		jTien.resetForm('signin-form');
+	$(signInForm).delegate(resetButton, 'click', function(evt) {
+		jTien.resetForm(signInForm);
 	});
-
-	/* Xử lý login */
 	
-	$('#signin').live('click', function(evt) {
+	/* Login button */
+	
+	$(signInForm).delegate(signInButton, 'click', function(evt) {
 		if ($debug && !isIEBrowser()) {
 			console.log('#' + this.id + ' button is clicked.');
 		}
 		
-		var loginForm = $('#signin-form');
-		
-		loginForm.validate({
+		$(signInForm).validate({
 			rules: {
 				id: { required: true, minlength: 2 },
 				passwd: { required: true, minlength: 3 }
 			},
 			messages: {
-				id: { required: 'Enter your ID (username, email).', minlength: $.format('ID, at least {0} characters.') },
-				passwd: { required: 'Enter your Password.', minlength: $.format('Password, at least {0} characters.') }
+				id: { required: 'Enter your username or email).', minlength: 'ID, at least {0} characters.' },
+				passwd: { required: 'Enter your password.', minlength: 'Password, at least {0} characters.' }
 			},
 			invalidHandler: function(form, validator) {
-				$('#signin-box').stop(true, true).effect('shake', { times:2, distance:5 }, 50);
+				$(signInBox).stop(true, true).effect('shake', { times:2, distance:5 }, 50);
 			},
-			submitHandler: function(frm) {
-				frm.ajaxSubmit();
+			submitHandler: function(form) {
+				jTien.ajaxSubmit(form)
+					.success(function(data) {
+						jTien.callJqDialog('server-msg', data, {
+							buttons: {
+								'Close': function() {
+									$(this).dialog('destroy');
+								}
+							}
+						}).dialog('open');
+					})
+					.complete(function(data) {
+						jTien.resetForm(signInForm);
+					});
 			}
 		});
 		
-		loginForm.submit();
+		$(signInForm).submit();
+		return false;
 	});
+	
+});
+
+$('#signin_pagelet #testZone').ready(function() {
 	
 	/* Xử lý nút Test1 Test2 */
 	
-	var googDialog = null;
-	
-	$('#test1').live('click', function() {
+	var testZone = '#testZone',
+		button1 = '#test1',
+		button2 = '#test2',
+		googDialog = null;
+
+	$(testZone).delegate(button1, 'click', function() {
 		if (!googDialog) {
 			googDialog = new goog.ui.Dialog();
 		}
@@ -59,26 +82,28 @@ $(function() {
 		googDialog.setVisible(true);
 	});
 	
-	$('#test2').live('click', function() {
-		var url = $ctx + '/user' + $ext;
-		var dlgConfirm = jTien.callJqDialog('dlg-confirm',
-				'Are you sure you want to delete selected topic?', {
-			title: 'Delete Topic Confirmation',
-			buttons: {
-				'OK': function() {
-					jTien.callJqDialog('dlg-confirm', url, {
-						buttons: {
-							'Close': function() {
-								$(this).dialog('destroy');
-							}
-						}
-					});
-				},
-				'Cancel': function() {
-					$(this).dialog('destroy');
+	$(testZone).delegate(button2, 'click', function() {
+		var url = $ctx + '/user' + $ext,
+			jsDialogs = $.parseJSON('\
+					{\
+						"dlgConfirm": {\
+							"id": "dlg-confirm",\
+							"title": "Display Users Confirmation",\
+							"content": "Are you sure you want to show user list?"\
+						}\
+					}'),
+			jsDlgConfirm = jsDialogs.dlgConfirm,
+			dlgConfirm = jTien.callJqDialog(jsDlgConfirm.id, jsDlgConfirm.content, {
+				title: jsDlgConfirm.title,
+				buttons: {
+					'OK': function() {
+						jTien.callJqDialog(jsDlgConfirm.id, url);
+					},
+					'Cancel': function() {
+						$(this).dialog('destroy');
+					}
 				}
-			}
-		});
+			});
 		dlgConfirm.dialog('open');
 		return false;
 	});

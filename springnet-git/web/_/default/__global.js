@@ -1,1 +1,212 @@
-goog.require("goog.editor.Field");goog.require("goog.ui.editor.DefaultToolbar");goog.require("goog.ui.editor.ToolbarController");goog.require("goog.ui.Dialog");var $dialogOpts={title:"Mantech Help Desk",autoOpen:false,draggable:true,modal:true,resizable:false,position:"center",minWidth:460,minHeight:160,width:"auto",height:"auto"};var $validateOpts={debug:$debug,errorClass:"error",validClass:"valid",onkeyup:false,onfocusout:false,highlight:function(c,a,b){$(c).addClass(a).removeClass(b);$(c.form).find("span[class~="+c.id+"]").addClass(a)},unhighlight:function(c,a,b){$(c).addClass(b).removeClass(a);$(c.form).find("span[class~="+c.id+"]").removeClass(a)}};$.ajaxSetup({statusCode:{404:function(){alert("Page not found.")},500:function(){alert("Server is busy.")}}});$.validator.setDefaults($validateOpts);$.validator.addMethod("vietnameseDate",function(b,a){return b.match("/^\d\d\d\d/\d\d?\d\d?$/")},"");$(function(){jTien.f.autocompleteOff();jTien.f.completeFormAction();jTien.f.disableDrag('{"tags":["a", "img"], "classes":["g-b"]}')});String.prototype.endsWith=function(a){return this.indexOf(a,this.length-a.length)!==-1};(function(b,c){var a=function(){return new a.fn.init()};a.fn=a.prototype={init:function(){return new Object()}};a.fn.init.prototype=a.fn;a.resetForm=a.prototype=function(e){var d=typeof e==="string"?/^#/.test(e)?$(e):$("#"+e):e;d[0].reset();d.find(":input:visible:enabled:first").focus();return d};a.ajaxSubmit=a.prototype=function(d){a.f.ajaxConnect()};a.callJqDialog=a.prototype=function(j,d,f,e){var i=/^(\/|http:\/\/|https:\/\/|ftp:\/\/)/.test(d);if(e==c){e=f;f=i?{}:c}if(typeof f==="object"){f.async=false}var g=i?$.ajax(d,f).responseText:'<p class="gg-popup-msg">'+d+"</p>";var h=a.f.createJqDialog(j,g,e);return h};a.f=a.prototype={autocompleteOff:function(){if($debug&&!isIEBrowser()){console.log('Assigned autocomplete="off" on input[type=text].')}$("form.off").attr("autocomplete","off");$("input[type=text].off").attr("autocomplete","off")},completeFormAction:function(){if($debug&&!isIEBrowser()){console.log('Auto assigning "'+$ext+'" for form[action].')}$("form").attr("action",function(){var d=$ctx+$(this).attr("action");return !d.endsWith("/")&&!d.endsWith($ext)?d+$ext:d})},disableDrag:function(e){var d=$.parseJSON(e);$.each(d.tags,function(f,g){if($debug&&!isIEBrowser()){console.log('Diabled dragging on tag: "'+g+'"')}$(g).live("mousedown",$false)});$.each(d.classes,function(f,g){if($debug&&!isIEBrowser()){console.log('Diabled dragging on class: ".'+g+'"')}$("."+g).live("mousedown",$false)})},getJSON:function(e){var d=null;$.ajax({url:$ctx+"/_/"+e,async:false,dataType:"json",success:function(f){d=f}});return d},ajaxSubmit:function(){},createJqDialog:function(g,e,d){var f=document.getElementById(g)==null?$('<div id="'+g+'"></div>'):$("#"+g);f.html(e);f.dialog($dialogOpts);if(typeof d==="object"){f.dialog(d)}return f}};b.jTien=a})(window);
+/* === Load required Google Closure Library === */
+
+goog.require('goog.editor.Field');
+goog.require('goog.ui.editor.DefaultToolbar');
+goog.require('goog.ui.editor.ToolbarController');
+goog.require('goog.ui.Dialog');
+
+
+/* === Initialize global variables === */
+
+var $dialogOpts = {
+		title: 'Mantech Help Desk',
+		autoOpen: false,
+		draggable: true,
+		modal: true,
+		resizable: false,
+		position: 'center',
+		minWidth: 390,
+		minHeight: 190,
+		width: 'auto',
+		height: 'auto',
+		closeOnEscape: false,
+		open: function(evt, ui) {
+			$('.ui-dialog-titlebar-close').remove();
+		},
+		buttons: {
+			'Close': function() {
+				$(this).dialog('destroy');
+			}
+		}
+},
+$validateOpts = {
+		debug: $debug,
+		errorClass: 'error', validClass: 'valid',
+		onkeyup: false, onfocusout: false,
+		highlight : function(el, errorClass, validClass) {
+			$(el).addClass(errorClass).removeClass(validClass);
+			$(el).next('span[class~=' + el.id + ']').addClass(errorClass);
+		},
+		unhighlight: function(el, errorClass, validClass) {
+			$(el).addClass(validClass).removeClass(errorClass);
+			$(el.form).find('span[class~=' + el.id + ']').removeClass(errorClass);
+		}
+};
+
+/* === Initialize setup default === */
+
+$.ajaxSetup({
+	statusCode: {
+		404: function() {
+			jTien.callJqDialog('server-msg', 'Page not found. Please try again later.', {title: 'HTTP Response 404'}).dialog('open');
+		},
+		500: function() {
+			jTien.callJqDialog('server-msg', 'Server is error. Please try again later.', {title: 'HTTP Response 500'}).dialog('open');
+		}
+	}
+});
+$.validator.setDefaults($validateOpts);
+$.validator.addMethod('vietnameseDate', function(value, element) {
+	return value.match('/^\d\d\d\d\/\d\d?\d\d?$/');
+}, '');
+
+/* === Execute default methods === */
+
+$(function() {
+	jTien.f.autocompleteOff();
+	jTien.f.completeFormAction();
+	jTien.f.disableDrag('{"tags":["a", "img"], "classes":["g-b"]}');
+});
+
+
+
+/*
+	=== SPRINGNET JAVASCRIPT LIBRARY ===
+*/
+
+/**
+ * endsWith method for javascript String object, same as Java.
+ * 
+ * @param suffix
+ * @returns {Boolean}
+ */
+String.prototype.endsWith = function(suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
+
+/**
+ * Initilization jTien library.
+ */
+;(function(window, undefined) {
+
+var jTien = function() {
+	return new jTien.fn.init();
+};
+
+jTien.fn = jTien.prototype = {
+	init: function() {
+		return new Object();
+	}
+};
+
+// Give the init function the jTien prototype for later instantiation
+jTien.fn.init.prototype = jTien.fn;
+
+jTien.resetForm = jTien.prototype = function(form) {
+	var _form = typeof form === 'string'
+			? /^#/.test(form) ? $(form) : $('#' + form)
+			: form;
+	_form[0].reset();
+	_form.find(':input[class!=noreset]:visible:enabled:first').focus();
+	return _form;
+};
+
+jTien.ajaxSubmit = jTien.prototype = function(form) {
+	var jqXhr = jTien.f.ajaxSubmit(form);
+	return jqXhr;
+};
+
+jTien.callJqDialog = jTien.prototype = function(id, url, settings, dlgOpts) {
+	var isUrl = /^(\/|http:\/\/|https:\/\/|ftp:\/\/)/.test(url);
+	if (dlgOpts == undefined) {
+		dlgOpts = settings;
+		settings = isUrl ? {} : undefined;
+	}
+	if (typeof settings === 'object') {
+		settings.async = false;
+	}
+	var responseText =  isUrl
+			? $.ajax(url, settings).responseText
+			: '<p class="gg-popup-msg">' + url + '</p>';
+	var dlg = jTien.f.createJqDialog(id, responseText, dlgOpts); 
+	return dlg;
+};
+
+jTien.f = jTien.prototype = {
+
+	/** Turn off autocomplete for input text */
+	autocompleteOff: function() {
+		if ($debug && !isIEBrowser()) {
+			console.log('Assigned autocomplete="off" on input[type=text].');
+		}
+		$('form.off').attr('autocomplete', 'off');
+		$('input[type=text].off').attr('autocomplete', 'off');
+	},
+	
+	completeFormAction: function() {
+		if ($debug && !isIEBrowser()) {
+			console.log('Auto assigning "' + $ext + '" for form[action].');
+		}
+		$('form').attr('action', function() {
+			var action = $ctx + $(this).attr('action');
+			return !action.endsWith("/") && !action.endsWith($ext) ? action + $ext : action;
+		});
+	},
+	
+	/** Prevent from dragging <link> and <image> */
+	disableDrag: function(elements) {
+		var json = $.parseJSON(elements); 
+		$.each(json.tags, function(idx, el) {
+			if ($debug && !isIEBrowser()) {
+				console.log('Diabled dragging on tag: "' + el + '"');
+			}
+			$(el).live('mousedown', $false);
+		});
+		$.each(json.classes, function(idx, el) {
+			if ($debug && !isIEBrowser()) {
+				console.log('Diabled dragging on class: ".' + el + '"');
+			}
+			$('.' + el).live('mousedown', $false);
+		});
+	},
+	
+	getJSON: function(path) {
+		var _json = null;
+		$.ajax({
+			url: $ctx + '/_/' + path,
+			async: false,
+			dataType: 'json',
+			success: function(json) {
+				_json = json;
+			}
+		});
+		return _json;
+	},
+	
+	ajaxSubmit: function(form) {
+		var _form = form instanceof HTMLFormElement ? $(form) : form;
+		var settings = {
+			async: false,
+			type: _form.attr('method'),
+			url: _form.attr('action'),
+			data: _form.serialize()
+		};
+		return $.ajax(settings);
+	},
+	
+	createJqDialog: function(id, data, dlgOpts) {
+		var dlg = document.getElementById(id) == null
+				? $('<div id="' + id + '"></div>')
+				: $('#' + id);
+		dlg.html(data);
+		dlg.dialog($dialogOpts);
+		if (typeof dlgOpts === 'object') {
+			dlg.dialog(dlgOpts);
+		}
+		return dlg;
+	}
+};
+
+window.jTien = jTien;
+
+})(window);

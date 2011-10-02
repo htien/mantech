@@ -72,7 +72,7 @@ public class EquipmentController {
     Equipment equipment = new Equipment();
     equipment.setName(name);
     equipment.setCategory(category);
-    equipmentRepo.add(equipment);
+    equipmentRepo.save(equipment);
     
     model.addAttribute("msg", "Added Equipment Successfully!");
     return "msg";

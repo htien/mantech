@@ -20,7 +20,7 @@
 		- ${comp.user.department.name}
 		- ${comp.equipment.name} - ${comp.status.name} - ${comp.title}
 		-${comp.content} - ${comp.priority.name} - ${comp.createDate} 
-		<a href="assignment/add${ext}?compId=${comp.id}">Assign</a><br />
+		<a href="/springnet/assignment/add${ext}?compId=${comp.id}">Assign</a><br />
 	</c:forEach>	
 </div>
 

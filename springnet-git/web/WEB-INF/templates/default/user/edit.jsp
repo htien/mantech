@@ -77,12 +77,6 @@
 						<input type="text" name="address" class="ui-widget-content" value="${user.homeAddress}"/>
 					</label>
 				</div>
-				<div class="row">
-					<label>
-						<strong>Status: </strong>
-						<span>${user.status}</span>
-					</label>
-				</div>
 			</div>
 			<div>
 				<div id="btnEdit" class="g-b g-b-r">Save</div>

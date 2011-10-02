@@ -50,6 +50,7 @@
 								<tr>
 									<td><input type="checkbox" name="userId" value="${tech.id}" /></td>
 									<td>${tech.id}</td><td>${tech.firstName}</td><td>${tech.lastName}</td>
+									<td>${tech.status}</td>
 								<tr>
 							</c:forEach>
 						</table>

@@ -85,7 +85,7 @@ public class UserController {
     user.setHomeAddress(address);
     user.setRole(role);
     
-    userRepo.add(user);
+    userRepo.save(user);
     
 //    model.addAttribute("msg", "Insert thanh cong!");
     return "redirect:/user/list";
@@ -117,7 +117,7 @@ public class UserController {
     UserRole uRole = roleRepo.get(role);
     user.setRole(uRole);
     user.setHomeAddress(address);
-    userRepo.add(user);
+    userRepo.save(user);
     return "msg";
   }
 }

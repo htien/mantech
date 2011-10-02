@@ -5,6 +5,7 @@
 package net.lilylnx.springnet.repository;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -26,19 +27,25 @@ public interface Repository<T> {
    * Thêm một thực thể mới của một đối tượng vào repository.
    * @param entity Thực cần lưu
    */
-  void add(T entity);
-
-  /**
-   * Xóa một thực thể từ repository.
-   * @param entity Thực thể cần xóa
-   */
-  void remove(T entity);
+  Serializable save(T entity);
 
   /**
    * Cập nhật thông tin của một thực thể trong repository.
    * @param entity Thực thể cần cập nhật
    */
   void update(T entity);
+
+  /**
+   * Xóa một thực thể từ repository.
+   * @param entity Thực thể cần xóa
+   */
+  void delete(T entity);
+  
+  /**
+   * Cập nhật một danh sách các thực thể trong repository.
+   * @param entities Tập hợp/danh sách cùng một thực thể
+   */
+  void saveOrUpdateAll(final Collection<T> entities);
   
   // Bổ sung thêm đồ chơi :D
   

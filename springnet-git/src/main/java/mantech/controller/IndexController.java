@@ -4,16 +4,17 @@
  */
 package mantech.controller;
 
-import java.io.IOException;
+import javax.servlet.http.HttpSession;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import mantech.domain.User;
+import mantech.service.LoginService;
 
 /**
  * @author Tien Nguyen
@@ -21,24 +22,35 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 public class IndexController {
+  
+  @Autowired
+  private LoginService loginService;
 
   public IndexController() {}
 
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public String list(ModelMap model) {    
-    model.addAttribute("welcomeMsg", "SpringFramework! & Hello World");
+    model.addAttribute("welcomeMsg", "SpringFramework. Admin Control Panel");
     return "__index";
   }
   
   @RequestMapping(value = "/login", method = RequestMethod.POST)
   public String login(@RequestParam("id") String id, @RequestParam("passwd") String passwd,
-      HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+      HttpSession session, ModelMap model) {
 
-    if (id.equals("nvhtien") && passwd.equals("123")) {
-      model.addAttribute("msg", "Logged in.");
+    try {
+      User user = loginService.authenticate(id, passwd);
+
+      if (user != null) {
+        session.setAttribute("userProfile", user);
+        model.addAttribute("msg", "Authenticated!");
+      }
+      else {
+        model.addAttribute("msg", "Wrong username/password. Access denied.");
+      }
     }
-    else {
-      model.addAttribute("msg", "Access Denied.");
+    catch (Exception e) {
+      model.addAttribute("msg", e.getMessage());
     }
     return "msg";
   }

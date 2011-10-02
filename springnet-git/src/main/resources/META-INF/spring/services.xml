@@ -18,9 +18,11 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
+	<bean id="mantech.service.LoginService" class="mantech.service.LoginService" />
+
 	<bean id="mantech.service.AssignmentService" class="mantech.service.AssignmentService" />
 	<bean id="mantech.service.ComplaintService" class="mantech.service.ComplaintService" />
-	<bean id="mantech.service.Equipment" class="mantech.service.EquipmentService" />
+	<bean id="mantech.service.EquipmentService" class="mantech.service.EquipmentService"/>
 	<bean id="mantech.service.UserService" class="mantech.service.UserService" />
 
 </beans>

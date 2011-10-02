@@ -61,7 +61,7 @@ public class User implements Serializable {
   private Date lastVisit;
 
   @Column(name = "deleted", nullable = false, insertable = false)
-  private boolean isDeleted;
+  private boolean deleted;
 
   @Column(name = "firstname")
   private String firstName;
@@ -155,11 +155,11 @@ public class User implements Serializable {
   }
 
   public boolean isDeleted() {
-    return isDeleted;
+    return deleted;
   }
 
   public void setDeleted(boolean isDeleted) {
-    this.isDeleted = isDeleted;
+    this.deleted = isDeleted;
   }
 
   public String getFirstName() {

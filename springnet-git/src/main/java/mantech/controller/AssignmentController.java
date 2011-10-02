@@ -86,13 +86,11 @@ public class AssignmentController {
   
   @RequestMapping (value = "/assignment/addSave", method = RequestMethod.POST)
   public String insertSave(@RequestParam(value = "compId") int compId, @RequestParam(value="userId") int[] userId, @RequestParam(value="beginDate") Date beginDate,
-      @RequestParam(value="duration") short duration)
-  { // Gom thanh` service het'
-    // Get
+      @RequestParam(value="duration") short duration) {
+
     List<User> users = userRepo.getUsers(userId);
     Complaint complaint = complaintRepo.get(compId);
 
-    // Set
     complaintService.setStatusAccepted(complaint);
     userService.setUserStatus(users);
     
@@ -102,7 +100,6 @@ public class AssignmentController {
     assignment.setBeginDate(beginDate);
     assignment.setDuration(duration);
 
-    // Update
     assignmentService.add(assignment);
     return "redirect:/assignment/list";
   }

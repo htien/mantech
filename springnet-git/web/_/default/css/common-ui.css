@@ -133,7 +133,7 @@ span.error {
 
 /* --- */
 
-.g-b {
+.g-b, a.g-b {
   position: relative;
   display: inline-block;
   margin-right: 16px;
@@ -183,7 +183,7 @@ span.error {
   -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
 }
 
-.g-b-b {
+.g-b-b, a.g-b-b {
   text-shadow: 0 1px rgba(0,0,0,.1);
   color: #fff;
   background-color: #4d90fe;
@@ -218,7 +218,7 @@ span.error {
   -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.3);
 }
 
-.g-b-r {
+.g-b-r, a.g-b-r {
   text-shadow: 0 1px rgba(0,0,0,.1);
   text-transform: uppercase;
   color: #fff;

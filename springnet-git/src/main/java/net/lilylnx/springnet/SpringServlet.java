@@ -96,7 +96,7 @@ public class SpringServlet extends DispatcherServlet {
       request.setAttribute(UserSession.class.getName(), userSession);
       
       this.operationChain.callAllOperations();
-      this.putDefaultProps();
+      this.putDefaultProps(request);
 
       super.service(request, response);
     }
@@ -109,11 +109,13 @@ public class SpringServlet extends DispatcherServlet {
   /**
    * Đưa một số key/value cho view.
    */
-  private void putDefaultProps() {
+  private void putDefaultProps(HttpServletRequest request) {
     ViewResolver viewResolver = (ViewResolver)SpringNet.getComponent("viewResolver");
+
     Map<String, Object> defaultAttributes = viewResolver.getAttributesMap();
     Date now = Calendar.getInstance().getTime();
-    
+
+    // Cached attributes
     defaultAttributes.put("name", config.getString("name"));
     defaultAttributes.put("version", config.getString("version"));
     defaultAttributes.put("webpage", config.getString("link.webpage"));
@@ -128,6 +130,9 @@ public class SpringServlet extends DispatcherServlet {
     defaultAttributes.put("pageTitle", config.getString("web.page.title"));
     defaultAttributes.put("metaKeywords", config.getString("web.page.metatag.keywords"));
     defaultAttributes.put("metaDescription", config.getString("web.page.metatag.description"));
+
+    // Non-cached attributes
+    request.setAttribute("p", request.getMethod().equalsIgnoreCase("GET") ? request.getParameter("p") : null);
   }
 
   private void showStuff(ApplicationContext beanFactory) {

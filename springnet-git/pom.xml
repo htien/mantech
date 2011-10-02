@@ -219,13 +219,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>net.lilylnx.jcafe</groupId>
-			<artifactId>libjcafe</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
 			<version>6.0</version>
@@ -252,6 +245,13 @@
 			<version>4.8.2</version>
 			<type>jar</type>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.lilylnx.jcafe</groupId>
+			<artifactId>libjcafe</artifactId>
+			<version>0.0.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>

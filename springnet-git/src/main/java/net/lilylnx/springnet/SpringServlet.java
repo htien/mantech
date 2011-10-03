@@ -82,6 +82,7 @@ public class SpringServlet extends DispatcherServlet {
    */
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    request.setCharacterEncoding(config.getString("encoding"));
     request.setAttribute(ConfigKeys.ANONYMOUS_USER_ID, config.getInt(ConfigKeys.ANONYMOUS_USER_ID, 1));
     request.setAttribute(ConfigKeys.HTTP_SERVLET_RESPONSE, response);
 

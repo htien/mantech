@@ -47,6 +47,8 @@
 		<prop key="hibernate.connection.password">${db.passwd}</prop>
 		<prop key="hibernate.default_schema">${db.default.schema}</prop>
 		<prop key="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</prop>
+		<prop key="hibernate.connection.characterEncoding">UTF-8</prop>
+		<prop key="hibernate.connection.charSet">UTF-8</prop>
 
 		<prop key="hibernate.c3p0.idle_test_period">10</prop>
 		<prop key="hibernate.c3p0.timeout">900</prop>

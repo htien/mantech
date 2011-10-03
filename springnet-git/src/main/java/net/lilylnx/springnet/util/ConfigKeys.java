@@ -25,6 +25,7 @@ public class ConfigKeys {
   
   public static final String SPRING_CONTEXT = "springnetContext";
   public static final String VERSION = "version";
+  public static final String ENCODING = "encoding";
   
   public static final String AUTHENTICATION_TYPE = "authentication.type";
   public static final String LOGIN_AUTHENTICATOR = "login.authenticator";

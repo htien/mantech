@@ -24,8 +24,7 @@ public class DefaultLoginAuthenticator implements LoginAuthenticator {
   @Autowired
   private UserRepository userRepo;
 
-  /*
-   * (non-Javadoc)
+  /* (non-Javadoc)
    * @see net.lilylnx.springnet.LoginAuthenticator#validateLogin(java.lang.String, java.lang.String, java.util.Map)
    */
   @Override
@@ -36,11 +35,15 @@ public class DefaultLoginAuthenticator implements LoginAuthenticator {
     String hashedPasswd = isEmail
         ? userRepo.getPasswordByEmail(unameOrEmail)
         : userRepo.getPasswordByUsername(unameOrEmail);
-    User user = null;
-    if (HashCryptorV1.verify(password, hashedPasswd, ConfigKeys.USERPWD_ALGOR)) {
-      user = isEmail ? userRepo.getByEmail(unameOrEmail) : userRepo.getByUsername(unameOrEmail);
+
+    if (hashedPasswd != null) {
+      User user = (HashCryptorV1.verify(password, hashedPasswd, ConfigKeys.USERPWD_ALGOR)
+          ? isEmail ? userRepo.getByEmail(unameOrEmail) : userRepo.getByUsername(unameOrEmail)
+          : null);
+      return (user != null && !user.isDeleted()) ? user : null;
     }
-    return (user != null && !user.isDeleted()) ? user : null;
+
+    return null;
   }
 
 }

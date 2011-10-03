@@ -6,6 +6,7 @@ package mantech.controller;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -120,5 +121,19 @@ public class UserController {
     userRepo.save(user);
     return "msg";
   }
+
+  @RequestMapping(value = "/user/search", method = RequestMethod.POST)
+  public String search(@RequestParam("q") String searchText, ModelMap model) {
+    List<User> users = StringUtils.isNotBlank(searchText.trim())
+        ? userRepo.searchByUsername(searchText)
+        : userRepo.findAll();
+    if (users.size() != 0) {
+      model.addAttribute("listUser", users);
+      return "/user/search";
+    }
+    else {
+      return "null";
+    }
+  }
+
 }
-  

@@ -15,13 +15,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import mantech.domain.User;
 import mantech.service.LoginService;
+import mantech.service.ViewService;
 
 /**
  * @author Tien Nguyen
  * @version $Id: IndexController.java,v 1.0 2011/06/07 23:56:07 lilylnx Exp $
  */
 @Controller
-public class IndexController {
+public class IndexController extends ViewService {
   
   @Autowired
   private LoginService loginService;
@@ -35,17 +36,17 @@ public class IndexController {
   }
   
   @RequestMapping(value = "/login", method = RequestMethod.POST)
-  public String login(@RequestParam("id") String id, @RequestParam("passwd") String passwd,
+  public String authenticateUser(@RequestParam("id") String id, @RequestParam("passwd") String passwd,
       HttpSession session, ModelMap model) {
 
     try {
       User user = loginService.authenticate(id, passwd);
-
       if (user != null) {
         session.setAttribute("userProfile", user);
         model.addAttribute("msg", "Authenticated!");
       }
       else {
+        session.removeAttribute("userProfile");
         model.addAttribute("msg", "Wrong username/password. Access denied.");
       }
     }

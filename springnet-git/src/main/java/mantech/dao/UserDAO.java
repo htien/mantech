@@ -104,6 +104,17 @@ public class UserDAO extends HibernateGenericDAO<User> implements UserRepository
         .list();
   }
 
+  /* (non-Javadoc)
+   * @see mantech.repository.UserRepository#searchByUsername(java.lang.String)
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<User> searchByUsername(String username) {
+    return (List<User>)session().createCriteria(persistClass)
+        .add(Restrictions.ilike("username", "%" + username + "%"))
+        .list();
+  }
+
   @Override
   public boolean isExistUser(int id) {
     return ((Long)session().createQuery("select count(u) from User u where u.id = :id")

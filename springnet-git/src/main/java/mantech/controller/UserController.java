@@ -123,10 +123,23 @@ public class UserController {
   }
 
   @RequestMapping(value = "/user/search", method = RequestMethod.POST)
-  public String search(@RequestParam("q") String searchText, ModelMap model) {
-    List<User> users = StringUtils.isNotBlank(searchText.trim())
-        ? userRepo.searchByUsername(searchText)
-        : userRepo.findAll();
+  public String search(@RequestParam("q") String searchText,
+      @RequestParam("yourChoice") String choice, ModelMap model) {
+
+//    List<User> users = StringUtils.isNotBlank(searchText.trim())
+//        ? userRepo.searchByUsername(searchText)
+//        : userRepo.findAll();
+    List<User> users = null;
+    if (choice.equals("1") && StringUtils.isNotBlank(searchText.trim())) {
+      users = userRepo.searchByUsername(searchText);
+    }
+    else if (choice.equals("2")&& StringUtils.isNotBlank(searchText.trim())) {
+      users = userRepo.searchByDepartment(searchText);
+    }
+    else {
+      users = userRepo.findAll();
+    }
+    
     if (users.size() != 0) {
       model.addAttribute("listUser", users);
       return "/user/search";

@@ -10,20 +10,26 @@
 $(function() {
 	$('#btnSearch').click(function() {
 		var responseText = jTien.f.ajaxConnect('#search-container',
-				$ctx + '/user/search.php', {q: $('#txtSearch').val()}, 'POST');
+				$ctx + '/user/search.php', {q: $('#txtSearch').val(), yourChoice: $('#yourChoice').val()}, 'POST');
 		if (responseText.length == 0) {
 			$('#search-container').html('Nothing to show.');
-		} 
+		}
 	});
 	$('#lnkShowAll').click(function() {
-		jTien.f.ajaxConnect('#search-container', $ctx + '/user/search.php', {q: ""}, 'POST');
+		jTien.f.ajaxConnect('#search-container', $ctx + '/user/search.php', {q: '', yourChoice: '0'}, 'POST');
 	});
 });
 </script>
 
 <div>
-	<input type="text" id="txtSearch" />
+	<input type="text" id="txtSearch" value="" />
 	<input type="button" id="btnSearch" value="Search" />
+	<div id="choice">
+		<select id="yourChoice" name="yourChoice">
+			<option value="1">UserName</option>
+			<option value="2">Department</option>
+		</select>
+	</div>
 	<a id="lnkShowAll" href="javascript:">Show All</a>
 </div>
 <div id="search-container">

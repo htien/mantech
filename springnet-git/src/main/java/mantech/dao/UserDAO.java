@@ -115,6 +115,13 @@ public class UserDAO extends HibernateGenericDAO<User> implements UserRepository
         .list();
   }
 
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<User> searchByDepartment(String name) {
+    String queryString = "select u from User u inner join u.department d where d.name like :name";
+    return session().createQuery(queryString).setString("name", "%" + name + "%").list();
+  }
+  
   @Override
   public boolean isExistUser(int id) {
     return ((Long)session().createQuery("select count(u) from User u where u.id = :id")

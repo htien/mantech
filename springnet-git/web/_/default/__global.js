@@ -46,6 +46,7 @@ $validateOpts = {
 /* === Initialize setup default === */
 
 $.ajaxSetup({
+	scriptCharset: 'UTF-8',
 	statusCode: {
 		404: function() {
 			jTien.callJqDialog('server-msg', 'Page not found. Please try again later.', {title: 'HTTP Response 404'}).dialog('open');
@@ -194,6 +195,29 @@ jTien.f = jTien.prototype = {
 		return $.ajax(settings);
 	},
 	
+	ajaxConnect: function(container, url, data, type) {
+		if (url == null || url.length == 0) {
+			return;
+		}
+		
+		if (data == null) {
+			data = {};
+		}
+		if (type == null) {
+			type = 'GET';
+		}
+		
+		var jqXhr = $.ajax({
+				async: false,
+				type: type,
+				url: url,
+				data: data
+		});
+		
+		$(container).html(jqXhr.responseText);
+		return jqXhr.responseText;
+	},
+
 	createJqDialog: function(id, data, dlgOpts) {
 		var dlg = document.getElementById(id) == null
 				? $('<div id="' + id + '"></div>')

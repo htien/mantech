@@ -11,8 +11,8 @@ import mantech.repository.AssignmentRepository;
 
 /**
  * 
- * @author Long Nguyen
- * @version $Id: AssignmentService.java,v 1.0 2011/10/03 1:10:22 nguyenlong Exp $
+ * @author Tien Nguyen
+ * @version $Id: AssignmentService.java,v 1.0 2011/10/03 1:10:22 lilylnx Exp $
  */
 public class AssignmentService {
   

@@ -9,20 +9,21 @@
 <script>
 $(function() {
 	$('#btnSearch').click(function() {
-		var responseText = jTien.f.ajaxConnect('#search-container',
-				$ctx + '/user/search.php', {q: $('#txtSearch').val(), yourChoice: $('#yourChoice').val()}, 'POST');
-		if (responseText.length == 0) {
-			$('#search-container').html('Nothing to show.');
-		}
+		jTien.ajaxConnect('search-container', 'user-search-form')
+				.success(function(data) {
+					if (data == null || data.length == 0) {
+						$('#search-container').html('Nothing to show.');
+					}
+				});
 	});
 	$('#lnkShowAll').click(function() {
-		jTien.f.ajaxConnect('#search-container', $ctx + '/user/search.php', {q: '', yourChoice: '0'}, 'POST');
+		jTien.ajaxConnect('search-container', 'user-search-form', 'q=');
 	});
 });
 </script>
 
-<div>
-	<input type="text" id="txtSearch" value="" />
+<form id="user-search-form" method="post" action="/user/search">
+	<input type="text" id="txtSearch" name="q" />
 	<input type="button" id="btnSearch" value="Search" />
 	<div id="choice">
 		<select id="yourChoice" name="yourChoice">
@@ -31,7 +32,7 @@ $(function() {
 		</select>
 	</div>
 	<a id="lnkShowAll" href="javascript:">Show All</a>
-</div>
+</form>
 <div id="search-container">
 	<table class="grid">
 		<tr>

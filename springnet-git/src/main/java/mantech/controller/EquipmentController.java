@@ -58,6 +58,26 @@ public class EquipmentController {
 
   }
   
+  @RequestMapping(value = "/equipment/add", method = RequestMethod.GET)
+  public String insert(ModelMap model) {
+    List<Category> category = categoryRepo.findAll();
+    model.addAttribute("category", category);
+    return "/equipment/add";
+  }
+  
+  @RequestMapping(value = "/equipment/addSave", method = RequestMethod.POST)
+  public String insertSave(@RequestParam(value = "name") String name, @RequestParam(value = "catId") int id,
+        ModelMap model) {
+    Category category = categoryRepo.get(id);
+    Equipment equipment = new Equipment();
+    equipment.setName(name);
+    equipment.setCategory(category);
+    equipmentRepo.save(equipment);
+    
+    model.addAttribute("msg", "Added Equipment Successfully!");
+    return "msg";
+  }
+  
   @RequestMapping(value = "/equipment/edit", method = RequestMethod.GET)
   public String update(@RequestParam(value = "id", required = false, defaultValue = "0") int id, ModelMap model){
     Equipment equipment = equipmentRepo.get(id);
@@ -83,23 +103,6 @@ public class EquipmentController {
       model.addAttribute("msg", "Update fail");
     }
     return update(id, model);
-  }
-  
-  @RequestMapping(value = "/equipment/add", method = RequestMethod.GET)
-  public String insert(ModelMap model) {
-    List<Category> category = categoryRepo.findAll();
-    model.addAttribute("category", category);
-    return "/equipment/add";
-  }
-  
-  @RequestMapping(value = "/equipment/addSave", method = RequestMethod.POST)
-  public String insertSave(@RequestParam(value = "name") String name, @RequestParam(value = "catId") int id, ModelMap model){
-    Category category = categoryRepo.get(id);
-    Equipment equipment = new Equipment();
-    equipment.setName(name);
-    equipment.setCategory(category);
-    equipmentRepo.add(equipment);
-    return "redirect:/equipment/list";
   }
 
 }

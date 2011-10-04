@@ -6,7 +6,8 @@
 		"/_/closure/goog/css/dialog.css",
 		"/_/default/css/common.css",
 		"/_/default/css/common-ui.css",
-		"/_/default/css/main.css"
+		"/_/default/css/main.css",
+		"/_/default/css/long.css"
 	],
 	"scripts": [
 		"/_/jquery/jquery-ui-1.8.16.js",

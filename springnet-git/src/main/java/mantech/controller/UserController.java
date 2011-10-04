@@ -6,6 +6,7 @@ package mantech.controller;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -37,7 +38,7 @@ public class UserController {
   private DepartmentRepository departmentRepo;
   
   @RequestMapping(value = {"/user", "/user/list"}, method = RequestMethod.GET)
-  public String showUser(ModelMap model){
+  public String list(ModelMap model){
     List<User> users = userRepo.findAll();
     model.addAttribute("listUser", users);
     return "user/list";
@@ -85,9 +86,54 @@ public class UserController {
     user.setHomeAddress(address);
     user.setRole(role);
     
-    userRepo.add(user);
+    userRepo.save(user);
     
 //    model.addAttribute("msg", "Insert thanh cong!");
     return "redirect:/user/list";
   }
+  
+  @RequestMapping(value = "/user/edit", method = RequestMethod.GET)
+  public String update(@RequestParam("uId") int id, ModelMap modal) {
+    List<Department> departs = departmentRepo.findAll();
+    List<UserRole> roles = roleRepo.findAll();
+    User user = userRepo.get(id);
+    Department depart = user.getDepartment();
+    modal.addAttribute("departList", departs);
+    modal.addAttribute("roleList", roles);
+    modal.addAttribute("user", user);
+    modal.addAttribute("depart", depart);
+    return "user/edit";
+  }
+  
+  @RequestMapping(value = "/user/editSave", method = RequestMethod.POST)
+  public String updateSave(@RequestParam("uid") int userId, 
+                      @RequestParam("email") String email,
+                      @RequestParam("department") byte depart,
+                      @RequestParam("role") byte role,
+                      @RequestParam("address") String address) {
+    User user = userRepo.get(userId);
+    user.setEmail(email);
+    Department department = departmentRepo.get(depart);
+    user.setDepartment(department);
+    UserRole uRole = roleRepo.get(role);
+    user.setRole(uRole);
+    user.setHomeAddress(address);
+    userRepo.save(user);
+    return "msg";
+  }
+
+  @RequestMapping(value = "/user/search", method = RequestMethod.POST)
+  public String search(@RequestParam("q") String searchText, ModelMap model) {
+    List<User> users = StringUtils.isNotBlank(searchText.trim())
+        ? userRepo.searchByUsername(searchText)
+        : userRepo.findAll();
+    if (users.size() != 0) {
+      model.addAttribute("listUser", users);
+      return "/user/search";
+    }
+    else {
+      return "null";
+    }
+  }
+
 }

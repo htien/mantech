@@ -45,6 +45,23 @@
 		<netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
 	</properties>
 
+	<repositories>
+		<repository>
+			<id>jboss-public-repository-group</id>
+			<name>JBoss Public Maven Repository Group</name>
+			<url>https://repository.jboss.org/nexus/content/groups/public/</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+
 	<build>
 		<directory>target</directory>
 		<finalName>${project.artifactId}-${project.version}</finalName>
@@ -105,7 +122,8 @@
 						<id>sign-artifacts</id>
 						<phase>verify</phase>
 						<configuration>
-							<keyname>J2EE Project Verification Key</keyname>
+							<keyname>D55D287D J2EE Project Verification Key</keyname>
+							<passphrase>${gpg.passphrase}</passphrase>
 						</configuration>
 						<goals>
 							<goal>sign</goal>
@@ -227,6 +245,13 @@
 			<version>4.8.2</version>
 			<type>jar</type>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.lilylnx.jcafe</groupId>
+			<artifactId>libjcafe</artifactId>
+			<version>0.0.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -384,6 +409,11 @@
 		</dependency>
 	</dependencies>
 
+	<dependencyManagement>
+		<dependencies>
+		</dependencies>
+	</dependencyManagement>
+
 	<reporting>
 		<plugins>
 			<plugin>
@@ -421,9 +451,4 @@
 		</profile>
 	</profiles>
 
-	<dependencyManagement>
-		<dependencies>
-
-		</dependencies>
-	</dependencyManagement>
 </project>

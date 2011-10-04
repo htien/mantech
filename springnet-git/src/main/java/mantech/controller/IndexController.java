@@ -4,40 +4,56 @@
  */
 package mantech.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import mantech.domain.User;
+import mantech.service.LoginService;
+import mantech.service.ViewService;
 
 /**
  * @author Tien Nguyen
  * @version $Id: IndexController.java,v 1.0 2011/06/07 23:56:07 lilylnx Exp $
  */
 @Controller
-public class IndexController {
+public class IndexController extends ViewService {
+  
+  @Autowired
+  private LoginService loginService;
 
   public IndexController() {}
 
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public String list(ModelMap model) {    
-    model.addAttribute("welcomeMsg", "SpringFramework! & Hello World");
+    model.addAttribute("welcomeMsg", "SpringFramework. Admin Control Panel");
     return "__index";
   }
   
-  @RequestMapping(value = "/", method = RequestMethod.POST)
-  public String login(HttpServletRequest request, ModelMap model) {
-    String id = request.getParameter("id");
-    String passwd = request.getParameter("passwd");
-    
-    if (id.equals("nvhtien") && passwd.equals("123")) {
-      model.addAttribute("loginMsg", "Logged in!");
+  @RequestMapping(value = "/login", method = RequestMethod.POST)
+  public String authenticateUser(@RequestParam("id") String id, @RequestParam("passwd") String passwd,
+      HttpSession session, ModelMap model) {
+
+    try {
+      User user = loginService.authenticate(id, passwd);
+      if (user != null) {
+        session.setAttribute("userProfile", user);
+        model.addAttribute("msg", "Authenticated!");
+      }
+      else {
+        session.removeAttribute("userProfile");
+        model.addAttribute("msg", "Wrong username/password. Access denied.");
+      }
     }
-    else {
-      model.addAttribute("loginMsg", "Access Denied!");
+    catch (Exception e) {
+      model.addAttribute("msg", e.getMessage());
     }
-    return list(model);
+    return "msg";
   }
 
 }

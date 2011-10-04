@@ -1,7 +1,8 @@
 #blueBar {
-  padding: 10px 0;
+  padding: .6em 2em .4em;
   color: #fff;
-  background-color: #2b4f82;
+  background-color: #22437f;
+  border-bottom: 2px solid #111;
 }
 
 #blueBar #companyName {
@@ -31,7 +32,10 @@
   font-size: 13px;
   background-color: #fff;
   border: 1px solid #ccc;
-  border-top: 1px solid #999;  
+  border-top: 1px solid #999;
+  box-shadow: 0 1px 3px rgba(0,0,0,.1);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.1);
+  -moz-box-shadow: 0 1px 3px rgba(0,0,0,.1);
 }
 
 #signin-box h2 {
@@ -69,9 +73,5 @@
 #signin-box span.error {
   display: block;
   margin-top: 3px;
-  font-size: 11px;
-}
-
-#loginMsg {
-  text-align: center;
+  font-size: 12px;
 }

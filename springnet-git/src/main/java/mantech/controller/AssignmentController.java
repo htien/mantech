@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import mantech.domain.Assignment;
 import mantech.domain.Complaint;
-import mantech.domain.ComplaintStatus;
 import mantech.domain.User;
-import mantech.repository.AssignmentRepository;
 import mantech.repository.ComplaintRepository;
-import mantech.repository.ComplaintStatusRepository;
 import mantech.repository.UserRepository;
+import mantech.service.AssignmentService;
+import mantech.service.ComplaintService;
+import mantech.service.UserService;
 
 /**
  * @author Long Nguyen
@@ -29,10 +29,7 @@ import mantech.repository.UserRepository;
  */
 @Controller
 public class AssignmentController {
-  
-  @Autowired
-  private AssignmentRepository assignmentRepo;
-  
+
   @Autowired
   private UserRepository userRepo;
   
@@ -40,7 +37,13 @@ public class AssignmentController {
   private ComplaintRepository complaintRepo;
   
   @Autowired
-  private ComplaintStatusRepository statusRepo; 
+  private ComplaintService complaintService;
+  
+  @Autowired
+  private AssignmentService assignmentService;
+  
+  @Autowired
+  private UserService userService;
   
   @RequestMapping (value = {"/assignment", "/assignment/list"}, method = RequestMethod.GET)
   public String list(ModelMap model) {
@@ -67,8 +70,11 @@ public class AssignmentController {
     if (complaintRepo.isExist(compId)) {
       if (!complaintRepo.hasAssignmentId(compId)) {
         List<Complaint> complaints = complaintRepo.findAll();
+        List<User> users = userRepo.getUserByRole("technician");
+        
         Complaint complaint = complaintRepo.get(compId);
         
+        model.addAttribute("technicians", users);
         model.addAttribute("complaint", complaint);
         model.addAttribute("compId", compId);
         model.addAttribute("listComplaint", complaints);
@@ -80,12 +86,13 @@ public class AssignmentController {
   
   @RequestMapping (value = "/assignment/addSave", method = RequestMethod.POST)
   public String insertSave(@RequestParam(value = "compId") int compId, @RequestParam(value="userId") int[] userId, @RequestParam(value="beginDate") Date beginDate,
-      @RequestParam(value="duration") short duration)
-  {
+      @RequestParam(value="duration") short duration) {
+
     List<User> users = userRepo.getUsers(userId);
     Complaint complaint = complaintRepo.get(compId);
-    ComplaintStatus status = statusRepo.get(ComplaintStatus.ACCEPTED);
-    complaint.setStatus(status);
+
+    complaintService.setStatusAccepted(complaint);
+    userService.setUserStatus(users);
     
     Assignment assignment = new Assignment();
     assignment.setComplaintId(complaint.getId());
@@ -93,7 +100,7 @@ public class AssignmentController {
     assignment.setBeginDate(beginDate);
     assignment.setDuration(duration);
 
-    assignmentRepo.add(assignment);
+    assignmentService.add(assignment);
     return "redirect:/assignment/list";
   }
 }

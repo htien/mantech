@@ -28,7 +28,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>hibernateSessionFilter</filter-name>
-		<url-pattern>*.cfm</url-pattern>
+		<url-pattern>*.php</url-pattern>
 	</filter-mapping>
 
 	<servlet>
@@ -43,7 +43,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>springnet</servlet-name>
-		<url-pattern>*.cfm</url-pattern>
+		<url-pattern>*.php</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>springnet</servlet-name>

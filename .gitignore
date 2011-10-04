@@ -41,6 +41,7 @@ ehthumbs.db
 ### Miscellaneous
 *.bak
 *.log
+*.raw*
 *.swp
 *.tmp
 .clover

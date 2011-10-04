@@ -26,6 +26,8 @@ import net.lilylnx.springnet.extension.RequestOperationChain;
 import net.lilylnx.springnet.util.ConfigKeys;
 import net.lilylnx.springnet.util.SpringConfig;
 
+import mantech.domain.UserSession;
+
 /**
  * Đây là Servlet chính, kế thừa từ {@link DispatcherServlet}
  * của SpringMVC dùng để điều khiển các modules của hệ thống,
@@ -79,17 +81,25 @@ public class SpringServlet extends DispatcherServlet {
    * @see javax.servlet.Servlet#service(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
    */
   @Override
-  protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    ServletRequestAttributes attributes = new ServletRequestAttributes(req);
+  protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    request.setCharacterEncoding(config.getString(ConfigKeys.ENCODING));
+    request.setAttribute(ConfigKeys.ANONYMOUS_USER_ID, config.getInt(ConfigKeys.ANONYMOUS_USER_ID, 1));
+    request.setAttribute(ConfigKeys.HTTP_SERVLET_RESPONSE, response);
+
+    ServletRequestAttributes attributes = new ServletRequestAttributes(request);
     
     try {
       RequestContextHolder.setRequestAttributes(attributes);
       
-      this.sessionManager.refreshSession(req, resp);
+      UserSession userSession = this.sessionManager.refreshSession(request, response);
+      
+      request.setAttribute(ConfigKeys.USER_SESSION, userSession);
+      request.setAttribute(UserSession.class.getName(), userSession);
+      
       this.operationChain.callAllOperations();
-      this.putDefaultProps();
+      this.putDefaultProps(request);
 
-      super.service(req, resp);
+      super.service(request, response);
     }
     finally {
       RequestContextHolder.resetRequestAttributes();
@@ -100,11 +110,13 @@ public class SpringServlet extends DispatcherServlet {
   /**
    * Đưa một số key/value cho view.
    */
-  private void putDefaultProps() {
+  private void putDefaultProps(HttpServletRequest request) {
     ViewResolver viewResolver = (ViewResolver)SpringNet.getComponent("viewResolver");
+
     Map<String, Object> defaultAttributes = viewResolver.getAttributesMap();
     Date now = Calendar.getInstance().getTime();
-    
+
+    // Cached attributes
     defaultAttributes.put("name", config.getString("name"));
     defaultAttributes.put("version", config.getString("version"));
     defaultAttributes.put("webpage", config.getString("link.webpage"));
@@ -119,10 +131,13 @@ public class SpringServlet extends DispatcherServlet {
     defaultAttributes.put("pageTitle", config.getString("web.page.title"));
     defaultAttributes.put("metaKeywords", config.getString("web.page.metatag.keywords"));
     defaultAttributes.put("metaDescription", config.getString("web.page.metatag.description"));
+
+    // Non-cached attributes
+    request.setAttribute("p", request.getMethod().equalsIgnoreCase("GET") ? request.getParameter("p") : null);
   }
 
   private void showStuff(ApplicationContext beanFactory) {
-    LOG.info("--- Loaded beans ---");
+    LOG.info("=== Loaded beans ===");
     for (String bean : beanFactory.getBeanDefinitionNames()) {
       LOG.info(bean);
     }

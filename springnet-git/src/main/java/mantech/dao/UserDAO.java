@@ -9,11 +9,13 @@ import java.util.List;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.validator.EmailValidator;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+
+import net.lilylnx.springnet.core.hibernate.HibernateGenericDAO;
 
 import mantech.domain.User;
 import mantech.repository.UserRepository;
-
-import net.lilylnx.springnet.core.hibernate.HibernateGenericDAO;
 
 /**
  * 
@@ -26,24 +28,50 @@ public class UserDAO extends HibernateGenericDAO<User> implements UserRepository
     super(sessionFactory);
   }
 
-  /*
-   * (non-Javadoc)
+  /* (non-Javadoc)
+   * @see mantech.repository.UserRepository#getPasswordByUsername(java.lang.String)
+   */
+  @Override
+  public String getPasswordByUsername(String username) {
+    return (String)this.session().createCriteria(persistClass)
+        .add(Restrictions.eq("username", username))
+        .setProjection(Projections.property("password"))
+        .setComment("userDAO.getPasswordByUsername")
+        .uniqueResult();
+  }
+
+  /* (non-Javadoc)
+   * @see mantech.repository.UserRepository#getPasswordByEmail(java.lang.String)
+   */
+  @Override
+  public String getPasswordByEmail(String email) {
+    return (String)this.session().createCriteria(persistClass)
+        .add(Restrictions.eq("email", email))
+        .setProjection(Projections.property("password"))
+        .setComment("userDAO.getPasswordByEmail")
+        .uniqueResult();
+  }
+
+  /* (non-Javadoc)
    * @see mantech.repository.UserRepository#getByUsername(java.lang.String)
    */
   @Override
   public User getByUsername(String username) {
-    // TODO Auto-generated method stub
-    return null;
+    return (User)this.session().createCriteria(persistClass)
+        .add(Restrictions.eq("username", username))
+        .setComment("userDAO.getByUsername")
+        .uniqueResult();
   }
 
-  /*
-   * (non-Javadoc)
-   * @see mantech.repository.UserRepository#validateUser(java.lang.String, java.lang.String)
+  /* (non-Javadoc)
+   * @see mantech.repository.UserRepository#getByEmail(java.lang.String)
    */
   @Override
-  public User validateUser(String username, String password) {
-    // TODO Auto-generated method stub
-    return null;
+  public User getByEmail(String email) {
+    return (User)this.session().createCriteria(persistClass)
+        .add(Restrictions.eq("email", email))
+        .setComment("userDAO.getByEmail")
+        .uniqueResult();
   }
 
   /*
@@ -53,7 +81,7 @@ public class UserDAO extends HibernateGenericDAO<User> implements UserRepository
   @SuppressWarnings("unchecked")
   @Override
   public List<User> getUserByRole(int id) {
-    return session().createQuery("from User u inner join u.role r where r.id = :id")
+    return session().createQuery("select u from User u inner join u.role r where r.id = :id")
         .setInteger("id", id).list();
   }
 
@@ -64,7 +92,7 @@ public class UserDAO extends HibernateGenericDAO<User> implements UserRepository
   @SuppressWarnings("unchecked")
   @Override
   public List<User> getUserByRole(String name) {
-    return session().createQuery("from User u inner join u.role r where r.name = :name")
+    return session().createQuery("select u from User u inner join u.role r where r.name = :name")
         .setString("name", name).list();
   }
 
@@ -73,6 +101,17 @@ public class UserDAO extends HibernateGenericDAO<User> implements UserRepository
   public List<User> getUsers(int... ids) {
     return session().createQuery("from User u where u.id in (:ids)")
         .setParameterList("ids", ArrayUtils.toObject(ids))
+        .list();
+  }
+
+  /* (non-Javadoc)
+   * @see mantech.repository.UserRepository#searchByUsername(java.lang.String)
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<User> searchByUsername(String username) {
+    return (List<User>)session().createCriteria(persistClass)
+        .add(Restrictions.ilike("username", "%" + username + "%"))
         .list();
   }
 

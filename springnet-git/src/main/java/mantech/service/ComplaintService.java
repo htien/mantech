@@ -10,7 +10,9 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import mantech.domain.Complaint;
+import mantech.domain.ComplaintStatus;
 import mantech.repository.ComplaintRepository;
+import mantech.repository.ComplaintStatusRepository;
 
 import net.lilylnx.springnet.core.exception.ValidationException;
 
@@ -23,6 +25,9 @@ public class ComplaintService {
   
   @Autowired
   private ComplaintRepository complaintRepo;
+  
+  @Autowired
+  private ComplaintStatusRepository statusRepo;
   
   public List<Complaint> sort(String fieldName, boolean order, int page) {
     return complaintRepo.sort(fieldName, order, new int[] { 3, page });
@@ -42,6 +47,11 @@ public class ComplaintService {
     }
 
     complaintRepo.insert(complaint);
+  }
+  
+  public void setStatusAccepted(Complaint complaint) {
+    ComplaintStatus status = statusRepo.get(ComplaintStatus.ACCEPTED);
+    complaint.setStatus(status);
   }
 
 }

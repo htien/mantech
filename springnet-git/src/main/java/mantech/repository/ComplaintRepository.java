@@ -24,6 +24,8 @@ public interface ComplaintRepository extends Repository<Complaint> {
   List<Complaint> getByPriority(byte id);
   List<Complaint> getByAssignment();
   List<Complaint> getWaitingComplaint();
+  List<Complaint> searchByUserName(String username);
+  List<Complaint> searchByEquipment(String equip);
   List<Complaint> searchByFName(String name);
   List<Complaint> searchStartWithFName(String name);
   List<Complaint> searchStartWithLName(String name);

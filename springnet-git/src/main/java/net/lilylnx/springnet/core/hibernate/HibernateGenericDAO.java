@@ -6,6 +6,8 @@ package net.lilylnx.springnet.core.hibernate;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -45,27 +47,37 @@ public abstract class HibernateGenericDAO<T> implements Repository<T> {
   }
   
   /* (non-Javadoc)
-   * @see net.lilylnx.springnet.repository.Repository#add(java.lang.Object)
+   * @see net.lilylnx.springnet.repository.Repository#save(java.lang.Object)
    */
   @Override
-  public void add(T entity) {
-    this.session().save(entity);
+  public Serializable save(T entity) {
+    return this.session().save(entity);
   }
-  
-  /* (non-Javadoc)
-   * @see net.lilylnx.springnet.repository.Repository#remove(java.lang.Object)
-   */
-  @Override
-  public void remove(T entity) {
-    this.session().delete(entity);
-  }
-  
+
   /* (non-Javadoc)
    * @see net.lilylnx.springnet.repository.Repository#update(java.lang.Object)
    */
   @Override
   public void update(T entity) {
     this.session().update(entity);
+  }
+
+  /* (non-Javadoc)
+   * @see net.lilylnx.springnet.repository.Repository#delete(java.lang.Object)
+   */
+  @Override
+  public void delete(T entity) {
+    this.session().delete(entity);
+  }
+  
+  /* (non-Javadoc)
+   * @see net.lilylnx.springnet.repository.Repository#saveOrUpdate(java.util.Collection)
+   */
+  @Override
+  public void saveOrUpdateAll(final Collection<T> entities) {
+    for (Iterator<T> it = entities.iterator(); it.hasNext();) {
+      this.session().saveOrUpdate(it.next());
+    }
   }
 
   @Override

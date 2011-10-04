@@ -59,14 +59,16 @@ p {
 
 strong {
   color: #222;
+  font-weight: bold;
 }
 
 a, a:visited, a:hover {
-  color: #0066A7 /*#3B5998*/;
+  color: #11c /*#3B5998*/;
   text-decoration: none;
 }
 
-a:hover {
+a:hover, a:active {
+  color: #800;
   text-decoration: underline;
 }
 

@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -70,7 +71,15 @@ public class ComplaintController {
     Date begin = format.parse("2011/09/05");
     Date end = format.parse("2011/09/10");
     Date createDate = format.parse("2011/09/09");
+    List<Complaint> listAllComplaint = complaintRepo.findAll();
     List<Complaint> complaints = complaintService.sort("id", false, 2); // trang 1, lay 3 kq, se lay ra id 1, 2, 3
+    List<Complaint> listWaitingComplaint = complaintRepo.getWaitingComplaint();
+    List<Complaint> complaintsByDate = complaintRepo.searchByDate(createDate);
+    List<Complaint> complaintsFromDateToDate = complaintRepo.searchByDate(format.parse("2011/09/09"), 
+                                                              format.parse("2011/10/02"));
+    List<Complaint> complaintsByYear = complaintRepo.searchByYear(2011);
+    
+    model.addAttribute("listAll", listAllComplaint);
     model.addAttribute("listComplaint", complaints);
     model.addAttribute("no", noOfComplaintInPeriod());
     model.addAttribute("list", listComplaintDaily(1));
@@ -78,15 +87,9 @@ public class ComplaintController {
     model.addAttribute("complaintByDepartment", complaintRepo.getByDepartment((byte)1));
     model.addAttribute("complaintByPriority",complaintRepo.getByPriority((byte)2));
     model.addAttribute("complaintByFirstName", complaintRepo.searchByFName("n"));
-    List<Complaint> complaintsByDate = complaintRepo.searchByDate(createDate);
-    model.addAttribute("complaintByDate", complaintsByDate);
-    List<Complaint> complaintsFromDateToDate = complaintRepo.searchByDate(format.parse("2011/09/09"), 
-                                               format.parse("2011/10/02"));
+    model.addAttribute("complaintByDate", complaintsByDate);    
     model.addAttribute("complaintsFromDateToDate", complaintsFromDateToDate);
-    List<Complaint> complaintsByYear = complaintRepo.searchByYear(2011);
     model.addAttribute("complaintYear", complaintsByYear);
-    
-    List<Complaint> listWaitingComplaint = complaintRepo.getWaitingComplaint();
     model.addAttribute("listComplaintWaiting", listWaitingComplaint);
     return "complaint/list";
   }
@@ -162,5 +165,29 @@ public class ComplaintController {
     complaint.setPriority(priority);
     complaintRepo.update(complaint);
     return "redirect:/complaint/list";
+  }
+  
+  @RequestMapping(value="/complaint/search", method = RequestMethod.POST)
+  public String search( @RequestParam("q") String searchText,
+                        @RequestParam("yourchoice") String choice,
+                        ModelMap model) {
+    
+    List<Complaint> complaints = null;
+    if(choice.equals("1") && StringUtils.isNotBlank(searchText.trim())) {
+      complaints = complaintRepo.searchByUserName(searchText);
+    }
+    else if(choice.equals("2") && StringUtils.isNotBlank(searchText.trim())) {
+      complaints = complaintRepo.searchByEquipment(searchText);
+    }
+    else {
+      complaints = complaintRepo.findAll();
+    }
+    if(complaints.size() != 0) {
+      model.addAttribute("listAll", complaints);
+      return "/complaint/search";
+    }
+    else {
+      return "null";
+    }
   }
 }

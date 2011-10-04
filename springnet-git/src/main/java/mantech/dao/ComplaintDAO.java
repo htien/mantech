@@ -161,4 +161,20 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
         .setInteger("id", id).uniqueResult()).longValue() > 0;
   }
 
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<Complaint> searchByUserName(String username) {
+    String queryString = "select c from Complaint c inner join c.user u "
+                          + "where u.username like :username";
+    return session().createQuery(queryString).setString("username", "%" +username+ "%").list();
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<Complaint> searchByEquipment(String equip) {
+    String queryString = "select c from Complaint c inner join c.equipment e "
+                          + "where e.name like :equipment";
+    return session().createQuery(queryString).setString("equipment", "%" +equip+ "%").list();
+  }
+
 }

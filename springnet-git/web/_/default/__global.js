@@ -46,6 +46,7 @@ $validateOpts = {
 /* === Initialize setup default === */
 
 $.ajaxSetup({
+	scriptCharset: 'UTF-8',
 	statusCode: {
 		404: function() {
 			jTien.callJqDialog('server-msg', 'Page not found. Please try again later.', {title: 'HTTP Response 404'}).dialog('open');
@@ -103,9 +104,7 @@ jTien.fn = jTien.prototype = {
 jTien.fn.init.prototype = jTien.fn;
 
 jTien.resetForm = jTien.prototype = function(form) {
-	var _form = typeof form === 'string'
-			? /^#/.test(form) ? $(form) : $('#' + form)
-			: form;
+	var _form = jTien.f.toJqId(form);
 	_form[0].reset();
 	_form.find(':input[class!=noreset]:visible:enabled:first').focus();
 	return _form;
@@ -116,8 +115,18 @@ jTien.ajaxSubmit = jTien.prototype = function(form) {
 	return jqXhr;
 };
 
+jTien.ajaxConnect = jTien.prototype = function(container, form, data) {
+	var _form = form instanceof HTMLFormElement ? $(form) : jTien.f.toJqId(form);
+	return jTien.f.ajaxConnect(container, {
+			async: false,
+			type: _form.attr('method'),
+			url: _form.attr('action'),
+			data: data == undefined ? _form.serialize() : data
+	});
+};
+
 jTien.callJqDialog = jTien.prototype = function(id, url, settings, dlgOpts) {
-	var isUrl = /^(\/|http:\/\/|https:\/\/|ftp:\/\/)/.test(url);
+	var isUrl = jTien.f.isUrl(url);
 	if (dlgOpts == undefined) {
 		dlgOpts = settings;
 		settings = isUrl ? {} : undefined;
@@ -194,6 +203,35 @@ jTien.f = jTien.prototype = {
 		return $.ajax(settings);
 	},
 	
+	ajaxConnect: function(container, url, data, type, settings) {
+		if (jTien.f.isBlank(url)) {
+			return null;
+		}
+
+		if (typeof url === 'object') {
+			settings = settings || url;
+			url = undefined;
+			data = undefined;
+			type = undefined;
+		}
+		else {		
+			url = jTien.f.isUrl(url) ? url : undefined;
+			data = !jTien.f.isBlank(data) ? data : undefined;
+			type = !jTien.f.isBlank(type) ? type : 'GET';
+		}
+
+		settings = settings || {};
+		settings.async = settings.async == undefined ? false : settings.async;
+		settings.url = url != undefined ? url : settings.url;
+		settings.data = data != undefined ? data: settings.data;
+		settings.type = settings.type == undefined ? type : settings.type;
+
+		var jqXHR = $.ajax(settings);
+		
+		jTien.f.toJqId(container).html(jqXHR.responseText);
+		return jqXHR;
+	},
+
 	createJqDialog: function(id, data, dlgOpts) {
 		var dlg = document.getElementById(id) == null
 				? $('<div id="' + id + '"></div>')
@@ -204,6 +242,21 @@ jTien.f = jTien.prototype = {
 			dlg.dialog(dlgOpts);
 		}
 		return dlg;
+	},
+	
+	isBlank: function(text) {
+		return text == null || (typeof text === 'string' && /^\s*$/.test(text));
+	},
+	
+	isUrl: function(url) {
+		return url != null &&
+			(typeof url === 'string' && /^(\/|http:\/\/|https:\/\/|ftp:\/\/)/.test(url));
+	},
+	
+	toJqId: function(id) {
+		return (typeof id === 'string')
+					? /^#/.test(id) ? $(id) : $('#' + id)
+					: id;
 	}
 };
 

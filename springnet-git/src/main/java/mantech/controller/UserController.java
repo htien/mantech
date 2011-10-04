@@ -6,6 +6,7 @@ package mantech.controller;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -85,7 +86,7 @@ public class UserController {
     user.setHomeAddress(address);
     user.setRole(role);
     
-    userRepo.add(user);
+    userRepo.save(user);
     
 //    model.addAttribute("msg", "Insert thanh cong!");
     return "redirect:/user/list";
@@ -117,8 +118,35 @@ public class UserController {
     UserRole uRole = roleRepo.get(role);
     user.setRole(uRole);
     user.setHomeAddress(address);
-    userRepo.add(user);
+    userRepo.save(user);
     return "msg";
   }
+
+  @RequestMapping(value = "/user/search", method = RequestMethod.POST)
+  public String search(@RequestParam("q") String searchText,
+      @RequestParam("yourChoice") String choice, ModelMap model) {
+
+//    List<User> users = StringUtils.isNotBlank(searchText.trim())
+//        ? userRepo.searchByUsername(searchText)
+//        : userRepo.findAll();
+    List<User> users = null;
+    if (choice.equals("1") && StringUtils.isNotBlank(searchText.trim())) {
+      users = userRepo.searchByUsername(searchText);
+    }
+    else if (choice.equals("2")&& StringUtils.isNotBlank(searchText.trim())) {
+      users = userRepo.searchByDepartment(searchText);
+    }
+    else {
+      users = userRepo.findAll();
+    }
+    
+    if (users.size() != 0) {
+      model.addAttribute("listUser", users);
+      return "/user/search";
+    }
+    else {
+      return "null";
+    }
+  }
+
 }
-  

@@ -4,6 +4,8 @@
  */
 package net.lilylnx.springnet.util;
 
+import net.lilylnx.jcafe.crypto.Algorithms;
+
 /**
  * @author Tien Nguyen
  * @version $Id: ConfigKeys.java,v 1.0 2011/06/22 16:34:43 lilylnx Exp $
@@ -22,11 +24,15 @@ public class ConfigKeys {
   public static final String DB_ENCRYPTED_PASSWD = "db.passwd.enc";
   
   public static final String SPRING_CONTEXT = "springnetContext";
+  public static final String CODENAME = "name";
   public static final String VERSION = "version";
+  public static final String CONTEXT_PATH = "context.path";
+  public static final String ENCODING = "encoding";
   
   public static final String AUTHENTICATION_TYPE = "authentication.type";
   public static final String LOGIN_AUTHENTICATOR = "login.authenticator";
   public static final String TYPE_SSO = "sso";
+  public static final String USERPWD_ALGOR = Algorithms.WHIRLPOOL_HASH;
   
   public static final String SSO_LOGOUT_REDIRECT = "sso.logout.redirect";
   

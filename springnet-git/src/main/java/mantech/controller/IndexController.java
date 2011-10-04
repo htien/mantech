@@ -15,14 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import mantech.domain.User;
 import mantech.service.LoginService;
-import mantech.service.ViewService;
 
 /**
  * @author Tien Nguyen
  * @version $Id: IndexController.java,v 1.0 2011/06/07 23:56:07 lilylnx Exp $
  */
 @Controller
-public class IndexController extends ViewService {
+public class IndexController {
   
   @Autowired
   private LoginService loginService;
@@ -40,7 +39,7 @@ public class IndexController extends ViewService {
       HttpSession session, ModelMap model) {
 
     try {
-      User user = loginService.authenticate(id, passwd);
+      User user = loginService.authenticate(id, passwd, session);
       if (user != null) {
         session.setAttribute("userProfile", user);
         model.addAttribute("msg", "Authenticated!");
@@ -53,7 +52,8 @@ public class IndexController extends ViewService {
     catch (Exception e) {
       model.addAttribute("msg", e.getMessage());
     }
-    return "msg";
+
+    return "message";
   }
 
 }

@@ -24,7 +24,9 @@ public class ConfigKeys {
   public static final String DB_ENCRYPTED_PASSWD = "db.passwd.enc";
   
   public static final String SPRING_CONTEXT = "springnetContext";
+  public static final String CODENAME = "name";
   public static final String VERSION = "version";
+  public static final String CONTEXT_PATH = "context.path";
   public static final String ENCODING = "encoding";
   
   public static final String AUTHENTICATION_TYPE = "authentication.type";

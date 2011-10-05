@@ -102,3 +102,21 @@ $('#signin_pagelet #testZone').ready(function() {
 	});
 
 });
+
+$('#user_list_pagelet').ready(function() {
+	var filterForm = '#user-filter-form',
+		filterSubmit = '#filter-query-submit',
+		lnkShowAll =  '#lnkShowAll',
+		resultList = '#the-list';
+	$(filterForm).delegate(filterSubmit, 'click', function(evt) {
+		jTien.ajaxConnect(resultList, filterForm)
+				.success(function(data) {
+					if (data == null || data.length == 0) {
+						$(resultList).html('<tr><td colspan="9">Nothing to show.</td></tr>');
+					}
+				});
+	});
+	$(filterForm).delegate(lnkShowAll, 'click', function() {
+		jTien.ajaxConnect(resultList, filterForm, 'q=&f=0');
+	});
+});

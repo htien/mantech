@@ -6,27 +6,6 @@
 </style>
 
 <div id="user_list_pagelet" class="g-pl">
-
-	<script>
-		$('#user_list_pagelet').ready(function() {
-			var filterForm = '#user-filter-form',
-				filterSubmit = '#filter-query-submit',
-				lnkShowAll =  '#lnkShowAll',
-				resultList = '#the-list';
-			$(filterForm).delegate(filterSubmit, 'click', function(evt) {
-				jTien.ajaxConnect(resultList, filterForm)
-						.success(function(data) {
-							if (data == null || data.length == 0) {
-								$(resultList).html('<tr><td colspan="9">Nothing to show.</td></tr>');
-							}
-						});
-			});
-			$(lnkShowAll).click(function() {
-				jTien.ajaxConnect(resultList, filterForm, 'q=&f=0');
-			});
-		});
-	</script>
-
 	<form id="user-filter-form" method="post" action="/user/search">
 		<input type="text" name="q" />
 		<select name="f">
@@ -34,7 +13,7 @@
 			<option value="2">Department</option>
 		</select>
 		<input type="button" id="filter-query-submit" value="Filter" />
-		<a id="lnkShowAll" href="javascript:">Show All</a>
+		<a id="lnkShowAll" href="#">Show All</a>
 		<table class="gg-list-table users grid">
 			<thead><tr><th>Username</th><th>Role</th><th>Deparment</th><th>First Name</th><th>Last Name</th><th>Gender</th><th>Address</th><th>Status</th><th>Register Date</th></tr></thead>
 			<tfoot><tr><th>Username</th><th>Role</th><th>Deparment</th><th>First Name</th><th>Last Name</th><th>Gender</th><th>Address</th><th>Status</th><th>Register Date</th></tr></tfoot>

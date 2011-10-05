@@ -57,7 +57,7 @@ public class ComplaintController {
   @Autowired
   private CategoryPriorityRepository priorityRepo;
   
-  @RequestMapping("complaint/listComplaint")
+  @RequestMapping("/complaint/listComplaint")
   public String list(ModelMap model) {
     List<Complaint> complaint = complaintRepo.findAll();
     model.addAttribute("list", complaint);
@@ -167,22 +167,22 @@ public class ComplaintController {
     return "redirect:/complaint/list";
   }
   
-  @RequestMapping(value="/complaint/search", method = RequestMethod.POST)
+  @RequestMapping(value = "/complaint/search", method = RequestMethod.POST)
   public String search( @RequestParam("q") String searchText,
-                        @RequestParam("yourchoice") String choice,
+                        @RequestParam("yourchoice") byte choice,
+                        @RequestParam(value="dateFrom", required=false) Date dateFrom,
+                        @RequestParam(value="dateTo", required=false) Date dateTo,
                         ModelMap model) {
-    
     List<Complaint> complaints = null;
-    if(choice.equals("1") && StringUtils.isNotBlank(searchText.trim())) {
-      complaints = complaintRepo.searchByUserName(searchText);
+    searchText = StringUtils.isBlank(searchText) ? null : searchText.trim();
+    
+    switch (choice) {
+      case 1: complaints = complaintRepo.search(searchText, null, dateFrom, dateTo); break;
+      case 2: complaints = complaintRepo.search(null, searchText, dateFrom, dateTo); break;
+      default: complaints = complaintRepo.search(null, null, dateFrom, dateTo); break;
     }
-    else if(choice.equals("2") && StringUtils.isNotBlank(searchText.trim())) {
-      complaints = complaintRepo.searchByEquipment(searchText);
-    }
-    else {
-      complaints = complaintRepo.findAll();
-    }
-    if(complaints.size() != 0) {
+   
+    if (complaints.size() != 0) {
       model.addAttribute("listAll", complaints);
       return "/complaint/search";
     }

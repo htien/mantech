@@ -10,6 +10,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
@@ -115,7 +116,7 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
         .setDate("from", from).setDate("to", SpringUtils.increaseDay(to))
         .list();
   }
-
+  
   @SuppressWarnings("unchecked")
   @Override
   public List<Complaint> searchByYear(int year) {
@@ -160,21 +161,23 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
     return ((Long)session().createQuery("select count(complaintId) from Assignment where complaintId = :id")
         .setInteger("id", id).uniqueResult()).longValue() > 0;
   }
-
+  
   @SuppressWarnings("unchecked")
   @Override
-  public List<Complaint> searchByUserName(String username) {
-    String queryString = "select c from Complaint c inner join c.user u "
-                          + "where u.username like :username";
-    return session().createQuery(queryString).setString("username", "%" +username+ "%").list();
-  }
+  public List<Complaint> search(String username, String equipName, Date dateFrom, Date dateTo) {
+    Criteria crit = session().createCriteria(persistClass, "c");
+    Criterion critDateFrom = dateFrom != null ? Restrictions.ge("c.createDate", dateFrom) : null,
+              critDateTo = dateTo != null ? Restrictions.lt("c.createDate", SpringUtils.increaseDay(dateTo)) : null;
 
-  @SuppressWarnings("unchecked")
-  @Override
-  public List<Complaint> searchByEquipment(String equip) {
-    String queryString = "select c from Complaint c inner join c.equipment e "
-                          + "where e.name like :equipment";
-    return session().createQuery(queryString).setString("equipment", "%" +equip+ "%").list();
+    if (username != null) {
+      crit.createCriteria("user", "u").add(Restrictions.ilike("u.username", "%" + username + "%"));
+    }
+    if (equipName != null) {
+      crit.createCriteria("equipment", "e").add(Restrictions.ilike("e.name", "%" + equipName + "%"));
+    }
+    crit = critDateFrom != null ? crit.add(critDateFrom) : crit;
+    crit = critDateTo != null ? crit.add(critDateTo) : crit;
+    
+    return crit.list();
   }
-
 }

@@ -1,10 +1,3 @@
-function renderPage(url) {
-	$.get(url, function(data) {
-		$('#result').html(data);
-	});
-};
-
-
 /* === Document Ready for assigning events === */
 
 $('#signin_pagelet').ready(function() {
@@ -42,7 +35,7 @@ $('#signin_pagelet').ready(function() {
 			submitHandler: function(form) {
 				jTien.ajaxSubmit(form)
 					.success(function(data) {
-						jTien.callJqDialog('server-msg', data, {
+						jTien.callJqDialog('ajax-response', data, {
 							buttons: {
 								'Close': function() {
 									$(this).dialog('destroy');

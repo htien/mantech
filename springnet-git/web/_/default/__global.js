@@ -49,10 +49,10 @@ $.ajaxSetup({
 	scriptCharset: 'UTF-8',
 	statusCode: {
 		404: function() {
-			jTien.callJqDialog('server-msg', 'Page not found. Please try again later.', {title: 'HTTP Response 404'}).dialog('open');
+			jTien.callJqDialog('ajax-response', 'Page not found. Please try again later.', {title: 'HTTP Response 404'}).dialog('open');
 		},
 		500: function() {
-			jTien.callJqDialog('server-msg', 'Server is error. Please try again later.', {title: 'HTTP Response 500'}).dialog('open');
+			jTien.callJqDialog('ajax-response', 'Server is error. Please try again later.', {title: 'HTTP Response 500'}).dialog('open');
 		}
 	}
 });

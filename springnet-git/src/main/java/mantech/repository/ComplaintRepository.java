@@ -24,14 +24,16 @@ public interface ComplaintRepository extends Repository<Complaint> {
   List<Complaint> getByPriority(byte id);
   List<Complaint> getByAssignment();
   List<Complaint> getWaitingComplaint();
-  List<Complaint> searchByUserName(String username);
-  List<Complaint> searchByEquipment(String equip);
+
   List<Complaint> searchByFName(String name);
   List<Complaint> searchStartWithFName(String name);
   List<Complaint> searchStartWithLName(String name);
   List<Complaint> searchByDate(Date date);
   List<Complaint> searchByDate(Date from, Date to);
+  
   List<Complaint> searchByYear(int year);
+  List<Complaint> search(String username, String equipName, Date dateFrom, Date dateTo);
+  
   boolean isExist(int id);
   boolean hasAssignmentId(int id);
   int insert(Complaint complaint);

@@ -17,7 +17,7 @@ $(function() {
 				});
 	});
 	$('#lnkShowAll').click(function() {
-		jTien.ajaxConnect('search-container', 'user-search-form', 'q=');
+		jTien.ajaxConnect('search-container', 'user-search-form', 'q=&yourChoice=0');
 	});
 });
 </script>

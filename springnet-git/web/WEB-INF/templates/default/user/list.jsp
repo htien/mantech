@@ -1,5 +1,4 @@
-<%@ include file="../layout/top.inc"%><%@ include file="../layout/header.inc"%>
-<compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
+<%@ include file="../layout/top.inc"%><%@ include file="../layout/header.inc"%><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
 <style>
 	.grid {margin-top: 15px; border: 1px solid #000; border-collapse: collapse;}
@@ -9,7 +8,7 @@
 <script>
 $(function() {
 	$('#btnSearch').click(function() {
-		jTien.ajaxConnect('search-container', 'user-search-form')
+		jTien.ajaxConnect('the-list', 'user-filter-form')
 				.success(function(data) {
 					if (data == null || data.length == 0) {
 						$('#search-container').html('Nothing to show.');
@@ -17,48 +16,65 @@ $(function() {
 				});
 	});
 	$('#lnkShowAll').click(function() {
-		jTien.ajaxConnect('search-container', 'user-search-form', 'q=');
+		jTien.ajaxConnect('the-list', 'user-filter-form', 'q=&yourChoice=0');
 	});
 });
 </script>
 
-<form id="user-search-form" method="post" action="/user/search">
-	<input type="text" id="txtSearch" name="q" />
+<form id="user-filter-form" method="post" action="/user/search">
+	<input type="text" name="q" />
+	<select name="yourChoice">
+		<option value="0">All</option>
+		<option value="1">UserName</option>
+		<option value="2">Department</option>
+	</select>
 	<input type="button" id="btnSearch" value="Search" />
-	<div id="choice">
-		<select id="yourChoice" name="yourChoice">
-			<option value="1">UserName</option>
-			<option value="2">Department</option>
-		</select>
-	</div>
 	<a id="lnkShowAll" href="javascript:">Show All</a>
 </form>
-<div id="search-container">
-	<table class="grid">
-		<tr>
-			<th>Username</th>
-			<th>Role</th>
-			<th>Deparment</th>
-			<th>First Name</th>
-			<th>Last Name</th>
-			<th>Gender</th>
-			<th>Address</th>
-			<th>Status</th>
-			<th>Register Date</th>
-		</tr>
-		<c:forEach items="${listUser}" var="l">
+
+<div id="user_list_pagelet" class="g-pl">
+	<table class="gg-list-table users grid">
+		<thead>
 			<tr>
-				<td>${l.username}</td>
-				<td>${l.role.name}</td>
-				<td>${l.department.name}</td>
-				<td>${l.firstName}</td>
-				<td>${l.lastName}</td>
-				<td>${l.gender}</td>
-				<td>${l.homeAddress}</td>
-				<td>${l.status}</td>
-				<td>${l.regDate }</td>
+				<th>Username</th>
+				<th>Role</th>
+				<th>Deparment</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Gender</th>
+				<th>Address</th>
+				<th>Status</th>
+				<th>Register Date</th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th>Username</th>
+				<th>Role</th>
+				<th>Deparment</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Gender</th>
+				<th>Address</th>
+				<th>Status</th>
+				<th>Register Date</th>
+			</tr>
+		</tfoot>
+		<tbody id="the-list">
+		<c:forEach items="${listUser}" var="user">
+			<tr>
+				<td>${user.username}</td>
+				<td>${user.role.name}</td>
+				<td>${user.department.name}</td>
+				<td>${user.firstName}</td>
+				<td>${user.lastName}</td>
+				<td>${user.gender}</td>
+				<td>${user.homeAddress}</td>
+				<td>${user.status}</td>
+				<td>${user.regDate }</td>
 			</tr>
 		</c:forEach>
+		</tbody>
 	</table>
 </div>
 

@@ -1,7 +1,4 @@
-<%@ include file="../layout/top.inc"%>
-<%@ include file="../layout/header.inc"%>
-<compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
-
+<%@ include file="../layout/top.inc" %><%@ include file="../layout/header.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
 <style>
 	.grid {margin-top: 15px; border: 1px solid #000; border-collapse: collapse;}
@@ -9,58 +6,69 @@
 </style>
 
 <script type="text/javascript">
-	$(function() {
-		$("#btnSearch").click(function() {
-			var responseText = jTien.f.ajaxConnect("#container", 
-					$ctx + "/complaint/search.php", {q: $("#txtSearch").val(),
-					yourchoice: $("#yourChoice").val()}, "POST");
-			if (responseText.length == 0) {
-				$("#container").html('Nothing to show');
-			}
-		});
-		$("#lnkShowAll").click(function() {
-			jTien.f.ajaxConnect("#container", 
-					$ctx + "/complaint/search.php", {q: '', yourchoice: '0'}, "POST");
-		});
+$(function() {
+	$("#btnSearch").click(function() {
+		var dateFrom = $('#dateFrom').val(),
+			dateTo = $('#dateTo').val();
+		var data = 'q=' + $('#q').val() + '&yourchoice=' + $('#yourchoice').val();
+		data += dateFrom.length != 0 ? '&dateFrom=' + dateFrom : '';
+		data += dateTo.length != 0 ? '&dateTo=' + dateTo : '';
+		jTien.ajaxConnect('container', 'complaint-search-form', data)
+				.success(function(data) {
+					if (data == null || data.length == 0) { 
+						$('#container').html('Nothing to show');
+					}
+				});
 	});
+	$("#lnkShowAll").click(function() {
+		jTien.ajaxConnect('container', 'complaint-search-form', 'q=&yourchoice=0');
+	});
+});
 </script>
 
-	<input id="txtSearch" type="text" name="search" value=""/>
-	<button id="btnSearch">Search</button><a id="lnkShowAll" href="javascript:">Show all</a>
-	<select id="yourChoice" name="yourChoice">
-		<option value = "1">Employee</option>
-		<option value = "2">Equipment</option>
+<form id="complaint-search-form" method="post" action="/complaint/search">
+	<select id="yourchoice" name="yourchoice">
+		<option value=1>Employee</option>
+		<option value=2>Equipment</option>
 	</select>
-	<div id="container">
-		<table class="grid">
-			<tr>
-				<th>Id</th>
-				<th>Employee</th>
-				<th>Equipment name</th>
-				<th>Title</th>
-				<th>Content</th>
-				<th>Priority</th>
-				<th>Status</th>
-				<th>Created date</th>
-				<th>End date</th>
-			</tr>
-			<tr>
-				<c:forEach items="${listAll}" var="complaint">
-					<tr>
-						<td>${complaint.id}</td>
-						<td>${complaint.user.username}</td>
-						<td>${complaint.equipment.name}</td>
-						<td>${complaint.title}</td>
-						<td>${complaint.content}</td>
-						<td>${complaint.priority.name}</td>
-						<td>${complaint.status.name}</td>
-						<td>${complaint.createDate}</td>
-						<td>${complaint.endDate}</td>
-					</tr>
-				</c:forEach>
-			</tr>
-		</table>
+	<input type="text" id="q" name="q" />
+	<div>
+		<p>
+			Form: <input type="text" id="dateFrom" name="dateFrom" />
+			To: <input type="text" id="dateTo" name="dateTo" />
+		</p>
 	</div>
+	<input type="button" id="btnSearch" value="Search" /><a id="lnkShowAll" href="javascript:">Show all</a>
+</form>
+
+<div id="container">
+	<table class="grid">
+		<tr>
+			<th>Id</th>
+			<th>Employee</th>
+			<th>Equipment name</th>
+			<th>Title</th>
+			<th>Content</th>
+			<th>Priority</th>
+			<th>Status</th>
+			<th>Created date</th>
+			<th>End date</th>
+		</tr>
+		<c:forEach items="${listAll}" var="complaint">
+			<tr>
+				<td>${complaint.id}</td>
+				<td>${complaint.user.username}</td>
+				<td>${complaint.equipment.name}</td>
+				<td>${complaint.title}</td>
+				<td>${complaint.content}</td>
+				<td>${complaint.priority.name}</td>
+				<td>${complaint.status.name}</td>
+				<td>${complaint.createDate}</td>
+				<td>${complaint.endDate}</td>
+			</tr>
+		</c:forEach>
+	</table>
+</div>
 
 
 <!-- <div> -->
@@ -161,3 +169,4 @@
 <!-- </div> -->
 
 </compress:html>
+<%@ include file="../layout/footer.inc" %>

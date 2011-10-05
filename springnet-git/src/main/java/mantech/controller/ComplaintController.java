@@ -55,17 +55,9 @@ public class ComplaintController {
   
   @Autowired
   private CategoryPriorityRepository priorityRepo;
-  
-  @RequestMapping("/complaint/listComplaint")
-  public String list(ModelMap model) {
-    List<Complaint> complaint = complaintRepo.findAll();
-    model.addAttribute("list", complaint);
-    return "/complaint/listComplaint";
-  }
 
   @RequestMapping(value = {"/complaint", "/complaint/list"}, method = RequestMethod.GET)
-  public String showAll(ModelMap model) throws Exception {
-    // Date begin = Calendar.getInstance().getTime();
+  public String list(ModelMap model) throws Exception {
     List<Complaint> listAllComplaint = complaintRepo.findAll();
     List<ComplaintStatus> status = statusRepo.findAll();
     List<CategoryPriority> priority = priorityRepo.findAll();

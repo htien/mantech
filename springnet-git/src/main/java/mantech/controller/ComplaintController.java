@@ -4,7 +4,6 @@
  */
 package mantech.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -67,32 +66,11 @@ public class ComplaintController {
   @RequestMapping(value = {"/complaint", "/complaint/list"}, method = RequestMethod.GET)
   public String showAll(ModelMap model) throws Exception {
     // Date begin = Calendar.getInstance().getTime();
-    SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-    Date begin = format.parse("2011/09/05");
-    Date end = format.parse("2011/09/10");
-    Date createDate = format.parse("2011/09/09");
     List<Complaint> listAllComplaint = complaintRepo.findAll();
-    List<Complaint> complaints = complaintService.sort("id", false, 2); // trang 1, lay 3 kq, se lay ra id 1, 2, 3
-    List<Complaint> listWaitingComplaint = complaintRepo.getWaitingComplaint();
-    List<Complaint> complaintsByDate = complaintRepo.searchByDate(createDate);
-    List<Complaint> complaintsFromDateToDate = complaintRepo.searchByDate(format.parse("2011/09/09"), 
-                                                              format.parse("2011/10/02"));
-    List<Complaint> complaintsByYear = complaintRepo.searchByYear(2011);
     List<ComplaintStatus> status = statusRepo.findAll();
     List<CategoryPriority> priority = priorityRepo.findAll();
     
     model.addAttribute("listAll", listAllComplaint);
-    model.addAttribute("listComplaint", complaints);
-    model.addAttribute("no", noOfComplaintInPeriod());
-    model.addAttribute("list", listComplaintDaily(1));
-    model.addAttribute("complaintInWeek", complaintRepo.getByWeekly(begin, end));
-    model.addAttribute("complaintByDepartment", complaintRepo.getByDepartment((byte)1));
-    model.addAttribute("complaintByPriority",complaintRepo.getByPriority((byte)2));
-    model.addAttribute("complaintByFirstName", complaintRepo.searchByFName("n"));
-    model.addAttribute("complaintByDate", complaintsByDate);    
-    model.addAttribute("complaintsFromDateToDate", complaintsFromDateToDate);
-    model.addAttribute("complaintYear", complaintsByYear);
-    model.addAttribute("listComplaintWaiting", listWaitingComplaint);
     model.addAttribute("listStatus", status);
     model.addAttribute("listPriority", priority);
     return "complaint/list";

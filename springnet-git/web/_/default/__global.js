@@ -59,7 +59,7 @@ $.ajaxSetup({
 $.validator.setDefaults($validateOpts);
 $.validator.addMethod('vietnameseDate', function(value, element) {
 	return value.match('/^\d\d\d\d\/\d\d?\d\d?$/');
-}, '');
+}, 'Invalidate date format yyyy/MM/dd');
 
 /* === Execute default methods === */
 

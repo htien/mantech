@@ -32,7 +32,7 @@ public interface ComplaintRepository extends Repository<Complaint> {
   List<Complaint> searchByDate(Date from, Date to);
   
   List<Complaint> searchByYear(int year);
-  List<Complaint> search(String username, String equipName, Date dateFrom, Date dateTo);
+  List<Complaint> search(String username, String equipName, Date dateFrom, Date dateTo, byte status, byte priority);
   
   boolean isExist(int id);
   boolean hasAssignmentId(int id);

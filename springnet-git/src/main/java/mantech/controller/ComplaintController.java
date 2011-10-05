@@ -78,6 +78,8 @@ public class ComplaintController {
     List<Complaint> complaintsFromDateToDate = complaintRepo.searchByDate(format.parse("2011/09/09"), 
                                                               format.parse("2011/10/02"));
     List<Complaint> complaintsByYear = complaintRepo.searchByYear(2011);
+    List<ComplaintStatus> status = statusRepo.findAll();
+    List<CategoryPriority> priority = priorityRepo.findAll();
     
     model.addAttribute("listAll", listAllComplaint);
     model.addAttribute("listComplaint", complaints);
@@ -91,6 +93,8 @@ public class ComplaintController {
     model.addAttribute("complaintsFromDateToDate", complaintsFromDateToDate);
     model.addAttribute("complaintYear", complaintsByYear);
     model.addAttribute("listComplaintWaiting", listWaitingComplaint);
+    model.addAttribute("listStatus", status);
+    model.addAttribute("listPriority", priority);
     return "complaint/list";
   }
 
@@ -169,17 +173,21 @@ public class ComplaintController {
   
   @RequestMapping(value = "/complaint/search", method = RequestMethod.POST)
   public String search( @RequestParam("q") String searchText,
-                        @RequestParam("yourchoice") byte choice,
+                        @RequestParam("f") byte choice,
                         @RequestParam(value="dateFrom", required=false) Date dateFrom,
                         @RequestParam(value="dateTo", required=false) Date dateTo,
+                        @RequestParam(value="status") byte status,
+                        @RequestParam(value="priority") byte priority,
                         ModelMap model) {
     List<Complaint> complaints = null;
     searchText = StringUtils.isBlank(searchText) ? null : searchText.trim();
     
     switch (choice) {
-      case 1: complaints = complaintRepo.search(searchText, null, dateFrom, dateTo); break;
-      case 2: complaints = complaintRepo.search(null, searchText, dateFrom, dateTo); break;
-      default: complaints = complaintRepo.search(null, null, dateFrom, dateTo); break;
+      case 1: 
+        complaints = complaintRepo.search(searchText, null, dateFrom, dateTo, status, priority);
+        break;
+      case 2: complaints = complaintRepo.search(null, searchText, dateFrom, dateTo, status, priority); break;
+      default: complaints = complaintRepo.search(null, null, dateFrom, dateTo, status, priority); break;
     }
    
     if (complaints.size() != 0) {

@@ -164,16 +164,22 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
   
   @SuppressWarnings("unchecked")
   @Override
-  public List<Complaint> search(String username, String equipName, Date dateFrom, Date dateTo) {
+  public List<Complaint> search(String username, String equipName, Date dateFrom, Date dateTo, byte status, byte priority) {
     Criteria crit = session().createCriteria(persistClass, "c");
     Criterion critDateFrom = dateFrom != null ? Restrictions.ge("c.createDate", dateFrom) : null,
               critDateTo = dateTo != null ? Restrictions.lt("c.createDate", SpringUtils.increaseDay(dateTo)) : null;
 
     if (username != null) {
-      crit.createCriteria("user", "u").add(Restrictions.ilike("u.username", "%" + username + "%"));
+      crit.createCriteria("c.user", "u").add(Restrictions.ilike("u.username", "%" + username + "%"));
     }
     if (equipName != null) {
-      crit.createCriteria("equipment", "e").add(Restrictions.ilike("e.name", "%" + equipName + "%"));
+      crit.createCriteria("c.equipment", "e").add(Restrictions.ilike("e.name", "%" + equipName + "%"));
+    }
+    if (status >= 1 && status <= 4) {
+      crit.createCriteria("c.status", "s").add(Restrictions.eq("s.id", status));
+    }
+    if (priority >= 1 && priority <= 5) {
+      crit.createCriteria("c.priority", "p").add(Restrictions.eq("p.id", priority));
     }
     crit = critDateFrom != null ? crit.add(critDateFrom) : crit;
     crit = critDateTo != null ? crit.add(critDateTo) : crit;

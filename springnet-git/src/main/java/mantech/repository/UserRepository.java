@@ -24,8 +24,7 @@ public interface UserRepository extends Repository<User> {
   List<User> getUserByRole(int id);
   List<User> getUserByRole(String name);
   List<User> getUsers(int... ids);
-  List<User> searchByUsername(String username);
-  List<User> searchByDepartment(String name);
+  List<User> search(String username, String departName);
   boolean isExistUser(int id);
   boolean isExistUser(String unameOrEmail);
 

@@ -116,7 +116,7 @@ public class SpringServlet extends DispatcherServlet {
     Date now = Calendar.getInstance().getTime();
 
     // Cached attributes
-    defaultAttributes.put("name", config.getString(ConfigKeys.CODENAME));
+    defaultAttributes.put("codename", config.getString(ConfigKeys.CODENAME));
     defaultAttributes.put("version", config.getString(ConfigKeys.VERSION));
     defaultAttributes.put("webpage", config.getString("link.webpage"));
     defaultAttributes.put("contextPath", config.getString(ConfigKeys.CONTEXT_PATH));
@@ -127,13 +127,11 @@ public class SpringServlet extends DispatcherServlet {
     defaultAttributes.put("now", now);
     defaultAttributes.put("timestamp", new Long(System.currentTimeMillis()));
     defaultAttributes.put("config", config);
-    
-    defaultAttributes.put("pageTitle", config.getString("web.page.title"));
-    defaultAttributes.put("metaKeywords", config.getString("web.page.metatag.keywords"));
-    defaultAttributes.put("metaDescription", config.getString("web.page.metatag.description"));
 
     // Non-cached attributes
-    request.setAttribute("p", request.getMethod().equalsIgnoreCase("GET") ? request.getParameter("p") : null);
+    request.setAttribute("p", request.getMethod().equalsIgnoreCase("GET")
+          ? request.getParameter("p")
+          : null);
   }
 
   private void showLoadedBeans(ApplicationContext beanFactory) {

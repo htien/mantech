@@ -1,17 +1,18 @@
+<%@ include file="../layout/top.inc" %>
+
 <div style="text-align:center">
-	<h1 style="margin:20px auto">${welcomeMsg}</h1>
+	<h1 style="margin:20px auto"><jtien:i18n key="Welcome.hello" /></h1>
 	<div style="margin-top:30px">
-		<p>Project Hosting:</p>
-		<p><a href="https://github.com/lilylnx/cncaptech/">github.com/lilylnx/cncaptech/</a></p>
+		<p><jtien:i18n key="Project.hosting" /></p>
+		<p><jtien:i18n key="Project.hosting.link" /></p>
 	</div>
 	<div style="margin:20px auto 10px">
-		<p>Libraries:</p>
-		<p><a href="http://repo.or.cz/w/libjcafe.git">repo.or.cz/w/libjcafe.git</a></p>
+		<p><jtien:i18n key="Project.libraries" /></p>
+		<p><jtien:i18n key="Project.libraries.link1" /></p>
 	</div>
 	<div style="margin:20px auto 10px">
-		<p>Mirrors:</p>
-		<p><a href="http://code.google.com/p/springnet/">code.google.com/p/springnet/</a><br />
-			<a href="http://www.assembla.com/spaces/cncaptech/">assembla.com/spaces/cncaptech/</a></p>
+		<p><jtien:i18n key="Project.mirrors" /></p>
+		<p><jtien:i18n key="Project.mirrors.link1" /><br /><jtien:i18n key="Project.mirrors.link2" /></p>
 	</div>
-	<a class="g-b g-b-r" href="${contextPath}/?p=login" style="margin:30px 0 0">ENTER LOGIN PAGE</a>
+	<a class="g-b g-b-r" href="${contextPath}/?p=login" style="margin:30px 0 0"><jtien:i18n key="Welcome.btnLogin" /></a>
 </div>

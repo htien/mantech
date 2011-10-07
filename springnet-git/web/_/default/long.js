@@ -4,24 +4,22 @@ $('#adduser_pagelet').ready(function() {
 			title: 'Add User Confirmation',
 			buttons: {
 				'Create': function() {
-					if (frm.valid()) {
-						jTien.ajaxSubmit(frm)
-							.success(function(data, textCode, xhr) {
-								jTien.callJqDialog('confirm-dialog', 'Added user successfully!', {
-									title: 'Server Message',
-									buttons: {
-										'Close': function() {
-											$(this).dialog('destroy');
-										}
+					if (!frm.valid()) { return; }
+					jTien.ajaxSubmit(frm)
+						.success(function(data, textCode, xhr) {
+							jTien.callJqDialog('confirm-dialog', 'Added user successfully!', {
+								buttons: {
+									'Close': function() {
+										$(this).dialog('destroy');
 									}
-								});
-								$('#msg').html(xhr.responseText);
-								jTien.resetForm(frm);
-							})
-							.error(function(data) {
-								$(dialog).dialog('close');
+								}
 							});
-					}
+							$('#msg').html(xhr.responseText);
+							jTien.resetForm(frm);
+						})
+						.error(function(data) {
+							$(dialog).dialog('close');
+						});
 				},
 				'Cancel': function() {
 					$(this).dialog('destroy');
@@ -49,7 +47,7 @@ $('#adduser_pagelet').ready(function() {
 				},
 				email: {
 					required: '',
-					email:'eg, abc@cba.com'
+					email:'eg, yourname@example.com'
 				},
 				firstName: {
 					required: '',
@@ -90,25 +88,23 @@ $('#addcomplaint_pagelet').ready(function() {
 			title: 'Add Complaint Confirmation',
 			buttons: {
 				'Create': function() {
-					if (frm.valid()) {
-						jTien.ajaxSubmit(frm)
-							.success(function(data, textCode, xhr) {
-								jTien.callJqDialog('confirm-dialog', 'Added complaint successfully!', {
-									title: 'Server Message',
-									buttons: {
-										'Close': function() {
-											$(this).dialog('destroy');
-										}
+					if (!frm.valid()) { return; }
+					jTien.ajaxSubmit(frm)
+						.success(function(data, textCode, xhr) {
+							jTien.callJqDialog('confirm-dialog', 'Added complaint successfully!', {
+								buttons: {
+									'Close': function() {
+										$(this).dialog('destroy');
 									}
-								});
-								$('#msg').html(xhr.responseText);
-								jTien.resetForm(frm);
-								alert(3);
-							})
-							.error(function(data) {
-								$(dialog).dialog('close');
+								}
 							});
-					}
+							$('#msg').html(xhr.responseText);
+							jTien.resetForm(frm);
+							alert(3);
+						})
+						.error(function(data) {
+							$(dialog).dialog('close');
+						});
 				},
 				'Cancel': function() {
 					$(this).dialog('destroy');
@@ -146,24 +142,22 @@ $('#addassignment_pagelet').ready(function() {
 			title: 'Add Assignment Confirmation',
 			buttons: {
 				'Create': function() {
-					if (frm.valid()) {
-						jTien.ajaxSubmit(frm)
-							.success(function(data, textCode, xhr) {
-								jTien.callJqDialog('confirm-dialog', 'Added assignment successfully!', {
-									title: 'Server Message',
-									buttons: {
-										'Close': function() {
-											$(this).dialog('destroy');
-										}
+					if (!frm.valid()) { return; }
+					jTien.ajaxSubmit(frm)
+						.success(function(data, textCode, xhr) {
+							jTien.callJqDialog('confirm-dialog', 'Added assignment successfully!', {
+								buttons: {
+									'Close': function() {
+										$(this).dialog('destroy');
 									}
-								});
-								$('#msg').html(xhr.responseText);
-								jTien.resetForm(frm);
-							})
-							.error(function(data) {
-								$(dialog).dialog('close');
+								}
 							});
-					}
+							$('#msg').html(xhr.responseText);
+							jTien.resetForm(frm);
+						})
+						.error(function(data) {
+							$(dialog).dialog('close');
+						});
 				},
 				'Cancel': function() {
 					$(this).dialog('destroy');
@@ -186,8 +180,7 @@ $('#addassignment_pagelet').ready(function() {
 				},
 				messages: {
 					beginDate: {
-						required: '',
-						vietnameseDate: 'Invalidate date format for Begin Date.'
+						required: ''
 					},
 					duration: {
 						required: '',
@@ -220,25 +213,23 @@ $('#addequipment_pagelet').ready(function() {
 				title: 'Add Equipment Confirmation',
 				buttons: {
 					'Create': function() {
-						if (frm.valid()) {
-							jTien.ajaxSubmit(frm)
-								.success(function(data, textCode, xhr) {
-									jTien.callJqDialog('confirm-dialog', 'added equipment successfully', {
-										title: 'Server Message',
-										buttons: {
-											'Close': function() {
-												$(this).dialog('destroy');
-											}
+						if (!frm.valid()) { return; }
+						jTien.ajaxSubmit(frm)
+							.success(function(data, textCode, xhr) {
+								jTien.callJqDialog('confirm-dialog', 'added equipment successfully', {
+									buttons: {
+										'Close': function() {
+											$(this).dialog('destroy');
 										}
-									});
-									$("#msg").html(xhr.responseText);
-									jTien.resetForm(frm);
-								})
-								.error(function(data) {
-									alert('error');
-									$(dialog).dialog('close');
+									}
 								});
-						}
+								$("#msg").html(xhr.responseText);
+								jTien.resetForm(frm);
+							})
+							.error(function(data) {
+								alert('error');
+								$(dialog).dialog('close');
+							});
 					},
 					'Cancel': function() {
 						$(this).dialog('destroy');
@@ -273,24 +264,21 @@ $('#edituser_pagelet').ready(function() {
 		dialogOpts = {
 				title: 'Edit User Confirmation',
 				buttons: {
-					'OK': function() {
-						if (frm.valid()) {
-							jTien.ajaxSubmit(frm)
-								.success(function(data, textCode, xhr) {
-									jTien.callJqDialog('confirm-dialog', 'Updated user successfully.', {
-										title: 'Server Message',
-										buttons: {
-											'Close': function() {
-												$(this).dialog('destroy');
-											}
+					'Update': function() {
+						if (!frm.valid()) { return; }
+						jTien.ajaxSubmit(frm)
+							.success(function(json, textCode, xhr) {
+								jTien.callJqDialog('confirm-dialog', json.message, {
+									buttons: {
+										'Close Message': function() {
+											$(this).dialog('destroy');
 										}
-									});
-									$("#msg").html(xhr.responseText);
-								})
-								.error(function(data) {
-									jTien.callJqDialog('confirm-dialog', data, {buttons:{}});
+									}
 								});
-						}
+							})
+							.error(function(data) {
+								jTien.callJqDialog('confirm-dialog', data, {buttons:{}});
+							});
 					},
 					'Cancel': function() {
 						$(this).dialog('destroy');

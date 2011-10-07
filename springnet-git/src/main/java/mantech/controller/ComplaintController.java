@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import net.lilylnx.springnet.core.exception.ValidationException;
+
 import mantech.domain.CategoryPriority;
 import mantech.domain.Complaint;
 import mantech.domain.ComplaintStatus;
@@ -27,8 +29,6 @@ import mantech.repository.ComplaintStatusRepository;
 import mantech.repository.EquipmentRepository;
 import mantech.repository.UserRepository;
 import mantech.service.ComplaintService;
-
-import net.lilylnx.springnet.core.exception.ValidationException;
 
 /**
  * @author Long Nguyen
@@ -77,7 +77,7 @@ public class ComplaintController {
   }
 
   @RequestMapping(value = "/complaint/add", method = RequestMethod.GET)
-  public String insert(@RequestParam(value = "uid") int id, ModelMap model){
+  public String insert(@RequestParam(value="uid") int id, ModelMap model){
     User user = userRepo.get(id);
     model.addAttribute("user", user);
     List<Equipment> equip = equipmentRepo.findAll();
@@ -86,9 +86,9 @@ public class ComplaintController {
   }
   
   @RequestMapping(value = "/complaint/addSave", method = RequestMethod.POST)
-  public String insertSave(@RequestParam(value = "equipId") int equipId,
-      @RequestParam(value = "title") String title,
-      @RequestParam(value = "content") String content, ModelMap model)
+  public String insertSave(@RequestParam(value="equipId") int equipId,
+      @RequestParam(value="title") String title,
+      @RequestParam(value="content") String content, ModelMap model)
   {
     Complaint complaint = new Complaint();
     User user = userRepo.get(2);
@@ -142,26 +142,25 @@ public class ComplaintController {
   }
   
   @RequestMapping(value = "/complaint/search", method = RequestMethod.POST)
-  public String search( @RequestParam("q") String searchText,
-                        @RequestParam("f") byte choice,
-                        @RequestParam(value="dateFrom", required=false) Date dateFrom,
-                        @RequestParam(value="dateTo", required=false) Date dateTo,
-                        @RequestParam(value="status") byte status,
-                        @RequestParam(value="priority") byte priority,
-                        ModelMap model) {
+  public String search(@RequestParam("q") String searchText,
+      @RequestParam("f") byte selectedField,
+      @RequestParam(value="dateFrom", required=false) Date dateFrom,
+      @RequestParam(value="dateTo", required=false) Date dateTo,
+      @RequestParam(value="status") byte status,
+      @RequestParam(value="priority") byte priority,
+      ModelMap model)
+  {
     List<Complaint> complaints = null;
     searchText = StringUtils.isBlank(searchText) ? null : searchText.trim();
     
-    switch (choice) {
-      case 1: 
-        complaints = complaintRepo.search(searchText, null, dateFrom, dateTo, status, priority);
-        break;
+    switch (selectedField) {
+      case 1: complaints = complaintRepo.search(searchText, null, dateFrom, dateTo, status, priority); break;
       case 2: complaints = complaintRepo.search(null, searchText, dateFrom, dateTo, status, priority); break;
       default: complaints = complaintRepo.search(null, null, dateFrom, dateTo, status, priority); break;
     }
    
     if (complaints.size() != 0) {
-      model.addAttribute("listAll", complaints);
+      model.addAttribute("listComplaint", complaints);
       return "/complaint/search";
     }
     else {

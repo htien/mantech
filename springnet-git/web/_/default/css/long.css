@@ -1,5 +1,25 @@
-.g-f { margin:20px; }
-.box .title { font-weight:bold; font-size:20px; text-align:center; margin-top:10px; }
-.box .row { margin-bottom:12px; }
-.box .row strong { display:inline-block; vertical-align:baseline; margin-top:4px; width:90px; font-weight:bold; }
-.box .row input[type=text] { margin-right:10px; }
+.g-f {
+  margin: 20px;
+}
+
+.box .title {
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+.box .row {
+  margin-bottom: 12px;
+}
+
+.box .row strong {
+  display: inline-block;
+  vertical-align: baseline;
+  margin-top: 4px;
+  width: 90px;
+  font-weight: bold;
+}
+
+.box .row input[type=text], .box .row input[type=password] {
+  margin-right: 10px;
+}

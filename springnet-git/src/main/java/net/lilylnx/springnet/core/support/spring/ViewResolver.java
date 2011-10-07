@@ -29,8 +29,8 @@ public class ViewResolver extends InternalResourceViewResolver {
    */
   @Override
   public View resolveViewName(String viewName, Locale locale) throws Exception {
-    boolean isView = viewName.startsWith(REDIRECT_URL_PREFIX) || viewName.startsWith(FORWARD_URL_PREFIX);
-    if (isView && !viewName.endsWith("/")) {
+    boolean hasViewPrefix = viewName.startsWith(REDIRECT_URL_PREFIX) || viewName.startsWith(FORWARD_URL_PREFIX);
+    if (hasViewPrefix && !viewName.endsWith("/")) {
       viewName += config.getServletExt();
     }
     return super.resolveViewName(viewName, locale);

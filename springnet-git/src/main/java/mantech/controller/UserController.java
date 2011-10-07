@@ -1,5 +1,5 @@
 /**
- * Written by Long Nguyen <chautinhlong@gmail.com>
+ * Written by Tien Nguyen <lilylnx@users.sf.net>
  * FREE FOR ALL BUT DOES NOT MEAN THERE IS NO PRICE.
  */
 package mantech.controller;
@@ -8,22 +8,28 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import net.lilylnx.springnet.util.ClientUtils;
+
+import mantech.controller.helpers.TemplateKeys;
 import mantech.domain.Department;
 import mantech.domain.User;
 import mantech.domain.UserRole;
 import mantech.repository.DepartmentRepository;
 import mantech.repository.UserRepository;
 import mantech.repository.UserRoleRepository;
+import mantech.service.UserService;
 
 /**
- * @author Long Nguyen
- * @version $Id: UserController.java,v 1.0 Sep 9, 2011 3:59:57 AM nguyenlong Exp $
+ * 
+ * @author Tien Nguyen
+ * @version $Id: UserController.java,v 1.0 Sep 9, 2011 3:59:57 AM lilylnx Exp $
  */
 @Controller
 public class UserController {
@@ -37,112 +43,85 @@ public class UserController {
   @Autowired
   private DepartmentRepository departmentRepo;
   
-  @RequestMapping(value = {"/user", "/user/list"}, method = RequestMethod.GET)
-  public String list(ModelMap model){
-    List<User> users = userRepo.findAll();
-    model.addAttribute("listUser", users);
-    return "user/list";
-  }
+  @Autowired
+  private UserService userService;
   
-  @RequestMapping(value="/user/add", method = RequestMethod.GET)
+  @Autowired
+  private ClientUtils clientUtils;
+
+  @RequestMapping(value = "/user", params = "!p", method = RequestMethod.GET)
+  public String list(ModelMap model) {
+    model.addAttribute("listUser", userRepo.findAll());
+    return TemplateKeys.USER_ADMIN;
+  }
+
+  @RequestMapping(value="/user", params = "p=add", method = RequestMethod.GET)
   public String insert(ModelMap model) {
-    List<Department> departs = departmentRepo.findAll();
-    List<UserRole> roles = roleRepo.findAll();
-    
-    model.addAttribute("departList", departs);
-    model.addAttribute("roleList", roles);
-    return "user/add";
+    model.addAttribute("departList", departmentRepo.findAll());
+    model.addAttribute("roleList", roleRepo.findAll());
+    return TemplateKeys.USER_ADMIN;
   }
   
   @RequestMapping(value = "/user/addSave", method = RequestMethod.POST)
-  public String insertSave(@RequestParam(value = "username") String username,
-                            @RequestParam(value = "passwd") String pass,
-                            @RequestParam(value = "email") String email,
-                            @RequestParam(value = "department") byte departId,
-                            @RequestParam(value = "role") byte roleId,
-                            @RequestParam(value = "firstName") String firstName,
-                            @RequestParam(value = "lastName") String lastName,
-                            @RequestParam(value = "gender") String gender,
-                            @RequestParam(value = "address") String address,
-                            ModelMap model) {
+  public String insertSave(@RequestParam(value="username") String username,
+        @RequestParam(value="passwd") String password, @RequestParam(value="email") String email,
+        @RequestParam(value="department") byte departId, @RequestParam(value="role") byte roleId,
+        @RequestParam(value="firstName") String firstName, @RequestParam(value="lastName") String lastName,
+        @RequestParam(value="gender") String gender, @RequestParam(value="address") String address)
+  {
+    // TODO Validate username, email...
     
     Department department = departmentRepo.get(departId);
-    UserRole role = roleRepo.get(roleId);
-    
-//    if (userRepo.isExistUser(100)) {
-//      model.addAttribute("msg", "The User ID is used.");
-//      //A(??)
-//      return "msg";
-//    }
-    
-    User user = new User();
-    user.setUsername(username);
-    user.setPassword(pass);
-    user.setEmail(email); 
-    user.setFirstName(firstName);
-    user.setLastName(lastName);
-    user.setGender(gender);
-    user.setDepartment(department);
-    user.setHomeAddress(address);
-    user.setRole(role);
-    
-    userRepo.save(user);
-    
-//    model.addAttribute("msg", "Insert thanh cong!");
+    UserRole userRole = roleRepo.get(roleId);
+
+    userService.add(username, password, email, firstName, lastName, gender, address, department, userRole);
     return "redirect:/user/list";
   }
   
-  @RequestMapping(value = "/user/edit", method = RequestMethod.GET)
-  public String update(@RequestParam("uId") int id, ModelMap modal) {
-    List<Department> departs = departmentRepo.findAll();
-    List<UserRole> roles = roleRepo.findAll();
+  @RequestMapping(value = "/user", params = "p=edit", method = RequestMethod.GET)
+  public String update(@RequestParam("id") int id, ModelMap model) {
     User user = userRepo.get(id);
-    Department depart = user.getDepartment();
-    modal.addAttribute("departList", departs);
-    modal.addAttribute("roleList", roles);
-    modal.addAttribute("user", user);
-    modal.addAttribute("depart", depart);
-    return "user/edit";
+
+    model.addAttribute("departList", departmentRepo.findAll());
+    model.addAttribute("roleList", roleRepo.findAll());
+    model.addAttribute("user", userRepo.get(id));
+    model.addAttribute("depart", user.getDepartment());
+    return TemplateKeys.USER_ADMIN;
   }
   
   @RequestMapping(value = "/user/editSave", method = RequestMethod.POST)
-  public String updateSave(@RequestParam("uid") int userId, 
-                      @RequestParam("email") String email,
-                      @RequestParam("department") byte depart,
-                      @RequestParam("role") byte role,
-                      @RequestParam("address") String address) {
-    User user = userRepo.get(userId);
-    user.setEmail(email);
+  public ResponseEntity<String> updateSave(@RequestParam("id") int userId, @RequestParam("email") String email,
+        @RequestParam("department") byte depart, @RequestParam("role") byte role,
+        @RequestParam("address") String address)
+  {
     Department department = departmentRepo.get(depart);
-    user.setDepartment(department);
-    UserRole uRole = roleRepo.get(role);
-    user.setRole(uRole);
-    user.setHomeAddress(address);
-    userRepo.save(user);
-    return "msg";
+    UserRole userRole = roleRepo.get(role);
+
+    User user = userService.update(userId, email, address, department, userRole);
+    return clientUtils.createJsonResponse(
+        new ResponseMessage("update", 0, String.format("Updated user: <strong>%s (ID: %d)</strong> successfully.",
+            user.getFirstName().concat(" ").concat(user.getLastName()), user.getId())));
   }
 
   @RequestMapping(value = "/user/search", method = RequestMethod.POST)
-  public String search(@RequestParam("q") String searchText,
-      @RequestParam("f") byte field, ModelMap model) {
-
+  public String search(@RequestParam("q") String searchText, @RequestParam("f") byte selectedField,
+      ModelMap model)
+  {
     List<User> users = null;
-    if (field == 1 && StringUtils.isNotBlank(searchText.trim())) {
-      users = userRepo.searchByUsername(searchText);
-    }
-    else if (field == 2 && StringUtils.isNotBlank(searchText.trim())) {
-      users = userRepo.searchByDepartment(searchText);
-    }
-    else {
-      users = userRepo.findAll();
-    }
+    searchText = StringUtils.isBlank(searchText) ? null : searchText.trim();
     
+    switch (selectedField) {
+      case 1: users = userService.searchByUsername(searchText); break;
+      case 2: users = userService.searchByDepartmentName(searchText); break;
+      default: users = userRepo.findAll(); break;
+    }
+
     if (users.size() != 0) {
       model.addAttribute("listUser", users);
-      return "/user/search";
+      return TemplateKeys.USER_SEARCH_ADMIN;
     }
     else {
-      return "null";
+      return TemplateKeys.NULL;
     }
   }
 

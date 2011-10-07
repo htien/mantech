@@ -38,14 +38,16 @@ public class EquipmentController {
   private CategoryRepository categoryRepo;
 
   @RequestMapping(value = {"/equipment", "/equipment/list"}, method = RequestMethod.GET)
-  public String list(@RequestParam(value = "page", required = false, defaultValue = "1") int page, ModelMap model) {
+  public String list(@RequestParam(value="page", required=false, defaultValue="1") int page,
+      ModelMap model) {
+
     int pageCount;
-    if (equipmentRepo.count().intValue() % 3 == 0)
+    if (equipmentRepo.count().intValue() % 3 == 0) {
       pageCount = equipmentRepo.count().intValue() / 3;
-    else
+    }
+    else {
       pageCount = (equipmentRepo.count().intValue() / 3) + 1;
-    System.out.println(equipmentRepo.count().intValue());
-    model.addAttribute("pageCount", pageCount);
+    }
 
     if (page < 1 || page > pageCount) {
       model.addAttribute("msg", "Nothing to show");
@@ -54,6 +56,8 @@ public class EquipmentController {
       List<Equipment> listEquipment = equipmentService.paginate(page);
       model.addAttribute("listEquipment", listEquipment);
     }
+    
+    model.addAttribute("pageCount", pageCount);
     return "/equipment/list";
 
   }
@@ -66,12 +70,14 @@ public class EquipmentController {
   }
   
   @RequestMapping(value = "/equipment/addSave", method = RequestMethod.POST)
-  public String insertSave(@RequestParam(value = "name") String name, @RequestParam(value = "catId") int id,
-        ModelMap model) {
+  public String insertSave(@RequestParam(value="name") String name,
+      @RequestParam(value="catId") int id, ModelMap model) {
+
     Category category = categoryRepo.get(id);
     Equipment equipment = new Equipment();
     equipment.setName(name);
     equipment.setCategory(category);
+    
     equipmentRepo.save(equipment);
     
     model.addAttribute("msg", "Added Equipment Successfully!");
@@ -79,7 +85,9 @@ public class EquipmentController {
   }
   
   @RequestMapping(value = "/equipment/edit", method = RequestMethod.GET)
-  public String update(@RequestParam(value = "id", required = false, defaultValue = "0") int id, ModelMap model){
+  public String update(@RequestParam(value="id", required=false, defaultValue="0") int id,
+      ModelMap model) {
+
     Equipment equipment = equipmentRepo.get(id);
     List<Category> listCategory = categoryRepo.findAll();
     model.addAttribute("equipment", equipment);
@@ -88,9 +96,9 @@ public class EquipmentController {
   }
   
   @RequestMapping(value = "/equipment/editSave", method = RequestMethod.POST)
-  public String updateSave(@RequestParam(value = "id") int id, @RequestParam(value = "catId") int catId,@RequestParam(value = "name") String name, ModelMap model) {
-    //update equipment set  category_id = 3, name = 'Fan' where id = 1
-    
+  public String updateSave(@RequestParam(value="id") int id, @RequestParam(value="catId") int catId,
+      @RequestParam(value="name") String name, ModelMap model) {
+
     Equipment equipment = equipmentRepo.get(id);
     Category newCate = categoryRepo.get(catId);
     if (newCate != null) {

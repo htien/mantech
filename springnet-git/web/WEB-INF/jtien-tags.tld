@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_0.xsd"
+	version="2.0">
+
+	<description>SpringNet Tag Libraries</description>
+	<tlib-version>1.0</tlib-version>
+	<short-name>jtien</short-name>
+	<uri>http://code.google.com/p/springnet</uri>
+	
+	<!-- I18n -->
+	
+	<tag>
+		<name>i18n</name>
+		<tag-class>net.lilylnx.springnet.core.tags.I18nTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>key</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<dynamic-attributes>true</dynamic-attributes>
+	</tag>
+	
+	<!-- Link -->
+	
+	<tag>
+		<name>url</name>
+		<tag-class>net.lilylnx.springnet.core.tags.URLTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>address</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<!-- TemplateResource -->
+
+	<tag>
+		<name>templateResource</name>
+		<tag-class>net.lilylnx.springnet.core.tags.TemplateResourceTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>item</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<!-- Settings -->
+	
+	<tag>
+		<name>settings</name>
+		<tag-class>net.lilylnx.springnet.core.tags.SettingsTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>key</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<!-- Tag files -->
+	
+	<tag>
+		<name>pagination</name>
+		<path>/WEB-ING/tags/springnet/pagination.tag</path>
+	</tag>
+	
+	<!-- Functions -->
+	
+	<function>
+		<name>contains</name>
+		<function-class>net.lilylnx.springnet.core.tags.Functions</function-class>
+		<function-signature>boolean contains(java.util.List, java.lang.Object)</function-signature>
+	</function>
+	
+	<function>
+		<name>lastPage</name>
+		<function-class>net.lilylnx.springnet.core.tags.Functions</function-class>
+		<function-signature>int lastPage(int, int)</function-signature>
+	</function>
+
+</taglib>

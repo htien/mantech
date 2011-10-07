@@ -2,7 +2,7 @@
 	jsCompressor="closure" compressJavaScript="true" compressCss="true"
 	removeIntertagSpaces="true">
 
-<c:forEach items="${listAll}" var="complaint">
+<c:forEach items="${listComplaint}" var="complaint">
 	<tr>
 		<td>${complaint.id}</td>
 		<td>${complaint.user.username}</td>

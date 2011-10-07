@@ -66,7 +66,7 @@ public class AssignmentController {
   }
   
   @RequestMapping (value = "/assignment/add", method = RequestMethod.GET)
-  public String insert(@RequestParam(value = "compId") int compId, ModelMap model) {
+  public String insert(@RequestParam(value="compId") int compId, ModelMap model) {
     if (complaintRepo.isExist(compId)) {
       if (!complaintRepo.hasAssignmentId(compId)) {
         List<Complaint> complaints = complaintRepo.findAll();
@@ -85,8 +85,10 @@ public class AssignmentController {
   }
   
   @RequestMapping (value = "/assignment/addSave", method = RequestMethod.POST)
-  public String insertSave(@RequestParam(value = "compId") int compId, @RequestParam(value="userId") int[] userId, @RequestParam(value="beginDate") Date beginDate,
-      @RequestParam(value="duration") short duration) {
+  public String insertSave(@RequestParam(value="compId") int compId,
+                          @RequestParam(value="userId") int[] userId,
+                          @RequestParam(value="beginDate") Date beginDate,
+                          @RequestParam(value="duration") short duration) {
 
     List<User> users = userRepo.getUsers(userId);
     Complaint complaint = complaintRepo.get(compId);

@@ -1,19 +1,21 @@
+<%@ include file="../layout/top.inc" %>
+
 <div id="signin_pagelet">
 	<div id="signin-box">
-		<h2>Administration</h2>
-		<form id="signin-form" class="off" action="/login" method="post">
+		<h2><jtien:i18n key="Login.admin" /></h2>
+		<form id="signin-form" class="off" action="/ssoAuthenticate" method="post">
 			<div>
-				<label title="Account ID (Username OR Email)">
-					<strong class="id-label">ID</strong>
+				<label title="<jtien:i18n key='Login.id.tip' />">
+					<strong class="id-label"><jtien:i18n key="Login.id" /></strong>
 					<input type="text" id="id" class="g-t" name="id" value="${id}" />
 				</label>
-				<label title="Your password for signing in">
-					<strong class="passwd-label">Password</strong>
+				<label title="<jtien:i18n key='Login.passwd.tip' />">
+					<strong class="passwd-label"><jtien:i18n key="Login.passwd" /></strong>
 					<input type="password" id="passwd" class="g-t" name="passwd" />
 				</label>
 			</div>
 			<div>
-				<div id="signin" class="g-b g-b-b">Sign in</div>
+				<div id="signin" class="g-b g-b-b"><jtien:i18n key="Login.btnSignin" /></div>
 			</div>
 			<p></p>
 			<%--<div id="testZone">

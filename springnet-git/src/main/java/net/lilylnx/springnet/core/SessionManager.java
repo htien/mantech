@@ -44,7 +44,7 @@ public class SessionManager {
   public UserSession refreshSession(HttpServletRequest request, HttpServletResponse response) {
     boolean isSSOAuthention = ConfigKeys.TYPE_SSO.equals(config.getString(ConfigKeys.AUTHENTICATION_TYPE));
     request.setAttribute("sso", isSSOAuthention);
-    request.setAttribute("ssoLogout", config.getString(ConfigKeys.SSO_LOGOUT_REDIRECT));
+    request.setAttribute("ssoLogout", config.getString(ConfigKeys.SSO_LOGOUT));
     return null;
   }
   

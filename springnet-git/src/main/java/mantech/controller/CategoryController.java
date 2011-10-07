@@ -32,15 +32,15 @@ public class CategoryController {
   @RequestMapping(value = {"/category", "/category/list"}, method = RequestMethod.GET)
   public String list(ModelMap model){
     List<Category> list = categoryRepo.findAll();
-    model.addAttribute("list",list);
+    model.addAttribute("list", list);
     return "/category/list";
   }
   
   @RequestMapping(value = "/category/edit", method = RequestMethod.GET)
-  public String update(@RequestParam(value = "catId", required = false, defaultValue = "0") int id, ModelMap model) {
-    // Xu ly query string
+  public String update(@RequestParam(value="catId", required=false, defaultValue="0") int id,
+      ModelMap model) {
+
     if (id > 0) {
-      // Lay category len
       Category category = categoryRepo.get(id);
       model.addAttribute("category", category);
     }
@@ -57,10 +57,9 @@ public class CategoryController {
 
   @RequestMapping(value = "/category/editSave", method = RequestMethod.POST)
   public String updateSave(@ModelAttribute("category") Category category, ModelMap model) {
-    // Validate tai day
+    // TODO Validate tai day
 
     if (category != null) {
-      // Update entity xuong database
       categoryRepo.update(category);
       model.addAttribute("msg", "Successfully!");
       model.addAttribute("ok", true);

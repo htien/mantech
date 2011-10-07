@@ -7,6 +7,10 @@ $('#signin_pagelet').ready(function() {
 		signInButton = '#signin',
 		resetButton = '#reset';
 	
+	function shakeContainer(container) {
+		jTien.f.toJqId(container).stop(true, true).effect('shake', { times:2, distance:5 }, 50);
+	}
+	
 	/* Reset button */
 
 	$(signInForm).delegate(resetButton, 'click', function(evt) {
@@ -26,22 +30,28 @@ $('#signin_pagelet').ready(function() {
 				passwd: { required: true, minlength: 3 }
 			},
 			messages: {
-				id: { required: 'Enter your username or email).', minlength: 'ID, at least {0} characters.' },
+				id: { required: 'Enter your username or email.', minlength: 'ID, at least {0} characters.' },
 				passwd: { required: 'Enter your password.', minlength: 'Password, at least {0} characters.' }
 			},
 			invalidHandler: function(form, validator) {
-				$(signInBox).stop(true, true).effect('shake', { times:2, distance:5 }, 50);
+				shakeContainer(signInBox);
 			},
 			submitHandler: function(form) {
 				jTien.ajaxSubmit(form)
-					.success(function(data) {
-						jTien.callJqDialog('ajax-response', data, {
-							buttons: {
-								'Close': function() {
-									$(this).dialog('destroy');
+					.success(function(loginResponse) {
+						if (loginResponse.status == 1) { 
+							document.location = $ctx;
+						}
+						else {
+							jTien.callJqDialog('ajax-response', loginResponse.message, {
+								buttons: {
+									'Close': function() {
+										$(this).dialog('destroy');
+										$(signInForm).submit();
+									}
 								}
-							}
-						}).dialog('open');
+							}).dialog('open');
+						}
 					})
 					.complete(function(data) {
 						jTien.resetForm(signInForm);

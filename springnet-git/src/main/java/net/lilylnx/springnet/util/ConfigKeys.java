@@ -18,13 +18,15 @@ public class ConfigKeys {
   public static final String LOG4J_XML_PATH = "/META-INF/log4j.xml";
   public static final String SPRING_PROPS_PATH = "/META-INF/springnet.properties";
   public static final String SPRING_CUSTOM_PROPS_PATH = "/META-INF/springnet-custom.properties";
+  public static final String SPRING_LANGUAGES_PATH = "/META-INF/languages/";
+  public static final String SPRING_LOCALE_PROPS_PATH = SPRING_LANGUAGES_PATH + "locales.properties";
   public static final String APPLICATION_PATH = "application.path";
   public static final String CONFIG = "config";
   public static final String DB_PASSWD = "db.passwd";
   public static final String DB_ENCRYPTED_PASSWD = "db.passwd.enc";
   
   public static final String SPRING_CONTEXT = "springnetContext";
-  public static final String CODENAME = "name";
+  public static final String CODENAME = "codename";
   public static final String VERSION = "version";
   public static final String CONTEXT_PATH = "context.path";
   public static final String ENCODING = "encoding";
@@ -34,11 +36,14 @@ public class ConfigKeys {
   public static final String TYPE_SSO = "sso";
   public static final String USERPWD_ALGOR = Algorithms.WHIRLPOOL_HASH;
   
-  public static final String SSO_LOGOUT_REDIRECT = "sso.logout.redirect";
+  public static final String SSO_LOGOUT = "sso.logout";
   
   public static final String ANONYMOUS_USER_ID = "anonymous.userId";
   public static final String ROLE_MANAGER = "roleManager";
   public static final String USER_SESSION = "userSession";
+  
+  public static final String I18N_DEFAULT_ADMIN = "i18n.internal";
+  public static final String I18N_DEFAULT = "i18n.default";
 
   public static final String HTTP_SERVLET_RESPONSE = "springnet.http.servlet.response";
   

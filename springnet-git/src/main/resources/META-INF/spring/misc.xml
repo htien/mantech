@@ -18,6 +18,8 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
+	<bean id="com.google.gson.Gson" class="com.google.gson.Gson" />
+
 	<bean id="net.lilylnx.springnet.SpringNet" class="net.lilylnx.springnet.SpringNet" />
 	<bean id="net.lilylnx.springnet.core.SessionManager" class="net.lilylnx.springnet.core.SessionManager" />
 	<bean id="net.lilylnx.springnet.extension.RequestOperationChain" class="net.lilylnx.springnet.extension.RequestOperationChain">
@@ -26,6 +28,8 @@
 		</property>
 	</bean>
 	<bean id="net.lilylnx.springnet.sso.LoginAuthenticator" class="net.lilylnx.springnet.sso.DefaultLoginAuthenticator" />
+	<bean id="net.lilylnx.springnet.util.ClientUtils" class="net.lilylnx.springnet.util.ClientUtils" />
+	<bean id="net.lilylnx.springnet.util.I18n" class="net.lilylnx.springnet.util.I18n" autowire="constructor" />
 	<bean id="net.lilylnx.springnet.util.SpringConfig" class="net.lilylnx.springnet.util.SpringConfig" />
 	
 	<bean id="org.springframework.beans.factory.config.CustomScopeConfigurer"

@@ -1,5 +1,4 @@
-<%@ include file="../layout/header.inc"%>
-<compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
+<%@ include file="../../layout/top.inc"%>
 
 <div id="adduser_pagelet" class="g-pl">
 	<div id="adduser-box" class="box">
@@ -10,19 +9,19 @@
 				<div class="row">
 					<label>
 						<strong>User Name: </strong>
-						<input type="text" name="username" class="ui-widget-content"/>
+						<input type="text" name="username" />
 					</label>
 				</div>
 				<div class="row">
 					<label>
 						<strong>Password: </strong>
-						<input type="text" name="passwd" class="ui-widget-content"/>
+						<input type="password" name="passwd" />
 					</label>
 				</div>
 				<div class="row">
 					<label>
 						<strong>Email: </strong>
-						<input type="text" name="email" class="ui-widget-content"/>
+						<input type="text" name="email" />
 					</label>
 				</div>
 				<div class="row">
@@ -48,13 +47,13 @@
 				<div class="row">
 					<label>
 						<strong>First Name: </strong>
-						<input type="text" name="firstName" class="ui-widget-content"/>
+						<input type="text" name="firstName" />
 					</label>
 				</div>
 				<div class="row">
 					<label>
 						<strong>Last Name: </strong>
-						<input type="text" name="lastName" class="ui-widget-content"/>
+						<input type="text" name="lastName" />
 					</label>
 				</div>
 				<div class="row">
@@ -69,7 +68,7 @@
 				<div class="row">
 					<label>
 						<strong>Address: </strong>
-						<input type="text" name="address" class="ui-widget-content"/>
+						<input type="text" name="address" />
 					</label>
 				</div>
 			</div>
@@ -80,6 +79,3 @@
 		</form>
 	</div>
 </div>
-
-</compress:html>
-<%@ include file="../layout/footer.inc"%>

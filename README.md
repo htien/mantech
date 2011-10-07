@@ -7,9 +7,9 @@ Using technologies
 
 * DB Management: SQL Server 2008, MySQL 5.x
 
-* Server-side: Servlet, Spring MVC, JPA with Hibernate, OSGi with ?
+* Server-side: Servlet, Spring MVC, Hibernate.
 
-* Client-side: jQuery, Dojo
+* Client-side: jQuery(, Closure Library).
 
 * Integrated Developement Environment: Eclipse 3.7+ (Indigo) or Netbeans 7.0.1+
 
@@ -23,25 +23,27 @@ Using technologies
 * Web Server: Tomcat 7.0.20+
 
 
-Hướng dẫn mở đề án
-------------------
+Hướng dẫn mở đề án (Vi)
+-----------------------
 
 ### Tổng quát
 
 Đề án đã được cấu hình để có thể mở được bằng Eclipse và Netbeans (chọn đúng phiên bản được yêu cầu).
 Lưu ý: Eclipse và Netbeans phải được cài đặt plugin hỗ trợ Maven 3 trở lên.
-Đề án được lưu trữ tại Github và Assembla tại URL:
+Đề án được lưu trữ tại:
 
   * https://github.com/lilylnx/cncaptech/
+  * http://code.google.com/p/springnet/
   * http://www.assembla.com/code/cncaptech/git/nodes
 
-Sử dụng công cụ [Git](http://git-scm.com/) để tải về. Trên Windows, sử dụng
+Sử dụng công cụ [Git](http://git-scm.com/) để tải đề án về. Trên Windows, sử dụng
 [msysgit](http://code.google.com/p/msysgit/downloads/list) để tải về.
-Sau khi tải về, điều cần làm là sao chép toàn bộ file trong thư mục `copy-to-project` vào đề án.
+Sau khi hoàn tất, điều cần làm là sao chép toàn bộ file trong thư mục `copy-to-project` vào đề án.
 Như vậy đã có thể mở được đề án.
 
-Việc cần làm tiếp theo khi mở đề án là apply Tomcat webserver vào đề án.
-Nếu cả Eclipse hoặc Netbeans sau khi mở "không báo cáo thiếu library", như vậy là thành công.
+Tiếp theo, hãy cấu hình đề án thực thi trên Tomcat 7 webserver.
+Nếu cả Eclipse hoặc Netbeans sau khi hoàn tất các bước, "không báo cáo thiếu library", như vậy là thành công.
+(Điều cần lưu ý, đề án có sử dụng Maven, nên phải chờ đợi để hoàn tất việc download các thư viện cần thiết.)
 
 Đối với Eclipse nên cài đặt thêm Spring plugin bằng cách vào `Help > Eclipse Marketplace`.
 

@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import net.lilylnx.springnet.util.ConfigKeys;
+import net.lilylnx.springnet.util.ClientUtils;
 
 import mantech.domain.User;
-import mantech.domain.UserSession;
 import mantech.service.LoginService;
 
 /**
@@ -30,28 +30,30 @@ public class LoginController {
 
   @Autowired
   private LoginService loginService;
+  
+  @Autowired
+  private ClientUtils clientUtils;
 
   @RequestMapping(value = "/ssoAuthenticate", method = RequestMethod.POST)
-  public String authenticateUser(@RequestParam("id") String id, @RequestParam("passwd") String passwd,
+  public ResponseEntity<String> authenticateUser(@RequestParam("id") String id, @RequestParam("passwd") String passwd,
       HttpServletRequest request, HttpSession session, ModelMap model) {
+
+    ResponseMessage message = new ResponseMessage("isAuthenticated", 0, "Wrong ID/password. Access denied.");
 
     try {
       User user = loginService.authenticate(id, passwd, session);
       if (user != null) {
-        model.addAttribute("msg", "Authenticated!");
-      }
-      else {
-        model.addAttribute("msg", "Wrong username/password. Access denied.");
+        message.setStatusAndMessage(1, "Authenticated.");
       }
     }
     catch (Exception e) {
-      model.addAttribute("msg", e.getMessage());
+      message.setMessage(e.getMessage());
     }
-    System.out.println((UserSession)request.getAttribute(ConfigKeys.USER_SESSION));
-    return "message";
+
+    return clientUtils.createJsonResponse(message);
   }
 
-  @RequestMapping(value = "/ssoLogout")
+  @RequestMapping(value = "/ssoLogout", method = RequestMethod.GET)
   public String logout(ModelMap model) {
     return null;
   }

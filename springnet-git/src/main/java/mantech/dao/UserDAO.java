@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.validator.EmailValidator;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -109,17 +110,15 @@ public class UserDAO extends HibernateGenericDAO<User> implements UserRepository
    */
   @SuppressWarnings("unchecked")
   @Override
-  public List<User> searchByUsername(String username) {
-    return (List<User>)session().createCriteria(persistClass)
-        .add(Restrictions.ilike("username", "%" + username + "%"))
-        .list();
-  }
-
-  @SuppressWarnings("unchecked")
-  @Override
-  public List<User> searchByDepartment(String name) {
-    String queryString = "select u from User u inner join u.department d where d.name like :name";
-    return session().createQuery(queryString).setString("name", "%" + name + "%").list();
+  public List<User> search(String username, String departName) {
+    Criteria crit = session().createCriteria(persistClass, "u");
+    if (username != null) {
+      crit.add(Restrictions.ilike("username", "%" + username + "%"));
+    }
+    if (departName != null) {
+      crit.createAlias("u.department", "d").add(Restrictions.ilike("d.name", "%" + departName + "%"));
+    }
+    return crit.list();
   }
   
   @Override

@@ -1,17 +1,15 @@
-<%@ include file="../layout/header.inc"%>
-<compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
+<%@ include file="../../layout/top.inc"%>
 
 <div id="edituser_pagelet" class="g-pl">
 	<div id="edituser-box" class="box">
 		<h2 class="title">Edit User</h2>
 		<form id="edituser-form" class="g-f" method="post" action="/user/editSave">
-			<p id="msg"></p>				
 			<div>
 				<div class="row">
 					<label>
 						<strong>User Id: </strong>
 						<span>${user.id}</span>
-						<input type="hidden" name="uid" value="${user.id}"/>
+						<input type="hidden" name="id" value="${user.id}"/>
 					</label>
 				</div>
 				<div class="row">
@@ -23,8 +21,7 @@
 				<div class="row">
 					<label>
 						<strong>Email: </strong>
-						<input type="text" name="email" class="ui-widget-content" value="${user.email}" />
-						<span>Hello</span>
+						<input type="text" name="email" value="${user.email}" />
 					</label>
 				</div>
 				<div class="row">
@@ -68,13 +65,13 @@
 				<div class="row">
 					<label>
 						<strong>Gender: </strong>
-						<span><c:if test="${user.gender.equals('M')}">Male</c:if><c:if test="${user.gender.equals('F')}">FeMale</c:if></span>
+						<span><c:if test="${user.gender.equals('M')}">Male</c:if><c:if test="${user.gender.equals('F')}">Female</c:if></span>
 					</label>						
 				</div>
 				<div class="row">
 					<label>
 						<strong>Address: </strong>
-						<input type="text" name="address" class="ui-widget-content" value="${user.homeAddress}"/>
+						<input type="text" name="address" value="${user.homeAddress}"/>
 					</label>
 				</div>
 			</div>
@@ -84,5 +81,3 @@
 		</form>
 	</div>
 </div>
-
-</compress:html>

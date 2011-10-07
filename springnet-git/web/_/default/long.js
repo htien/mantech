@@ -7,15 +7,16 @@ $('#adduser_pagelet').ready(function() {
 					if (!frm.valid()) { return; }
 					jTien.ajaxSubmit(frm)
 						.success(function(data, textCode, xhr) {
-							jTien.callJqDialog('confirm-dialog', 'Added user successfully!', {
-								buttons: {
-									'Close': function() {
-										$(this).dialog('destroy');
+							if (data.status == 1) {
+								jTien.callJqDialog('confirm-dialog', data.message, {
+									buttons: {
+										'Close': function() {
+											$(this).dialog('destroy');
+										}
 									}
-								}
-							});
-							$('#msg').html(xhr.responseText);
-							jTien.resetForm(frm);
+								});
+								jTien.resetForm(frm);
+							}
 						})
 						.error(function(data) {
 							$(dialog).dialog('close');

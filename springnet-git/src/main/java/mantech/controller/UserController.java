@@ -63,7 +63,7 @@ public class UserController {
   }
   
   @RequestMapping(value = "/user/addSave", method = RequestMethod.POST)
-  public String insertSave(@RequestParam(value="username") String username,
+  public ResponseEntity<String> insertSave(@RequestParam(value="username") String username,
         @RequestParam(value="passwd") String password, @RequestParam(value="email") String email,
         @RequestParam(value="department") byte departId, @RequestParam(value="role") byte roleId,
         @RequestParam(value="firstName") String firstName, @RequestParam(value="lastName") String lastName,
@@ -74,8 +74,9 @@ public class UserController {
     Department department = departmentRepo.get(departId);
     UserRole userRole = roleRepo.get(roleId);
 
-    userService.add(username, password, email, firstName, lastName, gender, address, department, userRole);
-    return "redirect:/user/list";
+    int newUserId = ((Integer)userService.add(username, password, email, firstName, lastName, gender, address, department, userRole)).intValue();
+    return clientUtils.createJsonResponse(
+        new ResponseMessage("insert", 1, String.format("Inserted user: <strong></strong>%s (ID: %d) successfully.", username, newUserId)));
   }
   
   @RequestMapping(value = "/user", params = "p=edit", method = RequestMethod.GET)

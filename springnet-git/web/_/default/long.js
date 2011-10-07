@@ -8,7 +8,7 @@ $('#adduser_pagelet').ready(function() {
 					jTien.ajaxSubmit(frm)
 						.success(function(data, textCode, xhr) {
 							if (data.status == 1) {
-								jTien.callJqDialog('confirm-dialog', data.message, {
+								jTien.callJqDialog('ajax-response', data.message, {
 									buttons: {
 										'Close': function() {
 											$(this).dialog('destroy');
@@ -67,7 +67,7 @@ $('#adduser_pagelet').ready(function() {
 				}
 			},
 			submitHandler: function(form) {
-				var dlg = jTien.callJqDialog('confirm-dialog', 'Are you sure you want to add new user?',
+				var dlg = jTien.callJqDialog('ajax-response', 'Are you sure you want to add new user?',
 						dialogOpts);
 				dlg.dialog('open');
 			}
@@ -92,7 +92,7 @@ $('#addcomplaint_pagelet').ready(function() {
 					if (!frm.valid()) { return; }
 					jTien.ajaxSubmit(frm)
 						.success(function(data, textCode, xhr) {
-							jTien.callJqDialog('confirm-dialog', 'Added complaint successfully!', {
+							jTien.callJqDialog('ajax-response', 'Added complaint successfully!', {
 								buttons: {
 									'Close': function() {
 										$(this).dialog('destroy');
@@ -122,7 +122,7 @@ $('#addcomplaint_pagelet').ready(function() {
 				content: { required: '' }
 			},
 			submitHandler: function(form) {
-				jTien.callJqDialog('confirm-dialog', 'Are you sure you want to add new complaint?', 
+				jTien.callJqDialog('ajax-response', 'Are you sure you want to add new complaint?', 
 						dialogOpts).dialog('open');
 			}
 		};
@@ -146,7 +146,7 @@ $('#addassignment_pagelet').ready(function() {
 					if (!frm.valid()) { return; }
 					jTien.ajaxSubmit(frm)
 						.success(function(data, textCode, xhr) {
-							jTien.callJqDialog('confirm-dialog', 'Added assignment successfully!', {
+							jTien.callJqDialog('ajax-response', 'Added assignment successfully!', {
 								buttons: {
 									'Close': function() {
 										$(this).dialog('destroy');
@@ -192,7 +192,7 @@ $('#addassignment_pagelet').ready(function() {
 					}
 				},
 				submitHandler: function(form) {
-					var dlg = jTien.callJqDialog('confirm-dialog', 'Are you sure you want to add new complaint?', 
+					var dlg = jTien.callJqDialog('ajax-response', 'Are you sure you want to add new complaint?', 
 							dialogOpts);
 					dlg.dialog('open');
 				}
@@ -217,7 +217,7 @@ $('#addequipment_pagelet').ready(function() {
 						if (!frm.valid()) { return; }
 						jTien.ajaxSubmit(frm)
 							.success(function(data, textCode, xhr) {
-								jTien.callJqDialog('confirm-dialog', 'added equipment successfully', {
+								jTien.callJqDialog('ajax-response', 'added equipment successfully', {
 									buttons: {
 										'Close': function() {
 											$(this).dialog('destroy');
@@ -245,7 +245,7 @@ $('#addequipment_pagelet').ready(function() {
 				name: { required: '' }
 			},
 			submitHandler: function(form) {
-				jTien.callJqDialog('confirm-dialog', 'Are you sure you want to add new equipment?', dialogOpts)
+				jTien.callJqDialog('ajax-response', 'Are you sure you want to add new equipment?', dialogOpts)
 						.dialog('open');
 			}
 		};
@@ -269,16 +269,15 @@ $('#edituser_pagelet').ready(function() {
 						if (!frm.valid()) { return; }
 						jTien.ajaxSubmit(frm)
 							.success(function(json, textCode, xhr) {
-								jTien.callJqDialog('confirm-dialog', json.message, {
-									buttons: {
-										'Close Message': function() {
-											$(this).dialog('destroy');
+								if (json.status == 1) {
+									jTien.callJqDialog('ajax-response', json.message, {
+										buttons: {
+											'Close Message': function() {
+												$(this).dialog('destroy');
+											}
 										}
-									}
-								});
-							})
-							.error(function(data) {
-								jTien.callJqDialog('confirm-dialog', data, {buttons:{}});
+									});
+								}
 							});
 					},
 					'Cancel': function() {
@@ -303,7 +302,7 @@ $('#edituser_pagelet').ready(function() {
 				}
 			},
 			submitHandler: function(form) {
-				jTien.callJqDialog('confirm-dialog', 'Are you sure you want to edit this user?', dialogOpts).dialog('open');
+				jTien.callJqDialog('ajax-response', 'Are you sure you want to edit this user?', dialogOpts).dialog('open');
 			}
 		};
 	

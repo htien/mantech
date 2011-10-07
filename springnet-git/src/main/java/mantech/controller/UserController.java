@@ -76,7 +76,7 @@ public class UserController {
 
     int newUserId = ((Integer)userService.add(username, password, email, firstName, lastName, gender, address, department, userRole)).intValue();
     return clientUtils.createJsonResponse(
-        new ResponseMessage("insert", 1, String.format("Inserted user: <strong></strong>%s (ID: %d) successfully.", username, newUserId)));
+        new ResponseMessage("insert", 1, String.format("Inserted user: <strong>%s (ID: %d)</strong> successfully.", username, newUserId)));
   }
   
   @RequestMapping(value = "/user", params = "p=edit", method = RequestMethod.GET)
@@ -100,7 +100,7 @@ public class UserController {
 
     User user = userService.update(userId, email, address, department, userRole);
     return clientUtils.createJsonResponse(
-        new ResponseMessage("update", 0, String.format("Updated user: <strong>%s (ID: %d)</strong> successfully.",
+        new ResponseMessage("update", 1, String.format("Updated user: <strong>%s (ID: %d)</strong> successfully.",
             user.getFirstName().concat(" ").concat(user.getLastName()), user.getId())));
   }
 

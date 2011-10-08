@@ -74,16 +74,15 @@ public class UserController {
       return clientUtils.createJsonResponse(
           new ResponseMessage("isExistUsername", 0, String.format("Username: <strong>%s</strong> is Exist", username)));
     }
-    else if (userRepo.isExistUser(email)) {
+    if (userRepo.isExistUser(email)) {
       return clientUtils.createJsonResponse(
           new ResponseMessage("isExistEmail", 0, String.format("Email: <strong>%s</strong> is Exits", email)));
-    }else {
+    }
       Department department = departmentRepo.get(departId);
       UserRole userRole = roleRepo.get(roleId);
       int newUserId = ((Integer)userService.add(username, password, email, firstName, lastName, gender, address, department, userRole)).intValue();
       return clientUtils.createJsonResponse(
           new ResponseMessage("insert", 1, String.format("Inserted user: <strong>%s (ID: %d)</strong> successfully.", username, newUserId)));
-    }    
   }
   
   @RequestMapping(value = "/user", params = "p=edit", method = RequestMethod.GET)

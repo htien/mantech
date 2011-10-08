@@ -2,6 +2,7 @@
 
 <c:forEach items="${listUser}" var="user">
 	<tr>
+		<td>${user.id}</td>
 		<td>${user.username}</td>
 		<td>${user.role.name}</td>
 		<td>${user.department.name}</td>
@@ -10,7 +11,6 @@
 		<td>${user.gender}</td>
 		<td>${user.homeAddress}</td>
 		<td>${user.status}</td>
-		<td>${user.regDate}</td>
 		<td>${user.regDate}</td>
 	</tr>
 </c:forEach>

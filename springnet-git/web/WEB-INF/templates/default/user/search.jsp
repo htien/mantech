@@ -11,6 +11,7 @@
 		<td>${user.homeAddress}</td>
 		<td>${user.status}</td>
 		<td>${user.regDate}</td>
+		<td>${user.regDate}</td>
 	</tr>
 </c:forEach>
 

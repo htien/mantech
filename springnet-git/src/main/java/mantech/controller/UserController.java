@@ -70,13 +70,20 @@ public class UserController {
         @RequestParam(value="gender") String gender, @RequestParam(value="address") String address)
   {
     // TODO Validate username, email...
-    
-    Department department = departmentRepo.get(departId);
-    UserRole userRole = roleRepo.get(roleId);
-
-    int newUserId = ((Integer)userService.add(username, password, email, firstName, lastName, gender, address, department, userRole)).intValue();
-    return clientUtils.createJsonResponse(
-        new ResponseMessage("insert", 1, String.format("Inserted user: <strong>%s (ID: %d)</strong> successfully.", username, newUserId)));
+    if (userRepo.isExistUser(username)) {
+      return clientUtils.createJsonResponse(
+          new ResponseMessage("isExistUsername", 0, String.format("Username: <strong>%s</strong> is Exist", username)));
+    }
+    else if (userRepo.isExistUser(email)) {
+      return clientUtils.createJsonResponse(
+          new ResponseMessage("isExistEmail", 0, String.format("Email: <strong>%s</strong> is Exits", email)));
+    }else {
+      Department department = departmentRepo.get(departId);
+      UserRole userRole = roleRepo.get(roleId);
+      int newUserId = ((Integer)userService.add(username, password, email, firstName, lastName, gender, address, department, userRole)).intValue();
+      return clientUtils.createJsonResponse(
+          new ResponseMessage("insert", 1, String.format("Inserted user: <strong>%s (ID: %d)</strong> successfully.", username, newUserId)));
+    }    
   }
   
   @RequestMapping(value = "/user", params = "p=edit", method = RequestMethod.GET)
@@ -85,7 +92,7 @@ public class UserController {
 
     model.addAttribute("departList", departmentRepo.findAll());
     model.addAttribute("roleList", roleRepo.findAll());
-    model.addAttribute("user", userRepo.get(id));
+    model.addAttribute("user", user);
     model.addAttribute("depart", user.getDepartment());
     return TemplateKeys.USER_ADMIN;
   }

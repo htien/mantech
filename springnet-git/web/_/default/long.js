@@ -17,8 +17,18 @@ $('#adduser_pagelet').ready(function() {
 								});
 								jTien.resetForm(frm);
 							}
+							if (data.status == 0) {
+								jTien.callJqDialog('ajax-response', data.message, {
+									buttons: {
+										'Close': function() {
+											$(this).dialog('destroy');
+										}
+									}
+								});
+							}
 						})
 						.error(function(data) {
+							alert(data);
 							$(dialog).dialog('close');
 						});
 				},
@@ -92,16 +102,16 @@ $('#addcomplaint_pagelet').ready(function() {
 					if (!frm.valid()) { return; }
 					jTien.ajaxSubmit(frm)
 						.success(function(data, textCode, xhr) {
-							jTien.callJqDialog('ajax-response', 'Added complaint successfully!', {
-								buttons: {
-									'Close': function() {
-										$(this).dialog('destroy');
+							if (data.status == 1) {
+								jTien.callJqDialog('ajax-response', data.message + ' successfully!', {
+									buttons: {
+										'Close': function() {
+											$(this).dialog('destroy');
+										}
 									}
-								}
-							});
-							$('#msg').html(xhr.responseText);
-							jTien.resetForm(frm);
-							alert(3);
+								});
+								jTien.resetForm(frm);
+							}
 						})
 						.error(function(data) {
 							$(dialog).dialog('close');
@@ -181,7 +191,8 @@ $('#addassignment_pagelet').ready(function() {
 				},
 				messages: {
 					beginDate: {
-						required: ''
+						required: '',
+						vietnameseDate: 'yyyy/MM/dd'
 					},
 					duration: {
 						required: '',
@@ -313,11 +324,52 @@ $('#edituser_pagelet').ready(function() {
 	});
 });
 
+$('#editcomplaint_pagelet').ready(function() {
+	var frm = null,
+	
+	dialogOpts = {
+		title: 'Edit Complaint confirmation',
+		buttons: {
+			'Update': function() {
+				if (!frm.valid()) {return;}
+				jTien.ajaxSubmit(frm)
+					.success (function(json, textCode, xhr) {
+						if (json.status == 1) {
+							jTien.callJqDialog('ajax-response', json.message + 'successfully', {
+								buttons: {
+									'Close Message': function() {
+										$(this).dialog('destroy');
+									}
+								}
+							});
+						}
+					});
+			},
+			'Cancel': function() {
+				$(this).dialog('destroy');
+			}
+		}
+	},
+	
+	validOpts = {
+		submitHandler: function(form) {
+			jTien.callJqDialog('ajax-response', 'Are you sure want to edit this complaint?', dialogOpts).dialog('open');
+		}	
+	};
+	
+	$('#editcomplaint-box').delegate('#btnEdit', 'click', function(evt) {
+		frm = $(this).parents('form');
+		frm.validate(validOpts);
+		frm.submit();
+	});
+});
+
 $('#complaint_list_pagelet').ready(function() {
 	var filterForm = '#complaint-filter-form',
 		filterSubmit = '#filter-query-submit',
 		lnkShowAll = '#lnkShowAll',
-		resultList = '#the-list';	
+		resultList = '#the-list';
+	
 	$(filterForm).delegate(filterSubmit, 'click', function(evt) {
 		var dateFrom = $('#dateFrom').val().trim(),
 			dateTo = $('#dateTo').val().trim(),

@@ -16,7 +16,9 @@ public class TemplateKeys {
   public static final String MAIN_PAGE = "__index";
   public static final String USER_ADMIN = "user/index";
   public static final String USER_SEARCH_ADMIN = "user/search";
-
+  public static final String COMPLAINT_ADMIN = "complaint/index";
+  public static final String COMPLAINT_SEARCH_ADMIN =  "complaint/search";
+  
   private TemplateKeys() {}
 
 }

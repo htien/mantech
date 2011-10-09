@@ -42,7 +42,7 @@
         class="org.springframework.orm.hibernate3.HibernateTransactionManager"
         p:sessionFactory-ref="org.hibernate.SessionFactory" />
 
-	<tx:annotation-driven />
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<import resource="spring/misc.xml" />
 	<import resource="spring/repositories.xml" />
@@ -60,7 +60,6 @@
 		p:prefix="/WEB-INF/${template.dir}/${template.name}/" p:suffix=".jsp" />
 
 	<context:spring-configured />
-	<context:component-scan base-package="net.lilylnx.springnet" />
 	<context:component-scan base-package="mantech.controller" />
 	<context:component-scan base-package="test.mantech.controller" />
 

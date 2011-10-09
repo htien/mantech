@@ -1,5 +1,3 @@
-<%@ include file="../../layout/top.inc"%>
-
 <div id="edituser_pagelet" class="g-pl">
 	<div id="edituser-box" class="box">
 		<h2 class="title">Edit User</h2>

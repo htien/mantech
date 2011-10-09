@@ -1,5 +1,3 @@
-<%@ include file="../../layout/top.inc" %>
-
 <div id="addcomplaint_pagelet" class="g-pl">
 	<div id="addcomplaint-box" class="box">
 		<h2 class="title">Insert New Complaint</h2>

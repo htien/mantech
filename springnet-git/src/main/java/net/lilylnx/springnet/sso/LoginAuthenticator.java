@@ -11,7 +11,7 @@ import mantech.domain.User;
 /**
  * 
  * @author Tien Nguyen
- * @version $Id: LoginAuthenticator.java,v 1.0 Sep 3, 2011 3:56:42 AM lilylnx Exp $
+ * @version $Id: LoginAuthenticator.java,v 1.0 2011/09/03 3:56:42 lilylnx Exp $
  */
 public interface LoginAuthenticator {
   

@@ -13,7 +13,7 @@
 		<td>${complaint.status.name}</td>
 		<td>${complaint.createDate}</td>
 		<td>${complaint.endDate}</td>
-		<td><a href="/springnet/complaint.php?p=edit&id=${complaint.id}">Edit</a></td>
+		<td><a href="<jtien:url address="/complaint"/>?p=edit&id=${complaint.id}">Edit</a></td>
 	</tr>
 </c:forEach>
 

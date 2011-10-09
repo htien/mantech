@@ -103,7 +103,7 @@ $('#addcomplaint_pagelet').ready(function() {
 					jTien.ajaxSubmit(frm)
 						.success(function(data, textCode, xhr) {
 							if (data.status == 1) {
-								jTien.callJqDialog('ajax-response', data.message + ' successfully!', {
+								jTien.callJqDialog('ajax-response', data.message, {
 									buttons: {
 										'Close': function() {
 											$(this).dialog('destroy');
@@ -228,7 +228,7 @@ $('#addequipment_pagelet').ready(function() {
 						if (!frm.valid()) { return; }
 						jTien.ajaxSubmit(frm)
 							.success(function(data, textCode, xhr) {
-								jTien.callJqDialog('ajax-response', 'added equipment successfully', {
+								jTien.callJqDialog('ajax-response', 'Added equipment successfully', {
 									buttons: {
 										'Close': function() {
 											$(this).dialog('destroy');
@@ -328,21 +328,19 @@ $('#editcomplaint_pagelet').ready(function() {
 	var frm = null,
 	
 	dialogOpts = {
-		title: 'Edit Complaint confirmation',
+		title: 'Edit Complaint Confirmation',
 		buttons: {
 			'Update': function() {
 				if (!frm.valid()) {return;}
 				jTien.ajaxSubmit(frm)
 					.success (function(json, textCode, xhr) {
-						if (json.status == 1) {
-							jTien.callJqDialog('ajax-response', json.message + 'successfully', {
-								buttons: {
-									'Close Message': function() {
-										$(this).dialog('destroy');
-									}
+						jTien.callJqDialog('ajax-response', json.message, {
+							buttons: {
+								'Close Message': function() {
+									$(this).dialog('destroy');
 								}
-							});
-						}
+							}
+						});
 					});
 			},
 			'Cancel': function() {

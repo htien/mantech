@@ -1,5 +1,3 @@
-<%@ include file="../../layout/top.inc"%>
-
 <div id="adduser_pagelet" class="g-pl">
 	<div id="adduser-box" class="box">
 		<h2 class="title">Add New User</h2>

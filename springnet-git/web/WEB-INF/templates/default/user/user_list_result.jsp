@@ -1,4 +1,6 @@
-<%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
+<%@ include file="../layout/top.inc"%><compress:html
+	jsCompressor="closure" compressJavaScript="true" compressCss="true"
+	removeIntertagSpaces="true">
 
 <c:forEach items="${listUser}" var="user">
 	<tr>
@@ -12,6 +14,7 @@
 		<td>${user.homeAddress}</td>
 		<td>${user.status}</td>
 		<td>${user.regDate}</td>
+		<td><a href="<jtien:url address="/user"/>?p=edit&id=${user.id}">Edit</a></td>
 	</tr>
 </c:forEach>
 

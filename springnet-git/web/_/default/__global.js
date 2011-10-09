@@ -9,7 +9,7 @@
 /* === Initialize global variables === */
 
 var $dialogOpts = {
-		title: 'Mantech Help Desk',
+		title: 'Mantech Helpdesk',
 		autoOpen: false,
 		draggable: true,
 		modal: true,
@@ -48,18 +48,46 @@ $validateOpts = {
 $.ajaxSetup({
 	scriptCharset: 'UTF-8',
 	statusCode: {
+		400: function() {
+			jTien.callJqDialog('ajax-response', 'The request cannot be fulfilled due to bad syntax.', {title: 'HTTP Response 400'}).dialog('open');
+		},
 		404: function() {
-			jTien.callJqDialog('ajax-response', 'Page not found. Please try again later.', {title: 'HTTP Response 404'}).dialog('open');
+			jTien.callJqDialog('ajax-response', 'The requested resource could not be found but may be available again in the future.', {title: 'HTTP Response 404'}).dialog('open');
 		},
 		500: function() {
-			jTien.callJqDialog('ajax-response', 'Server is error. Please try again later.', {title: 'HTTP Response 500'}).dialog('open');
+			jTien.callJqDialog('ajax-response', 'Internal Server Error. Please try again later.', {title: 'HTTP Response 500'}).dialog('open');
 		}
 	}
 });
+
 $.validator.setDefaults($validateOpts);
 $.validator.addMethod('vietnameseDate', function(value, element) {
 	return value.match(/^\d\d\d\d\/\d\d?\/\d\d?$/);
 }, 'Invalidate date format yyyy/MM/dd');
+
+/* === Global functions === */
+
+pageload = function() {
+	$.history.init(applyAjax_pageload);
+},
+
+applyAjax_pageload = function(hash) {
+	if (hash) jTien.ajaxFromLink(undefined, jTien.url('/load'), '#ggbody-content');
+},
+
+applyAjax_adminmenu = function() {
+	$('#adminmenu a').each(function(idx, el) {
+		$(el).click(function(evt) {
+			jTien.ajaxFromLink(this, jTien.url('/load'), '#ggbody-content');
+			evt.preventDefault();
+			return false;
+		});
+	});
+},
+
+shakeContainer = function(container) {
+	jTien.toJqId(container).stop(true, true).effect('shake', { times:2, distance:5 }, 50);
+};
 
 /* === Execute default methods === */
 
@@ -71,9 +99,7 @@ $(function() {
 
 
 
-/*
-	=== SPRINGNET JAVASCRIPT LIBRARY ===
-*/
+/* ========== SPRINGNET JAVASCRIPT LIBRARY === */
 
 /**
  * endsWith method for javascript String object, same as Java.
@@ -103,20 +129,35 @@ jTien.fn = jTien.prototype = {
 // Give the init function the jTien prototype for later instantiation
 jTien.fn.init.prototype = jTien.fn;
 
-jTien.resetForm = jTien.prototype = function(form) {
-	var _form = jTien.f.toJqId(form);
+jTien.toJqId = function(id) {
+	return (typeof id === 'string')
+				? /^#/.test(id) ? $(id) : $('#' + id)
+				: id;
+};
+
+jTien.url = function(path) {
+	if (typeof path === 'string') {
+		return $ctx.concat(path).concat($ext);
+	}
+	else {
+		return $ctx;
+	}
+};
+
+jTien.resetForm = function(form) {
+	var _form = jTien.toJqId(form);
 	_form[0].reset();
 	_form.find(':input[class!=noreset]:visible:enabled:first').focus();
 	return _form;
 };
 
-jTien.ajaxSubmit = jTien.prototype = function(form) {
+jTien.ajaxSubmit = function(form) {
 	var jqXhr = jTien.f.ajaxSubmit(form);
 	return jqXhr;
 };
 
-jTien.ajaxConnect = jTien.prototype = function(container, form, data) {
-	var _form = form instanceof HTMLFormElement ? $(form) : jTien.f.toJqId(form);
+jTien.ajaxConnect = function(container, form, data) {
+	var _form = form instanceof HTMLFormElement ? $(form) : jTien.toJqId(form);
 	return jTien.f.ajaxConnect(container, {
 			async: false,
 			type: _form.attr('method'),
@@ -125,7 +166,14 @@ jTien.ajaxConnect = jTien.prototype = function(container, form, data) {
 	});
 };
 
-jTien.callJqDialog = jTien.prototype = function(id, url, settings, dlgOpts) {
+jTien.ajaxFromLink = function(link, target, container) {
+	return jTien.f.ajaxFromLink(link, target).success(function(html) {
+		jTien.toJqId(container).html(html);
+		jTien.f.completeFormAction();
+	});
+};
+
+jTien.callJqDialog = function(id, url, settings, dlgOpts) {
 	var isUrl = jTien.f.isUrl(url);
 	if (dlgOpts == undefined) {
 		dlgOpts = settings;
@@ -228,7 +276,30 @@ jTien.f = jTien.prototype = {
 
 		var jqXHR = $.ajax(settings);
 		
-		jTien.f.toJqId(container).html(jqXHR.responseText);
+		jTien.toJqId(container).html(jqXHR.responseText);
+		return jqXHR;
+	},
+
+	/**
+	 * Ajax, get page from link.
+	 * Syntax: ajaxFromLink(link[, type], target)
+	 * @param link
+	 */
+	ajaxFromLink: function(link, type, target) {
+		var hash = (link == undefined ? document.location.hash : $(link).attr('href')).replace(/^.*#/, ''),
+			page = 'page='.concat(hash);
+		if (target == undefined) {
+			target = type;
+			type = undefined;
+		}
+		var jqXHR = $.ajax({
+			async: false,
+			url: target,
+			type: type || 'get',
+			data: page,
+			cache: false
+		});
+		$.history.load(hash);
 		return jqXHR;
 	},
 
@@ -251,12 +322,6 @@ jTien.f = jTien.prototype = {
 	isUrl: function(url) {
 		return url != null &&
 			(typeof url === 'string' && /^(\/|http:\/\/|https:\/\/|ftp:\/\/)/.test(url));
-	},
-	
-	toJqId: function(id) {
-		return (typeof id === 'string')
-					? /^#/.test(id) ? $(id) : $('#' + id)
-					: id;
 	}
 };
 

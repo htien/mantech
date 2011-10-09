@@ -83,12 +83,12 @@ $('#adduser_pagelet').ready(function() {
 			}
 		};
 	
-	$('#adduser-box').delegate('#btnAdd', 'click', function(evt) {
+	$('#btnAdd').live('click', function(evt) {
 		frm = $(this).parents('form');
 		frm.validate(validOpts);
 		frm.submit();
 	});
-	$('#adduser-box').delegate('#btnReset', 'click', function(evt) {
+	$('#btnReset').live('click', function(evt) {
 		jTien.resetForm($(this).parents('form'));
 	});
 });

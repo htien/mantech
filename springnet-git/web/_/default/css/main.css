@@ -27,7 +27,7 @@ body.gg-admin {
 }
 
 #ggaction {
-  padding: 12px 44px;
+  padding: 12px 44px 12px 60px;
   height: 30px;
   line-height: 30px;
   font-size: 20px;  
@@ -288,4 +288,11 @@ body.gg-admin {
   margin-left: 2px;
   margin-right: 20px;
   height: 32px;
+}
+
+#ggbody {
+}
+
+#ggbody-content {
+  overflow: hidden;
 }

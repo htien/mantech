@@ -50,7 +50,7 @@ public class AssignmentController {
   @Autowired
   private UserService userService;
   
-  @RequestMapping(value = {"/assignment"}, params = "!p", method = RequestMethod.GET)
+  @RequestMapping(value = {"/assignment"}, params = "p=list", method = RequestMethod.GET)
   public String list(ModelMap model) {
     List<Complaint> listComplaint = complaintRepo.getByAssignment();
     List<Complaint> listAllComplaint = complaintRepo.findAll();

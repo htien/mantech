@@ -49,7 +49,7 @@ public class UserController {
   @Autowired
   private ClientUtils clientUtils;
 
-  @RequestMapping(value = "/user", params = "!p", method = RequestMethod.GET)
+  @RequestMapping(value = "/user", params = "p=list", method = RequestMethod.GET)
   public String list(ModelMap model) {
     model.addAttribute("listUser", userRepo.findAll());
     return TemplateKeys.USER_ADMIN;

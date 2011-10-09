@@ -40,6 +40,10 @@ public class SpringConfig extends PropertiesConfiguration {
     return this.getString(ConfigKeys.APPLICATION_PATH);
   }
   
+  public String getContextPath() {
+    return this.getString(ConfigKeys.CONTEXT_PATH);
+  }
+  
   public String getServletExt() {
     return this.getString(ConfigKeys.SERVLET_EXTENSION);
   }

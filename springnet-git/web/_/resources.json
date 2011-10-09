@@ -13,6 +13,7 @@
 		"/_/jquery/jquery-ui-1.8.16.js",
 		"/_/jquery/jquery.validate.js",
 		"/_/jquery/jquery.validate.additional.js",
+		"/_/jquery/jquery.history.js",
 		"/_/default/__global.js",
 		"/_/default/common.js",
 		"/_/default/long.js"

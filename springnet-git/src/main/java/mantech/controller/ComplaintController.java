@@ -61,7 +61,7 @@ public class ComplaintController {
   @Autowired
   private ClientUtils clientUtils;
 
-  @RequestMapping(value = "/complaint", params = "!p", method = RequestMethod.GET)
+  @RequestMapping(value = "/complaint", params = "p=list", method = RequestMethod.GET)
   public String list(ModelMap model) throws Exception {
     
     model.addAttribute("listComplaint", complaintRepo.findAll());

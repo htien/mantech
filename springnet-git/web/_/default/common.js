@@ -1,15 +1,16 @@
 /* === Document Ready for assigning events === */
 
+$(function() {
+	pageload();
+	applyAjax_adminmenu();
+});
+
 $('#signin_pagelet').ready(function() {
 	
 	var signInBox = '#signin-box',
 		signInForm = '#signin-form',
 		signInButton = '#signin',
 		resetButton = '#reset';
-	
-	function shakeContainer(container) {
-		jTien.f.toJqId(container).stop(true, true).effect('shake', { times:2, distance:5 }, 50);
-	}
 	
 	/* Reset button */
 
@@ -118,7 +119,7 @@ $('#user_list_pagelet').ready(function() {
 		filterSubmit = '#filter-query-submit',
 		lnkShowAll =  '#lnkShowAll',
 		resultList = '#the-list';
-	$(filterForm).delegate(filterSubmit, 'click', function(evt) {
+	$(filterSubmit).live('click', function(evt) {
 		jTien.ajaxConnect(resultList, filterForm)
 				.success(function(data) {
 					if (data == null || data.length == 0) {
@@ -126,7 +127,7 @@ $('#user_list_pagelet').ready(function() {
 					}
 				});
 	});
-	$(filterForm).delegate(lnkShowAll, 'click', function() {
+	$(lnkShowAll).live('click', function() {
 		jTien.ajaxConnect(resultList, filterForm, 'q=&f=0');
 	});
 });

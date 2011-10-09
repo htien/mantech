@@ -5,8 +5,10 @@
 package mantech.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import mantech.controller.helpers.TemplateKeys;
 
@@ -24,9 +26,38 @@ public class IndexController {
     return TemplateKeys.LOGIN_PAGE;
   }
   
-  @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+  @RequestMapping(value = "/index", method = RequestMethod.GET)
   public String dashboard() {
     return TemplateKeys.MAIN_PAGE;
+  }
+  
+  @RequestMapping(value = "/load", method = RequestMethod.GET)
+  public String loader(@RequestParam("page") String page, ModelMap model) {
+    String module = null;
+    String action = null;
+
+    if (page.equals("listuser")) {
+      module = "user";
+      action = "list";
+    }
+    
+    if (page.equals("adduser")) {
+      module = "user";
+      action = "add";
+    }
+    
+    if (page.equals("listcomplaint")) {
+      module = "complaint";
+      action = "list";
+    }
+    
+    if (page.equals("listassignment")) {
+      module = "assignment";
+      action = "list";
+    }
+
+    model.addAttribute("p", action);
+    return "redirect:" + module;
   }
 
 }

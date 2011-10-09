@@ -23,6 +23,9 @@ public class TemplateKeys {
   public static final String COMPLAINT_ADMIN = "complaint/index";
   public static final String COMPLAINT_LIST_RESULT =  "complaint/complaint_list_result";
 
+  public static final String ASSIGNMENT_ADMIN =  "assignment/index";
+  public static final String ASSIGNMENT_LIST_RESULT = "assignment/assignment_list_result";
+  
   private TemplateKeys() {}
 
 }

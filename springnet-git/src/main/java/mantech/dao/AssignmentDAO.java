@@ -6,6 +6,7 @@ package mantech.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
@@ -44,6 +45,12 @@ public class AssignmentDAO extends HibernateGenericDAO<Assignment> implements As
   public List<Assignment> getCompleted(byte id) {
     return session().createQuery("select distinct a from Assignment a, Complaint c inner join c.status s" +
     		" where s.id = :id").setInteger("id", id).list();
+  }
+
+  @Override
+  public List<Assignment> showAllAssignmentWithTechnician() {
+    String query = "select d.id, d.complaintId, d.comp";
+    return null;
   }
 
 }

@@ -1,6 +1,3 @@
-<%@ include file="../layout/header.inc"%>
-<compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
-
 	<style>
  		.grid {border: 1px solid #000; border-collapse: collapse;}
  		.grid th, .grid td { border-collapse: collapse; padding: 1px 2px;}
@@ -111,4 +108,3 @@
 			</div>
 		</div>
 	</div>
-</compress:html>

@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import mantech.controller.helpers.TemplateKeys;
 import mantech.domain.Assignment;
 import mantech.domain.Complaint;
 import mantech.domain.User;
+import mantech.repository.AssignmentRepository;
 import mantech.repository.ComplaintRepository;
 import mantech.repository.UserRepository;
 import mantech.service.AssignmentService;
@@ -37,6 +39,9 @@ public class AssignmentController {
   private ComplaintRepository complaintRepo;
   
   @Autowired
+  private AssignmentRepository assignmentRepo;
+  
+  @Autowired
   private ComplaintService complaintService;
   
   @Autowired
@@ -45,13 +50,15 @@ public class AssignmentController {
   @Autowired
   private UserService userService;
   
-  @RequestMapping (value = {"/assignment", "/assignment/list"}, method = RequestMethod.GET)
+  @RequestMapping (value = {"/assignment"}, params = "!p", method = RequestMethod.GET)
   public String list(ModelMap model) {
     List<Complaint> listComplaint = complaintRepo.getByAssignment();
     List<Complaint> listAllComplaint = complaintRepo.findAll();
+    List<Assignment> listAllAssignment = assignmentRepo.findAll();
     
     model.addAttribute("listComplaint", listComplaint);
     model.addAttribute("listAllComplaint", listAllComplaint);
+    model.addAttribute("listAllAssignment", listAllAssignment);
     
     for (Complaint c : listAllComplaint) {
       try {
@@ -62,14 +69,13 @@ public class AssignmentController {
       }
     }
     
-    return "assignment/list";
+    return TemplateKeys.ASSIGNMENT_ADMIN;
   }
   
-  @RequestMapping (value = "/assignment/add", method = RequestMethod.GET)
+  @RequestMapping (value = "/assignment", params = "p=add", method = RequestMethod.GET)
   public String insert(@RequestParam(value="compId") int compId, ModelMap model) {
     if (complaintRepo.isExist(compId)) {
       if (!complaintRepo.hasAssignmentId(compId)) {
-        List<Complaint> complaints = complaintRepo.findAll();
         List<User> users = userRepo.getUserByRole("technician");
         
         Complaint complaint = complaintRepo.get(compId);
@@ -77,11 +83,11 @@ public class AssignmentController {
         model.addAttribute("technicians", users);
         model.addAttribute("complaint", complaint);
         model.addAttribute("compId", compId);
-        model.addAttribute("listComplaint", complaints);
-        return "/assignment/add";
+        model.addAttribute("listComplaint", complaintRepo.findAll());
+        return TemplateKeys.ASSIGNMENT_ADMIN;
       }
     }
-    return "redirect:/complaint/list";
+    return list(model);
   }
   
   @RequestMapping (value = "/assignment/addSave", method = RequestMethod.POST)
@@ -103,6 +109,6 @@ public class AssignmentController {
     assignment.setDuration(duration);
 
     assignmentService.add(assignment);
-    return "redirect:/assignment/list";
+    return TemplateKeys.ASSIGNMENT_ADMIN;
   }
 }

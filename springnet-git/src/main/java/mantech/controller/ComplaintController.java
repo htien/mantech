@@ -75,24 +75,23 @@ public class ComplaintController {
   }
 
   @RequestMapping(value = "/complaint", params = "p=add", method = RequestMethod.GET)
-  public String insert(@RequestParam(value="uid") int id, ModelMap model){
+  public String insert(ModelMap model){
     // TODO Sẽ cần chỉnh sửa lại userId sẽ được lấy từ session của employee đã đăng nhập.
     
-    model.addAttribute("user", userRepo.get(id));
+    model.addAttribute("user", userRepo.get(2));
     model.addAttribute("list", equipmentRepo.findAll());
     return TemplateKeys.COMPLAINT_ADMIN;
   }
   
   @RequestMapping(value = "/complaint/addSave", method = RequestMethod.POST)
-  public ResponseEntity<String> insertSave(@RequestParam(value="uid") int userId,
-      @RequestParam(value="equipId") int equipId,
+  public ResponseEntity<String> insertSave(@RequestParam(value="equipId") int equipId,
       @RequestParam(value="title") String title,
       @RequestParam(value="content") String content, ModelMap model)
   {
     ResponseMessage respMessage = new ResponseMessage(RName.ADD, RStatus.FAIL, null);
     
     try {
-      User user = userRepo.get(userId);
+      User user = userRepo.get(2);
       Equipment equipment = equipmentRepo.get(equipId);
       CategoryPriority priority = equipment.getCategory().getPriority();
       
@@ -112,13 +111,10 @@ public class ComplaintController {
     if (complaint == null) {
       return TemplateKeys.FILE_NOT_FOUND;
     }
-
-    List<CategoryPriority> priority = priorityRepo.findAll(false, "id");
-    List<ComplaintStatus> status = statusRepo.findAll(false, "id");
     
     model.addAttribute("complaint", complaint);
-    model.addAttribute("listStatus", status);
-    model.addAttribute("listPriority", priority);
+    model.addAttribute("listStatus", statusRepo.findAll(false, "id"));
+    model.addAttribute("listPriority", priorityRepo.findAll(false, "id"));
     return TemplateKeys.COMPLAINT_ADMIN;
   }
   

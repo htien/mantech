@@ -7,7 +7,6 @@
 				<div class = "row">
 					<label>
 						<strong>${user.firstName} ${user.lastName}</strong>
-						<input type="hidden" name="uid" value="${user.id}"/>
 					</label>
 				</div>
 				<div class="row">

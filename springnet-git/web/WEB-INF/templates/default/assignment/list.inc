@@ -6,17 +6,10 @@
 <div id="assignment_list_pagelet" class="g-pl">
 	<form id="assignment-filter-form">
 		<table class="gg-list-table users grid">
-			<thead><tr><th>Complaint Id</th><th>Begin Date</th><th>Duration</th><th>Create Date</th><th>Technician</th><th>isDeleted</th></tr></thead>
-			<tfoot><tr><th>Complaint Id</th><th>Begin Date</th><th>Duration</th><th>Create Date</th><th>Technician</th><th>isDeleted</th></tr></tfoot>
+			<thead><tr><th>Complaint Id</th><th>Begin Date</th><th>Duration</th><th>Create Date</th><th>isDeleted</th><th>Details</th></tr></thead>
+			<tfoot><tr><th>Complaint Id</th><th>Begin Date</th><th>Duration</th><th>Create Date</th><th>isDeleted</th><th>Details</th></tr></tfoot>
 			<tbody id="the-list">
-				<c:forEach items="${listAllAssignment}" var="a">
-					<tr>
-						<td>${a.complaintId}</td>
-						<td>${a.beginDate}</td>
-						<td>${a.duration}</td>
-						<td>${a.createDate}</td>
-					</tr>
-				</c:forEach>
+				<%@include file="assignment_list_result.jsp" %>
 			</tbody>
 		</table>
 	</form>

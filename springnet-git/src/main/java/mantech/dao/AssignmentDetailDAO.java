@@ -4,12 +4,14 @@
  */
 package mantech.dao;
 
-import org.hibernate.SessionFactory;
+import java.util.List;
 
-import net.lilylnx.springnet.core.hibernate.HibernateGenericDAO;
+import org.hibernate.SessionFactory;
 
 import mantech.domain.AssignmentDetail;
 import mantech.repository.AssignmentDetailRepository;
+
+import net.lilylnx.springnet.core.hibernate.HibernateGenericDAO;
 
 /**
  * 
@@ -20,6 +22,15 @@ public class AssignmentDetailDAO extends HibernateGenericDAO<AssignmentDetail> i
 
   public AssignmentDetailDAO(SessionFactory sessionFactory) {
     super(sessionFactory);
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<AssignmentDetail> getByComplaint(int id) {
+    return session().createQuery("select d from AssignmentDetail d" +
+    		" where d.assignment.complaintId = :id")
+    		.setInteger("id", id)
+    		.list();
   }
 
 }

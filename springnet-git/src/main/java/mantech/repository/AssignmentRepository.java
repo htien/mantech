@@ -20,6 +20,5 @@ public interface AssignmentRepository extends Repository<Assignment> {
   List<Assignment> getExist(boolean deleted);
   List<Assignment> getByUserId(int id);
   List<Assignment> getCompleted(byte id);
-  List<Assignment> showAllAssignmentWithTechnician();
   
 }

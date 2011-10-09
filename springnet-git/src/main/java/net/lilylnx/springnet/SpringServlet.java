@@ -125,6 +125,8 @@ public class SpringServlet extends DispatcherServlet {
     defaultAttributes.put("ext", config.getString(ConfigKeys.SERVLET_EXTENSION));
     defaultAttributes.put("encoding", config.getString(ConfigKeys.ENCODING));
     defaultAttributes.put("dateTimeFormat", config.getString("dateTime.format"));
+    defaultAttributes.put("dateFormat", config.getString("date.format"));
+    defaultAttributes.put("timeFormat", config.getString("time.format"));
     defaultAttributes.put("now", now);
     defaultAttributes.put("timestamp", new Long(System.currentTimeMillis()));
     defaultAttributes.put("config", config);

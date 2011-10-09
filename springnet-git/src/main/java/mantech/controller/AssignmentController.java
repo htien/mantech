@@ -50,7 +50,7 @@ public class AssignmentController {
   @Autowired
   private UserService userService;
   
-  @RequestMapping (value = {"/assignment"}, params = "!p", method = RequestMethod.GET)
+  @RequestMapping(value = {"/assignment"}, params = "!p", method = RequestMethod.GET)
   public String list(ModelMap model) {
     List<Complaint> listComplaint = complaintRepo.getByAssignment();
     List<Complaint> listAllComplaint = complaintRepo.findAll();
@@ -72,7 +72,18 @@ public class AssignmentController {
     return TemplateKeys.ASSIGNMENT_ADMIN;
   }
   
-  @RequestMapping (value = "/assignment", params = "p=add", method = RequestMethod.GET)
+  @RequestMapping(value = "/assignment", params = "p=detail", method = RequestMethod.GET)
+  public String detail(@RequestParam(value="compId") int compId, ModelMap model) {
+    Assignment assignment = assignmentRepo.get(compId);
+    if (assignment == null) {
+      return TemplateKeys.FILE_NOT_FOUND;
+    }
+    
+    model.addAttribute("details", assignment.getDetails());
+    return TemplateKeys.ASSIGNMENT_ADMIN;
+  }
+  
+  @RequestMapping(value = "/assignment", params = "p=add", method = RequestMethod.GET)
   public String insert(@RequestParam(value="compId") int compId, ModelMap model) {
     if (complaintRepo.isExist(compId)) {
       if (!complaintRepo.hasAssignmentId(compId)) {
@@ -90,7 +101,7 @@ public class AssignmentController {
     return list(model);
   }
   
-  @RequestMapping (value = "/assignment/addSave", method = RequestMethod.POST)
+  @RequestMapping(value = "/assignment/addSave", method = RequestMethod.POST)
   public String insertSave(@RequestParam(value="compId") int compId,
                           @RequestParam(value="userId") int[] userId,
                           @RequestParam(value="beginDate") Date beginDate,

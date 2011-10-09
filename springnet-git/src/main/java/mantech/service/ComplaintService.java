@@ -68,7 +68,7 @@ public class ComplaintService {
     return complaintRepo.insert(complaint);
   }
   
-  public Complaint update(int id, ComplaintStatus status, CategoryPriority priority ) {
+  public Complaint update(int id, ComplaintStatus status, CategoryPriority priority ) throws Exception {
     Complaint complaint = complaintRepo.get(id);
     complaint.setStatus(status);
     complaint.setPriority(priority);

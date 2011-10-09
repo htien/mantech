@@ -16,8 +16,9 @@ import mantech.domain.User;
 import mantech.repository.UserRepository;
 
 /**
+ * 
  * @author Tien Nguyen
- * @version $Id: DefaultLoginAuthenticator.java,v 1.0 Sep 3, 2011 4:00:30 AM lilylnx Exp $
+ * @version $Id: DefaultLoginAuthenticator.java,v 1.0 2011/09/03 4:00:30 lilylnx Exp $
  */
 public class DefaultLoginAuthenticator implements LoginAuthenticator {
   

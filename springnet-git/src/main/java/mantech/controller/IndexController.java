@@ -21,6 +21,11 @@ public class IndexController {
 
   @RequestMapping(value = "/", method = RequestMethod.GET)
   public String list() {
+    return TemplateKeys.LOGIN_PAGE;
+  }
+  
+  @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+  public String dashboard() {
     return TemplateKeys.MAIN_PAGE;
   }
 

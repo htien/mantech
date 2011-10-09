@@ -55,3 +55,14 @@ public class ResponseMessage implements Serializable {
   }
 
 }
+
+class RName {
+  public static final String ADD = "add";
+  public static final String UPDATE = "update";
+}
+
+class RStatus {
+  public static final int FAIL = 0;
+  public static final int SUCC = 1;
+  public static final int ERROR = 4;
+}

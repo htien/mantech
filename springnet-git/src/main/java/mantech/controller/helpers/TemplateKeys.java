@@ -12,13 +12,17 @@ package mantech.controller.helpers;
 public class TemplateKeys {
 
   public static final String NULL = "null";
+  public static final String FILE_NOT_FOUND = "404";
   public static final String MESSAGE = "message";
   public static final String MAIN_PAGE = "__index";
-  public static final String USER_ADMIN = "user/index";
-  public static final String USER_SEARCH_ADMIN = "user/search";
-  public static final String COMPLAINT_ADMIN = "complaint/index";
-  public static final String COMPLAINT_SEARCH_ADMIN =  "complaint/search";
+  public static final String LOGIN_PAGE = "__login";
   
+  public static final String USER_ADMIN = "user/index";
+  public static final String USER_LIST_RESULT = "user/user_list_result";
+
+  public static final String COMPLAINT_ADMIN = "complaint/index";
+  public static final String COMPLAINT_LIST_RESULT =  "complaint/complaint_list_result";
+
   private TemplateKeys() {}
 
 }

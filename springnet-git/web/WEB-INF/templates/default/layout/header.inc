@@ -17,6 +17,4 @@
 <title><jtien:settings key="web.title"/></title>
 </head>
 <body class="gg-admin">
-<div id="globalContainer">
-	<div id="ggContent">
 </compress:html>

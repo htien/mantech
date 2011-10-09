@@ -1,9 +1,9 @@
 /* === Load required Google Closure Library === */
 
-goog.require('goog.editor.Field');
-goog.require('goog.ui.editor.DefaultToolbar');
-goog.require('goog.ui.editor.ToolbarController');
-goog.require('goog.ui.Dialog');
+//goog.require('goog.editor.Field');
+//goog.require('goog.ui.editor.DefaultToolbar');
+//goog.require('goog.ui.editor.ToolbarController');
+//goog.require('goog.ui.Dialog');
 
 
 /* === Initialize global variables === */

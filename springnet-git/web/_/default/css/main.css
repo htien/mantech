@@ -1,9 +1,68 @@
+body.gg-admin {
+  min-width: 785px;
+}
+
+#globalTop {
+  position: relative;
+  width: 100%;
+  z-index: 1000;
+  background-color: #fff;
+  border-bottom: 1px solid #ebebeb;
+}
+
+#globalTop.fixed_elem {
+  top: 0;
+  left: 0;
+}
+
+#ggadminbar {
+  height: 37px;
+  background-color: #2d2d2d;
+  border-bottom: 1px solid #000;
+}
+
+#ggadminbar .selected {
+  color: #fff;
+  font-weight: bold;
+}
+
+#ggaction {
+  padding: 12px 44px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 20px;  
+}
+
+#ggaction .one {
+  color: #dd4b39;
+}
+
+#ggshadow, #ggshadow div {
+  height: 8px;
+}
+
+#ggshadow {
+  position: absolute;
+  bottom: -9px;
+  right: 0;
+  left: 0;
+  z-index: 999;
+  background-color: #fff;
+}
+
+#ggshadow div {
+  background: -webkit-gradient(linear,left top,left bottom,from(rgba(0, 0, 0, 0.2)),to(transparent));
+  -webkit-mask-box-image: -webkit-gradient(linear,left top,right top,color-stop(0,rgba(0,0,0,0)),color-stop(0.5,rgba(0,0,0,0.8)),color-stop(1,rgba(0,0,0,0)));
+}
+
 #globalContainer {
   position: relative;
   height: auto;
   width: 100%;
   min-height: 100%;
 }
+
+/*========== Index Page & Login Page === */
 
 #blueBar {
   padding: .6em 2em .4em;
@@ -83,6 +142,150 @@
   font-size: 12px;
 }
 
-#ggContent {
-  
+/*========== ADMINMENU ===*/
+
+#adminmenuback, #adminmenuwrap {
+  padding-left: 44px;
+  width: 176px;
+  /*background-color: #ececec;
+  border-right: 1px solid #ccc;*/
+}
+
+#adminmenuback {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+#adminmenuwrap {
+  position: relative;
+  float: left;
+  margin-top: 115px;
+}
+
+#adminmenushadow, #adminmenuback {
+  /*background-image: url(images/menu-shadow.png);*/
+  background-position: top right;
+  background-repeat: repeat-y;
+}
+
+#adminmenushadow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 6px;
+  z-index: 20;
+}
+
+#adminmenu * {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+}
+
+#adminmenu a, #gghead a {
+  text-decoration: none;
+}
+
+#adminmenu a {
+  display: block;
+  padding: 5px;
+  line-height: 20px;
+  color: #666;
+}
+
+#adminmenu li {
+  cursor: pointer;
+}
+
+#adminmenu li.gg-menu-top {
+  position: relative;
+  min-height: 26px;
+}
+
+#adminmenu li.gg-menu-top.current a.gg-menu-top.current {
+  color: #DD4B39;
+  font-weight: bold;
+}
+
+#adminmenu li.gg-menu-open a {
+  color: #333;
+}
+
+#adminmenu .gg-menu-arrow {
+}
+
+#adminmenu .gg-menu-toggle {
+}
+
+#adminmenu a.gg-menu-top {
+  padding-left: 44px;
+}
+
+#adminmenu a.gg-menu-top:hover, #adminmenu .gg-submenu a:hover {
+  background-color: #f5f5f5;
+}
+
+#adminmenu a.gg-menu-image {
+  background-position: 16px 4px;
+  background-repeat: no-repeat;
+}
+
+#adminmenu .menu-icon-dashboard a.gg-menu-image {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABEElEQVR42t2UzQmDQBCFU0JKSQleREXRiKIiKot/daQTS0gJW4KlWMJknrAH0SS7OQUXBoR98znOvPFyOcVxHGfyPG+2LOvquq4VhiHleU6+75MxjJOmqqqoaRpKkmS+88HzOI4rVBuEariSGcl939MwDNS2LQkhqOs6MyBgXMiMZICQfBRaQF2YFtAEhkBvbdu+HcJwEcexNgyBnmZZtvDkxQ7GlS1qADowBLQoIE1T2kDZZ0+2h2RbyLquFx0oNNAiJwgCyQx5+OkQKFt8Cmig/TrlKIokeqOqQBuKolgDQ1AvgwZaIyD6w719qDusndqSn4BIZsgGWJbl2YAYP3yFtWKj74Dq1wXNW6v89XkB6E5tY/X2XroAAAAASUVORK5CYII=);
+}
+
+#adminmenu .menu-icon-complaint a.gg-menu-image {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAT0lEQVR42mNgoBdIS0v7jw9D1exMTU1NoKaB/4k2lAQDwYZSxUCiDSHGQKIsoIuBeHzTMDhcSHMvo3t1BHgZn54h7mW6lIFkFw5UM5AaAACyqLNEs75CTgAAAABJRU5ErkJggg==);
+}
+
+#adminmenu .menu-icon-assignment a.gg-menu-image {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAQElEQVR42mNgoBdIS0v7TwwmycCMjAwHYiykuoFEGUoVA5ElCRmIrm/UwFEDR66BpGCCBtK1DCSpyKJ6wUopAADjPfKfKTVPaQAAAABJRU5ErkJggg==);
+}
+
+#adminmenu .menu-icon-equipment a.gg-menu-image {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAg0lEQVR42mNgoAVIS0vrT01N3U8mTsBm4H8K8H1qG/gf5NL09PT5VDMQhqll4HsgXoNu4HsKDJyLYSAVUgnxBgID3ACouAEPLgbiE0QbCFS4nuRIIWDgeaiGYmDSsExJSTEG0chsEA30iTZBwzIyMhzwJmBSAZqB/0cNHAEG3mcYCAAAu81dWVo+ZUoAAAAASUVORK5CYII=);
+}
+
+#adminmenu .menu-icon-user a.gg-menu-image {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAZ0lEQVR42mNgGDIgNTXVIC0t7T4Q/ycD3wfpRzGQAsPghqIb+J9SPGrgqIGUGghM6fspMQykH8XAhIQEgfT09PlAyfekGgbSB9JPUl6HWobbi+QAoCEFVDUQGtYJsGChdlH3nmFIAgDgbdXUjyjrAQAAAABJRU5ErkJggg==);
+}
+
+#adminmenu .menu-icon-credit a.gg-menu-image {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABBUlEQVR42u1UWw3DMAw0hEEYhEEYhEHITx+fgVAGgTAIhVAIhVAIgbDV0Vm6bmnabvucJUuJY5/PjhNp2/bKWtf146B6jhc1VlU1mBYC44p9pNiYAIVkJWhqmuaeO0usIApqDC8bgEF9tgA1sYCqZ6OVaH1xzp30zPbcGiMz28+p2tngEjLRJufBwChhYIZmR0t60QCw6hDgX8rqKNmi7NQzMF+UD8eY6xX2miQgeaQzh7Ooa67EQEcERBqVnm8bPrxXn5usCYBDYe6Sas/eWJUEwFNuwA8BsaBnntgGHQ/5VmyU5FfyB/xM9DbxEjoaH117/p32Ag07fuqp+EJyv80efZ3LJ9nbrCAYaSQ3AAAAAElFTkSuQmCC);
+}
+
+#adminmenu .gg-submenu {
+  position: relative;
+  z-index: 2;
+}
+
+#adminmenu .gg-submenu a {
+  padding-left: 44px;
+  font-size: 12px;
+}
+
+#adminmenu .gg-submenu ul {
+  background-color: #fff;
+}
+
+#adminmenu .gg-submenu-head {
+  display: none;
+}
+
+/*========== CONTENT ===*/
+
+#ggcontent {
+  margin-left: 240px;
+  padding-top: 115px;
+  height: 100%;
+}
+
+#gghead {
+  margin-left: 2px;
+  margin-right: 20px;
+  height: 32px;
 }

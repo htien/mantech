@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import net.lilylnx.springnet.util.ClientUtils;
+
 import mantech.controller.helpers.TemplateKeys;
 import mantech.domain.CategoryPriority;
 import mantech.domain.Complaint;
@@ -29,8 +31,6 @@ import mantech.repository.ComplaintStatusRepository;
 import mantech.repository.EquipmentRepository;
 import mantech.repository.UserRepository;
 import mantech.service.ComplaintService;
-
-import net.lilylnx.springnet.util.ClientUtils;
 
 /**
  * @author Long Nguyen
@@ -64,14 +64,10 @@ public class ComplaintController {
   @RequestMapping(value = "/complaint", params = "!p", method = RequestMethod.GET)
   public String list(ModelMap model) throws Exception {
     
-    model.addAttribute("listAll", complaintRepo.findAll());
+    model.addAttribute("listComplaint", complaintRepo.findAll());
     model.addAttribute("listStatus", statusRepo.findAll());
     model.addAttribute("listPriority", priorityRepo.findAll());
     return TemplateKeys.COMPLAINT_ADMIN;
-  }
-
-  public int noOfComplaintInPeriod() {
-    return complaintRepo.count().intValue();
   }
 
   public List<Complaint> listComplaintDaily(int i) {
@@ -80,6 +76,7 @@ public class ComplaintController {
 
   @RequestMapping(value = "/complaint", params = "p=add", method = RequestMethod.GET)
   public String insert(@RequestParam(value="uid") int id, ModelMap model){
+    // TODO Sẽ cần chỉnh sửa lại userId sẽ được lấy từ session của employee đã đăng nhập.
     
     model.addAttribute("user", userRepo.get(id));
     model.addAttribute("list", equipmentRepo.findAll());
@@ -87,41 +84,35 @@ public class ComplaintController {
   }
   
   @RequestMapping(value = "/complaint/addSave", method = RequestMethod.POST)
-  public ResponseEntity<String> insertSave(@RequestParam(value="uid") int id,
+  public ResponseEntity<String> insertSave(@RequestParam(value="uid") int userId,
       @RequestParam(value="equipId") int equipId,
       @RequestParam(value="title") String title,
       @RequestParam(value="content") String content, ModelMap model)
   {
-/*    Complaint complaint = new Complaint();*/
-    User user = userRepo.get(id);
-    Equipment equipment = equipmentRepo.get(equipId);
-    CategoryPriority priority = equipment.getCategory().getPriority();
-    int newComplaintId = ((Integer)complaintService.add(user, equipment, title, content, priority)).intValue();
-   /* complaint.setUser(user);
-    complaint.setEquipment(equipment);
-    complaint.setPriority(priority);
-    complaint.setTitle(title);
-    complaint.setContent(content);
+    ResponseMessage respMessage = new ResponseMessage(RName.ADD, RStatus.FAIL, null);
+    
     try {
-      complaintService.insert(complaint);
-    }
-    catch (ValidationException e) {
-      model.addAttribute("complaint", complaint);
-      model.addAttribute("errorMsg", e.getMessage());
-      return insert(user.getId(), model);
+      User user = userRepo.get(userId);
+      Equipment equipment = equipmentRepo.get(equipId);
+      CategoryPriority priority = equipment.getCategory().getPriority();
+      
+      int newComplaintId = ((Integer)complaintService.add(user, equipment, title, content, priority)).intValue();
+      respMessage.setStatusAndMessage(RStatus.SUCC, String.format("Inserted complaint: <strong>%s (ID: %d)</strong>", title, newComplaintId));
     }
     catch (Exception e) {
-      model.addAttribute("errorMsg", e.getMessage());
-      e.printStackTrace();
-    }*/
-    return clientUtils.createJsonResponse(
-        new ResponseMessage("insert", 1, String.format("Insert Complaint : <strong>%s (ID: %d)</strong>", title, newComplaintId)));
+      respMessage.setStatusAndMessage(RStatus.ERROR, e.getMessage());
+    }
+    return clientUtils.createJsonResponse(respMessage);
   }
   
   @RequestMapping(value = "/complaint", params = "p=edit", method = RequestMethod.GET)
   public String update(@RequestParam(value="id") int id, ModelMap model) {
     Complaint complaint = complaintRepo.get(id);
-    
+
+    if (complaint == null) {
+      return TemplateKeys.FILE_NOT_FOUND;
+    }
+
     List<CategoryPriority> priority = priorityRepo.findAll(false, "id");
     List<ComplaintStatus> status = statusRepo.findAll(false, "id");
     
@@ -136,14 +127,25 @@ public class ComplaintController {
       @RequestParam("status") byte statusId, 
       @RequestParam("priority") byte priorityId, ModelMap model)
   {
-    /*Complaint complaint = (Complaint)model.get("complaint");*/
-    ComplaintStatus status = statusRepo.get(statusId);
-    CategoryPriority priority = priorityRepo.get(priorityId);
-
-    Complaint complaint = complaintService.update(id, status, priority);
-    return clientUtils.createJsonResponse(
-        new ResponseMessage("update", 1, String.format("Updated complaint: <strong>%s (ID: %d)</strong>",
-            complaint.getStatus().getName().concat(" - ").concat(complaint.getPriority().getName()), complaint.getId())));
+    ResponseMessage respMessage = new ResponseMessage(RName.UPDATE, RStatus.FAIL, null);
+    
+    try {
+      ComplaintStatus status = statusRepo.get(statusId);
+      CategoryPriority priority = priorityRepo.get(priorityId);
+      
+      if (status == null || priority == null) {
+        throw new Exception("You are hacking :)");
+      }
+  
+      Complaint complaint = complaintService.update(id, status, priority);
+      respMessage.setStatusAndMessage(RStatus.SUCC, String.format("Updated complaint: <strong>%s (ID: %d)</strong> successfully.",
+          complaint.getTitle(), complaint.getId()));
+    }
+    catch (Exception e) {
+      respMessage.setStatusAndMessage(RStatus.ERROR, e.getMessage());
+    }
+    
+    return clientUtils.createJsonResponse(respMessage);
   }
   
   @RequestMapping(value = "/complaint/search", method = RequestMethod.POST)
@@ -166,7 +168,7 @@ public class ComplaintController {
    
     if (complaints.size() != 0) {
       model.addAttribute("listComplaint", complaints);
-      return TemplateKeys.COMPLAINT_SEARCH_ADMIN;
+      return TemplateKeys.COMPLAINT_LIST_RESULT;
     }
     else {
       return TemplateKeys.NULL;

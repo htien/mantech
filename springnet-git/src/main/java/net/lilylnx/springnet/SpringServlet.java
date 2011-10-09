@@ -100,6 +100,7 @@ public class SpringServlet extends DispatcherServlet {
 
       super.service(request, response);
     }
+    // TODO Cần catch chỗ này gấp!
     finally {
       RequestContextHolder.resetRequestAttributes();
       attributes.requestCompleted();

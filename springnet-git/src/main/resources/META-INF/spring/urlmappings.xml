@@ -18,7 +18,7 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-	<!-- Các mapping được thực hiện tự động bằng Controller annotation.
+	<!-- Các mapping được thực hiện tự động bởi Controller annotation.
 		Tập tin này bỏ trống. -->
 
 </beans>

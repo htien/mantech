@@ -69,31 +69,43 @@ public class UserController {
         @RequestParam(value="firstName") String firstName, @RequestParam(value="lastName") String lastName,
         @RequestParam(value="gender") String gender, @RequestParam(value="address") String address)
   {
-    // TODO Validate username, email...
+    ResponseMessage respMessage = new ResponseMessage(RName.ADD, RStatus.FAIL, null);
+
     if (userRepo.isExistUser(username)) {
-      return clientUtils.createJsonResponse(
-          new ResponseMessage("isExistUsername", 0, String.format("Username: <strong>%s</strong> is Exist", username)));
+        respMessage.setMessage(String.format("Username <strong>%s</strong> already exists.", username));
     }
-    else if (userRepo.isExistUser(email)) {
-      return clientUtils.createJsonResponse(
-          new ResponseMessage("isExistEmail", 0, String.format("Email: <strong>%s</strong> is Exits", email)));
-    }else {
-      Department department = departmentRepo.get(departId);
-      UserRole userRole = roleRepo.get(roleId);
-      int newUserId = ((Integer)userService.add(username, password, email, firstName, lastName, gender, address, department, userRole)).intValue();
-      return clientUtils.createJsonResponse(
-          new ResponseMessage("insert", 1, String.format("Inserted user: <strong>%s (ID: %d)</strong> successfully.", username, newUserId)));
-    }    
+    if (userRepo.isExistUser(email)) {
+      respMessage.setMessage(String.format("Email <strong>%s</strong> already exists.", email));
+    }
+
+    if (respMessage.getMessage() == null) {
+      try {
+        Department department = departmentRepo.get(departId);
+        UserRole userRole = roleRepo.get(roleId);
+  
+        int newUserId = ((Integer)userService.add(username, password, email, firstName, lastName, gender, address, department, userRole)).intValue();
+        respMessage.setStatusAndMessage(RStatus.SUCC, String.format("Inserted user: <strong>%s (ID: %d)</strong> successfully.", username, newUserId));
+      }
+      catch (Exception e) {
+        respMessage.setStatusAndMessage(RStatus.ERROR, e.getMessage());
+      }
+    }
+    return clientUtils.createJsonResponse(respMessage);
   }
   
   @RequestMapping(value = "/user", params = "p=edit", method = RequestMethod.GET)
   public String update(@RequestParam("id") int id, ModelMap model) {
-    User user = userRepo.get(id);
-
-    model.addAttribute("departList", departmentRepo.findAll());
-    model.addAttribute("roleList", roleRepo.findAll());
-    model.addAttribute("user", user);
-    model.addAttribute("depart", user.getDepartment());
+    try {
+      User user = userRepo.get(id);
+  
+      model.addAttribute("departList", departmentRepo.findAll());
+      model.addAttribute("roleList", roleRepo.findAll());
+      model.addAttribute("user", user);
+      model.addAttribute("depart", user.getDepartment());
+    }
+    catch (Exception e) {
+      return TemplateKeys.FILE_NOT_FOUND;
+    }
     return TemplateKeys.USER_ADMIN;
   }
   
@@ -102,22 +114,29 @@ public class UserController {
         @RequestParam("department") byte depart, @RequestParam("role") byte role,
         @RequestParam("address") String address)
   {
+    ResponseMessage respMessage = new ResponseMessage(RName.UPDATE, RStatus.FAIL, null);
     Department department = departmentRepo.get(depart);
     UserRole userRole = roleRepo.get(role);
 
-    User user = userService.update(userId, email, address, department, userRole);
-    return clientUtils.createJsonResponse(
-        new ResponseMessage("update", 1, String.format("Updated user: <strong>%s (ID: %d)</strong> successfully.",
-            user.getFirstName().concat(" ").concat(user.getLastName()), user.getId())));
+    try {
+      User user = userService.update(userId, email, address, department, userRole);
+      respMessage.setStatusAndMessage(RStatus.SUCC, String.format("Updated user: <strong>%s (ID: %d)</strong> successfully.",
+          user.getFirstName().concat(" ").concat(user.getLastName()), user.getId()));
+    }
+    catch (Exception e) {
+      respMessage.setStatusAndMessage(RStatus.ERROR, e.getMessage());
+    }
+    
+    return clientUtils.createJsonResponse(respMessage);
   }
 
   @RequestMapping(value = "/user/search", method = RequestMethod.POST)
   public String search(@RequestParam("q") String searchText, @RequestParam("f") byte selectedField,
       ModelMap model)
   {
+    searchText = StringUtils.isNotBlank(searchText) ? searchText.trim() : null;
     List<User> users = null;
-    searchText = StringUtils.isBlank(searchText) ? null : searchText.trim();
-    
+
     switch (selectedField) {
       case 1: users = userService.searchByUsername(searchText); break;
       case 2: users = userService.searchByDepartmentName(searchText); break;
@@ -126,7 +145,7 @@ public class UserController {
 
     if (users.size() != 0) {
       model.addAttribute("listUser", users);
-      return TemplateKeys.USER_SEARCH_ADMIN;
+      return TemplateKeys.USER_LIST_RESULT;
     }
     else {
       return TemplateKeys.NULL;

@@ -395,10 +395,10 @@ startChart = function() {
 	var a = [560, 2000, 700, 4000],
 		b = [100,200,30,130,60,30,10,100,600,200,100,50,150,800,200,100,30,70,80,20,200,200,1200,400,200,100,300,1600];
 	
-	var first = b.slice(0,6);
-	var second = b.slice(7,13);
-	var third = b.slice(14,20);
-	var fourth = b.slice(21,27);
+	var first = b.slice(0,7);
+	var second = b.slice(7,14);
+	var third = b.slice(14,21);
+	var fourth = b.slice(21,28);
 	
 	var chart=0;
 	

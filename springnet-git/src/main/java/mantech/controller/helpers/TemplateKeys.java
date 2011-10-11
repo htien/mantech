@@ -13,18 +13,33 @@ public class TemplateKeys {
 
   public static final String NULL = "null";
   public static final String FILE_NOT_FOUND = "404";
-  public static final String MESSAGE = "message";
-  public static final String MAIN_PAGE = "__index";
+  public static final String SPRINGNET_INFO_PAGE = "__springnet_info";
   public static final String LOGIN_PAGE = "__login";
+  public static final String MAIN_PAGE = "__index";
   
-  public static final String USER_ADMIN = "user/index";
+  public static final String USER_ADD = "user/add";
+  public static final String USER_EDIT = "user/edit";
+  public static final String USER_LIST = "user/list";
   public static final String USER_LIST_RESULT = "user/user_list_result";
 
-  public static final String COMPLAINT_ADMIN = "complaint/index";
+  public static final String COMPLAINT_ADD = "complaint/add";
+  public static final String COMPLAINT_EDIT = "complaint/edit";
+  public static final String COMPLAINT_LIST = "complaint/list";
   public static final String COMPLAINT_LIST_RESULT =  "complaint/complaint_list_result";
 
-  public static final String ASSIGNMENT_ADMIN =  "assignment/index";
+  public static final String ASSIGNMENT_LIST =  "assignment/list";
+  public static final String ASSIGNMENT_ADD = "assignment/add";
+  public static final String ASSIGNMENT_EDIT = "assignment/edit";
   public static final String ASSIGNMENT_LIST_RESULT = "assignment/assignment_list_result";
+  public static final String ASSIGNMENT_DETAIL = "assignment/detail";
+  
+  public static final String CATEGORY_ADD = "category/add";
+  public static final String CATEGORY_EDIT = "category/edit";
+  public static final String CATEGORY_LIST = "category/list";
+  
+  public static final String EQUIPMENT_ADD = "equipment/add";
+  public static final String EQUIPMENT_EDIT = "equipment/edit";
+  public static final String EQUIPMENT_LIST = "equipment/list";
   
   private TemplateKeys() {}
 

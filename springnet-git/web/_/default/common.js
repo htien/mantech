@@ -3,9 +3,11 @@
 $(function() {
 	pageload();
 	applyAjax_adminmenu();
+	applyAjax_pagelet();
+	jTien.adminMenu.init();
 });
 
-$('#signin_pagelet').ready(function() {
+$('#pagelet_signin').ready(function() {
 	
 	var signInBox = '#signin-box',
 		signInForm = '#signin-form',
@@ -41,7 +43,7 @@ $('#signin_pagelet').ready(function() {
 				jTien.ajaxSubmit(form)
 					.success(function(loginResponse) {
 						if (loginResponse.status == 1) { 
-							document.location = $ctx;
+							document.location = jTien.url('/index');
 						}
 						else {
 							jTien.callJqDialog('ajax-response', loginResponse.message, {
@@ -66,7 +68,7 @@ $('#signin_pagelet').ready(function() {
 	
 });
 
-$('#signin_pagelet #testZone').ready(function() {
+$('#pagelet_signin #testZone').ready(function() {
 	
 	/* Xử lý nút Test1 Test2 */
 	
@@ -114,7 +116,7 @@ $('#signin_pagelet #testZone').ready(function() {
 
 });
 
-$('#user_list_pagelet').ready(function() {
+$('#pagelet_user_list').ready(function() {
 	var filterForm = '#user-filter-form',
 		filterSubmit = '#filter-query-submit',
 		lnkShowAll =  '#lnkShowAll',

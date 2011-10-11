@@ -1,6 +1,4 @@
-<%@ taglib uri="http://htmlcompressor.googlecode.com/taglib/compressor" prefix="compress"%><compress:html
-	jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
+<%@ include file="top.inc"%>
 
 </body>
 </html>
-</compress:html>

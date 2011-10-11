@@ -41,7 +41,8 @@ $validateOpts = {
 			$(el).addClass(validClass).removeClass(errorClass);
 			$(el.form).find('span[class~=' + el.id + ']').removeClass(errorClass);
 		}
-};
+},
+$adminMenu = '#adminmenu';
 
 /* === Initialize setup default === */
 
@@ -72,17 +73,47 @@ pageload = function() {
 },
 
 applyAjax_pageload = function(hash) {
-	if (hash) jTien.ajaxFromLink(undefined, jTien.url('/load'), '#ggbody-content');
+	if (hash) {
+		if (hash.indexOf('-') > -1) {
+			jTien.ajaxFromLink(undefined, jTien.url('/loadaction'), '#ggbody-content');
+		}
+		else {
+			jTien.ajaxFromLink(undefined, jTien.url('/load'), '#ggbody-content');
+		}
+	}
 },
 
 applyAjax_adminmenu = function() {
 	$('#adminmenu a').each(function(idx, el) {
-		$(el).click(function(evt) {
-			jTien.ajaxFromLink(this, jTien.url('/load'), '#ggbody-content');
+		$(this).click(function(evt) {
+			jTien.ajaxFromLink(this, jTien.url('/load'), '#ggbody-content')
+				.success(function(html) {
+					currentMenuItem(idx, el);
+				});
 			evt.preventDefault();
 			return false;
 		});
 	});
+},
+
+applyAjax_pagelet = function() {
+	$('.g-pl .gg-list-table .a').each(function(idx, el) {
+		$(el).click(function(evt) {
+			jTien.ajaxFromLink(this, jTien.url('/loadaction'), '#ggbody-content');
+			evt.preventDefault();
+		});
+	});
+},
+
+currentMenuItem = function(idx, lnkMenuItem) {
+	var adminMenu = $($adminMenu),
+		menuItem = $(lnkMenuItem),
+		parentsMenuItem =  menuItem.parents('li.gg-menu-top');
+	adminMenu.find('.current').removeClass('current');
+
+	menuItem.addClass('current');
+	parentsMenuItem.addClass('current');
+	parentsMenuItem.find('a.gg-menu-top').addClass('current');
 },
 
 shakeContainer = function(container) {
@@ -133,7 +164,7 @@ jTien.toJqId = function(id) {
 	return (typeof id === 'string')
 				? /^#/.test(id) ? $(id) : $('#' + id)
 				: id;
-};
+},
 
 jTien.url = function(path) {
 	if (typeof path === 'string') {
@@ -142,20 +173,18 @@ jTien.url = function(path) {
 	else {
 		return $ctx;
 	}
-};
+},
 
 jTien.resetForm = function(form) {
 	var _form = jTien.toJqId(form);
 	_form[0].reset();
 	_form.find(':input[class!=noreset]:visible:enabled:first').focus();
 	return _form;
-};
-
+},
 jTien.ajaxSubmit = function(form) {
 	var jqXhr = jTien.f.ajaxSubmit(form);
 	return jqXhr;
-};
-
+},
 jTien.ajaxConnect = function(container, form, data) {
 	var _form = form instanceof HTMLFormElement ? $(form) : jTien.toJqId(form);
 	return jTien.f.ajaxConnect(container, {
@@ -164,15 +193,13 @@ jTien.ajaxConnect = function(container, form, data) {
 			url: _form.attr('action'),
 			data: data == undefined ? _form.serialize() : data
 	});
-};
-
+},
 jTien.ajaxFromLink = function(link, target, container) {
 	return jTien.f.ajaxFromLink(link, target).success(function(html) {
 		jTien.toJqId(container).html(html);
 		jTien.f.completeFormAction();
 	});
-};
-
+},
 jTien.callJqDialog = function(id, url, settings, dlgOpts) {
 	var isUrl = jTien.f.isUrl(url);
 	if (dlgOpts == undefined) {
@@ -187,8 +214,42 @@ jTien.callJqDialog = function(id, url, settings, dlgOpts) {
 			: '<p class="gg-popup-msg">' + url + '</p>';
 	var dlg = jTien.f.createJqDialog(id, responseText, dlgOpts); 
 	return dlg;
+},
+jTien.adminMenu = {
+	init: function() {
+		var adminMenu = $('#adminmenu');
+		$('.gg-menu-toggle', adminMenu).each(function(idx, el) {
+			var toggleButton = $(this),
+				subMenu = toggleButton.siblings('.gg-submenu');
+			if (subMenu.length) {
+				toggleButton.click(function(evt) {
+					jTien.adminMenu.toggle(subMenu);
+				});
+			}
+			else {
+				toggleButton.hide();
+			}
+		});
+	},
+	toggle: function(submenu) {
+		submenu.slideToggle(150, function() {
+			var menuId = submenu.css('display', '').parent().toggleClass('gg-menu-open').attr('id');
+			if (menuId) {
+				$('li.gg-has-submenu', '#adminmenu').each(function(idx, el) {
+					if (menuId == el.id) {
+						var status = $(el).hasClass('gg-menu-open') ? 'o' : 'c';
+						//setUserSetting('m' + idx, status);
+					}
+				});
+			}
+		});
+		return false;
+	}
 };
 
+/**
+ * Low-level functions.
+ */
 jTien.f = jTien.prototype = {
 
 	/** Turn off autocomplete for input text */
@@ -326,5 +387,4 @@ jTien.f = jTien.prototype = {
 };
 
 window.jTien = jTien;
-
 })(window);

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import mantech.controller.helpers.TemplateKeys;
 import mantech.domain.Category;
 import mantech.domain.Equipment;
 import mantech.repository.CategoryRepository;
@@ -37,7 +38,7 @@ public class EquipmentController {
   @Autowired
   private CategoryRepository categoryRepo;
 
-  @RequestMapping(value = {"/equipment", "/equipment/list"}, method = RequestMethod.GET)
+  @RequestMapping(value = "/equipment", params = "action=list", method = RequestMethod.GET)
   public String list(@RequestParam(value="page", required=false, defaultValue="1") int page,
       ModelMap model) {
 
@@ -58,11 +59,11 @@ public class EquipmentController {
     }
     
     model.addAttribute("pageCount", pageCount);
-    return "/equipment/list";
+    return TemplateKeys.EQUIPMENT_LIST;
 
   }
   
-  @RequestMapping(value = "/equipment/add", method = RequestMethod.GET)
+  @RequestMapping(value = "/equipment", params = "action=add", method = RequestMethod.GET)
   public String insert(ModelMap model) {
     List<Category> category = categoryRepo.findAll();
     model.addAttribute("category", category);
@@ -84,7 +85,7 @@ public class EquipmentController {
     return "msg";
   }
   
-  @RequestMapping(value = "/equipment/edit", method = RequestMethod.GET)
+  @RequestMapping(value = "/equipment", params = "action=edit", method = RequestMethod.GET)
   public String update(@RequestParam(value="id", required=false, defaultValue="0") int id,
       ModelMap model) {
 
@@ -92,7 +93,7 @@ public class EquipmentController {
     List<Category> listCategory = categoryRepo.findAll();
     model.addAttribute("equipment", equipment);
     model.addAttribute("listCategory", listCategory);
-    return "/equipment/edit";
+    return TemplateKeys.EQUIPMENT_EDIT;
   }
   
   @RequestMapping(value = "/equipment/editSave", method = RequestMethod.POST)

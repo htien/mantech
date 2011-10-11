@@ -1,9 +1,12 @@
+<%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure"
+	compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
+
 <style type="text/css">
 	.grid {margin-top: 15px; border: 1px solid #000; border-collapse: collapse;}
 	.grid th, .grid td {border: 1px solid #000; border-collapse: collapse}
 </style>
 
-<div id="user_list_pagelet" class="g-pl">
+<div id="pagelet_user_list" class="g-pl">
 	<form id="user-filter-form" method="post" action="/user/search">
 		<input type="text" name="q" />
 		<select name="f">
@@ -21,3 +24,5 @@
 		</table>
 	</form>
 </div>
+
+</compress:html>

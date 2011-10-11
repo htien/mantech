@@ -17,7 +17,7 @@ import com.google.gson.Gson;
  * @version $Id: ClientUtils.java,v 1.0 Oct 6, 2011 5:59:35 PM lilylnx Exp $
  */
 public class ClientUtils {
-  
+
   @Autowired
   private SpringConfig config;
   
@@ -30,4 +30,5 @@ public class ClientUtils {
     String json = gson.toJson(o);
     return new ResponseEntity<String>(json, headers, HttpStatus.CREATED);
   }
+
 }

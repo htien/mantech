@@ -49,6 +49,10 @@ h6 {
   font-size: 11px;
 }
 
+abbr {
+  border-bottom: 1px dotted #a3756e;
+}
+
 pre, code {
   font-family: monaco, 'dejavu sans mono', 'bitstream vera sans mono', 'courier new', monospace;
 }
@@ -116,6 +120,14 @@ ol.nobullets, ul.nobullets {
 
 .w100 {
   width: 100%;
+}
+
+.alignleft {
+  float: left;
+}
+
+.alignright {
+  float: right;
 }
 
 .fixed_elem {

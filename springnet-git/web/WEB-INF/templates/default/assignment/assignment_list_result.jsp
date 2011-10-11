@@ -1,6 +1,4 @@
-<%@ include file="../layout/top.inc"%><compress:html
-	jsCompressor="closure" compressJavaScript="true" compressCss="true"
-	removeIntertagSpaces="true">
+<%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
 <c:forEach items="${listAllAssignment}" var="a">
 	<tr>
@@ -9,7 +7,7 @@
 		<td>${a.duration}</td>
 		<td><fmt:formatDate value="${a.createDate}" pattern="${dateFormat}"/></td>
 		<td></td>
-		<td><a href='<jtien:url address="/assignment"/>?p=detail&compId=${a.complaintId}'>Detail</a></td>
+		<td><a class="a" href='<jtien:url address="/index"/>#detailassignment-${a.complaintId}'>Detail</a></td>
 	</tr>
 </c:forEach>
 

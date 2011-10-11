@@ -282,3 +282,7 @@ span.error {
   -webkit-box-shadow: inset 0 0 0 1px #fff;
   -moz-box-shadow: inset 0 0 0 1px #fff;
 }
+
+a.g-b {
+  text-decoration: none;
+}

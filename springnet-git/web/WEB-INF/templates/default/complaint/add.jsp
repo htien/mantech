@@ -1,3 +1,5 @@
+<%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
+
 <div id="addcomplaint_pagelet" class="g-pl">
 	<div id="addcomplaint-box" class="box">
 		<h2 class="title">Insert New Complaint</h2>
@@ -37,3 +39,5 @@
 		</form>
 	</div>
 </div>
+
+</compress:html>

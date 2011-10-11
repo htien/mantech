@@ -1,5 +1,5 @@
-<%@ include file="../layout/header.inc" %>
-<%@ include file="../layout/top.inc" %>
+<%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
+
 <f:form action="/category/editSave" commandName="category">
 	<h2>Update new category</h2>
 	<c:if test="${msg != null}">${msg}</c:if>
@@ -12,4 +12,5 @@
 		</c:when>
 	</c:choose>
 </f:form>
-<%@ include file="../layout/footer.inc" %>
+
+</compress:html>

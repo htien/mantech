@@ -1,3 +1,5 @@
+<%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
+
 <style>
 	.grid {margin-top: 15px; border: 1px solid #000; border-collapse: collapse;}
 	.grid th, .grid td {border: 1px solid #000; border-collapse: collapse}
@@ -44,3 +46,5 @@
 		</table>
 	</form>
 </div>
+
+</compress:html>

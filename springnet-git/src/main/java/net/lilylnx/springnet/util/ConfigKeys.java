@@ -20,6 +20,8 @@ public class ConfigKeys {
   public static final String SPRING_CUSTOM_PROPS_PATH = "/META-INF/springnet-custom.properties";
   public static final String SPRING_LANGUAGES_PATH = "/META-INF/languages/";
   public static final String SPRING_LOCALE_PROPS_PATH = SPRING_LANGUAGES_PATH + "locales.properties";
+  public static final String AJAX_URLS_PATH = "/META-INF/ajax-hash-urls.properties";
+  
   public static final String APPLICATION_PATH = "application.path";
   public static final String CONFIG = "config";
   public static final String DB_PASSWD = "db.passwd";
@@ -43,9 +45,10 @@ public class ConfigKeys {
   public static final String USER_SESSION = "userSession";
   
   public static final String I18N_DEFAULT_ADMIN = "i18n.internal";
-  public static final String I18N_DEFAULT = "i18n.default";
-
+  public static final String I18N_DEFAULT = "i18n.default";  
+  
   public static final String HTTP_SERVLET_RESPONSE = "springnet.http.servlet.response";
+  public static final String AJAX_HASH_URLS = "ajax.hash.urls";
   
   private ConfigKeys() {}
   

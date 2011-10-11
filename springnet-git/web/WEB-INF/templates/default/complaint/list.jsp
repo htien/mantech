@@ -6,6 +6,8 @@
 </style>
 
 <div id="complaint_list_pagelet" class="g-pl">
+	<div id="container" style="width: 700px; height: 400px;"></div>
+	
 	<form id="complaint-filter-form" method="post" action="/complaint/search">
 		<select id="field-name" name="f">
 			<option value="1">Employee</option>
@@ -45,6 +47,7 @@
 			</tbody>
 		</table>
 	</form>
+	<script>startChart();</script>
 </div>
 
 </compress:html>

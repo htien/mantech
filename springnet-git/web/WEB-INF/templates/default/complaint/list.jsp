@@ -1,10 +1,5 @@
 <%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
-<style>
-	.grid {margin-top: 15px; border: 1px solid #000; border-collapse: collapse;}
-	.grid th, .grid td {border: 1px solid #000; border-collapse: collapse}
-</style>
-
 <div id="complaint_list_pagelet" class="g-pl">
 	<div id="container" style="width: 700px; height: 400px;"></div>
 	
@@ -39,13 +34,64 @@
 		</div>
 		<div id="filter-query-submit" class="g-b g-b-r">Filter</div>
 		<div id="lnkShowAll" class="g-b g-b-b">Show All</div>
-		<table class="gg-list-table complaints grid">
-			<thead><tr><th>Id</th><th>Employee</th><th>Equipment name</th><th>Title</th><th>Content</th><th>Priority</th><th>Status</th><th>Created date</th><th>End date</th><th>Edit</th></tr></thead>
-			<tfoot><tr><th>Id</th><th>Employee</th><th>Equipment name</th><th>Title</th><th>Content</th><th>Priority</th><th>Status</th><th>Created date</th><th>End date</th><th>Edit</th></tr></tfoot>
-			<tbody id="the-list">
-				<%@ include file="complaint_list_result.jsp" %>
-			</tbody>
-		</table>
+		
+		<div id="complaint-viewmanager">
+			<div class="gg-listview">
+				<div class="gg-listview-inner">
+					<div class="gg-listview-headers-container">
+						<table class="gg-list-table gg-list-header-table widefat fixed complaint">
+							<colgroup>
+								<col class="list-col-complaintid" width="50" />
+								<col class="list-col-username" width="120" />
+								<col class="list-col-equipmentname" width="100" />
+								<col class="list-col-title" />
+								<col class="list-col-priority" width="65" />
+								<col class="list-col-status" width="80" />
+								<col class="list-col-createdate" width="80" />
+								<col class="list-col-enddate" width="80" />
+								<col class="list-col-edit" width="40" />
+							</colgroup>
+							<thead class="gg-list-thead">
+								<tr class="gg-list-header">
+									<td><span class="gg-inner-block">ID</span></td>
+									<td><span class="gg-inner-block">Employee</span></td>
+									<td><span class="gg-inner-block">Equipment Name</span></td>
+									<td><span class="gg-inner-block">Title</span></td>
+									<td><span class="gg-inner-block">Priority</span></td>
+									<td><span class="gg-inner-block">Status</span></td>
+									<td><span class="gg-inner-block">Create Date</span></td>
+									<td><span class="gg-inner-block">End Date</span></td>
+									<td><span class="gg-inner-block">Edit</span></td>
+								</tr>
+							</thead>
+						</table>
+					</div>
+					<div class="gg-listview-list">
+						<div class="gg-list-container">
+							<table class="gg-list-table widefat fixed complaint">
+								<colgroup>
+									<col class="list-col-complaintid" width="50" />
+									<col class="list-col-username" width="120" />
+									<col class="list-col-equipmentname" width="100" />
+									<col class="list-col-title" />
+									<col class="list-col-priority" width="65" />
+									<col class="list-col-status" width="80" />
+									<col class="list-col-createdate" width="80" />
+									<col class="list-col-enddate" width="80" />
+									<col class="list-col-edit" width="40" />
+								</colgroup>
+								<thead class="gg-list-thead">
+									<tr class="height:0"></tr>
+								</thead>
+								<tbody id="the-list" class="gg-list-tbody">
+									<%@ include file="complaint_list_result.jsp" %>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</form>
 	<script>startChart();</script>
 </div>

@@ -1,8 +1,14 @@
 <%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure"
 	compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
-<div id="pagelet_user_list" class="g-pl">
+<div id="pagelet_user_list" class="g-pl wrap">
+	<h2>Users<a class="add-new-h2" href="<jtien:url address="/index"/>#adduser">Add New</a></h2>
+	<ul class="subsubsub">
+		<li class="all">All <span class="count">(0)</span> | </li>
+		<li class="deleted">Deleted <span class="count">(0)</span></li>
+	</ul>
 	<form id="user-filter-form" method="post" action="/user/search">
+		<div class="tablenav"></div>
 		<input type="text" name="q" />
 		<select name="f">
 			<option value="1">UserName</option>
@@ -64,5 +70,6 @@
 			</div>
 		</div>
 	</form>
+	<div class="clear"></div>
 </div>
 </compress:html>

@@ -65,12 +65,12 @@ strong {
   font-weight: bold;
 }
 
-a, a:visited, a:hover {
+a, a:visited {
   color: #11c /*#3B5998*/;
   text-decoration: none;
 }
 
-a:hover, a:active {
+a:hover, a:active. a:focus {
   color: #800;
   text-decoration: underline;
 }

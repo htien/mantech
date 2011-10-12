@@ -17,8 +17,8 @@
 					<div class="gg-listview-headers-container">
 						<table class="gg-list-table gg-list-header-table widefat fixed equipment">
 							<colgroup>
-								<col class="list-col-equipmentid" width="70" />
-								<col class="list-col-equipmentname" width="100" />
+								<col class="list-col-equipmentid" width="40" />
+								<col class="list-col-equipmentname" width="200" />
 								<col class="list-col-category" />
 							</colgroup>
 							<thead class="gg-list-thead">
@@ -35,8 +35,8 @@
 						<div class="gg-list-container">
 							<table class="gg-list-table widefat fixed equipment">
 								<colgroup>
-									<col class="list-col-equipmentid" width="70" />
-									<col class="list-col-equipmentname" width="100" />
+									<col class="list-col-equipmentid" width="40" />
+									<col class="list-col-equipmentname" width="200" />
 									<col class="list-col-category" />
 								</colgroup>
 								<thead class="gg-list-thead">

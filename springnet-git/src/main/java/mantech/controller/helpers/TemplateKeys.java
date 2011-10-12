@@ -17,6 +17,9 @@ public class TemplateKeys {
   public static final String LOGIN_PAGE = "__login";
   public static final String MAIN_PAGE = "__index";
   
+  public static final String DASHBOARD_PAGE = "dashboard/dashboard";
+  public static final String DASHBOARD_VIEW_CREDITS = "dashboard/credits";
+  
   public static final String USER_ADD = "user/add";
   public static final String USER_EDIT = "user/edit";
   public static final String USER_LIST = "user/list";

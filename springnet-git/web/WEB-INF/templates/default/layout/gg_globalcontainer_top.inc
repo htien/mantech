@@ -7,7 +7,7 @@
 			<li class="selected"><span>Administrator</span></li>
 		</ul>
 	</div>
-	<div id="ggaction"><span class="one">Mantech Helpdesk</span></div>
+	<div id="ggaction"><span class="logo-text">Mantech Helpdesk</span> · </div>
 	<div id="ggshadow"><div></div></div>
 </div>
 <div id="globalContainer">

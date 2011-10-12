@@ -1,7 +1,7 @@
 <%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
 <div id="assignment_list_pagelet" class="g-pl wrap">
-	<h2>Categories<a class="add-new-h2" href="<jtien:url address="/index"/>#addassignment">Add New</a></h2>
+	<h2>Assignments<a class="add-new-h2" href="<jtien:url address="/index"/>#addassignment">Add New</a></h2>
 	<form id="assignment-filter-form">
 		<div id="assignment-viewmanager">
 			<div class="gg-listview">

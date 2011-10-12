@@ -1,3 +1,11 @@
+a, a:visited {
+  color: #21759b;
+}
+
+a:hover, a:active, a:focus {
+  color: #d54e21;
+}
+
 body.gg-admin {
   min-width: 785px;
 }
@@ -37,8 +45,9 @@ body.gg-admin {
   -moz-box-shadow: 0 0 3px rgba(0,0,0,.3);  
 }
 
-#ggaction .one {
+#ggaction .logo-text {
   color: #dd4b39;
+  text-shadow: 0 0 1px rgba(221,75,57,.1);
 }
 
 #ggshadow, #ggshadow div {
@@ -477,11 +486,59 @@ body.gg-admin {
 .gg-row-actions {
   margin-top: 5px;
   visibility: hidden;
+  color: #d6d6d6;
   font-size: 11.5px;
 }
 
-.gg-row-actions a {
-  color: #7f9acc;
+.wrap h2, .subtitle {
+  padding: 9px 15px 4px 0;
+  line-height: 29px;
+  text-shadow: 0 1px 0 rgba(255,255,255,1);
+  color: #464646;
+  font-size: 23px;
+  font-weight: normal;
+}
+
+.wrap .add-new-h2 {
+  position: relative;
+  top: -3px;
+  margin-left: 10px;
+  padding: 3px 8px;
+  text-decoration: none;
+  font-size: 12px;
+  background-color: #f1f1f1;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -khtml-border-radius: 3px;
+}
+
+.subsubsub {
+  float: left;
+  margin: 8px 0 5px;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+.subsubsub li {
+  display: inline;
+}
+
+.subsubsub a {
+  padding: .2em;
+  line-height: 2;
+}
+
+.subsubsub a .count {
+  color: #999;
+  font-weight: normal;
+}
+
+.tablenav {
+  clear: both;
+  margin: 6px 0 4px;
+  height: 30px;
+  vertical-align: middle;
 }
 
 #user-viewmanager {

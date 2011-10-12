@@ -1,7 +1,6 @@
 <%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
-<div id="complaint_list_pagelet" class="g-pl">
-	<div id="container"></div>
+<div id="complaint_list_pagelet" class="g-pl wrap">
 	<h2>Complaints<a class="add-new-h2" href="<jtien:url address="/index"/>#addcomplaint">Add New</a></h2>
 	<ul class="subsubsub">
 		<li class="all">All <span class="count">(0)</span> |</li>
@@ -46,24 +45,24 @@
 						<table class="gg-list-table gg-list-header-table widefat fixed complaint">
 							<colgroup>
 								<col class="list-col-complaintid" width="50" />
+								<col class="list-col-title" />
 								<col class="list-col-username" width="120" />
 								<col class="list-col-equipmentname" width="100" />
-								<col class="list-col-title" />
 								<col class="list-col-priority" width="65" />
+								<col class="list-col-createdate" width="100" />
+								<col class="list-col-enddate" width="100" />
 								<col class="list-col-status" width="80" />
-								<col class="list-col-createdate" width="80" />
-								<col class="list-col-enddate" width="80" />
 							</colgroup>
 							<thead class="gg-list-thead">
 								<tr class="gg-list-header">
 									<td><span class="gg-inner-block">ID</span></td>
-									<td><span class="gg-inner-block">Employee</span></td>
-									<td><span class="gg-inner-block">Equipment Name</span></td>
 									<td><span class="gg-inner-block">Title</span></td>
+									<td><span class="gg-inner-block">Employee</span></td>
+									<td><span class="gg-inner-block">Equipment</span></td>
 									<td><span class="gg-inner-block">Priority</span></td>
-									<td><span class="gg-inner-block">Status</span></td>
 									<td><span class="gg-inner-block">Create Date</span></td>
 									<td><span class="gg-inner-block">End Date</span></td>
+									<td><span class="gg-inner-block">Status</span></td>
 								</tr>
 							</thead>
 							<tbody><tr><td colspan="8"></td></tr></tbody>
@@ -74,13 +73,13 @@
 							<table class="gg-list-table widefat fixed complaint">
 								<colgroup>
 									<col class="list-col-complaintid" width="50" />
+									<col class="list-col-title" />
 									<col class="list-col-username" width="120" />
 									<col class="list-col-equipmentname" width="100" />
-									<col class="list-col-title" />
 									<col class="list-col-priority" width="65" />
+									<col class="list-col-createdate" width="100" />
+									<col class="list-col-enddate" width="100" />
 									<col class="list-col-status" width="80" />
-									<col class="list-col-createdate" width="80" />
-									<col class="list-col-enddate" width="80" />
 								</colgroup>
 								<thead class="gg-list-thead">
 									<tr class="height:0"></tr>
@@ -95,7 +94,6 @@
 			</div>
 		</div>
 	</form>
-	<script>startChart();</script>
 </div>
 
 </compress:html>

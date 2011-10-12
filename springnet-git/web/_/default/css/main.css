@@ -31,7 +31,7 @@ body.gg-admin {
   height: 30px;
   line-height: 30px;
   font-size: 20px;
-  background-color: #fbfbfb;
+  background-color: #f5f5f5;
   box-shadow: 0 0 3px rgba(0,0,0,.3);
   -webkit-box-shadow: 0 0 3px rgba(0,0,0,.3);
   -moz-box-shadow: 0 0 3px rgba(0,0,0,.3);  
@@ -186,7 +186,7 @@ body.gg-admin {
   z-index: 20;
 }
 
-#adminmenu * {
+#adminmenu, #ggadminbar, #ggfooter {
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -234,6 +234,10 @@ body.gg-admin {
   right: -9px;
   z-index: 25;
   background-color: #f5f5f5;
+}
+
+#adminmenu li.gg-menu-top.current {
+  margin-bottom: 16px;
 }
 
 #adminmenu li.gg-menu-open .gg-submenu {
@@ -343,8 +347,8 @@ body.gg-admin {
   height: 100%;
 }
 
-#gghead, #ggfooter {
-  margin-right: 20px;
+#gghead, #ggcontent, #ggfooter {
+  margin-right: 30px;
 }
 
 #gghead {
@@ -391,4 +395,74 @@ body.gg-admin {
 
 #ggfooter .copyright {
   text-transform: uppercase;
+}
+
+/*========== LIST-TABLE ===*/
+
+.gg-list-table {
+  padding: 0;
+  zoom: 1;
+  cursor: default;
+  border-spacing: 0;
+}
+
+.gg-list-table td {
+  vertical-align: middle;
+}
+
+.gg-list-header {
+  height: 34px;
+  color: #555;
+  font-size: 11px;
+}
+
+.gg-list-header td {
+  overflow: hidden;
+  padding: 0 0 0 6px;
+  empty-cells: show;
+  text-transform: uppercase;
+  white-space: nowrap;
+  z-index: 1;
+  font-weight: bold;
+  background-color: #fff;
+  border-color: #e5e5e5;
+  border-style: solid;
+  border-width: 1px 0;
+}
+
+.gg-listview-list {
+  position: relative;
+  overflow-y: hidden;
+  zoom: 1;
+}
+
+.gg-list-container {
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+}
+
+.gg-list-tr {
+  height: 33px;
+  -webkit-transition: font-size .218s,height .218s,line-height .218s,margin .218s,padding .218s,width .218s
+}
+
+.gg-list-tr:hover {
+  background-color: #ffffd6;
+}
+
+.gg-list-tr td {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.gg-td-wrapper {
+  padding: 0 7px;
+}
+
+#user-viewmanager {
+  margin-top: 10px;
 }

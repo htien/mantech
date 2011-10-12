@@ -81,6 +81,9 @@ applyAjax_pageload = function(hash) {
 			jTien.ajaxFromLink(undefined, jTien.url('/load'), '#ggbody-content');
 		}
 	}
+	else {
+		jTien.ajaxFromLink('#menu-complaints a.gg-menu-top', jTien.url('/load'), '#ggbody-content');
+	}
 },
 
 applyAjax_adminmenu = function() {

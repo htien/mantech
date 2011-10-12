@@ -138,3 +138,22 @@ ol.nobullets, ul.nobullets {
   padding: 8px 0;
   color: #222;
 }
+
+.widefat {
+  clear: both;
+  width: 100%;
+}
+
+.widefat * {
+  word-wrap: break-word;
+}
+
+table.fixed {
+  table-layout: fixed;
+}
+
+.gg-inner-block {
+  position: relative;
+  display: -moz-inline-box;
+  display: inline-block;
+}

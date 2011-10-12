@@ -1,14 +1,16 @@
 /* === Document Ready for assigning events === */
 
 $(function() {
-	pageload();
-	applyAjax_adminmenu();
-	applyAjax_pagelet();
-	jTien.adminMenu.init();
+	if ($('body').hasClass('gg-admin')) {
+		pageload();
+		applyAjax_adminmenu();
+		applyAjax_pagelet();
+		jTien.adminMenu.init();
+	}
 });
 
 $('#pagelet_signin').ready(function() {
-	
+
 	var signInBox = '#signin-box',
 		signInForm = '#signin-form',
 		signInButton = '#signin',

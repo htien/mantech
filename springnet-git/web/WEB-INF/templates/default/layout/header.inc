@@ -16,4 +16,4 @@
 <base href="${contextPath}/" />
 <title><jtien:settings key="web.title"/></title>
 </head>
-<body class="gg-admin">
+<body class="">

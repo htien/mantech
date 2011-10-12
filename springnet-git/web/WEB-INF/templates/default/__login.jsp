@@ -1,5 +1,5 @@
-<%@ include file="layout/top.inc"%><%@ include file="layout/header.inc"%><compress:html
-	jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
+<%@ include file="layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
+<%@ include file="layout/header.inc" %>
 
 <%@ include file="includes/bluebar.inc"%>
 <div id="pagelet_signin">
@@ -34,4 +34,5 @@
 	</div>
 </div>
 
-</compress:html><%@ include file="layout/footer.inc" %>
+<%@ include file="layout/footer.inc" %>
+</compress:html>

@@ -48,6 +48,7 @@
 					<ul>
 						<li class="gg-first-item"><a href="<jtien:url address="/index"/>#listequipment">All Equipments</a></li>
 						<li><a href="<jtien:url address="/index"/>#addequipment">Add New</a></li>
+						<li><a href="<jtien:url address="/index"/>#listcategory">Categories</a></li>
 					</ul>
 				</div>
 			</div>

@@ -2,7 +2,11 @@
 
 <div id="complaint_list_pagelet" class="g-pl">
 	<div id="container"></div>
-	
+	<h2>Complaints<a class="add-new-h2" href="<jtien:url address="/index"/>#addcomplaint">Add New</a></h2>
+	<ul class="subsubsub">
+		<li class="all">All <span class="count">(0)</span> |</li>
+		<li class="deleted">Deleted <span class="count">(0)</span></li>
+	</ul>
 	<form id="complaint-filter-form" method="post" action="/complaint/search">
 		<select id="field-name" name="f">
 			<option value="1">Employee</option>
@@ -49,7 +53,6 @@
 								<col class="list-col-status" width="80" />
 								<col class="list-col-createdate" width="80" />
 								<col class="list-col-enddate" width="80" />
-								<col class="list-col-edit" width="40" />
 							</colgroup>
 							<thead class="gg-list-thead">
 								<tr class="gg-list-header">
@@ -61,10 +64,9 @@
 									<td><span class="gg-inner-block">Status</span></td>
 									<td><span class="gg-inner-block">Create Date</span></td>
 									<td><span class="gg-inner-block">End Date</span></td>
-									<td><span class="gg-inner-block">Edit</span></td>
 								</tr>
 							</thead>
-							<tbody><tr><td colspan="9"></td></tr></tbody>
+							<tbody><tr><td colspan="8"></td></tr></tbody>
 						</table>
 					</div>
 					<div class="gg-listview-list">
@@ -79,7 +81,6 @@
 									<col class="list-col-status" width="80" />
 									<col class="list-col-createdate" width="80" />
 									<col class="list-col-enddate" width="80" />
-									<col class="list-col-edit" width="40" />
 								</colgroup>
 								<thead class="gg-list-thead">
 									<tr class="height:0"></tr>

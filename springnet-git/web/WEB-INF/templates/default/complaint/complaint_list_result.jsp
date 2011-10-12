@@ -5,12 +5,20 @@
 		<td><div class="gg-td-wrapper">${complaint.id}</div></td>
 		<td><div class="gg-td-wrapper">${complaint.user.username}</div></td>
 		<td><div class="gg-td-wrapper">${complaint.equipment.name}</div></td>
-		<td><div class="gg-td-wrapper">${complaint.title}</div></td>
+		<td>
+			<div class="gg-td-wrapper">
+				<strong>${complaint.title}</strong>
+				<div class="gg-row-actions">
+					<span><a href="<jtien:url address="/index"/>#editcomplaint-${complaint.id}">Edit</a></span>
+					<span> | </span>
+					<span><a href="<jtien:url address="/index"/>#addassignment-${complaint.id}">New Assignment</a></span>
+				</div>
+			</div>
+		</td>
 		<td><div class="gg-td-wrapper">${complaint.priority.name}</div></td>
 		<td><div class="gg-td-wrapper">${complaint.status.name}</div></td>
 		<td><div class="gg-td-wrapper"><fmt:formatDate value="${complaint.createDate}" pattern="${dateFormat}"/></div></td>
 		<td><div class="gg-td-wrapper"><fmt:formatDate value="${complaint.endDate}" pattern="${dateFormat}"/></div></td>
-		<td><div class="gg-td-wrapper"><a class="a" href="<jtien:url address="/index"/>#editcomplaint-${complaint.id}">Edit</a></div></td>
 	</tr>
 </c:forEach>
 

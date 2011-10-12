@@ -1,13 +1,8 @@
 <%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
-<style type="text/css">
-	.grid {margin-top: 15px; border: 1px solid #000; border-collapse: collapse;}
-	.grid th, .grid td {border: 1px solid #000; border-collapse: collapse}
-</style>
-
-<div id="assignment_list_pagelet" class="g-pl">
+<div id="assignment_list_pagelet" class="g-pl wrap">
+	<h2>Categories<a class="add-new-h2" href="<jtien:url address="/index"/>#addassignment">Add New</a></h2>
 	<form id="assignment-filter-form">
-	
 		<div id="assignment-viewmanager">
 			<div class="gg-listview">
 				<div class="gg-listview-inner">

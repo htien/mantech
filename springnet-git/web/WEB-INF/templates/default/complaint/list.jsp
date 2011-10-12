@@ -1,7 +1,7 @@
 <%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
 <div id="complaint_list_pagelet" class="g-pl">
-	<div id="container" style="width: 700px; height: 400px;"></div>
+	<div id="container"></div>
 	
 	<form id="complaint-filter-form" method="post" action="/complaint/search">
 		<select id="field-name" name="f">
@@ -64,6 +64,7 @@
 									<td><span class="gg-inner-block">Edit</span></td>
 								</tr>
 							</thead>
+							<tbody><tr><td colspan="9"></td></tr></tbody>
 						</table>
 					</div>
 					<div class="gg-listview-list">

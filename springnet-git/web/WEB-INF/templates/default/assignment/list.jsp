@@ -31,6 +31,7 @@
 									<td><span class="gg-inner-block">Detail</span></td>
 								</tr>
 							</thead>
+							<tbody><tr><td colspan="6"></td></tr></tbody>
 						</table>
 					</div>
 					<div class="gg-listview-list">

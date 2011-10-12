@@ -370,7 +370,7 @@ body.gg-admin {
 
 #ggbody-content {
   overflow: hidden;
-  padding-bottom: 100px;
+  padding-bottom: 130px;
 }
 
 #ggfooter {
@@ -399,15 +399,17 @@ body.gg-admin {
 
 /*========== LIST-TABLE ===*/
 
+.gg-listview-headers-container {
+  z-index: 1;
+}
+
 .gg-list-table {
   padding: 0;
   zoom: 1;
   cursor: default;
+  vertical-align: top;
+  color: #444;
   border-spacing: 0;
-}
-
-.gg-list-table td {
-  vertical-align: middle;
 }
 
 .gg-list-header {
@@ -421,6 +423,7 @@ body.gg-admin {
   padding: 0 0 0 6px;
   empty-cells: show;
   text-transform: uppercase;
+  vertical-align: middle;
   white-space: nowrap;
   z-index: 1;
   font-weight: bold;
@@ -453,6 +456,14 @@ body.gg-admin {
   background-color: #ffffd6;
 }
 
+.gg-list-tr:hover td {
+  color: #111;
+}
+
+.gg-list-tr:hover .gg-row-actions {
+  visibility: visible;
+}
+
 .gg-list-tr td {
   padding-top: 8px;
   padding-bottom: 8px;
@@ -461,6 +472,16 @@ body.gg-admin {
 
 .gg-td-wrapper {
   padding: 0 7px;
+}
+
+.gg-row-actions {
+  margin-top: 5px;
+  visibility: hidden;
+  font-size: 11.5px;
+}
+
+.gg-row-actions a {
+  color: #7f9acc;
 }
 
 #user-viewmanager {

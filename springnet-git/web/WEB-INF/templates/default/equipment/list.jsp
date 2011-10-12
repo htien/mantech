@@ -33,8 +33,8 @@
 	</c:if>
 	<tr>
 		<td colspan = "3">
-			<c:forEach begin="1" end="${pageCount}" var="page">
-				<a class="page" href="${contextPath}/equipment/list${ext}?page=${page}">${page}</a>
+			<c:forEach begin="1" end="${pageCount}" var="page"> 
+				<a class="page" href="<jtien:url address="/index"/>#listequipment-${page}">${page}</a>
 			</c:forEach>
 		</td>
 	</tr>

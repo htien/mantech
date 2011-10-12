@@ -36,6 +36,7 @@
 									<td><span class="gg-inner-block">Status</span></td>
 								</tr>
 							</thead>
+							<tbody><tr><td colspan="7"></td></tr></tbody>
 						</table>
 					</div>
 					<div class="gg-listview-list">

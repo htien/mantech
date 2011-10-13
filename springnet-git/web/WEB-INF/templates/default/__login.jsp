@@ -1,4 +1,5 @@
 <%@ include file="layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
+<c:set var="pageTitle" scope="request" value="Login | Mantech Helpdesk"/>
 <%@ include file="layout/header.inc" %>
 
 <%@ include file="includes/bluebar.inc"%>

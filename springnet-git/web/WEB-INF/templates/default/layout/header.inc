@@ -14,9 +14,7 @@
 <meta name="keywords" content="<jtien:settings key="web.metatag.keywords"/>" />
 <meta name="description" content="<jtien:settings key="web.metatag.description"/>" />
 <base href="${contextPath}/" />
-<title>
-	<c:if test="${web.title == null}"><jtien:settings key="web.title"/></c:if>
-	<c:if test="${web.title != null}">${web.title}</c:if>
-</title>
+<link rel="shortcut icon" type="image/x-icon" href="<jtien:templateResource item="/${templateName}/css/images/favicon.ico"/>" />
+<title><c:out value="${pageTitle}"><jtien:settings key="web.title"/></c:out></title>
 </head>
 <body class="">

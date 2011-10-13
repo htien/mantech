@@ -7,9 +7,9 @@
 			<div class="gg-td-wrapper">
 				<strong>${complaint.title}</strong>
 				<div class="gg-row-actions">
-					<span><a href="<jtien:url address="/index"/>#editcomplaint-${complaint.id}">Edit</a></span>
+					<span><a href="<jtien:url address="/index"/>#editcomplaint/id=${complaint.id}">Edit</a></span>
 					<span> | </span>
-					<span><a href="<jtien:url address="/index"/>#addassignment-${complaint.id}">New Assignment</a></span>
+					<span><a href="<jtien:url address="/index"/>#addassignment/compId=${complaint.id}">New Assignment</a></span>
 				</div>
 			</div>
 		</td>

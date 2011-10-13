@@ -153,6 +153,7 @@ span.error {
   min-width: 54px;
   line-height: 27px;
   text-align: center;
+  text-decoration: none;
   cursor: default;
   white-space: nowrap;
   color: #444;
@@ -273,6 +274,10 @@ span.error {
   -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.3);
 }
 
+a.g-b-r:visited, a.g-b-b:visited {
+  color: #fff;
+}
+
 .g-b-focus {
   border: 1px solid #fff;
   border: 1px solid rgba(0,0,0,0);
@@ -281,8 +286,4 @@ span.error {
   box-shadow: inset 0 0 0 1px #fff;
   -webkit-box-shadow: inset 0 0 0 1px #fff;
   -moz-box-shadow: inset 0 0 0 1px #fff;
-}
-
-a.g-b {
-  text-decoration: none;
 }

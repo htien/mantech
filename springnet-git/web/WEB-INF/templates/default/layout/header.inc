@@ -14,6 +14,9 @@
 <meta name="keywords" content="<jtien:settings key="web.metatag.keywords"/>" />
 <meta name="description" content="<jtien:settings key="web.metatag.description"/>" />
 <base href="${contextPath}/" />
-<title><jtien:settings key="web.title"/></title>
+<title>
+	<c:if test="${web.title == null}"><jtien:settings key="web.title"/></c:if>
+	<c:if test="${web.title != null}">${web.title}</c:if>
+</title>
 </head>
 <body class="">

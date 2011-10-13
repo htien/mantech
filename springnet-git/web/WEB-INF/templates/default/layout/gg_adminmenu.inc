@@ -27,7 +27,7 @@
 				<div class="gg-submenu-wrap">
 					<div class="gg-submenu-head">Complaints</div>
 					<ul>
-						<li class="gg-first-item"><a href="#listcomplaint">All Complaints</a></li>
+						<li class="gg-first-item"><a href="<jtien:url address="/index"/>#listcomplaint">All Complaints</a></li>
 						<li><a href="<jtien:url address="/index"/>#addcomplaint">Add New</a></li>
 					</ul>
 				</div>

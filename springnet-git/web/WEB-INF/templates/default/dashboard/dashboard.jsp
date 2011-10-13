@@ -5,5 +5,6 @@
 	<div id="container"></div>
 </div>
 <script>startChart();</script>
+<a class="a" href="<jtien:url address="/index"/>#adduser">Link</a>
 
 </compress:html>

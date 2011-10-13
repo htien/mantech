@@ -2,7 +2,7 @@
  * Written by Tien Nguyen <lilylnx@users.sf.net>
  * FREE FOR ALL BUT DOES NOT MEAN THERE IS NO PRICE.
  */
-package mantech.controller;
+package mantech.controller.helpers;
 
 import java.io.Serializable;
 
@@ -54,15 +54,4 @@ public class ResponseMessage implements Serializable {
     this.message = message;
   }
 
-}
-
-class RName {
-  public static final String ADD = "add";
-  public static final String UPDATE = "update";
-}
-
-class RStatus {
-  public static final int FAIL = 0;
-  public static final int SUCC = 1;
-  public static final int ERROR = 4;
 }

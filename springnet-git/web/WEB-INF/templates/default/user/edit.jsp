@@ -2,8 +2,8 @@
 	compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
 <div id="edituser_pagelet" class="g-pl">
-	<div id="edituser-box" class="box">
-		<h2 class="title">Edit User</h2>
+	<div id="edituser-box" class="box wrap">
+		<h2>Edit User</h2>
 		<form id="edituser-form" class="g-f" method="post" action="/user/editSave">
 			<div>
 				<div class="row">

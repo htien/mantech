@@ -80,7 +80,7 @@ public class ComplaintController {
     
     model.addAttribute("user", userRepo.get(2));
     model.addAttribute("list", equipmentRepo.findAll());
-    return TemplateKeys.COMPLAINT_EDIT;
+    return TemplateKeys.COMPLAINT_ADD;
   }
   
   @RequestMapping(value = "/complaint/addSave", method = RequestMethod.POST)

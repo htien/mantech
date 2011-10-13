@@ -1,8 +1,8 @@
 <%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
 <div id="addcomplaint_pagelet" class="g-pl">
-	<div id="addcomplaint-box" class="box">
-		<h2 class="title">Insert New Complaint</h2>
+	<div id="addcomplaint-box" class="box wrap">
+		<h2 class="title">Add New Complaint</h2>
 		<form id="addcomplaint-form" class="g-f" method="post" action="/complaint/addSave">
 			<p id="msg"></p>
 			<div>

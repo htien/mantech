@@ -3,8 +3,11 @@
 <div id="complaint_list_pagelet" class="g-pl wrap">
 	<h2>Complaints<a class="add-new-h2" href="<jtien:url address="/index"/>#addcomplaint">Add New</a></h2>
 	<ul class="subsubsub">
-		<li class="all">All <span class="count">(0)</span> |</li>
-		<li class="deleted">Deleted <span class="count">(0)</span></li>
+		<li class="all">All <span class="count" style="color: #357AE8">( ${all} )</span> | </li>
+		<li class="waiting">Waiting <span class="count" style="color: #357AE8">( ${countWaiting} )</span> | </li>
+		<li class="Accepted">Accepted <span class="count" style="color: #357AE8">( ${countAccepted} )</span> | </li>
+		<li class="Rejected">Rejected <span class="count" style="color: #357AE8">( ${countRejected} )</span> | </li>
+		<li class="Completed">Completed <span class="count" style="color: #357AE8">( ${countCompleted} )</span> </li>
 	</ul>
 	<form id="complaint-filter-form" method="post" action="/complaint/search">
 		<select id="field-name" name="f">

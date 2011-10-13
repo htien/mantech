@@ -31,6 +31,12 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
     super(sessionFactory);
   }
 
+  @Override
+  public Integer countByStatus(byte status) {
+    return session().createQuery("select count(c.status.id) from Complaint as c" +
+        " where c.status.id = :id").setByte("id", status).uniqueResult().hashCode();
+  }
+  
   @SuppressWarnings("unchecked")
   @Override
   public List<Complaint> getByWeekly(Date begin, Date end) {
@@ -186,4 +192,5 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
     
     return crit.list();
   }
+
 }

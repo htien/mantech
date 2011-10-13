@@ -4,7 +4,6 @@
 	<div id="editcomplaint-box" class="box wrap">
 		<h2>Edit Complaint</h2>
 		<form id="edituser-form" class="g-f" method="post" action="/complaint/editSave">
-			<input type="text" name="id" value="${complaint.id}" readonly="readonly"/>
 			<select name="status">
 				<c:forEach items="${listStatus}" var="status">
 					<option value="${status.id}" <c:if test="${complaint.status.id==status.id }">selected="selected"</c:if>>${status.name}</option>
@@ -17,6 +16,32 @@
 			</select>
 			<div id="btnEdit" class="g-b g-b-r">Save</div>
 		</form>
+		<div class="info">
+			<div>
+				<strong>Complaint ID:</strong> ${complaint.id}
+			</div>
+			<div>
+				<strong>Employee:</strong> ${complaint.user.username}
+			</div>
+			<div>
+				<strong>Equipment:</strong> ${complaint.equipment.name}
+			</div>
+			<div>
+				<strong>Title:</strong> ${complaint.title}
+			</div>
+			<div>
+				<strong>Content:</strong> ${complaint.content}
+			</div>
+			<div>
+				<strong>Status:</strong> ${complaint.status.name}
+			</div>
+			<div>
+				<strong>Priority:</strong> ${complaint.priority.name}
+			</div>
+			<div>
+				<strong>Create Date:</strong> ${complaint.createDate}
+			</div>
+		</div>
 	</div>
 </div>
 

@@ -16,8 +16,8 @@
 </style>
 
 <div id="addassignment_pagelet" class="g-pl">
-	<div id="addassignment-box" class="box">
-		<h1 id="title">Insert new assignment</h1>
+	<div id="addassignment-box" class="box wrap">
+		<h2>Add New Assignment</h2>
 		<div id="form">
 			<form id="addassignment-form" class="g-f" method="post" action="/assignment/addSave" >
 				<p id="msg"></p>

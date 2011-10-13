@@ -45,20 +45,34 @@ public class IndexController {
     return TemplateKeys.MAIN_PAGE;
   }
   
-  @RequestMapping(value = "/load", method = RequestMethod.GET)
-  public String loader(@RequestParam("page") String page, ModelMap model) {   
-    String[] _keys = this.getModuleKeys(page);
-    String module = _keys[0].trim();
-    String action = _keys[1].trim();
-
-    model.addAttribute("action", action);
-    return "redirect:".concat(module);
+  @RequestMapping(value = "/loader", method = RequestMethod.GET)
+  public String loader(@RequestParam("q") String query, ModelMap model) {
+    try {
+      // Processing module/param1=value1;param2=value2
+      String[] components = query.split("/");
+      String[] ajaxKey = this.getAjaxKey(components[0]);
+      String[] params = components.length > 1
+          ? components[components.length - 1].split(";") : null;
+      
+      if (params != null) {
+        for (String param : params) {
+          String[] _p = param.split("=");
+          model.addAttribute(_p[0], _p[1]);
+        }
+      }
+  
+      model.addAttribute("action", ajaxKey[1].trim());
+      return "redirect:".concat(ajaxKey[0].trim());
+    }
+    catch (Exception e) {
+      return TemplateKeys.FILE_NOT_FOUND;
+    }
   }
   
   @RequestMapping(value = "/loadaction", method = RequestMethod.GET)
-  public String actionloader(@RequestParam("page") String page, ModelMap model) {
+  public String actionloader(@RequestParam("page") String page, ModelMap model) throws Exception {
     String[] hashs = page.split("-");
-    String[] _keys = this.getModuleKeys(hashs[0]);
+    String[] _keys = this.getAjaxKey(hashs[0]);
     String module = _keys[0].trim();
     String action = _keys[1].trim();
     
@@ -67,7 +81,7 @@ public class IndexController {
     return "redirect:".concat(module);
   }
   
-  private String[] getModuleKeys(String name) {
+  private String[] getAjaxKey(String name) throws Exception {
     Properties ajaxHashUrls = (Properties)config.getProperty(ConfigKeys.AJAX_HASH_URLS);
     return ajaxHashUrls.getProperty(name.trim()).split(",");
   }

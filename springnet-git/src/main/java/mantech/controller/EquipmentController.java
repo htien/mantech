@@ -39,7 +39,7 @@ public class EquipmentController {
   private CategoryRepository categoryRepo;
 
   @RequestMapping(value = "/equipment", params = "action=list", method = RequestMethod.GET)
-  public String list(@RequestParam(value="id", required=false, defaultValue="1") int page,
+  public String list(@RequestParam(value="page", required=false, defaultValue="1") int page,
       ModelMap model) {
 
     int pageCount;

@@ -2,7 +2,7 @@
 
 $(function() {
 	if ($('body').hasClass('gg-admin')) {
-		pageload();
+		ajaxPageload();
 		applyAjax_adminmenu();
 		applyAjax_pagelet();
 		jTien.adminMenu.init();

@@ -8,7 +8,7 @@
 			<div class="gg-td-wrapper">
 				<strong>${user.username}</strong>
 				<div class="gg-row-actions">
-					<span><a href="<jtien:url address="/index"/>#edituser-${user.id}">Edit</a></span>
+					<span><a href="<jtien:url address="/index"/>#edituser/id=${user.id}">Edit</a></span>
 				</div>
 			</div>
 		</td>

@@ -2,7 +2,7 @@
 
 <div class="wrap">
 	<h2>Dashboard</h2>
-	<div id="container"></div>
+	<div id="container" style="width:600px"></div>
 </div>
 <script>startChart();</script>
 

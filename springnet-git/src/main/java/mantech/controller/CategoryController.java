@@ -4,8 +4,6 @@
  */
 package mantech.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import mantech.controller.helpers.TemplateKeys;
 import mantech.domain.Category;
 import mantech.repository.CategoryRepository;
 
@@ -29,15 +28,14 @@ public class CategoryController {
   @Autowired
   private CategoryRepository categoryRepo;
 
-  @RequestMapping(value = {"/category", "/category/list"}, method = RequestMethod.GET)
+  @RequestMapping(value = "/category", params = "action=list", method = RequestMethod.GET)
   public String list(ModelMap model){
-    List<Category> list = categoryRepo.findAll();
-    model.addAttribute("list", list);
-    return "/category/list";
+    model.addAttribute("listCategory", categoryRepo.findAll());
+    return TemplateKeys.CATEGORY_LIST;
   }
   
-  @RequestMapping(value = "/category/edit", method = RequestMethod.GET)
-  public String update(@RequestParam(value="catId", required=false, defaultValue="0") int id,
+  @RequestMapping(value = "/category", params = "action=edit", method = RequestMethod.GET)
+  public String update(@RequestParam(value="id", required=false, defaultValue="0") int id,
       ModelMap model) {
 
     if (id > 0) {
@@ -47,7 +45,7 @@ public class CategoryController {
     else { 
       model.addAttribute("msg", "Khong co category de xu ly");
     }
-    return "/category/edit";
+    return TemplateKeys.CATEGORY_EDIT;
   }
   
   @RequestMapping(value = "/category/editSave", method = RequestMethod.GET)

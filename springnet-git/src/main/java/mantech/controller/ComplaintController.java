@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import net.lilylnx.springnet.util.ClientUtils;
 
+import mantech.controller.helpers.RName;
+import mantech.controller.helpers.RStatus;
+import mantech.controller.helpers.ResponseMessage;
 import mantech.controller.helpers.TemplateKeys;
 import mantech.domain.CategoryPriority;
 import mantech.domain.Complaint;
@@ -61,26 +64,26 @@ public class ComplaintController {
   @Autowired
   private ClientUtils clientUtils;
 
-  @RequestMapping(value = "/complaint", params = "p=list", method = RequestMethod.GET)
+  @RequestMapping(value = "/complaint", params = "action=list", method = RequestMethod.GET)
   public String list(ModelMap model) throws Exception {
     
     model.addAttribute("listComplaint", complaintRepo.findAll());
     model.addAttribute("listStatus", statusRepo.findAll());
     model.addAttribute("listPriority", priorityRepo.findAll());
-    return TemplateKeys.COMPLAINT_ADMIN;
+    return TemplateKeys.COMPLAINT_LIST;
   }
 
   public List<Complaint> listComplaintDaily(int i) {
     return complaintRepo.findRange(new int[] { i - 1, i + 2 }, true, "id");
   }
 
-  @RequestMapping(value = "/complaint", params = "p=add", method = RequestMethod.GET)
+  @RequestMapping(value = "/complaint", params = "action=add", method = RequestMethod.GET)
   public String insert(ModelMap model){
     // TODO Sẽ cần chỉnh sửa lại userId sẽ được lấy từ session của employee đã đăng nhập.
     
     model.addAttribute("user", userRepo.get(2));
     model.addAttribute("list", equipmentRepo.findAll());
-    return TemplateKeys.COMPLAINT_ADMIN;
+    return TemplateKeys.COMPLAINT_ADD;
   }
   
   @RequestMapping(value = "/complaint/addSave", method = RequestMethod.POST)
@@ -104,7 +107,7 @@ public class ComplaintController {
     return clientUtils.createJsonResponse(respMessage);
   }
   
-  @RequestMapping(value = "/complaint", params = "p=edit", method = RequestMethod.GET)
+  @RequestMapping(value = "/complaint", params = "action=edit", method = RequestMethod.GET)
   public String update(@RequestParam(value="id") int id, ModelMap model) {
     Complaint complaint = complaintRepo.get(id);
 
@@ -115,7 +118,7 @@ public class ComplaintController {
     model.addAttribute("complaint", complaint);
     model.addAttribute("listStatus", statusRepo.findAll(false, "id"));
     model.addAttribute("listPriority", priorityRepo.findAll(false, "id"));
-    return TemplateKeys.COMPLAINT_ADMIN;
+    return TemplateKeys.COMPLAINT_EDIT;
   }
   
   @RequestMapping(value = "/complaint/editSave", method = RequestMethod.POST)

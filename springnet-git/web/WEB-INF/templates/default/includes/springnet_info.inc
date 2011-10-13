@@ -14,5 +14,4 @@
 		<p><jtien:i18n key="Project.mirrors" /></p>
 		<p><jtien:i18n key="Project.mirrors.link1" /><br /><jtien:i18n key="Project.mirrors.link2" /></p>
 	</div>
-	<a class="g-b g-b-r" href="${contextPath}/?p=login" style="margin:30px 0 0"><jtien:i18n key="Welcome.btnLogin" /></a>
 </div>

@@ -1,4 +1,7 @@
-<%@ include file="layout/top.inc" %><%@ include file="layout/header.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
-<h1>File Not Found!</h1>
-<h2>Under construction!</h2>
-</compress:html><%@ include file="layout/footer.inc" %>
+<%@ include file="layout/top.inc" %>
+
+<div class="error-panel">
+	<h1 id="g">Mantech Helpdesk</h1>
+	<p><strong>404.</strong><span> That's an error.</span></p>
+	<p>The requested URL was not found on this server.<br /><span>That's all we know.</span></p>
+</div>

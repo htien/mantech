@@ -1,46 +1,57 @@
-<%@ include file="../layout/header.inc"%>
-<%@ include file="../layout/top.inc"%>
-<compress:html jsCompressor="closure" compressJavaScript="true"
-	compressCss="true" removeIntertagSpaces="true">
-	
-	<style>
-		.grid {margin-top: 20px; border: 1px solid #000; border-collapse: collapse;}
-		.grid td, .grid th {padding: 10px 20px ;border: 1px solid #000;}
-		.grid tr.row { cursor: pointer; }
-		.grid tr.row:hover { background-color: lightgray; }
-		.page { display: inline-block; margin-right:3px; }
-	</style>
-	
-	<table class = "grid">
-		<tr>
-			<th colspan="3">All Equipment</th>
-		</tr>
-		<tr>
-			<th>Id</th>
-			<th>Name</th>
-			<th>Category</th>
-		</tr>
-		<c:if test="${msg != null}">
-		<tr>
-			<td colspan="3">${msg}</td>
-		</tr>
-		</c:if>
-		<c:if test="${msg == null}">
-		<c:forEach items="${listEquipment}" var="l">
-			<tr class="row" onclick="return window.location.href='${contextPath}/equipment/edit${ext}?id=${l.id}'">
-				<td>${l.id}</td>
-				<td>${l.name}</td>
-				<td>${l.category.name}</td>
-			</tr>
-		</c:forEach>
-		</c:if>
-		<tr>
-			<td colspan = "3">
-				<c:forEach begin="1" end="${pageCount}" var="page">
-					<a class="page" href="${contextPath}/equipment/list${ext}?page=${page}">${page}</a>
-				</c:forEach>
-			</td>
-		</tr>
-	</table>
+<%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
+
+<div id="pagelet_equipment_list" class="g-pl wrap">
+	<h2>Equipments<a class="add-new-h2" href="<jtien:url address="/index"/>#addequipment">Add New</a></h2>
+	<form id="equipment-filter-form" method="post" action="/equipment/search">
+		<input type="text" name="q" />
+		<select name="f">
+			<option value="1">Equipment</option>
+			<option value="2">Category</option>
+		</select>
+		<div id="filter-query-submit" class="g-b g-b-r">Filter</div>
+		<div id="lnkShowAll" class="g-b g-b-b">Show All</div>
+		
+		<div id="equipment-viewmanager">
+			<div class="gg-listview">
+				<div class="gg-listview-inner">
+					<div class="gg-listview-headers-container">
+						<table class="gg-list-table gg-list-header-table widefat fixed equipment">
+							<colgroup>
+								<col class="list-col-equipmentid" width="40" />
+								<col class="list-col-equipmentname" width="200" />
+								<col class="list-col-category" />
+							</colgroup>
+							<thead class="gg-list-thead">
+								<tr class="gg-list-header">
+									<td><span class="gg-inner-block">ID</span></td>
+									<td><span class="gg-inner-block">Name</span></td>
+									<td><span class="gg-inner-block">Category</span></td>
+								</tr>
+							</thead>
+							<tbody><tr><td colspan="3"></td></tr></tbody>
+						</table>
+					</div>
+					<div class="gg-listview-list">
+						<div class="gg-list-container">
+							<table class="gg-list-table widefat fixed equipment">
+								<colgroup>
+									<col class="list-col-equipmentid" width="40" />
+									<col class="list-col-equipmentname" width="200" />
+									<col class="list-col-category" />
+								</colgroup>
+								<thead class="gg-list-thead">
+									<tr class="height:0"></tr>
+								</thead>
+								<tbody id="the-list" class="gg-list-tbody">
+									<%@ include file="equipment_list_result.jsp" %>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
 </compress:html>
-<%@ include file="../layout/footer.inc" %>

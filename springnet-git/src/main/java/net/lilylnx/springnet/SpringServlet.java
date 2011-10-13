@@ -81,6 +81,7 @@ public class SpringServlet extends DispatcherServlet {
    */
   @Override
   protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    response.setCharacterEncoding(config.getString(ConfigKeys.ENCODING));
     request.setCharacterEncoding(config.getString(ConfigKeys.ENCODING));
     request.setAttribute(ConfigKeys.ANONYMOUS_USER_ID, config.getInt(ConfigKeys.ANONYMOUS_USER_ID, 1));
     request.setAttribute(ConfigKeys.HTTP_SERVLET_RESPONSE, response);
@@ -117,19 +118,13 @@ public class SpringServlet extends DispatcherServlet {
     Date now = Calendar.getInstance().getTime();
 
     // Cached attributes
-    defaultAttributes.put("codename", config.getString(ConfigKeys.CODENAME));
-    defaultAttributes.put("version", config.getString(ConfigKeys.VERSION));
-    defaultAttributes.put("webpage", config.getString("link.webpage"));
+    defaultAttributes.put("config", config);
     defaultAttributes.put("contextPath", config.getString(ConfigKeys.CONTEXT_PATH));
     defaultAttributes.put("fcontextPath", request.getContextPath());
     defaultAttributes.put("ext", config.getString(ConfigKeys.SERVLET_EXTENSION));
     defaultAttributes.put("encoding", config.getString(ConfigKeys.ENCODING));
-    defaultAttributes.put("dateTimeFormat", config.getString("dateTime.format"));
-    defaultAttributes.put("dateFormat", config.getString("date.format"));
-    defaultAttributes.put("timeFormat", config.getString("time.format"));
     defaultAttributes.put("now", now);
     defaultAttributes.put("timestamp", new Long(System.currentTimeMillis()));
-    defaultAttributes.put("config", config);
 
     // Non-cached attributes
     request.setAttribute("p", request.getMethod().equalsIgnoreCase("GET")

@@ -4,6 +4,7 @@
  */
 package net.lilylnx.springnet.util;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Properties;
@@ -26,6 +27,7 @@ public class SpringConfig extends PropertiesConfiguration {
   public SpringConfig() {
     try {
       loadProps();
+      loadAjaxHashUrls();
     }
     catch (Exception e) {
       throw new CommonException(e.getMessage());
@@ -65,6 +67,16 @@ public class SpringConfig extends PropertiesConfiguration {
         this.clearProperty(key);
         this.addProperty(key, custom.getProperty(key));
       }
+    }
+  }
+  
+  private void loadAjaxHashUrls() throws IOException {
+    InputStream is = this.getClass().getResourceAsStream(ConfigKeys.AJAX_URLS_PATH);
+
+    if (is != null) {
+      Properties ajaxHashUrls = new Properties();
+      ajaxHashUrls.load(is);
+      this.addProperty(ConfigKeys.AJAX_HASH_URLS, ajaxHashUrls);
     }
   }
 }

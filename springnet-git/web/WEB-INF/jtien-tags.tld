@@ -4,7 +4,7 @@
 	version="2.0">
 
 	<description>SpringNet Tag Libraries</description>
-	<tlib-version>1.0</tlib-version>
+	<tlib-version>3.0</tlib-version>
 	<short-name>jtien</short-name>
 	<uri>http://code.google.com/p/springnet</uri>
 	
@@ -65,7 +65,7 @@
 	
 	<tag>
 		<name>pagination</name>
-		<path>/WEB-ING/tags/springnet/pagination.tag</path>
+		<path>/WEB-INF/tags/springnet/pagination.tag</path>
 	</tag>
 	
 	<!-- Functions -->

@@ -1,8 +1,8 @@
-<%@ include file="top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
+<%@ include file="top.inc"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<script type="text/javascript"><%@ include file="/_/default/__init.js" %></script>
+<script type="text/javascript"><%@ include file="/_/default/__init.js"%></script>
 <script type="text/javascript" src="<jtien:templateResource item="/jquery/jquery-1.6.4.js"/>"></script>
 <script type="text/javascript" src="<jtien:templateResource item="/closure/goog/base.js"/>"></script>
 <script type="text/javascript" src="<jtien:templateResource item="/default/__global_runonce.js"/>"></script>
@@ -14,7 +14,9 @@
 <meta name="keywords" content="<jtien:settings key="web.metatag.keywords"/>" />
 <meta name="description" content="<jtien:settings key="web.metatag.description"/>" />
 <base href="${contextPath}/" />
-<title><jtien:settings key="web.title"/></title>
+<title>
+	<c:if test="${web.title == null}"><jtien:settings key="web.title"/></c:if>
+	<c:if test="${web.title != null}">${web.title}</c:if>
+</title>
 </head>
-<body class="gg-admin">
-</compress:html>
+<body class="">

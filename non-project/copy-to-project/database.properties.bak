@@ -4,7 +4,7 @@
 
 db.username = ENC(8tqOaezf+QfE33jrcHOnSg==)
 db.passwd = ENC(RNc2j30hNp2ny4vT01WVYi/dXJeckPmh)
-db.name = ENC(lgBwYhz1t8+R99+jwSxpVE7R/XP52MwM)
+db.name = ENC(zmqB9WEGUFkSdECG2y6FHYLTIjmkwFpMffmsqgab6pk\=)
 db.url = jdbc:jtds:sqlserver://${db.server.name}:${db.server.port}/${db.name}
 
 db.server.name = localhost

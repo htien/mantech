@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import net.lilylnx.springnet.util.ClientUtils;
 
+import mantech.controller.helpers.RName;
+import mantech.controller.helpers.RStatus;
+import mantech.controller.helpers.ResponseMessage;
 import mantech.controller.helpers.TemplateKeys;
 import mantech.domain.Department;
 import mantech.domain.User;
@@ -49,17 +52,17 @@ public class UserController {
   @Autowired
   private ClientUtils clientUtils;
 
-  @RequestMapping(value = "/user", params = "p=list", method = RequestMethod.GET)
+  @RequestMapping(value = "/user", params = "action=list", method = RequestMethod.GET)
   public String list(ModelMap model) {
     model.addAttribute("listUser", userRepo.findAll());
-    return TemplateKeys.USER_ADMIN;
+    return TemplateKeys.USER_LIST;
   }
 
-  @RequestMapping(value="/user", params = "p=add", method = RequestMethod.GET)
+  @RequestMapping(value="/user", params = "action=add", method = RequestMethod.GET)
   public String insert(ModelMap model) {
     model.addAttribute("departList", departmentRepo.findAll());
     model.addAttribute("roleList", roleRepo.findAll());
-    return TemplateKeys.USER_ADMIN;
+    return TemplateKeys.USER_ADD;
   }
   
   @RequestMapping(value = "/user/addSave", method = RequestMethod.POST)
@@ -94,7 +97,7 @@ public class UserController {
     return clientUtils.createJsonResponse(respMessage);
   }
   
-  @RequestMapping(value = "/user", params = "p=edit", method = RequestMethod.GET)
+  @RequestMapping(value = "/user", params = "action=edit", method = RequestMethod.GET)
   public String update(@RequestParam("id") int id, ModelMap model) {
     try {
       User user = userRepo.get(id);
@@ -107,7 +110,7 @@ public class UserController {
     catch (Exception e) {
       return TemplateKeys.FILE_NOT_FOUND;
     }
-    return TemplateKeys.USER_ADMIN;
+    return TemplateKeys.USER_EDIT;
   }
   
   @RequestMapping(value = "/user/editSave", method = RequestMethod.POST)

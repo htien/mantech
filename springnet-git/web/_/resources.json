@@ -14,6 +14,8 @@
 		"/_/jquery/jquery.validate.js",
 		"/_/jquery/jquery.validate.additional.js",
 		"/_/jquery/jquery.history.js",
+		"/_/highchart/highcharts.js",
+		"/_/highchart/modules/exporting.js",
 		"/_/default/__global.js",
 		"/_/default/common.js",
 		"/_/default/long.js"

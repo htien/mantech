@@ -3,12 +3,13 @@
 <div id="complaint_list_pagelet" class="g-pl wrap">
 	<h2>Complaints<a class="add-new-h2" href="<jtien:url address="/index"/>#addcomplaint">Add New</a></h2>
 	<ul class="subsubsub">
-		<li class="all">All <span class="count" style="color: #357AE8">( ${all} )</span> | </li>
-		<li class="waiting">Waiting <span class="count" style="color: #357AE8">( ${countWaiting} )</span> | </li>
-		<li class="Accepted">Accepted <span class="count" style="color: #357AE8">( ${countAccepted} )</span> | </li>
-		<li class="Rejected">Rejected <span class="count" style="color: #357AE8">( ${countRejected} )</span> | </li>
-		<li class="Completed">Completed <span class="count" style="color: #357AE8">( ${countCompleted} )</span> </li>
+		<li class="all"><a href="#">All</a> <span class="count" >(${all})</span> | </li>
+		<li class="waiting"><a href="#">Waiting</a> <span class="count" >(${countWaiting})</span> | </li>
+		<li class="Accepted"><a href="#">Accepted</a> <span class="count" >(${countAccepted})</span> | </li>
+		<li class="Rejected"><a href="#">Rejected</a> <span class="count" >(${countRejected})</span> | </li>
+		<li class="Completed"><a href="#">Completed</a> <span class="count" >(${countCompleted})</span> </li>
 	</ul>
+	<div class="clear"></div>
 	<form id="complaint-filter-form" method="post" action="/complaint/search">
 		<select id="field-name" name="f">
 			<option value="1">Employee</option>
@@ -18,8 +19,8 @@
 		<input type="text" id="query" name="q" />
 		<div>
 			<p>
-				Form: <input type="text" id="dateFrom" name="dateFrom" />
-				To: <input type="text" id="dateTo" name="dateTo" />
+				Date From: <input type="text" id="dateFrom" name="dateFrom" />
+				Date To: <input type="text" id="dateTo" name="dateTo" />
 			</p>
 		</div>
 		<div>

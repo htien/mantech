@@ -2,8 +2,8 @@
 	compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
 <div id="adduser_pagelet" class="g-pl">
-	<div id="adduser-box" class="box">
-		<h2 class="title">Add New User</h2>
+	<div id="adduser-box" class="box wrap">
+		<h2>Add New User</h2>
 		<form id="adduser-form" class="g-f" method="post" action="/user/addSave">
 			<div>
 				<div class="row">

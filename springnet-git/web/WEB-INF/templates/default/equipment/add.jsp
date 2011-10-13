@@ -1,8 +1,8 @@
 <%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
 <div id="addequipment_pagelet" class="g-pl">
-	<div id="addequipment-box" class="box">
-		<h1 id="title">Insert new equipment</h1>
+	<div id="addequipment-box" class="box wrap">
+		<h2>Add New Equipment</h2>
 		<form id="addequipment-form" class="g-f" method="post" action="/equipment/addSave">
 			<p id="msg"></p>
 			<div class="row">

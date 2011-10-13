@@ -39,7 +39,7 @@ body.gg-admin {
   height: 30px;
   line-height: 30px;
   font-size: 20px;
-  background-color: #f5f5f5;
+  background-color: #fff;
   box-shadow: 0 0 3px rgba(0,0,0,.3);
   -webkit-box-shadow: 0 0 3px rgba(0,0,0,.3);
   -moz-box-shadow: 0 0 3px rgba(0,0,0,.3);  
@@ -474,8 +474,8 @@ body.gg-admin {
 }
 
 .gg-list-tr td {
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-top: 4px;
+  padding-bottom: 2px;
   border-bottom: 1px solid #ebebeb;
 }
 

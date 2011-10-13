@@ -68,31 +68,32 @@ $.validator.addMethod('vietnameseDate', function(value, element) {
 
 /* === Global functions === */
 
-pageload = function() {
-	$.history.init(applyAjax_pageload);
+ajaxPageload = function() {
+	$.history.init(applyAjax_pageload, {unescape: '=/,;'});
 },
 
 applyAjax_pageload = function(hash) {
 	if (hash) {
-		if (hash.indexOf('-') > -1) {
-			jTien.ajaxFromLink(undefined, jTien.url('/loadaction'), '#ggbody-content');
-		}
-		else {
-			jTien.ajaxFromLink(undefined, jTien.url('/load'), '#ggbody-content');
-		}
+		$(window).bind('load', function(evt) {
+			jTien.ajaxFromLink(undefined, jTien.url('/loader'), '#ggbody-content')
+					.success(function(html) {
+						applyAjax_pagelet();
+					});
+		});
 	}
 	else {
-		jTien.ajaxFromLink('#menu-complaints a.gg-menu-top', jTien.url('/load'), '#ggbody-content');
+		jTien.ajaxFromLink('#menu-dashboard a.gg-menu-top', jTien.url('/loader'), '#ggbody-content');
 	}
 },
 
 applyAjax_adminmenu = function() {
 	$('#adminmenu a').each(function(idx, el) {
 		$(this).click(function(evt) {
-			jTien.ajaxFromLink(this, jTien.url('/load'), '#ggbody-content')
-				.success(function(html) {
-					currentMenuItem(idx, el);
-				});
+			jTien.ajaxFromLink(this, jTien.url('/loader'), '#ggbody-content')
+					.success(function(html) {
+						applyAjax_pagelet();
+						currentMenuItem(idx, el);
+					});
 			evt.preventDefault();
 			return false;
 		});
@@ -100,10 +101,14 @@ applyAjax_adminmenu = function() {
 },
 
 applyAjax_pagelet = function() {
-	$('.g-pl .gg-list-table .a').each(function(idx, el) {
-		$(el).click(function(evt) {
-			jTien.ajaxFromLink(this, jTien.url('/loadaction'), '#ggbody-content');
+	$('.g-pl a:not(.na)').each(function(idx, el) {
+		$(this).click(function(evt) {
+			jTien.ajaxFromLink(this, jTien.url('/loader'), '#ggbody-content')
+					.success(function(html) {
+						applyAjax_pagelet();
+					});
 			evt.preventDefault();
+			return false;
 		});
 	});
 },
@@ -351,7 +356,7 @@ jTien.f = jTien.prototype = {
 	 */
 	ajaxFromLink: function(link, type, target) {
 		var hash = (link == undefined ? document.location.hash : $(link).attr('href')).replace(/^.*#/, ''),
-			page = 'page='.concat(hash);
+			query = 'q='.concat(hash);
 		if (target == undefined) {
 			target = type;
 			type = undefined;
@@ -360,7 +365,7 @@ jTien.f = jTien.prototype = {
 			async: false,
 			url: target,
 			type: type || 'get',
-			data: page,
+			data: query,
 			cache: false
 		});
 		$.history.load(hash);

@@ -15,7 +15,7 @@
 	.row strong { display:inline-block; margin-top:4px; width:90px; vertical-align:top; font-weight:bold; }
 </style>
 
-<div id="addassignment_pagelet" class="g-pl">
+<div id="pagelet_addassignment" class="g-pl">
 	<div id="addassignment-box" class="box wrap">
 		<h2>Add New Assignment</h2>
 		<div id="form">

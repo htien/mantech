@@ -1,13 +1,13 @@
 <%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
-<div id="complaint_list_pagelet" class="g-pl wrap">
+<div id="pagelet_listcomplaint" class="g-pl wrap">
 	<h2>Complaints<a class="add-new-h2" href="<jtien:url address="/index"/>#addcomplaint">Add New</a></h2>
 	<ul class="subsubsub">
-		<li class="all"><a href="#">All</a> <span class="count" >(${all})</span> | </li>
-		<li class="waiting"><a href="#">Waiting</a> <span class="count" >(${countWaiting})</span> | </li>
-		<li class="Accepted"><a href="#">Accepted</a> <span class="count" >(${countAccepted})</span> | </li>
-		<li class="Rejected"><a href="#">Rejected</a> <span class="count" >(${countRejected})</span> | </li>
-		<li class="Completed"><a href="#">Completed</a> <span class="count" >(${countCompleted})</span> </li>
+		<li class="all"><a href="#">All <span class="count">(${all})</span></a> | </li>
+		<li class="waiting"><a href="#">Waiting <span class="count">(${countWaiting})</span></a> | </li>
+		<li class="accepted"><a href="#">Accepted <span class="count">(${countAccepted})</span></a> | </li>
+		<li class="rejected"><a href="#">Rejected <span class="count">(${countRejected})</span></a> | </li>
+		<li class="completed"><a href="#">Completed <span class="count">(${countCompleted})</span></a></li>
 	</ul>
 	<div class="clear"></div>
 	<form id="complaint-filter-form" method="post" action="/complaint/search">
@@ -25,7 +25,7 @@
 		</div>
 		<div>
 			<select id="status" name="status">
-				<option value="0" selected="selected">-All-</option>
+				<option value="0" selected="selected">- All -</option>
 				<c:forEach items="${listStatus}" var="status">
 					<option value="${status.id}">${status.name}</option>
 				</c:forEach>
@@ -33,7 +33,7 @@
 		</div>
 		<div>
 			<select id="priority" name="priority">
-				<option value="0" selected="selected">-All-</option>
+				<option value="0" selected="selected">- All -</option>
 				<c:forEach items="${listPriority}" var="priority">
 					<option value="${priority.id}">${priority.name}</option>
 				</c:forEach>

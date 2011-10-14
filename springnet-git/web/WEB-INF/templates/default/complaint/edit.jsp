@@ -1,6 +1,6 @@
 <%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
-<div id="editcomplaint_pagelet" class="g-pl">
+<div id="pagelet_editcomplaint" class="g-pl">
 	<div id="editcomplaint-box" class="box wrap">
 		<h2>Edit Complaint</h2>
 		<form id="edituser-form" class="g-f" method="post" action="/complaint/editSave">

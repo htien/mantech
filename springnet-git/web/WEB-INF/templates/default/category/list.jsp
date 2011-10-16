@@ -1,6 +1,6 @@
 <%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
-<div id="category_list_pagelet" class="g-pl wrap">
+<div id="pagelet_category_list" class="g-pl wrap">
 	<h2>Categories<a class="add-new-h2" href="<jtien:url address="/index"/>#addcategory">Add New</a></h2>
 	<form id="category-filter-form" method="post" action="/category/search">
 		<div id="category-viewmanager">

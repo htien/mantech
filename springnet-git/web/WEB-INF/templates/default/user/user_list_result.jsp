@@ -1,7 +1,7 @@
 <%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure"
 	compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
-<c:forEach items="${listUser}" var="user">
+<c:forEach items="${users}" var="user">
 	<tr class="gg-list-tr">
 		<td><div class="gg-td-wrapper">${user.id}</div></td>
 		<td>
@@ -19,5 +19,10 @@
 		<td><div class="gg-td-wrapper">${user.status}</div></td>
 	</tr>
 </c:forEach>
+<tr class="gg-list-tr">
+	<td colspan="7">
+		<jtien:pagination info="${pagination}" />
+	</td>
+</tr>
 
 </compress:html>

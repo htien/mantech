@@ -6,8 +6,14 @@
   color: #d54e21;
 }
 
+body {
+  background-image: url(images/map.png);
+  background-repeat: no-repeat;
+}
+
 body.gg-admin {
   min-width: 785px;
+  background: none;
 }
 
 #globalTop {
@@ -15,7 +21,7 @@ body.gg-admin {
   width: 100%;
   z-index: 1000;
   background-color: #fff;
-  border-bottom: 1px solid #ebebeb;
+  
 }
 
 #globalTop.fixed_elem {
@@ -24,30 +30,138 @@ body.gg-admin {
 }
 
 #ggadminbar {
-  height: 28px;
+  position: relative;
+  z-index: 1000;
+  height: 30px;
+  line-height: 27px;
+  cursor: default;
+  font-size: 13px;
   background-color: #2d2d2d;
   border-bottom: 1px solid #000;
 }
 
-#ggadminbar .selected {
+#ggadminbar #ggadminbar-left {
+  float: left;
+  padding-left: 4px;
+}
+
+#ggadminbar #ggadminbar-right {
+  float: right;
+  padding-right: 4px;
+}
+
+#ggadminbar .ggl {
+  color: #ccc;
+}
+
+#ggadminbar .gg-link-top {
+  position: relative;
+  display: inline-block;
+  display: -moz-inline-block;
+  line-height: 28px;
+  vertical-align: top;
+}
+
+#ggadminbar .gg-link-top .ggs {
+  display: block;
+  padding-top: 29px;
+  width: 1px;
+  background: url(images/google-plus.png) -27px -22px;
+}
+
+#ggadminbar .ggl {
+  position: relative;
+  z-index: 10;
+  display: block;
+}
+
+#ggadminbar .ggl:hover, #ggadminbar .ggl:focus {
+  background-color: #4c4c4c;
+}
+
+#ggadminbar .ggl.sel .ggls {
   color: #fff;
   font-weight: bold;
 }
 
+#ggadminbar .ggl.sel .gglb {
+  border-top-color: #dd4b39;
+}
+
+#ggadminbar .ggls {
+  display: block;
+  padding: 0 5px;
+}
+
+#ggadminbar .gglb {
+  display: block;
+  border-top: 2px solid transparent;
+}
+
+#ggadminbar-left, #ggadminbar-right {
+  white-space: nowrap;
+}
+
+/*========== MENU POPUP ===*/
+
+#ggadminbar div.gg-menupop {
+  position: absolute;
+  top: 29px;
+  right: -26px;
+  left: auto;
+  z-index: 1;
+  overflow: hidden;
+  max-width: none;
+  background-color: #fff;
+  /*border: 1px solid #bebebe;*/
+  box-shadow: 0 1px 5px #ccc;
+  -webkit-box-shadow: 0 1px 5px #ccc;
+  -moz-box-shadow: 0 1px 5px #ccc;
+}
+
+#ggadminbar div.gg-menupop .gg-menupop-inner {
+  position: relative;
+  padding: 10px 0;
+  zoom: 1;
+}
+
+#ggadminbar li.gg-menupop-open {
+  border-color: #bebebe;
+  border-style: solid;
+  border-width: 0 1px;
+  box-shadow: 0 1px 5px #ccc;
+  -webkit-box-shadow: 0 1px 5px #ccc;
+  -moz-box-shadow: 0 1px 5px #ccc;
+}
+
+#ggadminbar li.gg-menupop-open .gg-menupop-open {
+  color: #36c;
+  background-color: #fff;
+}
+
+/*========== ACTION HEADER ===*/
+
 #ggaction {
   padding: 12px 44px 12px 60px;
-  height: 30px;
-  line-height: 30px;
-  font-size: 20px;
-  background-color: #fff;
-  box-shadow: 0 0 3px rgba(0,0,0,.3);
-  -webkit-box-shadow: 0 0 3px rgba(0,0,0,.3);
-  -moz-box-shadow: 0 0 3px rgba(0,0,0,.3);  
+  height: 40px;
+  line-height: 40px;
+  font-size: 23px;
+  background: -webkit-gradient(linear,left top,left bottom,from(#fcfcfc),to(#f7f7f7));
+  background: -moz-linear-gradient(top,#fcfcfc,#f7f7f7);
+  background: -o-linear-gradient(top,#fcfcfc,#f7f7f7);
+  border-bottom: 1px solid #c1ccd6; 
+  box-shadow: 0 0 5px #d7d7d7;
+  -webkit-box-shadow: 0 0 5px #d7d7d7;
+  -moz-box-shadow: 0 0 5px #d7d7d7;  
+}
+
+#ggaction span {
+  font-family: Open Sans, Arial, sans-serif;
 }
 
 #ggaction .logo-text {
-  color: #dd4b39;
   text-shadow: 0 0 1px rgba(221,75,57,.1);
+  color: #dd4b39;
 }
 
 #ggshadow, #ggshadow div {
@@ -56,7 +170,7 @@ body.gg-admin {
 
 #ggshadow {
   position: absolute;
-  bottom: -9px;
+  bottom: -8px;
   right: 0;
   left: 0;
   z-index: 999;
@@ -64,7 +178,7 @@ body.gg-admin {
 
 #ggshadow div {
   background: -webkit-gradient(linear,left top,left bottom,from(rgba(0, 0, 0, 0.2)),to(transparent));
-  -webkit-mask-box-image: -webkit-gradient(linear,left top,right top,color-stop(0,rgba(0,0,0,0)),color-stop(0.5,rgba(0,0,0,0.8)),color-stop(1,rgba(0,0,0,0)));
+  -webkit-mask-box-image: -webkit-gradient(linear,left top,right top,color-stop(0,rgba(0,0,0,0)),color-stop(0.5,rgba(0,0,0,0.5)),color-stop(1,rgba(0,0,0,0)));
 }
 
 #globalContainer {
@@ -177,7 +291,7 @@ body.gg-admin {
 #adminmenuwrap {
   position: relative;
   float: left;
-  margin-top: 100px;
+  margin-top: 110px;
 }
 
 #adminmenushadow, #adminmenuback {
@@ -226,15 +340,19 @@ body.gg-admin {
 }
 
 #adminmenu li.gg-menu-top.current {
-  border-color: #e5e5e5;
+  border-color: #d1dce6;
 }
 
 #adminmenu li.gg-menu-top.current a.current {
   color: #dd4b39;
   font-weight: bold;
 }
-#adminmenu li.gg-menu-top.current a.gg-menu-top.current {
+#adminmenu li.gg-menu-top.current div.gg-menu-top,
+#adminmenu li.gg-menu-top.current .gg-menu-arrow {
   background-color: #f5f5f5;
+  background: -webkit-gradient(linear,left top,left bottom,from(#fcfcfc),to(#f5f5f5));
+  background: -moz-linear-gradient(top,#fcfcfc,#f5f5f5);
+  background: -o-linear-gradient(top,#fcfcfc,#f5f5f5);
 }
 #adminmenu li.gg-menu-top.current .gg-menu-arrow {
   display: block;
@@ -242,7 +360,6 @@ body.gg-admin {
   top: 0;
   right: -9px;
   z-index: 25;
-  background-color: #f5f5f5;
 }
 
 #adminmenu li.gg-menu-top.current {
@@ -326,10 +443,6 @@ body.gg-admin {
   font-size: 12px;
 }
 
-#adminmenu .gg-submenu ul {
-  background-color: #fff;
-}
-
 #adminmenu .gg-submenu-head {
   display: none;
 }
@@ -352,7 +465,7 @@ body.gg-admin {
 }
 
 #ggcontent {
-  padding-top: 91px;
+  padding-top: 101px;
   height: 100%;
 }
 
@@ -404,6 +517,121 @@ body.gg-admin {
 
 #ggfooter .copyright {
   text-transform: uppercase;
+}
+
+/*========== OPTIONS BUTTON ===*/
+
+#gg-adminbar-options .ggls {
+  padding: 5px;
+}
+
+#options {
+  display: block;
+  width: 16px;
+  height: 17px;
+  background: url(images/google-plus.png) no-repeat 0 0;
+}
+
+/*========== PERSONAL MENU ===*/
+
+#gg-personal-menu {
+  display: none;
+}
+
+#gg-personal-menu a:hover, #gg-personal-menu a:focus {
+  background: #eff3fb;
+}
+
+#gg-personal-menu .personal-info {
+  display: inline-block;
+  margin: 6px 50px 10px 0;
+  vertical-align: top;
+}
+
+#gg-personal-menu .personal-links {
+  display: block;
+  margin-top: 5px;
+}
+
+#gg-personal-menu .personal-link li {
+  line-height: 27px;
+}
+
+#gg-personal-menu a {
+  cursor: pointer;
+}
+
+#gg-personal-menu .link {
+  display: inline-block;
+  margin: 0 10px;
+  padding: 0 10px;
+}
+
+#gg-personal-menu .gme, #gg-personal-menu .gmail, #gg-personal-menu .grole {
+  display: block;
+  margin: 0 20px;
+  line-height: 17px;
+}
+
+#gg-personal-menu .gme {
+  font-weight: bold;
+  color: #000;
+}
+
+#gg-personal-menu .gmail {
+  color: #666;
+}
+
+#gg-personal-menu .grole {
+  margin-top: 7px;
+}
+
+#gg-personal-menu .clear {
+  border-top: 1px solid #e5e5e5;
+}
+
+#default-avatar, #avatar {
+  display: inline-block;
+  margin: 10px 0 10px 20px;
+  width: 96px;
+  height: 96px;
+}
+
+#default-avatar {
+  background-image: url(images/google-plus.png);
+  background-position: -58px 0;
+  background-repeat: no-repeat;
+}
+
+#another {
+  width: 100%;
+  white-space: nowrap;
+}
+
+#another .tdleft, #another .tdright {
+  padding: 10px 20px 0;
+}
+
+#another .tdleft {
+  padding-left: 0;
+  text-align: left;
+}
+
+#another .tdright {
+  padding-right: 0;
+  text-align: right;
+}
+
+/*========== NEW COMPLAINT BUTTON ===*/
+
+#adminmenu .quickbuttons {
+  margin-bottom: 15px;
+  padding-left: 16px;
+  cursor: default;
+}
+
+#adminmenu .quickbuttons .g-b-r {
+  font-size: 12px;
 }
 
 /*========== LIST-TABLE ===*/
@@ -497,6 +725,10 @@ body.gg-admin {
   color: #464646;
   font-size: 23px;
   font-weight: normal;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
 }
 
 .wrap .add-new-h2 {
@@ -534,12 +766,150 @@ body.gg-admin {
   font-weight: normal;
 }
 
+.search-box {
+  float: right;
+}
+
+.search-box.nofloat {
+  float: none;
+}
+
+.search-box input, .search-box select {
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.search-box label {
+  display: inline-block;
+  padding-top: 7px;
+  vertical-align: top;
+}
+
+.search-box .label {
+  margin-left: 10px;
+}
+
+.search-box .g-b {
+  margin-right: 0;
+  margin-left: 5px;
+}
+
 .tablenav {
   clear: both;
   margin: 6px 0 4px;
   height: 30px;
   vertical-align: middle;
 }
+
+.gg-has-right-sidebar .gg-postbox-container {
+  clear: left;
+  margin-right: -340px;
+  width: 100%;
+}
+
+.gg-has-right-sidebar .gg-body-content {
+  margin-right: 300px;
+}
+
+.gg-inner-sidebar {
+  position: relative;
+  float: right;
+  clear: right;
+  width: 281px;
+}
+
+.gg-postbox-container {
+  float: left;
+  padding-right: .5%;
+}
+
+.gg-postbox {
+  position: relative;
+  margin-bottom: 20px;
+  min-width: 255px;
+  line-height: 1;
+  background-color: #f5f5f5;
+  background-image: linear-gradient(top,#f9f9f9,#f5f5f5);
+  background-image: -webkit-linear-gradient(top,#f9f9f9,#f5f5f5);
+  background-image: -moz-linear-gradient(top,#f9f9f9,#f5f5f5);
+  background-image: -o-linear-gradient(top,#f9f9f9,#f5f5f5);
+  background-image: -ms-linear-gradient(top,#f9f9f9,#f5f5f5);
+  border: 1px solid #dfdfdf;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -khtml-border-radius: 2px;
+  box-shadow: inset 0 1px 0 #fff;
+  -webkit-box-shadow: inset 0 1px 0 #fff;
+  -moz-box-shadow: inset 0 1px 0 #fff;
+}
+
+.gg-postbox h3 {
+  padding: 7px 10px;
+  color: #464646;
+  font-family: MetaBold, Tahoma, sans-serif;
+  font-size: 15px;
+  font-weight: normal;
+  background-color: #f1f1f1;
+  background-image: linear-gradient(top,#f9f9f9,#ececec);
+  background-image: -webkit-linear-gradient(top,#f9f9f9,#ececec);
+  background-image: -moz-linear-gradient(top,#f9f9f9,#ececec);
+  background-image: -o-linear-gradient(top,#f9f9f9,#ececec);
+  background-image: -ms-linear-gradient(top,#f9f9f9,#ececec);
+  border-bottom: 1px solid #dfdfdf;
+  box-shadow: 0 1px 0 #fff;
+  -webkit-box-shadow: 0 1px 0 #fff;
+  -moz-box-shadow: 0 1px 0 #fff;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+}
+
+.gg-postbox .gg-inside {
+  position: relative;
+  font-size: 12px;
+}
+
+.gg-postbox .gg-handlediv {
+  display: none;
+}
+
+.gg-postbox .gg-options {
+  padding: 6px 0 16px;
+  border-bottom: 1px solid #dfdfdf;
+}
+
+.gg-postbox .gg-options p {
+  padding: 0 10px;
+}
+
+.gg-postbox .gg-actions {
+  clear: both;
+  padding: 10px 10px 8px;
+  border-top: 1px solid #fff;
+}
+
+.misc-pub-section {
+  padding: 6px 10px;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #dfdfdf;
+}
+
+.misc-pub-section:first-child {
+  border-top: none;
+}
+
+.misc-pub-section:last-child {
+  border-bottom: none;
+}
+
+/*=== FORM ===*/
+
+.g-f {
+}
+
+/*=== ERROR PANEL ===*/
 
 .error-panel {
   margin: 7% auto 0;
@@ -568,6 +938,66 @@ body.gg-admin {
   font-weight: normal;
 }
 
+/*=== CUSTOMIZE ELEMENTS ===*/
+
 #user-viewmanager {
   margin-top: 10px;
+}
+
+#complaint-new {
+  padding-top: 20px;
+}
+
+#complaint-new #complaint-titlediv {
+  margin-bottom: 20px;
+}
+
+#complaint-new #title {
+  width: 100%;
+  height: 34px;
+  line-height: 100%;
+  font-size: 1.7em;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -khtml-border-radius: 2px;
+}
+
+#complaint-new #title:focus {
+  box-shadow: inset 0 1px 1px #ddd;
+  -webkit-box-shadow: inset 0 1px 1px #ddd;
+  -moz-box-shadow: inset 0 1px 1px #ddd;
+}
+
+#complaint-new #equipid {
+  margin: 7px 0;
+}
+
+#complaint-new #content {
+  display: none;
+  margin-top: 5px;
+  width: 100%;
+  max-width: 100%;
+}
+
+#editor-toolbar {
+  margin-bottom: -3px;
+  border: 1px solid #dfdfdf;
+  border-bottom-width: 2px;
+}
+
+#editor-container {
+  border: 1px solid #dfdfdf;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -khtml-border-radius: 3px;
+}
+
+#editor {
+  width: 100%;
+  min-height: 290px;
+  box-shadow: inset 1px 1px 2px rgba(0,0,0,.1);
+  -webkit-box-shadow: inset 1px 1px 2px rgba(0,0,0,.1);
+  -moz-box-shadow: inset 1px 1px 2px rgba(0,0,0,.1);
 }

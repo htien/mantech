@@ -37,6 +37,7 @@ public class URLTag extends JTienTag {
       if (this.address == null) {
         this.address = "";
       }
+      
       String[] addresses = this.address.split("/");
       for (String _address : addresses) {
         if (StringUtils.isNotEmpty(_address)) {
@@ -48,7 +49,10 @@ public class URLTag extends JTienTag {
       urlBuilder.append(this.address);
     }
     
-    urlBuilder.append(this.config().getString(ConfigKeys.SERVLET_EXTENSION));
+    if (!address.equals("/")) {
+      urlBuilder.append(this.config().getString(ConfigKeys.SERVLET_EXTENSION));
+    }
+
     this.write(this.response().encodeURL(urlBuilder.toString()));
   }
   

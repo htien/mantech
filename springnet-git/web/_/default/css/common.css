@@ -13,6 +13,12 @@
   font-weight: bold;
 }
 
+@font-face {
+  font-family: 'Open Sans';
+  src: local('☺'), url('images/fonts/open-sans.woff') format('woff');
+  font-weight: bold;
+}
+
 *|*:-moz-any-link:focus {
   outline: none;
 }
@@ -133,11 +139,6 @@ ol.nobullets, ul.nobullets {
   position: fixed !important;
 }
 
-.gg-popup-msg {
-  padding: 8px 0;
-  color: #222;
-}
-
 .widefat {
   clear: both;
   width: 100%;
@@ -155,4 +156,9 @@ table.fixed {
   position: relative;
   display: -moz-inline-box;
   display: inline-block;
+}
+
+.gg-popup-msg {
+  padding: 8px 0;
+  color: #222;
 }

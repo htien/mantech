@@ -50,6 +50,9 @@ public class ConfigKeys {
   public static final String HTTP_SERVLET_RESPONSE = "springnet.http.servlet.response";
   public static final String AJAX_HASH_URLS = "ajax.hash.urls";
   
+  public static final String USERS_PER_PAGE = "usersPerPage";
+  public static final String COMPLAINTS_PER_PAGE = "complaintsPerPage";
+  
   private ConfigKeys() {}
   
 }

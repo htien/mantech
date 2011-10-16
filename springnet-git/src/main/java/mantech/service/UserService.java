@@ -68,5 +68,9 @@ public class UserService {
       u.setStatus("B");
     }
   }
+  
+  public int countTotalUsers() {
+    return ((Long)userRepo.count()).intValue();
+  }
 
 }

@@ -1,4 +1,4 @@
-$('#adduser_pagelet').ready(function() {
+$('#pagelet_adduser').ready(function() {
 	var frm = null,
 		dialogOpts = {
 			title: 'Add User Confirmation',
@@ -42,9 +42,9 @@ $('#adduser_pagelet').ready(function() {
 				username: { required:true, minlength:3, maxlength:16 },
 				passwd: { required:true, minlength:6 },
 				email: { required:true, email:true },
-				firstName: { required:true, minlength:3, maxlength:30 },
-				lastName: { required:true, minlength:3, maxlength:30 },
-				address: { required:true, minlength:3, maxlength:200 }
+				firstName: { required:true, minlength:1, maxlength:30 },
+				lastName: { required:true, minlength:1, maxlength:30 },
+				address: { required:true, minlength:1, maxlength:200 }
 			},
 			messages: {
 				username: {
@@ -93,7 +93,7 @@ $('#adduser_pagelet').ready(function() {
 	});
 });
 
-$('#addcomplaint_pagelet').ready(function() {
+$('#pagelet_addcomplaint').ready(function() {
 	var frm = null,
 		dialogOpts = {
 			title: 'Add Complaint Confirmation',
@@ -147,7 +147,7 @@ $('#addcomplaint_pagelet').ready(function() {
 	});
 });
 
-$('#addassignment_pagelet').ready(function() {
+$('#pagelet_addassignment').ready(function() {
 	var frm = null,	
 		dialogOpts = {
 			title: 'Add Assignment Confirmation',
@@ -219,7 +219,7 @@ $('#addassignment_pagelet').ready(function() {
 	});
 });
 
-$('#addequipment_pagelet').ready(function() {
+$('#pagelet_addequipment').ready(function() {
 	var frm = null,
 		dialogOpts = {
 				title: 'Add Equipment Confirmation',
@@ -271,7 +271,7 @@ $('#addequipment_pagelet').ready(function() {
 	});
 });
 
-$('#edituser_pagelet').ready(function() {
+$('#pagelet_edituser').ready(function() {
 	var frm = null,
 		dialogOpts = {
 				title: 'Edit User Confirmation',
@@ -324,7 +324,7 @@ $('#edituser_pagelet').ready(function() {
 	});
 });
 
-$('#editcomplaint_pagelet').ready(function() {
+$('#pagelet_editcomplaint').ready(function() {
 	var frm = null,
 	
 	dialogOpts = {
@@ -362,7 +362,7 @@ $('#editcomplaint_pagelet').ready(function() {
 	});
 });
 
-$('#complaint_list_pagelet').ready(function() {
+$('#pagelet_listcomplaint').ready(function() {
 	var filterForm = '#complaint-filter-form',
 		filterSubmit = '#filter-query-submit',
 		lnkShowAll = '#lnkShowAll',
@@ -523,4 +523,4 @@ startChart = function() {
 			enabled: true
 		}
 	});
-}
+};

@@ -66,10 +66,14 @@ public class ComplaintController {
 
   @RequestMapping(value = "/complaint", params = "action=list", method = RequestMethod.GET)
   public String list(ModelMap model) throws Exception {
-    
     model.addAttribute("listComplaint", complaintRepo.findAll());
     model.addAttribute("listStatus", statusRepo.findAll());
     model.addAttribute("listPriority", priorityRepo.findAll());
+    model.addAttribute("all", ((Long)complaintRepo.count()).toString());
+    model.addAttribute("countWaiting", complaintRepo.countByStatus((byte)1));
+    model.addAttribute("countAccepted", complaintRepo.countByStatus((byte)2));
+    model.addAttribute("countRejected", complaintRepo.countByStatus((byte)3));
+    model.addAttribute("countCompleted", complaintRepo.countByStatus((byte)4));
     return TemplateKeys.COMPLAINT_LIST;
   }
 

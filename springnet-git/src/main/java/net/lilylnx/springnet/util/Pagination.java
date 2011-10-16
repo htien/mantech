@@ -38,6 +38,46 @@ public class Pagination {
     this.thisPage = this.calculateThisPage(page);
   }
   
+  public Pagination forUsers(int totalUsers) {
+    this.totalRecords = totalUsers;
+    this.recordsPerPage = config.getInt(ConfigKeys.USERS_PER_PAGE, 25);
+    this.totalPages = this.calculateTotalPages();
+    this.thisPage = this.calculateThisPage(this.start);
+    this.start = this.calculateStart(this.start, this.recordsPerPage);
+    this.baseUrl = String.format("#%s", "listuser");
+    this.id = 0;
+    
+    return this;
+  }
+  
+  public int getTotalPages() {
+    return this.totalPages;
+  }
+  
+  public long getTotalRecords() {
+    return this.totalRecords;
+  }
+  
+  public int getRecordsPerPage() {
+    return this.recordsPerPage;
+  }
+  
+  public int getThisPage() {
+    return this.thisPage;
+  }
+  
+  public int getId() {
+    return this.id;
+  }
+  
+  public int getStart() {
+    return this.start;
+  }
+  
+  public String getBaseUrl() {
+    return this.baseUrl;
+  }
+  
   private int calculateThisPage(int page) {
     return Math.min(this.totalPages, Math.max(1, page));
   }

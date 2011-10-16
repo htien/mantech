@@ -56,6 +56,6 @@ public class LoginController {
 
   @RequestMapping(value = "/ssoLogout", method = RequestMethod.GET)
   public String logout(ModelMap model) {
-    return null;
+    return "redirect:/";
   }
 }

@@ -1,9 +1,21 @@
 /* === Load required Google Closure Library === */
 
-//goog.require('goog.editor.Field');
-//goog.require('goog.ui.editor.DefaultToolbar');
-//goog.require('goog.ui.editor.ToolbarController');
-//goog.require('goog.ui.Dialog');
+  goog.require('goog.dom');
+  goog.require('goog.editor.Command');
+  goog.require('goog.editor.Field');
+  goog.require('goog.editor.plugins.BasicTextFormatter');
+  goog.require('goog.editor.plugins.EnterHandler');
+  goog.require('goog.editor.plugins.HeaderFormatter');
+  goog.require('goog.editor.plugins.LinkBubble');
+  goog.require('goog.editor.plugins.LinkDialogPlugin');
+  goog.require('goog.editor.plugins.ListTabHandler');
+  goog.require('goog.editor.plugins.LoremIpsum');
+  goog.require('goog.editor.plugins.RemoveFormatting');
+  goog.require('goog.editor.plugins.SpacesTabHandler');
+  goog.require('goog.editor.plugins.UndoRedo');
+  goog.require('goog.ui.Dialog');
+  goog.require('goog.ui.editor.DefaultToolbar');
+  goog.require('goog.ui.editor.ToolbarController');
 
 
 /* === Initialize global variables === */
@@ -74,12 +86,10 @@ ajaxPageload = function() {
 
 applyAjax_pageload = function(hash) {
 	if (hash) {
-		$(window).bind('load', function(evt) {
-			jTien.ajaxFromLink(undefined, jTien.url('/loader'), '#ggbody-content')
-					.success(function(html) {
-						applyAjax_pagelet();
-					});
-		});
+		jTien.ajaxFromLink(undefined, jTien.url('/loader'), '#ggbody-content')
+				.success(function(html) {
+					applyAjax_pagelet();
+				});
 	}
 	else {
 		jTien.ajaxFromLink('#menu-dashboard a.gg-menu-top', jTien.url('/loader'), '#ggbody-content');
@@ -89,8 +99,10 @@ applyAjax_pageload = function(hash) {
 applyAjax_adminmenu = function() {
 	$('#adminmenu a').each(function(idx, el) {
 		$(this).click(function(evt) {
+			$('#ggbody-content').hide();
 			jTien.ajaxFromLink(this, jTien.url('/loader'), '#ggbody-content')
 					.success(function(html) {
+						$('#ggbody-content').slideToggle('slow');
 						applyAjax_pagelet();
 						currentMenuItem(idx, el);
 					});
@@ -134,6 +146,9 @@ $(function() {
 	jTien.f.autocompleteOff();
 	jTien.f.completeFormAction();
 	jTien.f.disableDrag('{"tags":["a", "img"], "classes":["g-b"]}');
+	$('.ui-datepicker a').live('click', function(evt) {
+		evt.preventDefault();
+	});
 });
 
 
@@ -355,7 +370,9 @@ jTien.f = jTien.prototype = {
 	 * @param link
 	 */
 	ajaxFromLink: function(link, type, target) {
-		var hash = (link == undefined ? document.location.hash : $(link).attr('href')).replace(/^.*#/, ''),
+		var hash = (link == undefined
+				? document.location.hash
+				: jTien.f.isUrl(link) ? link : $(link).attr('href')).replace(/^.*#/, ''),
 			query = 'q='.concat(hash);
 		if (target == undefined) {
 			target = type;

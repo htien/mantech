@@ -1,5 +1,4 @@
-<%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure"
-	compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
+<%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
 <c:forEach items="${listCategory}" var="category">
 	<tr class="gg-list-tr">

@@ -28,5 +28,10 @@ public class DashboardController {
   public String viewCredits() {
     return TemplateKeys.DASHBOARD_VIEW_CREDITS;
   }
+  
+  @RequestMapping(value = "/dashboard", params = "action=viewfaqs", method = RequestMethod.GET)
+  public String viewFAQs(ModelMap model) {
+    return TemplateKeys.DASHBOARD_VIEW_FAQS;
+  }
 
 }

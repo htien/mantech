@@ -1,22 +1,26 @@
 <%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure"
 	compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
-<div id="pagelet_user_list" class="g-pl wrap">
+<div id="pagelet_listuser" class="g-pl wrap">
 	<h2>Users<a class="add-new-h2" href="<jtien:url address="/index"/>#adduser">Add New</a></h2>
 	<ul class="subsubsub">
-		<li class="all">All <span class="count">(0)</span> | </li>
-		<li class="deleted">Deleted <span class="count">(0)</span></li>
+		<li class="all"><a href="#">All <span class="count">(${totalUsers})</span></a></li>
+		<c:if test="${totalDeletedUsers}">
+			<li class="deleted"> | <a href="#">Deleted <span class="count">(0)</span></a></li>
+	 	</c:if>
 	</ul>
 	<form id="user-filter-form" method="post" action="/user/search">
-		<div class="tablenav"></div>
-		<input type="text" name="q" />
-		<select name="f">
-			<option value="1">UserName</option>
-			<option value="2">Department</option>
-		</select>
-		<div id="filter-query-submit" class="g-b g-b-r">Filter</div>
-		<div id="lnkShowAll" class="g-b g-b-b">Show All</div>
-		
+		<div class="search-box">
+			<input type="text" name="q" />
+			<select name="f">
+				<option value="1">Username</option>
+				<option value="2">Department</option>
+			</select>
+			<div id="filter-query-submit" class="g-b g-b-r">Filter</div>
+			<div id="lnkShowAll" class="g-b g-b-b">All</div>
+		</div>
+		<div class="tablenav">
+		</div>
 		<div id="user-viewmanager">
 			<div class="gg-listview">
 				<div class="gg-listview-inner">

@@ -3,11 +3,71 @@
 <script type="text/javascript">$('body').addClass('gg-admin');</script>
 <div id="globalTop" class="fixed_elem">
 	<div id="ggadminbar">
-		<ul>
-			<li class="selected"><span>Administrator</span></li>
-		</ul>
+		<div class="quicklinks">
+			<div id="ggadminbar-left">
+				<ul>
+					<li id="gg-adminbar-role" class="gg-link-top">
+						<a class="ggl sel">
+							<span class="gglb"></span>
+							<span class="ggls">Administrator</span>
+						</a>
+					</li>
+					<li id="gg-adminbar-about" class="gg-link-top">
+						<a class="ggl" href="<jtien:url address="/"/>?p=info">
+							<span class="gglb"></span>
+							<span class="ggls">About</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div id="ggadminbar-right">
+				<ul>
+					<li id="gg-adminbar-account" class="gg-link-top gg-menupop">
+						<a id="lnkAccount" class="ggl" href="javascript:">
+							<span class="gglb"></span>
+							<span class="ggls">Tien Nguyen</span>
+						</a>
+						<div id="gg-personal-menu" class="gg-menupop">
+							<div class="gg-menupop-inner">
+								<div id="personal-0">
+									<span id="default-avatar"></span>
+									<%--<img id="avatar" src="" alt="Tien Nguyen" style="display:none" />--%>
+									<div class="personal-info">
+										<span class="gme">Tien Nguyen</span>
+										<span class="gmail">nvhtien@yahoo.co.uk</span>
+										<span class="grole">Administrator</span>
+										<ul class="personal-links">
+											<li><a id="profile" class="link">Profile</a></li>
+											<li><a id="blog" class="link" href="<jtien:settings key="author.blog"/>">About Me</a></li>
+										</ul>
+									</div>
+									<div class="clear"></div>
+									<table id="another">
+										<tbody>
+											<tr>
+												<td class="tdleft"><a id="signout" class="link" href="<jtien:url address="/ssoLogout"/>">Sign out</a></td>
+												<td class="tdright"><a id="close-personal-menu" class="link">Close</a></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="gg-link-top">
+						<span class="ggs"></span>
+					</li>
+					<li id="gg-adminbar-options" class="gg-link-top">
+						<a id="lnkOptions" class="ggl" href="javascript:">
+							<span class="gglb"></span>
+							<span class="ggls"><span id="options"></span></span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
 	</div>
-	<div id="ggaction"><span class="logo-text">Mantech Helpdesk</span> · </div>
+	<div id="ggaction"><span class="logo-text">Mantech Helpdesk</span> · <span class="path-1">Admin Control Panel</span></div>
 	<div id="ggshadow"><div></div></div>
 </div>
 <div id="globalContainer">

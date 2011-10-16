@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import net.lilylnx.springnet.util.ClientUtils;
+import net.lilylnx.springnet.util.Pagination;
+import net.lilylnx.springnet.util.SpringConfig;
 
 import mantech.controller.helpers.RName;
 import mantech.controller.helpers.RStatus;
@@ -38,6 +40,9 @@ import mantech.service.UserService;
 public class UserController {
 
   @Autowired
+  private SpringConfig config;
+  
+  @Autowired
   private UserRepository userRepo;
   
   @Autowired
@@ -53,15 +58,20 @@ public class UserController {
   private ClientUtils clientUtils;
 
   @RequestMapping(value = "/user", params = "action=list", method = RequestMethod.GET)
-  public String list(ModelMap model) {
-    model.addAttribute("listUser", userRepo.findAll());
+  public String list(@RequestParam(value="page", required=false, defaultValue="1") int page, ModelMap model) {
+    Pagination pagination = new Pagination(config, page)
+        .forUsers(this.userService.countTotalUsers());
+
+    model.addAttribute("users", userRepo.findAll())
+        .addAttribute("pagination", pagination)
+        .addAttribute("totalUsers", pagination.getTotalRecords());
     return TemplateKeys.USER_LIST;
   }
 
   @RequestMapping(value="/user", params = "action=add", method = RequestMethod.GET)
   public String insert(ModelMap model) {
-    model.addAttribute("departList", departmentRepo.findAll());
-    model.addAttribute("roleList", roleRepo.findAll());
+    model.addAttribute("departList", departmentRepo.findAll())
+        .addAttribute("roleList", roleRepo.findAll());
     return TemplateKeys.USER_ADD;
   }
   
@@ -148,7 +158,7 @@ public class UserController {
     }
 
     if (users.size() != 0) {
-      model.addAttribute("listUser", users);
+      model.addAttribute("users", users);
       return TemplateKeys.USER_LIST_RESULT;
     }
     else {

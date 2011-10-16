@@ -11,37 +11,50 @@
 	</ul>
 	<div class="clear"></div>
 	<form id="complaint-filter-form" method="post" action="/complaint/search">
-		<select id="field-name" name="f">
-			<option value="1">Employee</option>
-			<option value="2">Equipment</option>
-			<option value="3">Title</option>
-		</select>
-		<input type="text" id="query" name="q" />
-		<div>
-			<p>
-				Date From: <input type="text" id="dateFrom" name="dateFrom" />
-				Date To: <input type="text" id="dateTo" name="dateTo" />
-			</p>
-		</div>
-		<div>
+		<div class="search-box">
+			<select id="field-name" name="f" style="margin-right:0;border-right-color:#fff">
+				<option value="1">Employee</option>
+				<option value="2">Equipment</option>
+				<option value="3">Title</option>
+			</select>
+			<input type="text" id="query" name="q" size="12" style="margin-left:-1px;border-left-color:transparent" />
+			<label for="dateFrom" class="label">Date</label><input type="text" id="dateFrom" name="dateFrom" size="8" readonly="readonly" />
+			<label for="dateTo">-</label><input type="text" id="dateTo" name="dateTo" size="8" readonly="readonly" />
 			<select id="status" name="status">
-				<option value="0" selected="selected">- All -</option>
+				<option value="0" selected="selected">ALL</option>
 				<c:forEach items="${listStatus}" var="status">
 					<option value="${status.id}">${status.name}</option>
 				</c:forEach>
 			</select>
-		</div>
-		<div>
 			<select id="priority" name="priority">
-				<option value="0" selected="selected">- All -</option>
+				<option value="0" selected="selected">ALL</option>
 				<c:forEach items="${listPriority}" var="priority">
 					<option value="${priority.id}">${priority.name}</option>
 				</c:forEach>
 			</select>
+			<div id="filter-query-submit" class="g-b g-b-r">Filter</div>
+			<div id="lnkShowAll" class="g-b g-b-b">Show All</div>
+			<script type="text/javascript">
+				var dates = $('#dateFrom, #dateTo').datepicker({
+					defaultDate: '+1w',
+					dateFormat: 'yy/mm/dd',
+					numberOfMonths: 2,
+					showAnim: 'slideDown',
+					changeMonth: true,
+					onSelect: function(selectedDate) {
+						var option = this.id == 'dateFrom' ? 'minDate' : 'maxDate',
+							instance = $(this).data('datepicker'),
+							date = $.datepicker.parseDate(
+									instance.settings.dateFormat ||
+									$.datepicker._defaults.dateFormat,
+									selectedDate, instance.settings);
+						dates.not(this).datepicker('option', option, date);
+					}
+				});
+			</script>
 		</div>
-		<div id="filter-query-submit" class="g-b g-b-r">Filter</div>
-		<div id="lnkShowAll" class="g-b g-b-b">Show All</div>
-		
+		<div class="tablenav">
+		</div>
 		<div id="complaint-viewmanager">
 			<div class="gg-listview">
 				<div class="gg-listview-inner">

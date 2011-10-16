@@ -4,10 +4,11 @@
 <div id="adminmenuwrap">
 	<div id="adminmenushadow"></div>
 	<ul id="adminmenu">
+		<li class="quickbuttons"><div id="new-complaint" class="g-b g-b-r">New Complaint</div></li>
 		<li id="menu-dashboard" class="gg-first-item gg-menu-top gg-has-submenu menu-icon-dashboard">
 			<div class="gg-menu-arrow"><div></div></div>
 			<div class="gg-menu-toggle"><br /></div>
-			<a href="<jtien:url address="/index"/>#dashoverview" class="gg-menu-top gg-menu-image">Dashboard</a>
+			<div class="gg-menu-top"><a href="<jtien:url address="/index"/>#dashoverview" class="gg-menu-top gg-menu-image">Dashboard</a></div>
 			<div class="gg-submenu">
 				<div class="gg-submenu-wrap">
 					<div class="gg-submenu-head">Dashboard</div>
@@ -23,13 +24,13 @@
 		<li id="menu-complaints" class="gg-menu-top gg-has-submenu menu-icon-complaint">
 			<div class="gg-menu-arrow"><div></div></div>
 			<div class="gg-menu-toggle"><br /></div>
-			<a href="<jtien:url address="/index"/>#listcomplaint" class="gg-menu-top gg-menu-image">Complaints</a>
+			<div class="gg-menu-top"><a href="<jtien:url address="/index"/>#listcomplaint" class="gg-menu-top gg-menu-image">Complaints</a></div>
 			<div class="gg-submenu">
 				<div class="gg-submenu-wrap">
 					<div class="gg-submenu-head">Complaints</div>
 					<ul>
 						<li class="gg-first-item"><a href="<jtien:url address="/index"/>#listcomplaint">All Complaints</a></li>
-						<li><a href="<jtien:url address="/index"/>#addcomplaint">Add New</a></li>
+						<li><a id="addcomplaint" href="<jtien:url address="/index"/>#addcomplaint">Add New</a></li>
 					</ul>
 				</div>
 			</div>
@@ -37,12 +38,12 @@
 		<li id="menu-assignments" class="gg-menu-top menu-icon-assignment">
 			<div class="gg-menu-arrow"><div></div></div>
 			<div class="gg-menu-toggle"><br /></div>
-			<a href="<jtien:url address="/index"/>#listassignment" class="gg-menu-top gg-menu-image">Assignments</a>
+			<div class="gg-menu-top"><a href="<jtien:url address="/index"/>#listassignment" class="gg-menu-top gg-menu-image">Assignments</a></div>
 		</li>
 		<li id="menu-equipments" class="gg-menu-top gg-has-submenu menu-icon-equipment">
 			<div class="gg-menu-arrow"><div></div></div>
 			<div class="gg-menu-toggle"><br /></div>
-			<a href="<jtien:url address="/index"/>#listequipment" class="gg-menu-top gg-menu-image">Equipments</a>
+			<div class="gg-menu-top"><a href="<jtien:url address="/index"/>#listequipment" class="gg-menu-top gg-menu-image">Equipments</a></div>
 			<div class="gg-submenu">
 				<div class="gg-submenu-wrap">
 					<div class="gg-submenu-head">Equipments</div>
@@ -57,12 +58,12 @@
 		<li id="menu-users" class="gg-menu-top gg-has-submenu menu-icon-user">
 			<div class="gg-menu-arrow"><div></div></div>
 			<div class="gg-menu-toggle"><br /></div>
-			<a href="<jtien:url address="/index"/>#listuser" class="gg-menu-top gg-menu-image">Users</a>
+			<div class="gg-menu-top"><a href="<jtien:url address="/index"/>#listuser/page=1" class="gg-menu-top gg-menu-image">Users</a></div>
 			<div class="gg-submenu">
 				<div class="gg-submenu-wrap">
 					<div class="gg-submenu-head">Users</div>
 					<ul>
-						<li class="gg-first-item"><a href="<jtien:url address="/index"/>#listuser">All Users</a></li>
+						<li class="gg-first-item"><a href="<jtien:url address="/index"/>#listuser/page=1">All Users</a></li>
 						<li><a href="<jtien:url address="/index"/>#adduser">Add New</a></li>
 					</ul>
 				</div>
@@ -71,7 +72,7 @@
 		<li id="menu-credits" class="gg-menu-top menu-icon-credit">
 			<div class="gg-menu-arrow"><div></div></div>
 			<div class="gg-menu-toggle"><br /></div>
-			<a href="<jtien:url address="/index"/>#viewcredits" class="gg-menu-top gg-menu-image">Credits</a>
+			<div class="gg-menu-top"><a href="<jtien:url address="/index"/>#viewcredits" class="gg-menu-top gg-menu-image">Credits</a></div>
 		</li>
 	</ul>
 </div>

@@ -3,14 +3,17 @@
 <div id="pagelet_listequipment" class="g-pl wrap">
 	<h2>Equipments<a class="add-new-h2" href="<jtien:url address="/index"/>#addequipment">Add New</a></h2>
 	<form id="equipment-filter-form" method="post" action="/equipment/search">
-		<input type="text" name="q" />
-		<select name="f">
-			<option value="1">Equipment</option>
-			<option value="2">Category</option>
-		</select>
-		<div id="filter-query-submit" class="g-b g-b-r">Filter</div>
-		<div id="lnkShowAll" class="g-b g-b-b">Show All</div>
-		
+		<div class="search-box">
+			<input type="text" name="q" />
+			<select name="f">
+				<option value="1">Equipment</option>
+				<option value="2">Category</option>
+			</select>
+			<div id="filter-query-submit" class="g-b g-b-r">Filter</div>
+			<div id="lnkShowAll" class="g-b g-b-b">Show All</div>
+		</div>
+		<div class="tablenav">
+		</div>
 		<div id="equipment-viewmanager">
 			<div class="gg-listview">
 				<div class="gg-listview-inner">

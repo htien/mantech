@@ -63,10 +63,10 @@
 	
 	<!-- Tag files -->
 	
-	<tag>
+	<tag-file>
 		<name>pagination</name>
 		<path>/WEB-INF/tags/springnet/pagination.tag</path>
-	</tag>
+	</tag-file>
 	
 	<!-- Functions -->
 	

@@ -6,8 +6,85 @@ $(function() {
 		applyAjax_adminmenu();
 		applyAjax_pagelet();
 		jTien.adminMenu.init();
+
+		ggAdminBar_applyMenuPopup();
+		$('#lnkOptions').click(openOptionsPopup);
+		$('#close-personal-menu').click(closePersonalMenu);
+		$('#profile').click(profileHandler);
+		$('#signout').click(signoutHandler);
+		$('#new-complaint').click(openNewComplaintPage);
 	}
 });
+
+ggAdminBar_applyMenuPopup = function() {
+	var menuItems = $('#ggadminbar li.gg-menupop');
+	menuItems.find('.ggl').each(function(idx, el) {
+		$(this).click(ggAdminBar_openMenuPopup);
+	});
+},
+
+ggAdminBar_openMenuPopup = function(evt) {
+	var ggl = $(this),
+		menuItem = ggl.parent(),
+		popContainer = ggl.siblings('div.gg-menupop');
+	if (popContainer.is(':hidden')) {
+		var openClass = 'gg-menupop-open';
+		ggl.addClass(openClass);
+		menuItem.addClass(openClass);
+		popContainer.show('fast');
+	}
+	return false;
+},
+
+ggAdminBar_closeMenuPopup = function(popMenu) {
+	if (popMenu.is(':visible')) {
+		var openClass = 'gg-menupop-open',
+			menuItem = popMenu.parents('li.' + openClass);
+		popMenu.hide('fast');
+		menuItem.removeClass(openClass);
+		menuItem.find('.' + openClass)[0].removeClass(openClass);
+	}
+},
+
+closePersonalMenu = function(evt) {
+	ggAdminBar_closeMenuPopup($('#gg-personal-menu'));
+},
+
+openOptionsPopup = function(evt) {
+	var notice = 'This function is temporarily not allowed. It will be released in version 2.0.';
+	jTien.callJqDialog('ajax-response', notice).dialog('open');
+	return false;
+},
+
+profileHandler = function(evt) {
+	jTien.callJqDialog('ajax-response', 'This is my profile').dialog('open');
+},
+
+signoutHandler = function(evt) {
+	var link = $(this).attr('href');
+	jTien.callJqDialog('ajax-response', 'Please confirm the logout?', {
+		title: 'Logout Confirmation',
+		buttons: {
+			'OK': function() {
+				document.location = link;
+			},
+			'Cancel': function() {
+				$(this).dialog('destroy');
+				$('#close-personal-menu').click();
+			}
+		}
+	}).dialog('open');
+	return false;
+},
+
+openNewComplaintPage = function() {
+//	var link = jTien.url('/index').concat('#addcomplaint');
+//	jTien.ajaxFromLink(link, jTien.url('/loader'), '#ggbody-content')
+//			.success(function(html) {
+//				applyAjax_pagelet();
+//			});
+	$('#addcomplaint').click();
+};
 
 $('#pagelet_signin').ready(function() {
 
@@ -52,13 +129,14 @@ $('#pagelet_signin').ready(function() {
 								buttons: {
 									'Close': function() {
 										$(this).dialog('destroy');
+										jTien.resetForm(signInForm);
 										$(signInForm).submit();
 									}
 								}
 							}).dialog('open');
 						}
 					})
-					.complete(function(data) {
+					.error(function(data) {
 						jTien.resetForm(signInForm);
 					});
 			}
@@ -115,10 +193,9 @@ $('#pagelet_signin #testZone').ready(function() {
 		dlgConfirm.dialog('open');
 		return false;
 	});
-
 });
 
-$('#pagelet_user_list').ready(function() {
+$('#pagelet_listuser').ready(function() {
 	var filterForm = '#user-filter-form',
 		filterSubmit = '#filter-query-submit',
 		lnkShowAll =  '#lnkShowAll',
@@ -127,7 +204,7 @@ $('#pagelet_user_list').ready(function() {
 		jTien.ajaxConnect(resultList, filterForm)
 				.success(function(data) {
 					if (data == null || data.length == 0) {
-						$(resultList).html('<tr><td colspan="9">Nothing to show.</td></tr>');
+						$(resultList).html('<tr><td colspan="9" style="padding-top:5px;text-align:center">Nothing to show.</td></tr>');
 					}
 				});
 	});

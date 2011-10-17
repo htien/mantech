@@ -38,7 +38,7 @@
 }
 
 .ui-dialog {
-  padding: 0;
+  padding: 0 0 30px;
   border: 1px solid #acacac;
   border-bottom-color: #999;
   border-bottom-radius: 0;
@@ -72,7 +72,7 @@
 }
 
 .ui-dialog .ui-dialog-buttonpane {
-  padding: 15px 42px 30px 42px;
+  padding: 15px 42px 0 42px;
   border-width: 0;
 }
 
@@ -104,6 +104,55 @@
   padding: 0;
   height: auto;
 }
+
+.ui-tabs {
+  padding: 0;
+  border: none;
+}
+
+.ui-tabs .ui-tabs-nav {
+  padding: 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #dbdbdb;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+}
+
+.ui-tabs .ui-tabs-nav a {
+  outline: none;
+}
+
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a,
+.ui-tabs .ui-tabs-nav li.ui-state-disabled a,
+.ui-tabs .ui-tabs-nav li.ui-state-processing a {
+  cursor: default;
+}
+
+.ui-tabs .ui-state-default {
+  border-color: transparent;
+}
+
+.ui-tabs .ui-state-hover {
+  background: none;
+}
+
+.ui-tabs .ui-tabs-selected {
+  background: #fff;
+  border: 1px solid #dbdbdb;
+}
+
+.ui-tabs .ui-tabs-selected a {
+  color: #000 !important;
+}
+
+.ui-tabs .ui-tabs-panel {
+  padding-right: 0;
+  padding-left: 0;
+}
+
 
 /* === */
 
@@ -191,7 +240,7 @@ span.error {
   -moz-border-radius: 2px;
 }
 
-.g-b {
+.g-b, .ui-button {
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;

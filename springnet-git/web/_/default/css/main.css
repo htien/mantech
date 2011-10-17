@@ -113,7 +113,7 @@ body.gg-admin {
   overflow: hidden;
   max-width: none;
   background-color: #fff;
-  /*border: 1px solid #bebebe;*/
+  border: 1px solid #bebebe;
   box-shadow: 0 1px 5px #ccc;
   -webkit-box-shadow: 0 1px 5px #ccc;
   -moz-box-shadow: 0 1px 5px #ccc;
@@ -142,7 +142,7 @@ body.gg-admin {
 /*========== ACTION HEADER ===*/
 
 #ggaction {
-  padding: 12px 44px 12px 60px;
+  padding: 12px 44px 12px 30px;
   height: 40px;
   line-height: 40px;
   font-size: 23px;
@@ -275,7 +275,7 @@ body.gg-admin {
 /*========== ADMINMENU ===*/
 
 #adminmenuback, #adminmenuwrap {
-  padding-left: 44px;
+  padding-left: 15px;
   width: 176px;
   background-color: #fff /*#ececec*/;
   border-right: 1px solid #ddd;
@@ -461,7 +461,7 @@ body.gg-admin {
 /*========== CONTENT ===*/
 
 #ggcontent, #ggfooter {
-  margin-left: 250px;
+  margin-left: 210px;
 }
 
 #ggcontent {
@@ -470,7 +470,7 @@ body.gg-admin {
 }
 
 #gghead, #ggcontent, #ggfooter {
-  margin-right: 30px;
+  margin-right: 15px;
 }
 
 #gghead {
@@ -636,6 +636,10 @@ body.gg-admin {
 
 /*========== LIST-TABLE ===*/
 
+.gg-listview {
+  line-height: 1.4;
+}
+
 .gg-listview-headers-container {
   z-index: 1;
 }
@@ -712,7 +716,7 @@ body.gg-admin {
 }
 
 .gg-row-actions {
-  margin-top: 5px;
+  margin-top: 4px;
   visibility: hidden;
   color: #d6d6d6;
   font-size: 11.5px;
@@ -801,6 +805,10 @@ body.gg-admin {
   vertical-align: middle;
 }
 
+.gg-metabox-holder {
+  padding-top: 10px;
+}
+
 .gg-has-right-sidebar .gg-postbox-container {
   clear: left;
   margin-right: -340px;
@@ -821,6 +829,10 @@ body.gg-admin {
 .gg-postbox-container {
   float: left;
   padding-right: .5%;
+}
+
+.gg-postbox-container .gg-metabox-sortable {
+  min-height: 300px;
 }
 
 .gg-postbox {
@@ -866,9 +878,14 @@ body.gg-admin {
   -khtml-user-select: none;
 }
 
-.gg-postbox .gg-inside {
+.gg-postbox .gg-inside, .gg-postbox .gg-submitbox {
   position: relative;
   font-size: 12px;
+}
+
+.gg-postbox .gg-inside {
+  margin: 10px 0;
+  padding: 0 10px;
 }
 
 .gg-postbox .gg-handlediv {
@@ -1000,4 +1017,42 @@ body.gg-admin {
   box-shadow: inset 1px 1px 2px rgba(0,0,0,.1);
   -webkit-box-shadow: inset 1px 1px 2px rgba(0,0,0,.1);
   -moz-box-shadow: inset 1px 1px 2px rgba(0,0,0,.1);
+}
+
+#dashboard-widgets .gg-metabox-sortables {
+  margin: 0 5px;
+}
+
+#profile-tabs .grid {
+  width: 100%;
+}
+
+#profile-tabs .grid td {
+  padding: 7px; vertical-align: middle;
+}
+
+#profile-tabs .grid .label {
+  text-align: right;
+}
+
+#profile-tabs .buttons {
+  margin-top: 30px;
+}
+
+#profile-basic .grid td {
+  border-bottom: 1px dotted #eee;
+}
+
+#profile-basic .grid .label {
+  width: 100px;
+}
+
+#profile-changepwd .grid .label {
+  padding-top: 14px;
+  width: 150px;
+  vertical-align: top;
+}
+
+#profile-changepwd span.error {
+  display: block;
 }

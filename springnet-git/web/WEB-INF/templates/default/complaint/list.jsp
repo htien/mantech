@@ -9,7 +9,6 @@
 		<li class="rejected"><a href="#">Rejected <span class="count">(${countRejected})</span></a> | </li>
 		<li class="completed"><a href="#">Completed <span class="count">(${countCompleted})</span></a></li>
 	</ul>
-	<div class="clear"></div>
 	<form id="complaint-filter-form" method="post" action="/complaint/search">
 		<div class="search-box">
 			<select id="field-name" name="f" style="margin-right:0;border-right-color:#fff">
@@ -32,8 +31,7 @@
 					<option value="${priority.id}">${priority.name}</option>
 				</c:forEach>
 			</select>
-			<div id="filter-query-submit" class="g-b g-b-r">Filter</div>
-			<div id="lnkShowAll" class="g-b g-b-b">Show All</div>
+			<div id="filter-query-submit" class="g-b g-b-b">Filter</div>
 			<script type="text/javascript">
 				var dates = $('#dateFrom, #dateTo').datepicker({
 					defaultDate: '+1w',
@@ -66,7 +64,6 @@
 								<col class="list-col-username" width="120" />
 								<col class="list-col-equipmentname" width="100" />
 								<col class="list-col-priority" width="65" />
-								<col class="list-col-createdate" width="100" />
 								<col class="list-col-enddate" width="100" />
 								<col class="list-col-status" width="80" />
 							</colgroup>
@@ -77,12 +74,11 @@
 									<td><span class="gg-inner-block">Employee</span></td>
 									<td><span class="gg-inner-block">Equipment</span></td>
 									<td><span class="gg-inner-block">Priority</span></td>
-									<td><span class="gg-inner-block">Create Date</span></td>
 									<td><span class="gg-inner-block">End Date</span></td>
 									<td><span class="gg-inner-block">Status</span></td>
 								</tr>
 							</thead>
-							<tbody><tr><td colspan="8"></td></tr></tbody>
+							<tbody><tr><td colspan="7"></td></tr></tbody>
 						</table>
 					</div>
 					<div class="gg-listview-list">
@@ -94,7 +90,6 @@
 									<col class="list-col-username" width="120" />
 									<col class="list-col-equipmentname" width="100" />
 									<col class="list-col-priority" width="65" />
-									<col class="list-col-createdate" width="100" />
 									<col class="list-col-enddate" width="100" />
 									<col class="list-col-status" width="80" />
 								</colgroup>

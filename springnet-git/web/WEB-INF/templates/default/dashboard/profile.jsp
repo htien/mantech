@@ -24,8 +24,5 @@
 		<div><strong>Confirm New Password: </strong><input type="password" name="confirmpass" width="30px"/></div>
 	</div>
 </div>
-<script type="text/javascript">
-	$('#profile-tabs').tabs();
-</script>
 
 </compress:html>

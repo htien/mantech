@@ -38,7 +38,7 @@
 }
 
 .ui-dialog {
-  padding: 0;
+  padding: 0 0 30px;
   border: 1px solid #acacac;
   border-bottom-color: #999;
   border-bottom-radius: 0;
@@ -72,7 +72,7 @@
 }
 
 .ui-dialog .ui-dialog-buttonpane {
-  padding: 15px 42px 30px 42px;
+  padding: 15px 42px 0 42px;
   border-width: 0;
 }
 

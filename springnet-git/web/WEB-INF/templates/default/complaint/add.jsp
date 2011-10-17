@@ -9,29 +9,27 @@
 					<div class="gg-postbox">
 						<div class="gg-handlediv"></div>
 						<h3 class="gg-title"><span>Publish</span></h3>
-						<div class="gg-inside">
-							<div class="gg-submitbox">
-								<div class="gg-options">
-									<div class="misc-pub-section">
-										<p>Compose your complaint and press <strong>Submit</strong> for reporting to administrator.</p>
-									</div>
-									<div class="misc-pub-section">
-										<label>Sender:</label>
-										<strong> ${user.firstName} ${user.lastName}</strong>
-									</div>
-									<div class="misc-pub-section">
-										<label for="equipid">Report on the equipment:</label>
-										<select id="equipid" name="equip_id" class="noreset">
-											<c:forEach items="${list}" var="equip">
-												<option value="${equip.id}">${equip.name}</option>
-											</c:forEach>
-										</select>
-									</div>
+						<div class="gg-submitbox">
+							<div class="gg-options">
+								<div class="misc-pub-section">
+									<p>Compose your complaint and press <strong>Submit</strong> for reporting to administrator.</p>
 								</div>
-								<div class="gg-actions">
-									<div id="btnAdd" class="g-b g-b-r">Submit</div>
-									<div id="btnReset" class="g-b g-b-b">Reset</div>
+								<div class="misc-pub-section">
+									<label>Sender:</label>
+									<strong> ${user.firstName} ${user.lastName}</strong>
 								</div>
+								<div class="misc-pub-section">
+									<label for="equipid">Report on the equipment:</label>
+									<select id="equipid" name="equip_id" class="noreset">
+										<c:forEach items="${list}" var="equip">
+											<option value="${equip.id}">${equip.name}</option>
+										</c:forEach>
+									</select>
+								</div>
+							</div>
+							<div class="gg-actions">
+								<div id="btnAdd" class="g-b g-b-r">Submit</div>
+								<div id="btnReset" class="g-b g-b-b">Reset</div>
 							</div>
 						</div>
 					</div>

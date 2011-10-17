@@ -57,8 +57,9 @@ openOptionsPopup = function(evt) {
 },
 
 profileHandler = function(evt) {
-	var url = jTien.url('/user') + '?action=profile';
-	var dialog = jTien.callJqDialog('ajax-response', url);
+	var url = jTien.url('/user') + '?action=profile',
+		dialog = jTien.callJqDialog('ajax-response', url);
+	$('#profile-tabs').tabs();
 	dialog.dialog('open');
 },
 

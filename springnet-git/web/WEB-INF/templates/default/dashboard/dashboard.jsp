@@ -1,5 +1,8 @@
 <%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
+<script type="text/javascript">
+
+</script>
 <div class="wrap">
 	<h2>Dashboard</h2>
 	<div id="dashboard-widgets-wrap">
@@ -17,7 +20,6 @@
 						<div class="gg-handlediv"></div>
 						<h3 class="gg-title">Special Thanks</h3>
 						<div class="gg-inside">
-							<p>Open Source.</p>
 						</div>
 					</div>
 				</div>

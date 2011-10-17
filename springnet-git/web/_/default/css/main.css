@@ -142,7 +142,7 @@ body.gg-admin {
 /*========== ACTION HEADER ===*/
 
 #ggaction {
-  padding: 12px 44px 12px 60px;
+  padding: 12px 44px 12px 30px;
   height: 40px;
   line-height: 40px;
   font-size: 23px;
@@ -636,6 +636,10 @@ body.gg-admin {
 
 /*========== LIST-TABLE ===*/
 
+.gg-listview {
+  line-height: 1.4;
+}
+
 .gg-listview-headers-container {
   z-index: 1;
 }
@@ -712,7 +716,7 @@ body.gg-admin {
 }
 
 .gg-row-actions {
-  margin-top: 5px;
+  margin-top: 4px;
   visibility: hidden;
   color: #d6d6d6;
   font-size: 11.5px;
@@ -874,9 +878,14 @@ body.gg-admin {
   -khtml-user-select: none;
 }
 
-.gg-postbox .gg-inside {
+.gg-postbox .gg-inside, .gg-postbox .gg-submitbox {
   position: relative;
   font-size: 12px;
+}
+
+.gg-postbox .gg-inside {
+  margin: 10px 0;
+  padding: 0 10px;
 }
 
 .gg-postbox .gg-handlediv {

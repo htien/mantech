@@ -31,7 +31,7 @@
 					<option value="${priority.id}">${priority.name}</option>
 				</c:forEach>
 			</select>
-			<div id="filter-query-submit" class="g-b g-b-r">Filter</div>
+			<div id="filter-query-submit" class="g-b g-b-b">Filter</div>
 			<script type="text/javascript">
 				var dates = $('#dateFrom, #dateTo').datepicker({
 					defaultDate: '+1w',

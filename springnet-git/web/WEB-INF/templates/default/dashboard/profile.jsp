@@ -21,16 +21,12 @@
 				<td><strong>${user.username}</strong></td>
 			</tr>
 			<tr>
-				<td>First Name: </td>
-				<td><strong>${user.firstName}</strong></td>
-			</tr>
-			<tr>
-				<td>Last Name: </td>
-				<td><strong>${user.lastName}</strong></td>
+				<td>Full Name: </td>
+				<td><strong>${user.firstName} ${user.lastName}</strong></td>
 			</tr>
 			<tr>
 				<td>Gender: </td>
-				<td><strong>${user.gender}</strong></td>
+				<td><strong><c:if test="${user.gender} == 'M'">Male</c:if>Female</strong></td>
 			</tr>
 			<tr>
 				<td>Address: </td>
@@ -50,29 +46,63 @@
 		</table>
 	</div>
 	<div id="profile-changepwd">
-		<table class="grid">
-			<tr>
-				<td class="label">Current Password: </td>
-				<td><input type="password" name="oldpass" size="30" /></td>
-			</tr>
-			<tr>
-				<td class="label">New Password: </td>
-				<td><input type="password" name="newpass" size="30" /></td>
-			</tr>
-			<tr>
-				<td class="label">Confirm New Password: </td>
-				<td><input type="password" name="confirmpass" size="30" /></td>
-			</tr>
-			<tr>
-				<td class="buttons" colspan="2"><div id="change-profile" class="g-b g-b-b">Change</div></td>
-			</tr>
-		</table>
+		<form id="changepass-form" class="g-f" method="post" action="/user/changepass">
+			<table class="grid">
+				<tr>
+					<td class="label">Current Password: </td>
+					<td><input type="password" name="oldpass" size="30" /></td>
+				</tr>
+				<tr>
+					<td class="label">New Password: </td>
+					<td><input type="password" name="newpass" size="30" /></td>
+				</tr>
+				<tr>
+					<td class="label">Confirm New Password: </td>
+					<td><input type="password" name="confirmpass" size="30" /></td>
+				</tr>
+			</table>
+			<div class="buttons">
+				<div id="change-passwd" class="g-b g-b-b">Save</div>
+			</div>
+		</form>
 	</div>
 </div>
 <script type="text/javascript">
+	var frm = null,
+	validOpts = {
+		rules: {
+			oldpass: {required: true, minlength: 6},
+			newpass: {required: true, minlength: 6},
+			confirmpass: {required: true, minlength: 6}
+		},
+		messages: {
+			oldpass: {
+				required: '',
+				minlength: 'Please enter at least {0} characters.'
+			},
+			newpass: {
+				required: '',
+				minlength: 'Please enter at least {0} characters.'
+			},
+			confirmpass: {
+				required: '',
+				minlength: 'Please enter at least {0} characters.'
+			}
+		},
+		submitHandler: function(form) {
+			var dlg = jTien.callJqDialog('ajax-response', 'Are you sure you want to change your password?',
+					dialogOpts);
+			dlg.dialog('open');
+		}
+	};	
 	$('#close-profile').live('click', function(evt) {
 		$('#ajax-response').dialog('close');
 		$('#close-personal-menu').click();
+	});
+	$('#change-passwd').live('click', function(evt) {
+		frm = $(this).parents('form');
+		frm.validate(validOpts);
+		frm.submit();
 	});
 </script>
 

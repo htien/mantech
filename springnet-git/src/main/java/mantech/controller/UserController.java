@@ -157,21 +157,23 @@ public class UserController {
   }
   
   @RequestMapping(value = "/user", params = "action=changepass", method = RequestMethod.POST)
-  public String changePasswd(@RequestParam(value="oldpass") String oldpass,
+  public ResponseEntity<String> changePasswd(@RequestParam(value="oldpass") String oldpass,
         @RequestParam(value="newpass") String newpass,
-        @RequestParam(value="confirmpass") String confirmpass){
+        @RequestParam(value="confirmpass") String confirmpass)
+  {
+    ResponseMessage respMessage = new ResponseMessage(RName.UPDATE, RStatus.FAIL, null);
     User user = userRepo.get(2);
-    if (user.getPassword().equals(oldpass) && newpass.equals(confirmpass)) {
+    if (newpass.equals(confirmpass) && user.getPassword().equals(oldpass)) {
       try {
         user.setPassword(newpass);
         userRepo.save(user);
+        respMessage.setStatusAndMessage(RStatus.SUCC, "Changed password successfully.");
       }
       catch (Exception e){
-        
-      }
-      
+        respMessage.setStatusAndMessage(RStatus.ERROR, e.getMessage());
+      } 
     }
-    return TemplateKeys.USER_PROFILE;
+    return clientUtils.createJsonResponse(respMessage);
   }
   
   @RequestMapping(value = "/user/search", method = RequestMethod.POST)

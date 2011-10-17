@@ -59,7 +59,7 @@ openOptionsPopup = function(evt) {
 profileHandler = function(evt) {
 	var url = jTien.url('/user') + '?action=profile',
 		dialog = jTien.callJqDialog('ajax-response', url, {
-			title: 'My Profile',
+			title: 'Mantech Profile',
 			width: 600,
 			buttons: {}
 		});

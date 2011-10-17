@@ -147,7 +147,7 @@ public class UserController {
   @RequestMapping(value = "/user", params = "action=profile", method = RequestMethod.GET)
   public String profile(ModelMap model) {
     try {
-      User user = userRepo.get(2);
+      User user = userRepo.get(9);
       model.addAttribute("user", user);
     }
     catch (Exception e) {
@@ -156,13 +156,13 @@ public class UserController {
     return TemplateKeys.USER_PROFILE;
   }
   
-  @RequestMapping(value = "/user", params = "action=changepass", method = RequestMethod.POST)
+  @RequestMapping(value = "/user/changepass", method = RequestMethod.POST)
   public ResponseEntity<String> changePasswd(@RequestParam(value="oldpass") String oldpass,
         @RequestParam(value="newpass") String newpass,
         @RequestParam(value="confirmpass") String confirmpass)
   {
     ResponseMessage respMessage = new ResponseMessage(RName.UPDATE, RStatus.FAIL, null);
-    User user = userRepo.get(2);
+    User user = userRepo.get(9);
     if (newpass.equals(confirmpass) && user.getPassword().equals(oldpass)) {
       try {
         user.setPassword(newpass);

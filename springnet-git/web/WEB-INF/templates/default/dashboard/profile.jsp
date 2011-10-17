@@ -74,6 +74,42 @@
 </div>
 <script type="text/javascript">
 	var frm = null,
+	dialogOpts = {
+		title: 'Change Password Confirmation',
+		buttons: {
+			'OK': function() {
+				if(!frm.valid()) { return; }
+				jTien.ajaxSubmit(frm)
+					.success(function(data, textCode, xhr) {
+						if(data.status == 1) {
+							jTien.callJqDialog('ajax-response', data.message, {
+								buttons: {
+									'Close': function() {
+										$(this).dialog('destroy');
+									}
+								}
+							});
+							jTien.resetForm(frm);
+						}
+						if (data.status == 0) {
+							jTien.callJqDialog('ajax-response', data.message, {
+								buttons: {
+									'Close': function() {
+										$(this).dialog('destroy');
+									}
+								}
+							});
+						}
+					})
+					.error(function(data) {
+						$(dialog).dialog('close');
+					});
+			},
+			'Cancel': function() {
+				$(this).dialog('destroy');
+			}
+		}
+	},
 	validOpts = {
 		rules: {
 			oldpass: {required: true, minlength: 6},

@@ -156,6 +156,24 @@ public class UserController {
     return TemplateKeys.USER_PROFILE;
   }
   
+  @RequestMapping(value = "/user", params = "action=changepass", method = RequestMethod.POST)
+  public String changePasswd(@RequestParam(value="oldpass") String oldpass,
+        @RequestParam(value="newpass") String newpass,
+        @RequestParam(value="confirmpass") String confirmpass){
+    User user = userRepo.get(2);
+    if (user.getPassword().equals(oldpass) && newpass.equals(confirmpass)) {
+      try {
+        user.setPassword(newpass);
+        userRepo.save(user);
+      }
+      catch (Exception e){
+        
+      }
+      
+    }
+    return TemplateKeys.USER_PROFILE;
+  }
+  
   @RequestMapping(value = "/user/search", method = RequestMethod.POST)
   public String search(@RequestParam("q") String searchText, @RequestParam("f") byte selectedField,
       ModelMap model)

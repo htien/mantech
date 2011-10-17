@@ -79,6 +79,7 @@
 					jTien.ajaxSubmit(frm)
 						.success(function(data, textCode, xhr) {
 							if (data.status == 1) {
+								$('#profile-tabs').tabs('select', 0);
 							}
 							jTien.resetForm(frm);
 							jTien.callJqDialog('ajax-response', data.message);
@@ -110,14 +111,13 @@
 				}
 			},
 			submitHandler: function(form) {
-				var dlg = jTien.callJqDialog('ajax-response',
-						'Are you sure you want to change your password?', dialogOpts);
-				dlg.dialog('open');
+				jTien.callJqDialog('ajax-response',
+						'Are you sure you want to change your password?', dialogOpts).dialog('open');
 			}
 		};
 
 	$('#close-profile').live('click', function(evt) {
-		$('#ajax-response').dialog('close');
+		$('#userprofile-dialog').dialog('close');
 	});
 
 	$('#close-profile2').live('click', function(evt) {

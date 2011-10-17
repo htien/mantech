@@ -163,10 +163,12 @@ public class UserController {
   {
     ResponseMessage respMessage = new ResponseMessage(RName.UPDATE, RStatus.FAIL, null);
     User user = userRepo.get(9);
+
     if(!newpass.equals(confirmpass) || !user.getPassword().equals(oldpass)) {
-      respMessage.setStatusAndMessage(RStatus.FAIL, "Wrong Pass.");
+      respMessage.setStatusAndMessage(RStatus.FAIL, "Wrong password.");
     }
-    else if(respMessage.getMessage() == null) {
+
+    if(respMessage.getMessage() == null) {
       try {
         user.setPassword(newpass);
         userRepo.save(user);
@@ -176,6 +178,7 @@ public class UserController {
         respMessage.setStatusAndMessage(RStatus.ERROR, e.getMessage());
       } 
     }
+
     return clientUtils.createJsonResponse(respMessage);
   }
   

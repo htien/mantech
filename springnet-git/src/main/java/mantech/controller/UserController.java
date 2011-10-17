@@ -145,9 +145,9 @@ public class UserController {
   }
 
   @RequestMapping(value = "/user", params = "action=profile", method = RequestMethod.GET)
-  public String profile(@RequestParam("id") int id, ModelMap model) {
+  public String profile(ModelMap model) {
     try {
-      User user = userRepo.get(id);
+      User user = userRepo.get(2);
       model.addAttribute("user", user);
     }
     catch (Exception e) {

@@ -23,9 +23,9 @@ public class TemplateKeys {
   
   public static final String USER_ADD = "user/add";
   public static final String USER_EDIT = "user/edit";
-  public static final String USER_PROFILE = "dasboard/profile";
   public static final String USER_LIST = "user/list";
   public static final String USER_LIST_RESULT = "user/user_list_result";
+  public static final String USER_PROFILE = "dashboard/profile";
 
   public static final String COMPLAINT_ADD = "complaint/add";
   public static final String COMPLAINT_EDIT = "complaint/edit";

@@ -76,11 +76,13 @@ public class ComplaintController {
     model.addAttribute("countCompleted", complaintRepo.countByStatus((byte)4));
     return TemplateKeys.COMPLAINT_LIST;
   }
-
-  public List<Complaint> listComplaintDaily(int i) {
-    return complaintRepo.findRange(new int[] { i - 1, i + 2 }, true, "id");
+  
+  @RequestMapping(value = "/complaint", params = "action=report", method = RequestMethod.GET)
+  public String reportMonthly(@RequestParam(value = "month") String month, ModelMap model) {
+    
+    return null;
   }
-
+  
   @RequestMapping(value = "/complaint", params = "action=add", method = RequestMethod.GET)
   public String insert(ModelMap model){
     // TODO Sẽ cần chỉnh sửa lại userId sẽ được lấy từ session của employee đã đăng nhập.

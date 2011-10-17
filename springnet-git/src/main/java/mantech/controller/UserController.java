@@ -144,6 +144,18 @@ public class UserController {
     return clientUtils.createJsonResponse(respMessage);
   }
 
+  @RequestMapping(value = "/user", params = "action=profile", method = RequestMethod.GET)
+  public String profile(@RequestParam("id") int id, ModelMap model) {
+    try {
+      User user = userRepo.get(id);
+      model.addAttribute("user", user);
+    }
+    catch (Exception e) {
+      return TemplateKeys.FILE_NOT_FOUND;
+    }
+    return TemplateKeys.USER_PROFILE;
+  }
+  
   @RequestMapping(value = "/user/search", method = RequestMethod.POST)
   public String search(@RequestParam("q") String searchText, @RequestParam("f") byte selectedField,
       ModelMap model)

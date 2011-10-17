@@ -62,9 +62,6 @@
 							goog.editor.Command.ORDERED_LIST,
 							goog.editor.Command.INDENT,
 							goog.editor.Command.OUTDENT,
-							goog.editor.Command.JUSTIFY_LEFT,
-							goog.editor.Command.JUSTIFY_CENTER,
-							goog.editor.Command.JUSTIFY_RIGHT,
 							goog.editor.Command.REMOVE_FORMAT
 						],
 						editorToolbar = goog.ui.editor.DefaultToolbar.makeToolbar(buttons,

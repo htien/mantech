@@ -275,7 +275,7 @@ body.gg-admin {
 /*========== ADMINMENU ===*/
 
 #adminmenuback, #adminmenuwrap {
-  padding-left: 44px;
+  padding-left: 15px;
   width: 176px;
   background-color: #fff /*#ececec*/;
   border-right: 1px solid #ddd;
@@ -461,7 +461,7 @@ body.gg-admin {
 /*========== CONTENT ===*/
 
 #ggcontent, #ggfooter {
-  margin-left: 250px;
+  margin-left: 210px;
 }
 
 #ggcontent {
@@ -470,7 +470,7 @@ body.gg-admin {
 }
 
 #gghead, #ggcontent, #ggfooter {
-  margin-right: 30px;
+  margin-right: 15px;
 }
 
 #gghead {
@@ -801,6 +801,10 @@ body.gg-admin {
   vertical-align: middle;
 }
 
+.gg-metabox-holder {
+  padding-top: 10px;
+}
+
 .gg-has-right-sidebar .gg-postbox-container {
   clear: left;
   margin-right: -340px;
@@ -821,6 +825,10 @@ body.gg-admin {
 .gg-postbox-container {
   float: left;
   padding-right: .5%;
+}
+
+.gg-postbox-container .gg-metabox-sortable {
+  min-height: 300px;
 }
 
 .gg-postbox {
@@ -1000,4 +1008,8 @@ body.gg-admin {
   box-shadow: inset 1px 1px 2px rgba(0,0,0,.1);
   -webkit-box-shadow: inset 1px 1px 2px rgba(0,0,0,.1);
   -moz-box-shadow: inset 1px 1px 2px rgba(0,0,0,.1);
+}
+
+#dashboard-widgets .gg-metabox-sortables {
+  margin: 0 5px;
 }

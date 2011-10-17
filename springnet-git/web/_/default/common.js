@@ -64,7 +64,9 @@ profileHandler = function(evt) {
 			buttons: {}
 		});
 	$('#profile-tabs').tabs();
+	jTien.f.completeFormAction();
 	dialog.dialog('open');
+	$('#close-personal-menu').click();
 },
 
 signoutHandler = function(evt) {

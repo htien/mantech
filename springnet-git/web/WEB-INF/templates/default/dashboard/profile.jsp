@@ -1,7 +1,12 @@
 <%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 <style>
-	#profile-tabs .grid td { padding: 7px; vertical-align: middle; }
-	#profile-tabs .grid .label { text-align: right; }
+  #profile-tabs .grid { width: 100%; }
+  #profile-tabs .grid td { padding: 7px; vertical-align: middle; }
+  #profile-tabs .grid .label { text-align: right; }
+  #profile-tabs .buttons { margin-top: 15px; }
+  #profile-basic .grid td { border-bottom: 1px dotted #eee; }
+  #profile-basic .label { width: 100px; }
+  #profile-changepwd .label { width: 150px; }
 </style>
 
 <div id="profile-tabs">
@@ -13,37 +18,37 @@
 	<div id="profile-basic">
 		<table class="grid">
 			<tr>
-				<td>ID: </td>
+				<td class="label">ID:</td>
 				<td><strong>${user.id}</strong></td>
 			</tr>
 			<tr>
-				<td>Username: </td>
+				<td class="label">Username:</td>
 				<td><strong>${user.username}</strong></td>
 			</tr>
 			<tr>
-				<td>Full Name: </td>
+				<td class="label">Full Name: </td>
 				<td><strong>${user.firstName} ${user.lastName}</strong></td>
 			</tr>
 			<tr>
-				<td>Gender: </td>
+				<td class="label">Gender: </td>
 				<td><strong><c:if test="${user.gender} == 'M'">Male</c:if>Female</strong></td>
 			</tr>
 			<tr>
-				<td>Address: </td>
+				<td class="label">Address:</td>
 				<td><strong>${user.homeAddress}</strong></td>
 			</tr>
 			<tr>
-				<td>Status: </td>
+				<td class="label">Status:</td>
 				<td><strong>${user.status}</strong></td>
 			</tr>
 			<tr>
-				<td>Join Date: </td>
+				<td class="label">Join Date:</td>
 				<td><strong>${user.regDate}</strong></td>
 			</tr>
-			<tr>
-				<td><div id="close-profile" class="g-b g-b-b">Close</div></td>
-			</tr>
 		</table>
+		<div class="buttons">
+			<div id="close-profile" class="g-b g-b-b">Close</div>
+		</div>
 	</div>
 	<div id="profile-changepwd">
 		<form id="changepass-form" class="g-f" method="post" action="/user/changepass">
@@ -97,7 +102,6 @@
 	};	
 	$('#close-profile').live('click', function(evt) {
 		$('#ajax-response').dialog('close');
-		$('#close-personal-menu').click();
 	});
 	$('#change-passwd').live('click', function(evt) {
 		frm = $(this).parents('form');

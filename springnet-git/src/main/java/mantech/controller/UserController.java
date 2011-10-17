@@ -85,7 +85,7 @@ public class UserController {
     ResponseMessage respMessage = new ResponseMessage(RName.ADD, RStatus.FAIL, null);
 
     if (userRepo.isExistUser(username)) {
-        respMessage.setMessage(String.format("Username <strong>%s</strong> already exists.", username));
+      respMessage.setMessage(String.format("Username <strong>%s</strong> already exists.", username));
     }
     if (userRepo.isExistUser(email)) {
       respMessage.setMessage(String.format("Email <strong>%s</strong> already exists.", email));
@@ -163,7 +163,10 @@ public class UserController {
   {
     ResponseMessage respMessage = new ResponseMessage(RName.UPDATE, RStatus.FAIL, null);
     User user = userRepo.get(9);
-    if (newpass.equals(confirmpass) && user.getPassword().equals(oldpass)) {
+    if(!newpass.equals(confirmpass) || !user.getPassword().equals(oldpass)) {
+      respMessage.setStatusAndMessage(RStatus.FAIL, "Wrong Pass.");
+    }
+    else if(respMessage.getMessage() == null) {
       try {
         user.setPassword(newpass);
         userRepo.save(user);

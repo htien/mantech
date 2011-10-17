@@ -42,7 +42,7 @@ ggAdminBar_closeMenuPopup = function(popMenu) {
 			menuItem = popMenu.parents('li.' + openClass);
 		popMenu.hide('fast');
 		menuItem.removeClass(openClass);
-		menuItem.find('.' + openClass)[0].removeClass(openClass);
+		menuItem.find('.' + openClass).removeClass(openClass);
 	}
 },
 

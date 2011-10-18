@@ -13,13 +13,54 @@
 						<div class="gg-handlediv"></div>
 						<h3 class="gg-title">Right Now</h3>
 						<div class="gg-inside">
-							This is right now.
+							<div class="table table_summary">
+								<p class="sub">Summary</p>
+								<table>
+									<tbody>
+										<tr class="first">
+											<td class="first b"><a href="javascript:">0</a></td>
+											<td class="t">Users</td>
+										</tr>
+										<tr>
+											<td class="first b"><a href="javascript:">0</a></td>
+											<td class="t">Categories</td>
+										</tr>
+										<tr>
+											<td class="first b"><a href="javascript:">0</a></td>
+											<td class="t">Equipments</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="table table_complaints">
+								<p class="sub">Complaint Summary</p>
+								<table>
+									<tbody>
+										<tr class="first">
+											<td class="first b"><a href="javascript:">0</a></td>
+											<td class="t">Complaints</td>
+										</tr>
+										<tr class="first">
+											<td class="first b"><a href="javascript:">0</a></td>
+											<td class="t">Assignments</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="version">
+								<p>Theme <a><strong>SpringNet</strong></a> is combine Google+ and Wordpress skin.<br/>
+									Designed by T.</p>
+							</div>
 						</div>
 					</div>
 					<div id="dashboard_specialthanks" class="gg-postbox">
 						<div class="gg-handlediv"></div>
 						<h3 class="gg-title">Special Thanks</h3>
 						<div class="gg-inside">
+							<ol>
+								<li>Google</li>
+								<li>Github</li>
+							</ol>
 						</div>
 					</div>
 				</div>

@@ -50,16 +50,16 @@
 			<table class="grid">
 				<tr>
 					<td class="label">Current password: </td>
-					<td><input type="password" name="oldpass" size="30" /></td>
+					<td><input type="password" id="currentpasswd" name="oldpass" size="30" /></td>
 				</tr>
 				<tr><td colspan="2"></td></tr>
 				<tr>
-					<td class="label">New password: </td>
-					<td><input type="password" name="newpass" size="30" /></td>
+					<td class="label">New Password: </td>
+					<td><input type="password" id="newpasswd" name="newpass" size="30" /></td>
 				</tr>
 				<tr>
 					<td class="label">Confirm new password: </td>
-					<td><input type="password" name="confirmpass" size="30" /></td>
+					<td><input type="password" id="confirmpasswd" name="confirmpass" size="30" /></td>
 				</tr>
 			</table>
 			<div class="buttons">
@@ -79,6 +79,7 @@
 					jTien.ajaxSubmit(frm)
 						.success(function(data, textCode, xhr) {
 							if (data.status == 1) {
+								$('#profile-tabs').tabs('select', 0);
 							}
 							jTien.resetForm(frm);
 							jTien.callJqDialog('ajax-response', data.message);
@@ -93,7 +94,7 @@
 			rules: {
 				oldpass: { required: true },
 				newpass: { required: true, minlength: 6 },
-				confirmpass: { required: true, minlength: 6 }
+				confirmpass: {required: true, minlength: 6, equalTo: '#newpasswd'}
 			},
 			messages: {
 				oldpass: {
@@ -105,18 +106,18 @@
 				},
 				confirmpass: {
 					required: '',
-					minlength: 'At least {0} characters.'
+					minlength: 'At least {0} characters.',
+					equalTo: 'Please enter the same with new pass.'
 				}
 			},
 			submitHandler: function(form) {
-				var dlg = jTien.callJqDialog('ajax-response',
-						'Are you sure you want to change your password?', dialogOpts);
-				dlg.dialog('open');
+				jTien.callJqDialog('ajax-response',
+						'Are you sure you want to change your password?', dialogOpts).dialog('open');
 			}
 		};
 
 	$('#close-profile').live('click', function(evt) {
-		$('#ajax-response').dialog('close');
+		$('#userprofile-dialog').dialog('close');
 	});
 
 	$('#close-profile2').live('click', function(evt) {

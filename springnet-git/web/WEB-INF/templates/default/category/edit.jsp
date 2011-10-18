@@ -4,15 +4,18 @@
 	<div id="editcategory_box" class="box wrap">
 		<h2>Edit Category</h2>
 		<f:form action="/category/editSave" commandName="category">
-			<c:if test="${msg != null}">${msg}</c:if>
-			<c:choose>
-				<c:when test="${msg == null || ok == true}">
-					<div>
-						<p><f:input title="Name" path="name" /></p>
-						<p><input type="submit" value="Update" /></p>
-					</div>
-				</c:when>
-			</c:choose>
+			<div id="category-edit" class="box">
+				<p><br /></p>
+				<c:if test="${msg != null}">${msg}</c:if>
+				<c:choose>
+					<c:when test="${msg == null || ok == true}">
+						<div>
+							<p><f:input title="Name" path="name" /></p>
+							<p><input type="submit" value="Update" /></p>
+						</div>
+					</c:when>
+				</c:choose>
+			</div>
 		</f:form>
 	</div>
 </div>

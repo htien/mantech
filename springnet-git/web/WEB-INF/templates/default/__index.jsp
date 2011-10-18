@@ -5,7 +5,7 @@
 
 <div id="ggcontent">
 	<div id="gghead">
-		<h2 class="site-heading"><jtien:settings key="author"/></h2>
+		<h2 class="site-heading">News: It's a funny day!</h2>
 	</div>
 	<div id="ggbody">
 		<div id="ggbody-content"></div>

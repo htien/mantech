@@ -42,7 +42,7 @@ ggAdminBar_closeMenuPopup = function(popMenu) {
 			menuItem = popMenu.parents('li.' + openClass);
 		popMenu.hide('fast');
 		menuItem.removeClass(openClass);
-		menuItem.find('.' + openClass)[0].removeClass(openClass);
+		menuItem.find('.' + openClass).removeClass(openClass);
 	}
 },
 
@@ -57,7 +57,16 @@ openOptionsPopup = function(evt) {
 },
 
 profileHandler = function(evt) {
-	jTien.callJqDialog('ajax-response', 'This is my profile').dialog('open');
+	var url = jTien.url('/user') + '?action=profile',
+		dialog = jTien.callJqDialog('userprofile-dialog', url, {
+			title: 'Mantech Profile',
+			width: 600,
+			buttons: {}
+		});
+	$('#profile-tabs').tabs();
+	jTien.f.completeFormAction();
+	dialog.dialog('open');
+	$('#close-personal-menu').click();
 },
 
 signoutHandler = function(evt) {

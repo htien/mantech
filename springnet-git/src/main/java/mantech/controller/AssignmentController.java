@@ -87,7 +87,7 @@ public class AssignmentController {
   public String insert(@RequestParam(value="compId") int compId, ModelMap model) {
     if (complaintRepo.isExist(compId)) {
       if (!complaintRepo.hasAssignmentId(compId)) {
-        List<User> users = userRepo.getUserByRole("technician");
+        List<User> users = userRepo.getTechnicianFree();
         
         Complaint complaint = complaintRepo.get(compId);
         

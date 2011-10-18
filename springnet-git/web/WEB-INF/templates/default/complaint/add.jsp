@@ -2,36 +2,34 @@
 
 <div id="pagelet_addcomplaint" class="g-pl">
 	<div id="addcomplaint-box" class="box wrap">
-		<h2 class="title">Add New Complaint</h2>
+		<h2 class="title">Create New Complaint</h2>
 		<form id="addcomplaint-form" class="g-f" method="post" action="/complaint/addSave">
 			<div id="complaint-new" class="gg-has-right-sidebar">
 				<div class="gg-inner-sidebar">
 					<div class="gg-postbox">
 						<div class="gg-handlediv"></div>
 						<h3 class="gg-title"><span>Publish</span></h3>
-						<div class="gg-inside">
-							<div class="gg-submitbox">
-								<div class="gg-options">
-									<div class="misc-pub-section">
-										<p>Compose your complaint and press <strong>Submit</strong> for reporting to administrator.</p>
-									</div>
-									<div class="misc-pub-section">
-										<label>Sender:</label>
-										<strong> ${user.firstName} ${user.lastName}</strong>
-									</div>
-									<div class="misc-pub-section">
-										<label for="equipid">Report on the equipment:</label>
-										<select id="equipid" name="equip_id" class="noreset">
-											<c:forEach items="${list}" var="equip">
-												<option value="${equip.id}">${equip.name}</option>
-											</c:forEach>
-										</select>
-									</div>
+						<div class="gg-submitbox">
+							<div class="gg-options">
+								<div class="misc-pub-section">
+									<p>Compose your complaint and press <strong>Submit</strong> for reporting to administrator.</p>
 								</div>
-								<div class="gg-actions">
-									<div id="btnAdd" class="g-b g-b-r">Submit</div>
-									<div id="btnReset" class="g-b g-b-b">Reset</div>
+								<div class="misc-pub-section">
+									<label>Sender:</label>
+									<strong> ${user.firstName} ${user.lastName}</strong>
 								</div>
+								<div class="misc-pub-section">
+									<label for="equipid">Report on the equipment:</label>
+									<select id="equipid" name="equip_id" class="noreset">
+										<c:forEach items="${list}" var="equip">
+											<option value="${equip.id}">${equip.name}</option>
+										</c:forEach>
+									</select>
+								</div>
+							</div>
+							<div class="gg-actions">
+								<div id="btnAdd" class="g-b g-b-r">Submit</div>
+								<div id="btnReset" class="g-b g-b-b">Reset</div>
 							</div>
 						</div>
 					</div>
@@ -62,9 +60,6 @@
 							goog.editor.Command.ORDERED_LIST,
 							goog.editor.Command.INDENT,
 							goog.editor.Command.OUTDENT,
-							goog.editor.Command.JUSTIFY_LEFT,
-							goog.editor.Command.JUSTIFY_CENTER,
-							goog.editor.Command.JUSTIFY_RIGHT,
 							goog.editor.Command.REMOVE_FORMAT
 						],
 						editorToolbar = goog.ui.editor.DefaultToolbar.makeToolbar(buttons,

@@ -123,13 +123,59 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
         .list();
   }
   
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<Complaint> searchByMonth(int month) {
+    return session().createQuery("from Complaint c where datepart(month, c.createDate) = :month")
+        .setInteger("month", month).list();
+  }
+  
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<Complaint> searchByCurrentMonth() {
+    return session().createQuery("from Complaint c where datepart(month, c.createDate) =" +
+    		" datepart(month, getdate())").list();
+  }
+  
   @SuppressWarnings("unchecked")
   @Override
   public List<Complaint> searchByYear(int year) {
     return session().createQuery("from Complaint c where datepart(year, c.createDate) = :year")
         .setInteger("year", year).list();
   }
+  
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<Complaint> searchByCurrentYear() {
+    return session().createQuery("from Complaint c where datepart(year, c.createDate) =" +
+    		" datepart(year, getdate())").list();
+  }
 
+  @Override
+  public int sumaryInMonth(int month) {
+    return (Integer)session().createQuery("select count(c.id) from Complaint c" +
+    		" where datepart(month, c.createDate) = :month").setInteger("month", month).uniqueResult();
+  }
+
+  @Override
+  public int sumaryInCurrentMonth() {
+    return (Integer)session().createQuery("select count(c.id) from Complaint c" +
+        " where datepart(month, c.createDate) = datepart(month, getdate())").uniqueResult();
+  }
+
+  @Override
+  public int sumaryInYear(int year) {
+    return (Integer)session().createQuery("select count(c.id) from Complaint c" +
+        " where datepart(year, c.createDate) = :year").setInteger("year", year).uniqueResult();
+  }
+
+  @Override
+  public int sumaryInCurrentYear() {
+    return (Integer)session().createQuery("select count(c.id) from Complaint c" +
+        " where datepart(year, c.createDate) = datepart(year, getdate())").uniqueResult();
+  }
+  
   @SuppressWarnings("unchecked")
   @Override
   public List<Complaint> getByAssignment() {

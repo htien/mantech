@@ -2,7 +2,7 @@
 
 <div id="pagelet_addcomplaint" class="g-pl">
 	<div id="addcomplaint-box" class="box wrap">
-		<h2 class="title">Add New Complaint</h2>
+		<h2 class="title">Create New Complaint</h2>
 		<form id="addcomplaint-form" class="g-f" method="post" action="/complaint/addSave">
 			<div id="complaint-new" class="gg-has-right-sidebar">
 				<div class="gg-inner-sidebar">

@@ -165,7 +165,7 @@ public class UserController {
     User user = userRepo.get(9);
 
     if(!newpass.equals(confirmpass) || !user.getPassword().equals(oldpass)) {
-      respMessage.setStatusAndMessage(RStatus.FAIL, "Wrong password.");
+      respMessage.setStatusAndMessage(RStatus.FAIL, "The password you gave is incorrect.");
     }
 
     if(respMessage.getMessage() == null) {

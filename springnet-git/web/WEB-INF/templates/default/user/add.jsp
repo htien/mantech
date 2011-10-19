@@ -14,7 +14,7 @@
 						</tr>
 						<tr>
 							<td class="label">Create a password:</td>
-							<td><input type="password" name="passwd" /></td>
+							<td><input type="password" id="password" name="passwd" /></td>
 						</tr>
 						<tr>
 							<td class="label">Retype password:</td>

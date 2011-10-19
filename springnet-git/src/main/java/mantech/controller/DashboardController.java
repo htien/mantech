@@ -4,16 +4,12 @@
  */
 package mantech.controller;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.tools.ant.types.resources.comparators.Reverse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -85,7 +81,7 @@ public class DashboardController {
     }
     
     for(int i = 1; i <= 12; i++) {
-      listMonthNumber.add(complaintRepo.sumaryInMonth(i));
+      listMonthNumber.add(complaintRepo.summaryInMonth(i));
       listMonth.add(i);
     }
     
@@ -101,18 +97,18 @@ public class DashboardController {
   @RequestMapping(value = "/dashboard", params = "action=viewcredits", method = RequestMethod.GET)
   public String viewCredits(ModelMap model) {
       // TODO Sẽ cần chỉnh sửa lại userId sẽ được lấy từ session của employee đã đăng nhập.
-    model.addAttribute("currentYear", complaintRepo.sumaryInCurrentYear());
-    model.addAttribute("currentMonth", complaintRepo.sumaryInCurrentMonth());
-    model.addAttribute("currentYearByEducation", complaintRepo.sumaryInCurrentYearByDepart((byte)1));
-    model.addAttribute("currentYearByManagement", complaintRepo.sumaryInCurrentYearByDepart((byte)2));
-    model.addAttribute("currentYearByLearning", complaintRepo.sumaryInCurrentYearByDepart((byte)3));
-    model.addAttribute("currentYearByInternal", complaintRepo.sumaryInCurrentYearByDepart((byte)4));
-    model.addAttribute("currentYearByHuman", complaintRepo.sumaryInCurrentYearByDepart((byte)5));
-    model.addAttribute("currentMonthByEducation", complaintRepo.sumaryInCurrentMonthByDepart((byte)1));
-    model.addAttribute("currentMonthByManagement", complaintRepo.sumaryInCurrentMonthByDepart((byte)2));
-    model.addAttribute("currentMonthByLearning", complaintRepo.sumaryInCurrentMonthByDepart((byte)3));
-    model.addAttribute("currentMonthByInternal", complaintRepo.sumaryInCurrentMonthByDepart((byte)4));
-    model.addAttribute("currentMonthByHuman", complaintRepo.sumaryInCurrentMonthByDepart((byte)5));
+    model.addAttribute("currentYear", complaintRepo.summaryInCurrentYear());
+    model.addAttribute("currentMonth", complaintRepo.summaryInCurrentMonth());
+    model.addAttribute("currentYearByEducation", complaintRepo.summaryInCurrentYearByDepart((byte)1));
+    model.addAttribute("currentYearByManagement", complaintRepo.summaryInCurrentYearByDepart((byte)2));
+    model.addAttribute("currentYearByLearning", complaintRepo.summaryInCurrentYearByDepart((byte)3));
+    model.addAttribute("currentYearByInternal", complaintRepo.summaryInCurrentYearByDepart((byte)4));
+    model.addAttribute("currentYearByHuman", complaintRepo.summaryInCurrentYearByDepart((byte)5));
+    model.addAttribute("currentMonthByEducation", complaintRepo.summaryInCurrentMonthByDepart((byte)1));
+    model.addAttribute("currentMonthByManagement", complaintRepo.summaryInCurrentMonthByDepart((byte)2));
+    model.addAttribute("currentMonthByLearning", complaintRepo.summaryInCurrentMonthByDepart((byte)3));
+    model.addAttribute("currentMonthByInternal", complaintRepo.summaryInCurrentMonthByDepart((byte)4));
+    model.addAttribute("currentMonthByHuman", complaintRepo.summaryInCurrentMonthByDepart((byte)5));
     
     model.addAttribute("listCurrentYearByEducation", complaintRepo.getCurrentYearByDepartment((byte)1));
     model.addAttribute("listCurrentYearByManagement", complaintRepo.getCurrentYearByDepartment((byte)2));

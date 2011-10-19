@@ -7,6 +7,7 @@ package mantech.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import net.lilylnx.springnet.util.ClientUtils;
+
+import mantech.controller.helpers.RName;
+import mantech.controller.helpers.RStatus;
+import mantech.controller.helpers.ResponseMessage;
 import mantech.controller.helpers.TemplateKeys;
 import mantech.domain.Category;
 import mantech.domain.Equipment;
@@ -38,6 +44,9 @@ public class EquipmentController {
   @Autowired
   private CategoryRepository categoryRepo;
 
+  @Autowired
+  private ClientUtils clientUtils;
+  
   @RequestMapping(value = "/equipment", params = "action=list", method = RequestMethod.GET)
   public String list(@RequestParam(value="page", required=false, defaultValue="1") int page,
       ModelMap model) {
@@ -71,18 +80,23 @@ public class EquipmentController {
   }
   
   @RequestMapping(value = "/equipment/addSave", method = RequestMethod.POST)
-  public String insertSave(@RequestParam(value="name") String name,
+  public ResponseEntity<String> insertSave(@RequestParam(value="name") String name,
       @RequestParam(value="catId") int id, ModelMap model) {
 
-    Category category = categoryRepo.get(id);
-    Equipment equipment = new Equipment();
-    equipment.setName(name);
-    equipment.setCategory(category);
-    
-    equipmentRepo.save(equipment);
-    
-    model.addAttribute("msg", "Added Equipment Successfully!");
-    return "msg";
+    ResponseMessage respMessage = new ResponseMessage(RName.ADD, RStatus.FAIL, null);
+    try {
+      Category category = categoryRepo.get(id);
+      Equipment equipment = new Equipment();
+      equipment.setName(name);
+      equipment.setCategory(category);
+      
+      equipmentRepo.save(equipment);
+      respMessage.setStatusAndMessage(RStatus.SUCC, String.format("Inserted equipment: <strong>%s </strong>", name));
+    }
+    catch(Exception e) {
+      respMessage.setStatusAndMessage(RStatus.ERROR, e.getMessage());
+    }
+    return clientUtils.createJsonResponse(respMessage);
   }
   
   @RequestMapping(value = "/equipment", params = "action=edit", method = RequestMethod.GET)
@@ -97,21 +111,25 @@ public class EquipmentController {
   }
   
   @RequestMapping(value = "/equipment/editSave", method = RequestMethod.POST)
-  public String updateSave(@RequestParam(value="id") int id, @RequestParam(value="catId") int catId,
+  public ResponseEntity<String> updateSave(@RequestParam(value="id") int id, @RequestParam(value="catId") int catId,
       @RequestParam(value="name") String name, ModelMap model) {
 
-    Equipment equipment = equipmentRepo.get(id);
-    Category newCate = categoryRepo.get(catId);
-    if (newCate != null) {
+    ResponseMessage respMessage = new ResponseMessage(RName.UPDATE, RStatus.FAIL, null);
+    
+    try{
+      Equipment equipment = equipmentRepo.get(id);
+      Category newCate = categoryRepo.get(catId);
       equipment.setName(name);
       equipment.setCategory(newCate);
       equipmentRepo.update(equipment);
-      model.addAttribute("msg", "Update successfully");
+      respMessage.setStatusAndMessage(RStatus.SUCC, String.format("Updated equipment: <strong>%s </strong> successfully.",
+          equipment.getName()));
     }
-    else {
-      model.addAttribute("msg", "Update fail");
+    catch(Exception e) {
+      respMessage.setStatusAndMessage(RStatus.ERROR, e.getMessage());
     }
-    return update(id, model);
+    
+    return clientUtils.createJsonResponse(respMessage);
   }
 
 }

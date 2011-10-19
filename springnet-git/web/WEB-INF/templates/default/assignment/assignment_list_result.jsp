@@ -7,7 +7,7 @@
 		<td><div class="gg-td-wrapper">${assignment.duration}</div></td>
 		<td><div class="gg-td-wrapper"><fmt:formatDate value="${assignment.createDate}" pattern="${dateFormat}"/></div></td>
 		<td><div class="gg-td-wrapper"></div></td>
-		<td><div class="gg-td-wrapper"><a class="a" href='<jtien:url address="/index"/>#detailassignment-${assignment.complaintId}'>Detail</a></div></td>
+		<td><div class="gg-td-wrapper"><a class="a" href='<jtien:url address="/index"/>#detailassignment/assignmentId=${assignment.complaintId}'>Detail</a></div></td>
 	</tr>
 </c:forEach>
 

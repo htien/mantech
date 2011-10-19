@@ -27,8 +27,8 @@
 										${user.lastName}</strong>
 								</div>
 								<div class="misc-pub-section">
-									<label for="equipid">Report on the equipment:</label> <select
-										id="equipid" name="equip_id" class="noreset">
+									<label for="equipid">Report on the equipment:</label>
+									<select id="equipid" name="equip_id" class="noreset">
 										<c:forEach items="${list}" var="equip">
 											<option value="${equip.id}">${equip.name}</option>
 										</c:forEach>

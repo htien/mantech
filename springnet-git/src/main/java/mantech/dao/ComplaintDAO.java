@@ -32,7 +32,7 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
   }
 
   @Override
-  public Integer countByStatus(byte status) {
+  public int countByStatus(byte status) {
     return session().createQuery("select count(c.status.id) from Complaint as c" +
         " where c.status.id = :id").setByte("id", status).uniqueResult().hashCode();
   }
@@ -181,50 +181,50 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
   }
  
   @Override
-  public Integer sumaryInMonth(int month) {
-    return session().createQuery("select count(c.id) from Complaint c" +
+  public int summaryInMonth(int month) {
+    return ((Long)session().createQuery("select count(c.id) from Complaint c" +
     		" where datepart(month, c.createDate) = :month").setInteger("month", month)
-    		.uniqueResult().hashCode();
+    		.uniqueResult()).intValue();
   }
 
   @Override
-  public Integer sumaryInCurrentMonth() {
-    return session().createQuery("select count(c.id) from Complaint c" +
+  public int summaryInCurrentMonth() {
+    return ((Long)session().createQuery("select count(c.id) from Complaint c" +
         " where datepart(month, c.createDate) = datepart(month, getdate())")
-        .uniqueResult().hashCode();
+        .uniqueResult()).intValue();
   }
 
   @Override
-  public Integer sumaryInCurrentMonthByDepart(byte id) {
-    return session().createSQLQuery("select count(c.id) from" +
+  public int summaryInCurrentMonthByDepart(byte id) {
+    return ((Integer)session().createSQLQuery("select count(c.id) from" +
         " complaint c, [user] u, department d where" +
         " c.userid = u.id and u.department_id = d.id" +
         " and datepart(month, c.createdate) = datepart(month, getdate())" +
-        " and d.id = :id").setByte("id", id).uniqueResult().hashCode();
+        " and d.id = :id").setByte("id", id).uniqueResult()).intValue();
   }
 
   @Override
-  public Integer sumaryInYear(int year) {
-    return session().createQuery("select count(c.id) from Complaint c" +
+  public int summaryInYear(int year) {
+    return ((Long)session().createQuery("select count(c.id) from Complaint c" +
         " where datepart(year, c.createDate) = :year").setInteger("year", year)
-        .uniqueResult().hashCode();
+        .uniqueResult()).intValue();
   }
 
   @Override
-  public Integer sumaryInCurrentYear() {
-    return session().createQuery("select count(c.id) from Complaint c" +
+  public int summaryInCurrentYear() {
+    return ((Long)session().createQuery("select count(c.id) from Complaint c" +
         " where datepart(year, c.createDate) = datepart(year, getdate())")
-        .uniqueResult().hashCode();
+        .uniqueResult()).intValue();
   }
   
 
   @Override
-  public Integer sumaryInCurrentYearByDepart(byte id) {
-    return session().createSQLQuery("select count(c.id) from" +
+  public int summaryInCurrentYearByDepart(byte id) {
+    return ((Integer)session().createSQLQuery("select count(c.id) from" +
         " complaint c, [user] u, department d where" +
         " c.userid = u.id and u.department_id = d.id" +
         " and datepart(year, c.createdate) = datepart(year, getdate())" +
-        " and d.id = :id").setByte("id", id).uniqueResult().hashCode();
+        " and d.id = :id").setByte("id", id).uniqueResult()).intValue();
   }
   
   @SuppressWarnings("unchecked")

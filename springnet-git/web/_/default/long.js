@@ -1,97 +1,102 @@
-$('#pagelet_adduser').ready(function() {
-	var frm = null,
-		dialogOpts = {
-			title: 'Add User Confirmation',
-			buttons: {
-				'Create': function() {
-					if (!frm.valid()) { return; }
-					jTien.ajaxSubmit(frm)
-						.success(function(data, textCode, xhr) {
-							if (data.status == 1) {
-								jTien.callJqDialog('ajax-response', data.message, {
-									buttons: {
-										'Close': function() {
-											$(this).dialog('destroy');
-										}
-									}
-								});
-								jTien.resetForm(frm);
-							}
-							if (data.status == 0) {
-								jTien.callJqDialog('ajax-response', data.message, {
-									buttons: {
-										'Close': function() {
-											$(this).dialog('destroy');
-										}
-									}
-								});
-							}
-						})
-						.error(function(data) {
-							alert(data);
-							$(dialog).dialog('close');
-						});
-				},
-				'Cancel': function() {
-					$(this).dialog('destroy');
-				}
-			}
-		},
-		validOpts = {
-			rules: {
-				username: { required:true, minlength:3, maxlength:16 },
-				passwd: { required:true, minlength:6 },
-				email: { required:true, email:true },
-				firstName: { required:true, minlength:1, maxlength:30 },
-				lastName: { required:true, minlength:1, maxlength:30 },
-				address: { required:true, minlength:1, maxlength:200 }
-			},
-			messages: {
-				username: {
-					required: '',
-					minlength: 'Please enter at least {0} characters.',
-					maxlength: 'Please enter no more than {0} characters.'
-				},
-				passwd: {
-					required: '',
-					minlength: 'Please enter at least {0} characters.'
-				},
-				email: {
-					required: '',
-					email:'eg, yourname@example.com'
-				},
-				firstName: {
-					required: '',
-					minlength: 'Please enter at least {0} characters.',
-					maxlength: 'Please enter no more than {0} characters.'
-				},
-				lastName: {
-					required: '',
-					minlength: 'Please enter at least {0} characters.',
-					maxlength: 'Please enter no more than {0} characters.'
-				},
-				address: {
-					required: '',
-					minlength: 'Please enter at least {0} characters.',
-					maxlength: 'Please enter no more than {0} characters.'
-				}
-			},
-			submitHandler: function(form) {
-				var dlg = jTien.callJqDialog('ajax-response', 'Are you sure you want to add new user?',
-						dialogOpts);
-				dlg.dialog('open');
-			}
-		};
-	
-	$('#btnAdd').live('click', function(evt) {
-		frm = $(this).parents('form');
-		frm.validate(validOpts);
-		frm.submit();
-	});
-	$('#btnReset').live('click', function(evt) {
-		jTien.resetForm($(this).parents('form'));
-	});
-});
+//$('#pagelet_adduser').ready(function() {
+//	var frm = null,
+//		dialogOpts = {
+//			title: 'Add User Confirmation',
+//			buttons: {
+//				'Create': function() {
+//					if (!frm.valid()) { return; }
+//					jTien.ajaxSubmit(frm)
+//						.success(function(data, textCode, xhr) {
+//							if (data.status == 1) {
+//								jTien.callJqDialog('ajax-response', data.message, {
+//									buttons: {
+//										'Close': function() {
+//											$(this).dialog('destroy');
+//										}
+//									}
+//								});
+//								jTien.resetForm(frm);
+//							}
+//							if (data.status == 0) {
+//								jTien.callJqDialog('ajax-response', data.message, {
+//									buttons: {
+//										'Close': function() {
+//											$(this).dialog('destroy');
+//										}
+//									}
+//								});
+//							}
+//						})
+//						.error(function(data) {
+//							alert(data);
+//							$(dialog).dialog('close');
+//						});
+//				},
+//				'Cancel': function() {
+//					$(this).dialog('destroy');
+//				}
+//			}
+//		},
+//		validOpts = {
+//			rules: {
+//				username: { required:true, minlength:3, maxlength:16 },
+//				passwd: { required:true, minlength:6 },
+//				confirm_passwd: { required: true, equalTo: "#password" },
+//				email: { required:true, email:true },
+//				firstName: { required:true, minlength:1, maxlength:30 },
+//				lastName: { required:true, minlength:1, maxlength:30 },
+//				address: { required:true, minlength:1, maxlength:200 }
+//			},
+//			messages: {
+//				username: {
+//					required: '',
+//					minlength: 'Please enter at least {0} characters.',
+//					maxlength: 'Please enter no more than {0} characters.'
+//				},
+//				passwd: {
+//					required: '',
+//					minlength: 'Please enter at least {0} characters.'
+//				},
+//				confirm_passwd: {
+//					required: '',
+//					equalTo: 'Do not match the over password.'
+//				},
+//				email: {
+//					required: '',
+//					email:'eg, yourname@example.com'
+//				},
+//				firstName: {
+//					required: '',
+//					minlength: 'Please enter at least {0} characters.',
+//					maxlength: 'Please enter no more than {0} characters.'
+//				},
+//				lastName: {
+//					required: '',
+//					minlength: 'Please enter at least {0} characters.',
+//					maxlength: 'Please enter no more than {0} characters.'
+//				},
+//				address: {
+//					required: '',
+//					minlength: 'Please enter at least {0} characters.',
+//					maxlength: 'Please enter no more than {0} characters.'
+//				}
+//			},
+//			submitHandler: function(form) {
+//				var dlg = jTien.callJqDialog('ajax-response', 'Are you sure you want to add new user?',
+//						dialogOpts);
+//				dlg.dialog('open');
+//			}
+//		};
+//	
+//	$('#btnAdd').live('click', function(evt) {
+//		frm = $(this).parents('form');
+//		frm.validate(validOpts);
+//		frm.submit();
+//	});
+//	$('#btnReset').live('click', function(evt) {
+//		jTien.resetForm($(this).parents('form'));
+//	});
+//});
 
 $('#pagelet_addcomplaint').ready(function() {
 	var frm = null,
@@ -124,12 +129,12 @@ $('#pagelet_addcomplaint').ready(function() {
 		},
 		validOpts = {
 			rules: {
-				title: { required: true },
-				content: { required: true }
+				complaint_title: { required: true },
+				complaint_content: { required: true }
 			},
 			messages: {
-				title: { required: '' },
-				content: { required: '' }
+				complaint_title: { required: '' },
+				complaint_content: { required: '' }
 			},
 			submitHandler: function(form) {
 				jTien.callJqDialog('ajax-response', 'Are you sure you want to add new complaint?', 
@@ -203,7 +208,7 @@ $('#pagelet_addassignment').ready(function() {
 					}
 				},
 				submitHandler: function(form) {
-					var dlg = jTien.callJqDialog('ajax-response', 'Are you sure you want to add new complaint?', 
+					var dlg = jTien.callJqDialog('ajax-response', 'Are you sure you want to add new assignment?', 
 							dialogOpts);
 					dlg.dialog('open');
 				}
@@ -228,18 +233,16 @@ $('#pagelet_addequipment').ready(function() {
 						if (!frm.valid()) { return; }
 						jTien.ajaxSubmit(frm)
 							.success(function(data, textCode, xhr) {
-								jTien.callJqDialog('ajax-response', 'Added equipment successfully', {
+								jTien.callJqDialog('ajax-response', data.message, {
 									buttons: {
 										'Close': function() {
 											$(this).dialog('destroy');
 										}
 									}
 								});
-								$("#msg").html(xhr.responseText);
 								jTien.resetForm(frm);
 							})
 							.error(function(data) {
-								alert('error');
 								$(dialog).dialog('close');
 							});
 					},
@@ -267,6 +270,56 @@ $('#pagelet_addequipment').ready(function() {
 		frm.submit();
 	});
 	$('#addequipment-box').delegate('#btnReset', 'click', function(evt) {
+		jTien.resetForm($(this).parents('form'));
+	});
+});
+
+$('#pagelet_addcategory').ready(function() {
+	var frm = null,
+		dialogOpts = {
+				title: 'Add category Confirmation',
+				buttons: {
+					'Create': function() {
+						if (!frm.valid()) { return; }
+						jTien.ajaxSubmit(frm)
+							.success(function(data, textCode, xhr) {
+								jTien.callJqDialog('ajax-response', data.message, {
+									buttons: {
+										'Close': function() {
+											$(this).dialog('destroy');
+										}
+									}
+								});
+								jTien.resetForm(frm);
+							})
+							.error(function(data) {
+								$(dialog).dialog('close');
+							});
+					},
+					'Cancel': function() {
+						$(this).dialog('destroy');
+					}
+				}
+		},
+		validOpts = {
+			rules: {
+				name: { required: true }
+			},
+			messages: {
+				name: { required: '' }
+			},
+			submitHandler: function(form) {
+				jTien.callJqDialog('ajax-response', 'Are you sure you want to add new category?', dialogOpts)
+						.dialog('open');
+			}
+		};
+	
+	$('#addcategory-box').delegate('#btnAdd', 'click', function(evt) {
+		frm = $(this).parents('form');
+		frm.validate(validOpts);
+		frm.submit();
+	});
+	$('#addcategory-box').delegate('#btnReset', 'click', function(evt) {
 		jTien.resetForm($(this).parents('form'));
 	});
 });
@@ -362,10 +415,85 @@ $('#pagelet_editcomplaint').ready(function() {
 	});
 });
 
+$('#pagelet_editequipment').ready(function() {
+	var frm = null,
+	
+	dialogOpts = {
+		title: 'Edit Equipment Confirmation',
+		buttons: {
+			'Update': function() {
+				if (!frm.valid()) {return;}
+				jTien.ajaxSubmit(frm)
+					.success (function(json, textCode, xhr) {
+						jTien.callJqDialog('ajax-response', json.message, {
+							buttons: {
+								'Close Message': function() {
+									$(this).dialog('destroy');
+								}
+							}
+						});
+					});
+			},
+			'Cancel': function() {
+				$(this).dialog('destroy');
+			}
+		}
+	},
+	
+	validOpts = {
+		submitHandler: function(form) {
+			jTien.callJqDialog('ajax-response', 'Are you sure want to edit this equipment?', dialogOpts).dialog('open');
+		}	
+	};
+	
+	$('#editequipment-box').delegate('#btnEdit', 'click', function(evt) {
+		frm = $(this).parents('form');
+		frm.validate(validOpts);
+		frm.submit();
+	});
+});
+
+$('#pagelet_editcategory').ready(function() {
+	var frm = null,
+	
+	dialogOpts = {
+		title: 'Edit category Confirmation',
+		buttons: {
+			'Update': function() {
+				if (!frm.valid()) {return;}
+				jTien.ajaxSubmit(frm)
+					.success (function(json, textCode, xhr) {
+						jTien.callJqDialog('ajax-response', json.message, {
+							buttons: {
+								'Close Message': function() {
+									$(this).dialog('destroy');
+								}
+							}
+						});
+					});
+			},
+			'Cancel': function() {
+				$(this).dialog('destroy');
+			}
+		}
+	},
+	
+	validOpts = {
+		submitHandler: function(form) {
+			jTien.callJqDialog('ajax-response', 'Are you sure want to edit this category?', dialogOpts).dialog('open');
+		}	
+	};
+	
+	$('#editcategory-box').delegate('#btnEdit', 'click', function(evt) {
+		frm = $(this).parents('form');
+		frm.validate(validOpts);
+		frm.submit();
+	});
+});
+
 $('#pagelet_listcomplaint').ready(function() {
 	var filterForm = '#complaint-filter-form',
 		filterSubmit = '#filter-query-submit',
-		lnkShowAll = '#lnkShowAll',
 		resultList = '#the-list';
 	
 	$(filterForm).delegate(filterSubmit, 'click', function(evt) {

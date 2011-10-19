@@ -13,8 +13,7 @@
 					<span><a
 						href="<jtien:url address="/index"/>#editcomplaint/id=${complaint.id}">Edit</a>
 					</span> <span> | </span> <span><a
-						href="<jtien:url address="/index"/>#addassignment/compId=${complaint.id}">New
-							Assignment</a>
+						href="<jtien:url address="/index"/>#addassignment/compId=${complaint.id}">New Assignment</a>
 					</span>
 				</div>
 			</div></td>

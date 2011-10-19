@@ -4,12 +4,16 @@
  */
 package mantech.controller;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.tools.ant.types.resources.comparators.Reverse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -49,12 +53,13 @@ public class DashboardController {
       int dateMonth = cal.get(Calendar.DAY_OF_MONTH);
       String s;
       SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-      
+
       Date date = null;
+      List<String> listString = new ArrayList<String>();
       List<Integer> listNumber = new ArrayList<Integer>();
-      for (int i = 0; i < 15; i++) {
+      for (int i = 0; i < 10; i++) {
         if (i > 0) {
-          dateMonth = dateMonth - 1;
+          dateMonth--;
         }
         try {
           s = Integer.toString(year) + "/" +
@@ -62,10 +67,12 @@ public class DashboardController {
               ((dateMonth < 10)? ("0" + Integer.toString(dateMonth)): Integer.toString(dateMonth));
           date = sdf.parse(s);
           listNumber.add(complaintRepo.countByDate(date));
+          listString.add(s);
         }
         catch (Exception e) {}
       }
       model.addAttribute("list", listNumber);
+      model.addAttribute("listDate", listString);
     //------------------------------------
       model.addAttribute("currentYear", complaintRepo.sumaryInCurrentYear());
       model.addAttribute("currentMonth", complaintRepo.sumaryInCurrentMonth());

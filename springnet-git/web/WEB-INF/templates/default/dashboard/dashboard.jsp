@@ -15,19 +15,19 @@
 								<table>
 									<tbody>
 										<tr class="first">
-											<td class="first b"><a href="javascript:">0</a>
+											<td class="first b"><a href="<jtien:url address='/index'/>#listuser">${totalUsers}</a>
 											</td>
-											<td class="t">Users</td>
+											<td class="t"><a href="<jtien:url address='/index'/>#listuser">Users</a></td>
 										</tr>
 										<tr>
-											<td class="first b"><a href="javascript:">0</a>
+											<td class="first b"><a href="<jtien:url address='/index'/>#listcategory">${totalCategories}</a>
 											</td>
-											<td class="t">Categories</td>
+											<td class="t"><a href="<jtien:url address='/index'/>#listcategory">Categories</a></td>
 										</tr>
 										<tr>
-											<td class="first b"><a href="javascript:">0</a>
+											<td class="first b"><a href="<jtien:url address='/index'/>#listequipment">${totalEquipments}</a>
 											</td>
-											<td class="t">Equipments</td>
+											<td class="t"><a href="<jtien:url address='/index'/>#listequipment">Equipments</a></td>
 										</tr>
 									</tbody>
 								</table>
@@ -37,14 +37,9 @@
 								<table>
 									<tbody>
 										<tr class="first">
-											<td class="first b"><a href="javascript:">0</a>
+											<td class="first b"><a href="<jtien:url address='/index'/>#listcomplaint">${totalComplaints}</a>
 											</td>
-											<td class="t">Complaints</td>
-										</tr>
-										<tr class="first">
-											<td class="first b"><a href="javascript:">0</a>
-											</td>
-											<td class="t">Assignments</td>
+											<td class="t"><a href="<jtien:url address='/index'/>#listcomplaint">Complaints</a></td>
 										</tr>
 									</tbody>
 								</table>

@@ -21,7 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import mantech.controller.helpers.TemplateKeys;
+import mantech.repository.CategoryRepository;
 import mantech.repository.ComplaintRepository;
+import mantech.repository.EquipmentRepository;
+import mantech.repository.UserRepository;
 
 /**
  * 
@@ -32,10 +35,23 @@ import mantech.repository.ComplaintRepository;
 public class DashboardController {
   
   @Autowired
+  private UserRepository userRepo;
+  
+  @Autowired
   private ComplaintRepository complaintRepo;
+  
+  @Autowired
+  private EquipmentRepository equipmentRepo;
+  
+  @Autowired
+  private CategoryRepository categoryRepo;
   
   @RequestMapping(value = "/dashboard", params = "action=overview", method = RequestMethod.GET)
   public String dashboard(ModelMap model) {
+    model.addAttribute("totalUsers", userRepo.count().intValue())
+      .addAttribute("totalComplaints", complaintRepo.count().intValue())
+      .addAttribute("totalCategories", categoryRepo.count().intValue())
+      .addAttribute("totalEquipments", equipmentRepo.count().intValue());
     return TemplateKeys.DASHBOARD_PAGE;
   }
   

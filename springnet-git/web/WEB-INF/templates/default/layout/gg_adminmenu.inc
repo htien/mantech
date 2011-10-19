@@ -14,7 +14,7 @@
 					<div class="gg-submenu-head">Dashboard</div>
 					<ul>
 						<li class="gg-first-item current"><a href="<jtien:url address="/index"/>#dashoverview">Home</a></li>
-						<li><a href="<jtien:url address="/index"/>#viewreport">Report</a></li>
+						<li><a href="<jtien:url address="/index"/>#viewreports">Report</a></li>
 						<li><a href="<jtien:url address="/index"/>#viewstats">Stats</a></li>
 						<li><a href="<jtien:url address="/index"/>#faqs">FAQs</a></li>
 					</ul>

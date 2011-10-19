@@ -99,10 +99,9 @@ applyAjax_pageload = function(hash) {
 applyAjax_adminmenu = function() {
 	$('#adminmenu a').each(function(idx, el) {
 		$(this).click(function(evt) {
-			$('#ggbody-content').hide();
 			jTien.ajaxFromLink(this, jTien.url('/loader'), '#ggbody-content')
 					.success(function(html) {
-						$('#ggbody-content').slideToggle('slow');
+						//$('#ggbody-content').hide().show('slow');
 						applyAjax_pagelet();
 						currentMenuItem(idx, el);
 					});

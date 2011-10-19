@@ -123,11 +123,10 @@ public class UserController {
     return TemplateKeys.USER_EDIT;
   }
   
-//  @RequestMapping(value = "/user", params = "action=trash", method = RequestMethod.GET)
-//  public String trash(@RequestParam("id") int id, ModelMap model) {
-//    
-//    return null;
-//  }
+  @RequestMapping(value = "/user", params = "action=ban", method = RequestMethod.GET)
+  public String trash(@RequestParam("id") int id, ModelMap model) {
+    return null;
+  }
   
   @RequestMapping(value = "/user/editSave", method = RequestMethod.POST)
   public ResponseEntity<String> updateSave(@RequestParam("id") int userId, @RequestParam("email") String email,

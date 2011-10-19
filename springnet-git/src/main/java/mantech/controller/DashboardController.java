@@ -35,6 +35,11 @@ public class DashboardController {
     return TemplateKeys.DASHBOARD_PAGE;
   }
   
+  @RequestMapping(value = "/dashboard", params = "action=viewreports", method = RequestMethod.GET)
+  public String viewReports(ModelMap model) {
+    return TemplateKeys.DASHBOARD_VIEW_REPORTS;
+  }
+  
   @RequestMapping(value = "/dashboard", params = "action=viewcredits", method = RequestMethod.GET)
   public String viewCredits(ModelMap model) {
       // TODO Sẽ cần chỉnh sửa lại userId sẽ được lấy từ session của employee đã đăng nhập.

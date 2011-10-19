@@ -1,8 +1,5 @@
 <%@ include file="../layout/top.inc"%><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
-<script type="text/javascript">
-
-</script>
 <div class="wrap">
 	<h2>Dashboard</h2>
 	<div id="dashboard-widgets-wrap">
@@ -58,6 +55,28 @@
 									</a> is combine Google+ and Wordpress skin.<br /> Designed by T.
 								</p>
 							</div>
+						</div>
+					</div>
+					<div id="dashboard_complaint_stats" class="gg-postbox">
+						<div class="gg-handlediv"></div>
+						<h3 class="gg-title">Complaint Summary</h3>
+						<div class="gg-inside box">
+							<table class="grid">
+								<tbody>
+									<tr>
+										<td class="label">Complaints today</td>
+										<td class="n">0</td>
+									</tr>
+									<tr>
+										<td class="label">Complaints yesterday</td>
+										<td class="n">0</td>
+									</tr>
+									<tr>
+										<td class="label">Complaints last month</td>
+										<td class="n">0</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 					<div id="dashboard_specialthanks" class="gg-postbox">

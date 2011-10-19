@@ -57,63 +57,73 @@ public class DashboardController {
   
   @RequestMapping(value = "/dashboard", params = "action=viewreports", method = RequestMethod.GET)
   public String viewReports(ModelMap model) {
+    Calendar cal = Calendar.getInstance();
+    int year = cal.get(Calendar.YEAR);
+    int month = (cal.get(Calendar.MONTH)) + 1;
+    int dateMonth = cal.get(Calendar.DAY_OF_MONTH);
+    String s;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+
+    Date date = null;
+    List<String> listDateString = new ArrayList<String>();
+    List<Integer> listDateNumber = new ArrayList<Integer>();
+    List<Integer> listMonth = new ArrayList<Integer>();
+    List<Integer> listMonthNumber = new ArrayList<Integer>();
+    for (int i = 0; i < 10; i++) {
+      if (i > 0) {
+        dateMonth--;
+      }
+      try {
+        s = Integer.toString(year) + "/" +
+            ((month < 10)? ("0" + Integer.toString(month)): Integer.toString(month))+ "/" +
+            ((dateMonth < 10)? ("0" + Integer.toString(dateMonth)): Integer.toString(dateMonth));
+        date = sdf.parse(s);
+        listDateNumber.add(complaintRepo.countByDate(date));
+        listDateString.add(s);
+      }
+      catch (Exception e) {}
+    }
+    
+    for(int i = 1; i <= 12; i++) {
+      listMonthNumber.add(complaintRepo.sumaryInMonth(i));
+      listMonth.add(i);
+    }
+    
+    model.addAttribute("list", listDateNumber);
+    model.addAttribute("listDate", listDateString);
+    model.addAttribute("listInMonth", listMonthNumber);
+    model.addAttribute("listMonth", listMonth);
+
+    
     return TemplateKeys.DASHBOARD_VIEW_REPORTS;
   }
   
   @RequestMapping(value = "/dashboard", params = "action=viewcredits", method = RequestMethod.GET)
   public String viewCredits(ModelMap model) {
       // TODO Sẽ cần chỉnh sửa lại userId sẽ được lấy từ session của employee đã đăng nhập.
-      Calendar cal = Calendar.getInstance();
-      int year = cal.get(Calendar.YEAR);
-      int month = (cal.get(Calendar.MONTH)) + 1;
-      int dateMonth = cal.get(Calendar.DAY_OF_MONTH);
-      String s;
-      SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-
-      Date date = null;
-      List<String> listString = new ArrayList<String>();
-      List<Integer> listNumber = new ArrayList<Integer>();
-      for (int i = 0; i < 10; i++) {
-        if (i > 0) {
-          dateMonth--;
-        }
-        try {
-          s = Integer.toString(year) + "/" +
-              ((month < 10)? ("0" + Integer.toString(month)): Integer.toString(month))+ "/" +
-              ((dateMonth < 10)? ("0" + Integer.toString(dateMonth)): Integer.toString(dateMonth));
-          date = sdf.parse(s);
-          listNumber.add(complaintRepo.countByDate(date));
-          listString.add(s);
-        }
-        catch (Exception e) {}
-      }
-      model.addAttribute("list", listNumber);
-      model.addAttribute("listDate", listString);
-    //------------------------------------
-      model.addAttribute("currentYear", complaintRepo.sumaryInCurrentYear());
-      model.addAttribute("currentMonth", complaintRepo.sumaryInCurrentMonth());
-      model.addAttribute("currentYearByEducation", complaintRepo.sumaryInCurrentYearByDepart((byte)1));
-      model.addAttribute("currentYearByManagement", complaintRepo.sumaryInCurrentYearByDepart((byte)2));
-      model.addAttribute("currentYearByLearning", complaintRepo.sumaryInCurrentYearByDepart((byte)3));
-      model.addAttribute("currentYearByInternal", complaintRepo.sumaryInCurrentYearByDepart((byte)4));
-      model.addAttribute("currentYearByHuman", complaintRepo.sumaryInCurrentYearByDepart((byte)5));
-      model.addAttribute("currentMonthByEducation", complaintRepo.sumaryInCurrentMonthByDepart((byte)1));
-      model.addAttribute("currentMonthByManagement", complaintRepo.sumaryInCurrentMonthByDepart((byte)2));
-      model.addAttribute("currentMonthByLearning", complaintRepo.sumaryInCurrentMonthByDepart((byte)3));
-      model.addAttribute("currentMonthByInternal", complaintRepo.sumaryInCurrentMonthByDepart((byte)4));
-      model.addAttribute("currentMonthByHuman", complaintRepo.sumaryInCurrentMonthByDepart((byte)5));
-      
-      model.addAttribute("listCurrentYearByEducation", complaintRepo.getCurrentYearByDepartment((byte)1));
-      model.addAttribute("listCurrentYearByManagement", complaintRepo.getCurrentYearByDepartment((byte)2));
-      model.addAttribute("listCurrentYearByLearning", complaintRepo.getCurrentYearByDepartment((byte)3));
-      model.addAttribute("listCurrentYearByInternal", complaintRepo.getCurrentYearByDepartment((byte)4));
-      model.addAttribute("listCurrentYearByHuman", complaintRepo.getCurrentYearByDepartment((byte)5));
-      model.addAttribute("listCurrentMonthByEducation", complaintRepo.getCurrentMonthByDepartment((byte)1));
-      model.addAttribute("listCurrentMonthByManagement", complaintRepo.getCurrentMonthByDepartment((byte)2));
-      model.addAttribute("listCurrentMonthByLearning", complaintRepo.getCurrentMonthByDepartment((byte)3));
-      model.addAttribute("listCurrentMonthByInternal", complaintRepo.getCurrentMonthByDepartment((byte)4));
-      model.addAttribute("listCurrentMonthByHuman", complaintRepo.getCurrentMonthByDepartment((byte)5));
-   
+    model.addAttribute("currentYear", complaintRepo.sumaryInCurrentYear());
+    model.addAttribute("currentMonth", complaintRepo.sumaryInCurrentMonth());
+    model.addAttribute("currentYearByEducation", complaintRepo.sumaryInCurrentYearByDepart((byte)1));
+    model.addAttribute("currentYearByManagement", complaintRepo.sumaryInCurrentYearByDepart((byte)2));
+    model.addAttribute("currentYearByLearning", complaintRepo.sumaryInCurrentYearByDepart((byte)3));
+    model.addAttribute("currentYearByInternal", complaintRepo.sumaryInCurrentYearByDepart((byte)4));
+    model.addAttribute("currentYearByHuman", complaintRepo.sumaryInCurrentYearByDepart((byte)5));
+    model.addAttribute("currentMonthByEducation", complaintRepo.sumaryInCurrentMonthByDepart((byte)1));
+    model.addAttribute("currentMonthByManagement", complaintRepo.sumaryInCurrentMonthByDepart((byte)2));
+    model.addAttribute("currentMonthByLearning", complaintRepo.sumaryInCurrentMonthByDepart((byte)3));
+    model.addAttribute("currentMonthByInternal", complaintRepo.sumaryInCurrentMonthByDepart((byte)4));
+    model.addAttribute("currentMonthByHuman", complaintRepo.sumaryInCurrentMonthByDepart((byte)5));
+    
+    model.addAttribute("listCurrentYearByEducation", complaintRepo.getCurrentYearByDepartment((byte)1));
+    model.addAttribute("listCurrentYearByManagement", complaintRepo.getCurrentYearByDepartment((byte)2));
+    model.addAttribute("listCurrentYearByLearning", complaintRepo.getCurrentYearByDepartment((byte)3));
+    model.addAttribute("listCurrentYearByInternal", complaintRepo.getCurrentYearByDepartment((byte)4));
+    model.addAttribute("listCurrentYearByHuman", complaintRepo.getCurrentYearByDepartment((byte)5));
+    model.addAttribute("listCurrentMonthByEducation", complaintRepo.getCurrentMonthByDepartment((byte)1));
+    model.addAttribute("listCurrentMonthByManagement", complaintRepo.getCurrentMonthByDepartment((byte)2));
+    model.addAttribute("listCurrentMonthByLearning", complaintRepo.getCurrentMonthByDepartment((byte)3));
+    model.addAttribute("listCurrentMonthByInternal", complaintRepo.getCurrentMonthByDepartment((byte)4));
+    model.addAttribute("listCurrentMonthByHuman", complaintRepo.getCurrentMonthByDepartment((byte)5));
     return TemplateKeys.DASHBOARD_VIEW_CREDITS;
   }
   

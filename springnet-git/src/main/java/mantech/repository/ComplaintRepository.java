@@ -27,6 +27,8 @@ public interface ComplaintRepository extends Repository<Complaint> {
   List<Complaint> getByPriority(byte id);
   List<Complaint> getByAssignment();
   List<Complaint> getWaitingComplaint();
+  List<Complaint> getCurrentMonthByDepartment(byte id);
+  List<Complaint> getCurrentYearByDepartment(byte id);
 
   List<Complaint> searchByFName(String name);
   List<Complaint> searchStartWithFName(String name);
@@ -40,10 +42,14 @@ public interface ComplaintRepository extends Repository<Complaint> {
   List<Complaint> searchByCurrentYear();
   List<Complaint> search(String username, String equipName, Date dateFrom, Date dateTo, byte status, byte priority);
   
-  int sumaryInMonth(int month);
-  int sumaryInCurrentMonth();
-  int sumaryInYear(int year);
-  int sumaryInCurrentYear();
+  int countByDate(Date date);
+  
+  Integer sumaryInMonth(int month);
+  Integer sumaryInCurrentMonth();
+  Integer sumaryInCurrentMonthByDepart(byte id);
+  Integer sumaryInYear(int year);
+  Integer sumaryInCurrentYear();
+  Integer sumaryInCurrentYearByDepart(byte id);
   
   boolean isExist(int id);
   boolean hasAssignmentId(int id);

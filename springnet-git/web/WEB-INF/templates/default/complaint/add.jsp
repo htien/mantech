@@ -1,26 +1,34 @@
-<%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
+<%@ include file="../layout/top.inc"%><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
+
+<!-- *********************************************** -->
 <div id="pagelet_addcomplaint" class="g-pl">
 	<div id="addcomplaint-box" class="box wrap">
 		<h2 class="title">Create New Complaint</h2>
-		<form id="addcomplaint-form" class="g-f" method="post" action="/complaint/addSave">
+		<form id="addcomplaint-form" class="g-f" method="post"
+			action="/complaint/addSave">
 			<div id="complaint-new" class="gg-has-right-sidebar">
 				<div class="gg-inner-sidebar">
 					<div class="gg-postbox">
 						<div class="gg-handlediv"></div>
-						<h3 class="gg-title"><span>Publish</span></h3>
+						<h3 class="gg-title">
+							<span>Publish</span>
+						</h3>
 						<div class="gg-submitbox">
 							<div class="gg-options">
 								<div class="misc-pub-section">
-									<p>Compose your complaint and press <strong>Submit</strong> for reporting to administrator.</p>
+									<p>
+										Compose your complaint and press <strong>Submit</strong> for
+										reporting to administrator.
+									</p>
 								</div>
 								<div class="misc-pub-section">
-									<label>Sender:</label>
-									<strong> ${user.firstName} ${user.lastName}</strong>
+									<label>Sender:</label> <strong> ${user.firstName}
+										${user.lastName}</strong>
 								</div>
 								<div class="misc-pub-section">
-									<label for="equipid">Report on the equipment:</label>
-									<select id="equipid" name="equip_id" class="noreset">
+									<label for="equipid">Report on the equipment:</label> <select
+										id="equipid" name="equip_id" class="noreset">
 										<c:forEach items="${list}" var="equip">
 											<option value="${equip.id}">${equip.name}</option>
 										</c:forEach>

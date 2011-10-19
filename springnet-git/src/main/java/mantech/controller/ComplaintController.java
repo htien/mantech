@@ -4,6 +4,8 @@
  */
 package mantech.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -16,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
-import net.lilylnx.springnet.util.ClientUtils;
 
 import mantech.controller.helpers.RName;
 import mantech.controller.helpers.RStatus;
@@ -34,6 +34,8 @@ import mantech.repository.ComplaintStatusRepository;
 import mantech.repository.EquipmentRepository;
 import mantech.repository.UserRepository;
 import mantech.service.ComplaintService;
+
+import net.lilylnx.springnet.util.ClientUtils;
 
 /**
  * @author Long Nguyen
@@ -89,6 +91,7 @@ public class ComplaintController {
     
     model.addAttribute("user", userRepo.get(2));
     model.addAttribute("list", equipmentRepo.findAll());
+
     return TemplateKeys.COMPLAINT_ADD;
   }
   

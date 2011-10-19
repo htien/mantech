@@ -1,4 +1,4 @@
-<%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
+<%@ include file="../layout/top.inc"%><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
 <script type="text/javascript">
 
@@ -7,7 +7,7 @@
 	<h2>Dashboard</h2>
 	<div id="dashboard-widgets-wrap">
 		<div id="dashboard-widgets" class="gg-metabox-holder">
-			<div class="gg-postbox-container" style="width:49%">
+			<div class="gg-postbox-container" style="width: 49%">
 				<div class="gg-metabox-sortables">
 					<div id="dashboard_right_now" class="gg-postbox">
 						<div class="gg-handlediv"></div>
@@ -18,15 +18,18 @@
 								<table>
 									<tbody>
 										<tr class="first">
-											<td class="first b"><a href="javascript:">0</a></td>
+											<td class="first b"><a href="javascript:">0</a>
+											</td>
 											<td class="t">Users</td>
 										</tr>
 										<tr>
-											<td class="first b"><a href="javascript:">0</a></td>
+											<td class="first b"><a href="javascript:">0</a>
+											</td>
 											<td class="t">Categories</td>
 										</tr>
 										<tr>
-											<td class="first b"><a href="javascript:">0</a></td>
+											<td class="first b"><a href="javascript:">0</a>
+											</td>
 											<td class="t">Equipments</td>
 										</tr>
 									</tbody>
@@ -37,19 +40,23 @@
 								<table>
 									<tbody>
 										<tr class="first">
-											<td class="first b"><a href="javascript:">0</a></td>
+											<td class="first b"><a href="javascript:">0</a>
+											</td>
 											<td class="t">Complaints</td>
 										</tr>
 										<tr class="first">
-											<td class="first b"><a href="javascript:">0</a></td>
+											<td class="first b"><a href="javascript:">0</a>
+											</td>
 											<td class="t">Assignments</td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
 							<div class="version">
-								<p>Theme <a><strong>SpringNet</strong></a> is combine Google+ and Wordpress skin.<br/>
-									Designed by T.</p>
+								<p>
+									Theme <a><strong>SpringNet</strong>
+									</a> is combine Google+ and Wordpress skin.<br /> Designed by T.
+								</p>
 							</div>
 						</div>
 					</div>
@@ -65,7 +72,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="gg-postbox-container" style="width:49%">
+			<div class="gg-postbox-container" style="width: 49%">
 				<div class="gg-metabox-sortables">
 					<div id="dashboard_stats" class="gg-postbox">
 						<div class="gg-handlediv"></div>

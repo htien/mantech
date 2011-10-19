@@ -61,6 +61,25 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
 
   @SuppressWarnings("unchecked")
   @Override
+  public List<Complaint> getCurrentMonthByDepartment(byte id) {
+    return session().createQuery("select c from" +
+        " Complaint c inner join c.user u inner join u.department d where" +
+        " datepart(month, c.createDate) = datepart(month, getdate())" +
+        " and d.id = :id").setByte("id", id).list();
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<Complaint> getCurrentYearByDepartment(byte id) {
+    return session().createQuery("select c from" +
+        " Complaint c inner join c.user u inner join u.department d where" +
+        " datepart(year, c.createDate) = datepart(year, getdate())" +
+        " and d.id = :id").setByte("id", id).list();
+  }
+
+
+  @SuppressWarnings("unchecked")
+  @Override
   public List<Complaint> searchByFName(String name) {
     return session().createCriteria(persistClass).createCriteria("user", "u")
         .add(Restrictions.ilike("u.firstName", "%" + name + "%"))
@@ -153,27 +172,59 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
   }
 
   @Override
-  public int sumaryInMonth(int month) {
-    return (Integer)session().createQuery("select count(c.id) from Complaint c" +
-    		" where datepart(month, c.createDate) = :month").setInteger("month", month).uniqueResult();
+  public int countByDate(Date date) {
+    return ((Long)session().createQuery("select count(c) from Complaint c" +
+    		" where c.createDate >= :date1 and c.createDate <= :date2)")
+        .setDate("date1", date)
+        .setDate("date2", SpringUtils.increaseDay(date))
+        .uniqueResult()).intValue();
+  }
+ 
+  @Override
+  public Integer sumaryInMonth(int month) {
+    return session().createQuery("select count(c.id) from Complaint c" +
+    		" where datepart(month, c.createDate) = :month").setInteger("month", month)
+    		.uniqueResult().hashCode();
   }
 
   @Override
-  public int sumaryInCurrentMonth() {
-    return (Integer)session().createQuery("select count(c.id) from Complaint c" +
-        " where datepart(month, c.createDate) = datepart(month, getdate())").uniqueResult();
+  public Integer sumaryInCurrentMonth() {
+    return session().createQuery("select count(c.id) from Complaint c" +
+        " where datepart(month, c.createDate) = datepart(month, getdate())")
+        .uniqueResult().hashCode();
   }
 
   @Override
-  public int sumaryInYear(int year) {
-    return (Integer)session().createQuery("select count(c.id) from Complaint c" +
-        " where datepart(year, c.createDate) = :year").setInteger("year", year).uniqueResult();
+  public Integer sumaryInCurrentMonthByDepart(byte id) {
+    return session().createSQLQuery("select count(c.id) from" +
+        " complaint c, [user] u, department d where" +
+        " c.userid = u.id and u.department_id = d.id" +
+        " and datepart(month, c.createdate) = datepart(month, getdate())" +
+        " and d.id = :id").setByte("id", id).uniqueResult().hashCode();
   }
 
   @Override
-  public int sumaryInCurrentYear() {
-    return (Integer)session().createQuery("select count(c.id) from Complaint c" +
-        " where datepart(year, c.createDate) = datepart(year, getdate())").uniqueResult();
+  public Integer sumaryInYear(int year) {
+    return session().createQuery("select count(c.id) from Complaint c" +
+        " where datepart(year, c.createDate) = :year").setInteger("year", year)
+        .uniqueResult().hashCode();
+  }
+
+  @Override
+  public Integer sumaryInCurrentYear() {
+    return session().createQuery("select count(c.id) from Complaint c" +
+        " where datepart(year, c.createDate) = datepart(year, getdate())")
+        .uniqueResult().hashCode();
+  }
+  
+
+  @Override
+  public Integer sumaryInCurrentYearByDepart(byte id) {
+    return session().createSQLQuery("select count(c.id) from" +
+        " complaint c, [user] u, department d where" +
+        " c.userid = u.id and u.department_id = d.id" +
+        " and datepart(year, c.createdate) = datepart(year, getdate())" +
+        " and d.id = :id").setByte("id", id).uniqueResult().hashCode();
   }
   
   @SuppressWarnings("unchecked")

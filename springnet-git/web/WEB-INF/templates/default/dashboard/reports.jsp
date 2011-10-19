@@ -21,16 +21,18 @@
 				<div id="statmonths-chart" class="chart"></div>
 			</div>
 			<div id="statyears" class="gg-stat-container">
+				This feature will be released in version 2.0.<br />
+				Comming soon...
 				<div id="statyears-chart" class="chart"></div>
 			</div>
 		</div>
 	</div>
 </div>
+
 <script type="text/javascript">
-	$('#chartswitch', '#statchart-complaints').tabs();
-</script>
-<script type="text/javascript">
-	var chart,
+	var colors = Highcharts.getOptions().colors,
+		daysChart, monthsChart,
+		daysStatName = "Days", monthsStatName = "Months",
 		xDays = [
 	        <%
 	        	List<String> xDays = (List<String>)request.getAttribute("listDate");
@@ -52,27 +54,15 @@
        		  }
        		}
        	%>
-        ].reverse();
-		
-	var colors = Highcharts.getOptions().colors,
-		categories = xDays,
-		name = "Days",
-		totalColumns = '<%=yDays.size()%>',
-		data = [];
-	for (var i = 0; i < totalColumns; i++) {
-		data.push({ y: yDays[i], color: colors[0] });
+        ].reverse(),
+		totalDays= '<%=yDays.size()%>',
+		daysData = [];
+
+	for (var i = 0; i < totalDays; i++) {
+		daysData.push({ y: yDays[i], color: colors[0] });
 	}
-	function setChart(name, categories, data, color) {
-		chart.xAxis[0].setCategories(categories);
-		chart.series[0].remove();
-		chart.addSeries({
-			name: name,
-			data: data,
-			color: color || 'white'
-		});
-	}
-	
-	chart = new Highcharts.Chart({
+
+	daysChart = new Highcharts.Chart({
 		chart: {
 			renderTo: 'statdays-chart', 
 			type: 'column'
@@ -81,7 +71,7 @@
 			text: null
 		},
 		xAxis: {
-			categories: categories
+			categories: xDays
 		},
 		yAxis: {
 			title: {
@@ -99,93 +89,93 @@
 			}
 		},
 		series: [{
-			name: name,
-			data: data,
+			name: daysStatName,
+			data: daysData,
 			color: 'white'
 		}],
 		exporting: {
 			enabled: false
 		}
-	});		
+	});
+
+	function setChart(name, categories, data, color) {
+		chart.xAxis[0].setCategories(categories);
+		chart.series[0].remove();
+		chart.addSeries({
+			name: name,
+			data: data,
+			color: color || 'white'
+		});
+	}
+	var xMonths = [
+        <%
+        	String[] monthNames = {
+				"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+			};
+        	List<Integer> xMonths = (List<Integer>)request.getAttribute("listMonth");
+        	for (int i = 0; i < xMonths.size(); i++) {
+        	  out.print("'" + monthNames[i] + "'");
+        	  if (i != xMonths.size()) {
+        	    out.print(",");
+        	  }
+        	}
+        %>
+       ],
+       yMonths = [
+      	<%
+     		List<Integer> yMonths = (List<Integer>)request.getAttribute("listInMonth");
+       		for (int i : yMonths) {
+       		  out.print(i);
+       		  if (i != yMonths.size()) {
+       		    out.print(",");
+       		  }
+       		}
+      	%>
+       ];
+	totalMonths = '<%=yMonths.size()%>',
+	monthsData = [];
+
+for (var i = 0; i < totalMonths; i++) {
+	monthsData.push({ y: yMonths[i], color: colors[0] });
+}
+
+monthsChart = new Highcharts.Chart({
+	chart: {
+		renderTo: 'statmonths-chart', 
+		type: 'column'
+	},
+	title: {
+		text: null
+	},
+	xAxis: {
+		categories: xMonths
+	},
+	yAxis: {
+		title: {
+			text: 'Total complaints'
+		}
+	},
+	plotOptions: {
+		column: {
+			cursor: 'pointer',					
+		}
+	},
+	tooltip: {
+		formatter: function() {
+			return this.x + '<br/><strong>Complaints: ' + this.y + '</strong>';
+		}
+	},
+	series: [{
+		name: monthsStatName,
+		data: monthsData,
+		color: 'white'
+	}],
+	exporting: {
+		enabled: false
+	}
+});
 </script>
-<!-- <script type="text/javascript"> -->
-<!-- 	var chart, -->
-<!-- 		cate = [ -->
-<%-- 	        <% --%>
-<!-- 	        	List<String> sMonth = (List<String>)request.getAttribute("listMonth"); -->
-<!-- 	        	for (int i = 0; i < sMonth.size(); i++) { -->
-<!-- 	        	  out.print("'" + sMonth.get(i) + "'"); -->
-<!-- 	        	  if (i != sMonth.size()) { -->
-<!-- 	        	    out.print(","); -->
-<!-- 	        	  } -->
-<!-- 	        	} -->
-<!-- 	        %> -->
-<!--         ].reverse(), -->
-<!-- 		list = [ -->
-<%--        	<% --%>
-<!--        		List<Integer> numbers = (List<Integer>)request.getAttribute("list"); -->
-<!--        		for (int i : numbers) { -->
-<!--        		  out.print(i); -->
-<!--        		  if (i != numbers.size()) { -->
-<!--        		    out.print(","); -->
-<!--        		  } -->
-<!--        		} -->
-<!--        	%> -->
-<!--         ].reverse(); -->
-		
-<!-- 	var colors = Highcharts.getOptions().colors, -->
-<!-- 		categories = cate, -->
-<!-- 		name = "Days", -->
-<%-- 		totalColumns = '<%=numbers.size()%>', --%>
-<!-- 		data = []; -->
-<!-- 	for (var i = 0; i < totalColumns; i++) { -->
-<!-- 		data.push({ y: list[i], color: colors[0] }); -->
-<!-- 	} -->
-<!-- 	function setChart(name, categories, data, color) { -->
-<!-- 		chart.xAxis[0].setCategories(categories); -->
-<!-- 		chart.series[0].remove(); -->
-<!-- 		chart.addSeries({ -->
-<!-- 			name: name, -->
-<!-- 			data: data, -->
-<!-- 			color: color || 'white' -->
-<!-- 		}); -->
-<!-- 	} -->
-	
-<!-- 	chart = new Highcharts.Chart({ -->
-<!-- 		chart: { -->
-<!-- 			renderTo: 'statmonths-chart',  -->
-<!-- 			type: 'column' -->
-<!-- 		}, -->
-<!-- 		title: { -->
-<!-- 			text: null -->
-<!-- 		}, -->
-<!-- 		xAxis: { -->
-<!-- 			categories: categories -->
-<!-- 		}, -->
-<!-- 		yAxis: { -->
-<!-- 			title: { -->
-<!-- 				text: 'Total complaints' -->
-<!-- 			} -->
-<!-- 		}, -->
-<!-- 		plotOptions: { -->
-<!-- 			column: { -->
-<!-- 				cursor: 'pointer',					 -->
-<!-- 			} -->
-<!-- 		}, -->
-<!-- 		tooltip: { -->
-<!-- 			formatter: function() { -->
-<!-- 				return this.x + '<br/><strong>Complaints: ' + this.y + '</strong>'; -->
-<!-- 			} -->
-<!-- 		}, -->
-<!-- 		series: [{ -->
-<!-- 			name: name, -->
-<!-- 			data: data, -->
-<!-- 			color: 'white' -->
-<!-- 		}], -->
-<!-- 		exporting: { -->
-<!-- 			enabled: false -->
-<!-- 		} -->
-<!-- 	}); -->
-		
-<!-- </script> -->
+<script type="text/javascript">
+	$('#chartswitch', '#statchart-complaints').tabs();
+</script>
 </compress:html>

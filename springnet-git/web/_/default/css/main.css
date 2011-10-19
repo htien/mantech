@@ -1198,6 +1198,10 @@ body.gg-admin {
   background-image: -webkit-gradient(linear,left top,left bottom,from(#f6f6f6),to(#fefefe));
 }
 
+#statchart-complaints .gg-stat-container .chart {
+  height: 300px;
+}
+
 #faqs-list {
   margin-top: 25px;
 }

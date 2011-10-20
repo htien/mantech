@@ -33,4 +33,11 @@ public class AssignmentDetailDAO extends HibernateGenericDAO<AssignmentDetail> i
     		.list();
   }
 
+  @Override
+  public int countAssignDetailNotCompleted(int id) {
+    return ((Long)session().createQuery("select count(s.id) from AssignmentDetail s" +
+    		" where s.assignment.complaintId = :id" +
+    		" and s.completeDate is null").setInteger("id", id).uniqueResult()).intValue();
+  }
+
 }

@@ -28,7 +28,7 @@
 					</tr>
 				</table>
 				<div class="buttons">
-					<div class="g-b g-b-r">Save</div>
+					<div id="btnEdit" class="g-b g-b-r">Save</div>
 				</div>
 			</div>
 		</form>

@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import net.lilylnx.springnet.util.ClientUtils;
-
 import mantech.controller.helpers.RName;
 import mantech.controller.helpers.RStatus;
 import mantech.controller.helpers.ResponseMessage;
@@ -34,6 +32,8 @@ import mantech.repository.ComplaintStatusRepository;
 import mantech.repository.EquipmentRepository;
 import mantech.repository.UserRepository;
 import mantech.service.ComplaintService;
+
+import net.lilylnx.springnet.util.ClientUtils;
 
 /**
  * @author Long Nguyen
@@ -89,13 +89,14 @@ public class ComplaintController {
     
     model.addAttribute("user", userRepo.get(2));
     model.addAttribute("list", equipmentRepo.findAll());
+
     return TemplateKeys.COMPLAINT_ADD;
   }
   
   @RequestMapping(value = "/complaint/addSave", method = RequestMethod.POST)
-  public ResponseEntity<String> insertSave(@RequestParam(value="equipId") int equipId,
-      @RequestParam(value="title") String title,
-      @RequestParam(value="content") String content, ModelMap model)
+  public ResponseEntity<String> insertSave(@RequestParam(value="equip_id") int equipId,
+      @RequestParam(value="complaint_title") String title,
+      @RequestParam(value="complaint_content") String content, ModelMap model)
   {
     ResponseMessage respMessage = new ResponseMessage(RName.ADD, RStatus.FAIL, null);
     

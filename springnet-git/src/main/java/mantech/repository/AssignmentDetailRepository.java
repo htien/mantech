@@ -18,5 +18,7 @@ import mantech.domain.AssignmentDetail;
 public interface AssignmentDetailRepository extends Repository<AssignmentDetail> {
  
   List<AssignmentDetail> getByComplaint(int id);
+  
+  int countAssignDetailNotCompleted(int id);
 
 }

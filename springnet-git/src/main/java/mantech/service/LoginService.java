@@ -4,8 +4,6 @@
  */
 package mantech.service;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import net.lilylnx.springnet.sso.LoginAuthenticator;
@@ -22,10 +20,8 @@ public class LoginService {
   @Autowired
   private LoginAuthenticator loginAuthenticator;
   
-  public User authenticate(String username, String passwd, HttpSession session) throws Exception {
-    User user = loginAuthenticator.validateLogin(username, passwd, null);
-    session.setAttribute("userProfile", user);
-    return user;
+  public User authenticate(String username, String passwd) throws Exception {
+    return loginAuthenticator.validateLogin(username, passwd, null);
   }
 
 }

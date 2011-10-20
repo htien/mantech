@@ -51,7 +51,18 @@
 	<import resource="spring/urlmappings.xml" />
 
 	<!-- MVC CONFIGURATION -->
-
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/" />
+			<bean id="loginInterceptor" class="net.lilylnx.springnet.controller.interceptor.LoginInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/index**" />
+			<bean id="securityInterceptor" class="net.lilylnx.springnet.controller.interceptor.SecurityInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
 	<bean class="net.lilylnx.springnet.core.support.spring.AnnotationHandlerMapping"
 		p:useDefaultSuffixPattern="false" />
 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
@@ -60,7 +71,6 @@
 		p:prefix="/WEB-INF/${template.dir}/${template.name}/" p:suffix=".jsp" />
 
 	<context:spring-configured />
-	<context:component-scan base-package="net.lilylnx.springnet" />
 	<context:component-scan base-package="mantech.controller" />
 	<context:component-scan base-package="test.mantech.controller" />
 

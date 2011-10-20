@@ -14,4 +14,6 @@ import mantech.domain.Session;
  */
 public interface SessionRepository extends Repository<Session> {
 
+  void add(Session session);
+
 }

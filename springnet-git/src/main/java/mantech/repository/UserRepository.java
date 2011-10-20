@@ -17,10 +17,11 @@ import net.lilylnx.springnet.repository.Repository;
  */
 public interface UserRepository extends Repository<User> {
 
-  String getPasswordByUsername(String username);
-  String getPasswordByEmail(String email);
   User getByUsername(String username);
   User getByEmail(String email);
+
+  String getPasswordByUsername(String username);
+  String getPasswordByEmail(String email);
   List<User> getTechnicianFree();
   List<User> getUserByRole(int id);
   List<User> getUserByRole(String name);

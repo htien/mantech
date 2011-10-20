@@ -89,7 +89,7 @@ public class SpringServlet extends DispatcherServlet {
     ServletRequestAttributes attributes = new ServletRequestAttributes(request);
     
     try {
-      RequestContextHolder.setRequestAttributes(attributes);
+      RequestContextHolder.setRequestAttributes(attributes, false);
       
       UserSession userSession = this.sessionManager.refreshSession(request, response);
       
@@ -106,6 +106,7 @@ public class SpringServlet extends DispatcherServlet {
       RequestContextHolder.resetRequestAttributes();
       attributes.requestCompleted();
     }
+
   }
   
   /**

@@ -60,7 +60,7 @@
 								<tbody>
 									<tr>
 										<td class="label">Complaints today</td>
-										<td class="n">0</td>
+										<td class="n">${totalComplaintsToDay}</td>
 									</tr>
 									<tr>
 										<td class="label">Complaints yesterday</td>

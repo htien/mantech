@@ -4,6 +4,7 @@
  */
 package mantech.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,10 +45,31 @@ public class DashboardController {
   
   @RequestMapping(value = "/dashboard", params = "action=overview", method = RequestMethod.GET)
   public String dashboard(ModelMap model) {
+    
+    Calendar cal = Calendar.getInstance();
+    int year = cal.get(Calendar.YEAR);
+    int month = (cal.get(Calendar.MONTH)) + 1;
+    int dateMonth = cal.get(Calendar.DAY_OF_MONTH);
+    String s;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+
+    Date date = null;
+    
+    s = Integer.toString(year) + "/" +
+        ((month < 10)? ("0" + Integer.toString(month)): Integer.toString(month))+ "/" +
+        ((dateMonth < 10)? ("0" + Integer.toString(dateMonth)): Integer.toString(dateMonth));
+    try {
+      date = sdf.parse(s);
+    }
+    catch (ParseException e) {
+      e.printStackTrace();
+    }
+    
     model.addAttribute("totalUsers", userRepo.count().intValue())
       .addAttribute("totalComplaints", complaintRepo.count().intValue())
       .addAttribute("totalCategories", categoryRepo.count().intValue())
-      .addAttribute("totalEquipments", equipmentRepo.count().intValue());
+      .addAttribute("totalEquipments", equipmentRepo.count().intValue())
+      .addAttribute("totalComplaintsToDay", complaintRepo.countByDate(date));
     return TemplateKeys.DASHBOARD_PAGE;
   }
   
@@ -57,6 +79,8 @@ public class DashboardController {
     int year = cal.get(Calendar.YEAR);
     int month = (cal.get(Calendar.MONTH)) + 1;
     int dateMonth = cal.get(Calendar.DAY_OF_MONTH);
+    int currWeek = complaintRepo.getCurrentWeek();
+    
     String s;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
@@ -65,6 +89,9 @@ public class DashboardController {
     List<Integer> listDateNumber = new ArrayList<Integer>();
     List<Integer> listMonth = new ArrayList<Integer>();
     List<Integer> listMonthNumber = new ArrayList<Integer>();
+    List<Integer> listComplaintsInWeek = new ArrayList<Integer>();
+    List<Integer> listWeeks = new ArrayList<Integer>();
+    
     for (int i = 0; i < 10; i++) {
       if (i > 0) {
         dateMonth--;
@@ -85,11 +112,20 @@ public class DashboardController {
       listMonth.add(i);
     }
     
+    for (int i = 0; i < 20; i++) {
+      if (i > 0) {
+        currWeek--;
+      }
+      listWeeks.add(currWeek);
+      listComplaintsInWeek.add(complaintRepo.countByWeek(currWeek));
+    }
+    
     model.addAttribute("list", listDateNumber);
     model.addAttribute("listDate", listDateString);
     model.addAttribute("listInMonth", listMonthNumber);
     model.addAttribute("listMonth", listMonth);
-
+    model.addAttribute("listWeeks", listWeeks);
+    model.addAttribute("listComplaintsInWeek", listComplaintsInWeek);
     
     return TemplateKeys.DASHBOARD_VIEW_REPORTS;
   }

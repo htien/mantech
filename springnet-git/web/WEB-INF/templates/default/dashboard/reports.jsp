@@ -31,8 +31,8 @@
 
 <script type="text/javascript">
 	var colors = Highcharts.getOptions().colors,
-		daysChart, monthsChart,
-		daysStatName = "Days", monthsStatName = "Months",
+		daysChart, monthsChart, weeksChart,
+		daysStatName = "Days", monthsStatName = "Months", weeksStatName = "Weeks",
 		xDays = [
 	        <%
 	        	List<String> xDays = (List<String>)request.getAttribute("listDate");
@@ -107,6 +107,7 @@
 			color: color || 'white'
 		});
 	}
+	
 	var xMonths = [
         <%
         	String[] monthNames = {
@@ -174,8 +175,76 @@ monthsChart = new Highcharts.Chart({
 		enabled: false
 	}
 });
+
+var xWeeks = [
+<%
+   	List<Integer> xWeeks = (List<Integer>)request.getAttribute("listWeeks");
+   	for (int i = 0; i < xWeeks.size(); i++) {
+   	  out.print(xWeeks.get(i));
+   	  if (i != xWeeks.size()) {
+   	    out.print(",");
+   	  }
+   	}
+%>
+].reverse(),
+yWeeks = [
+<%
+List<Integer> yWeeks = (List<Integer>)request.getAttribute("listComplaintsInWeek");
+		for (int i : yWeeks) {
+		  out.print(i);
+		  if (i != yWeeks.size()) {
+		    out.print(",");
+		  }
+		}
+ %>
+   ].reverse();
+totalWeeks = '<%=yWeeks.size()%>',
+	weeksData = [];
+
+for (var i = 0; i < totalWeeks; i++) {
+ weeksData.push({ y: yWeeks[i], color: colors[0] });
+}
+
+weeksChart = new Highcharts.Chart({
+	chart: {
+		renderTo: 'statweeks-chart', 
+		type: 'column'
+	},
+	title: {
+		text: null
+	},
+	xAxis: {
+		categories: xWeeks
+	},
+	yAxis: {
+		title: {
+			text: 'Total complaints'
+		}
+	},
+	plotOptions: {
+		column: {
+			cursor: 'pointer',					
+		}
+	},
+	tooltip: {
+		formatter: function() {
+			return this.x + '<br/><strong>Complaints: ' + this.y + '</strong>';
+		}
+	},
+	series: [{
+		name: weeksStatName,
+		data: weeksData,
+		color: 'white'
+	}],
+	exporting: {
+		enabled: false
+	}
+});
+          
 </script>
+
 <script type="text/javascript">
 	$('#chartswitch', '#statchart-complaints').tabs();
 </script>
+
 </compress:html>

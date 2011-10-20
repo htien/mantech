@@ -173,10 +173,24 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
 
   @Override
   public int countByDate(Date date) {
-    return ((Long)session().createQuery("select count(c) from Complaint c" +
+    return ((Long)session().createQuery("select count(c.id) from Complaint c" +
     		" where c.createDate >= :date1 and c.createDate <= :date2)")
         .setDate("date1", date)
         .setDate("date2", SpringUtils.increaseDay(date))
+        .uniqueResult()).intValue();
+  }
+  
+  @Override
+  public int countByWeek(int week) {
+    return ((Integer)session().createSQLQuery("select count(c.id) from Complaint c" +
+    		" where datepart(week, c.createDate) = :week")
+    		.setInteger("week", week).uniqueResult()).intValue();
+  }
+  
+  @Override
+  public int getCurrentWeek() {
+    return ((Integer)session().createSQLQuery("select DISTINCT DATEPART(week, c.createdate) from complaint c" +
+        " where DATEPART(week, c.createdate) = DATEPART(week, GETDATE())")
         .uniqueResult()).intValue();
   }
  
@@ -289,5 +303,9 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
     
     return crit.list();
   }
+
+
+
+
 
 }

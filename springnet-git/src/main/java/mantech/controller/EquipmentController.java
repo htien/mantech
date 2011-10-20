@@ -52,11 +52,11 @@ public class EquipmentController {
       ModelMap model) {
 
     int pageCount;
-    if (equipmentRepo.count().intValue() % 3 == 0) {
-      pageCount = equipmentRepo.count().intValue() / 3;
+    if (equipmentRepo.count().intValue() % 5 == 0) {
+      pageCount = equipmentRepo.count().intValue() / 5;
     }
     else {
-      pageCount = (equipmentRepo.count().intValue() / 3) + 1;
+      pageCount = (equipmentRepo.count().intValue() / 5) + 1;
     }
 
     if (page < 1 || page > pageCount) {

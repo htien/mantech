@@ -43,6 +43,8 @@ public interface ComplaintRepository extends Repository<Complaint> {
   List<Complaint> search(String username, String equipName, Date dateFrom, Date dateTo, byte status, byte priority);
   
   int countByDate(Date date);
+  int countByWeek(int week);
+  int getCurrentWeek();
   
   int summaryInMonth(int month);
   int summaryInCurrentMonth();

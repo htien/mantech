@@ -132,10 +132,6 @@ $('#pagelet_addcomplaint').ready(function() {
 				complaint_title: { required: true },
 				complaint_content: { required: true }
 			},
-			messages: {
-				complaint_title: { required: '' },
-				complaint_content: { required: '' }
-			},
 			submitHandler: function(form) {
 				jTien.callJqDialog('ajax-response', 'Are you sure you want to add new complaint?', 
 						dialogOpts).dialog('open');
@@ -194,19 +190,6 @@ $('#pagelet_addassignment').ready(function() {
 						required: true
 					}
 				},
-				messages: {
-					beginDate: {
-						required: '',
-						vietnameseDate: 'yyyy/MM/dd'
-					},
-					duration: {
-						required: '',
-						digits: 'Must a positive number'
-					},
-					userId: {
-						required: 'Please choose the technician to assign!'
-					}
-				},
 				submitHandler: function(form) {
 					var dlg = jTien.callJqDialog('ajax-response', 'Are you sure you want to add new assignment?', 
 							dialogOpts);
@@ -255,9 +238,6 @@ $('#pagelet_addequipment').ready(function() {
 			rules: {
 				name: { required: true }
 			},
-			messages: {
-				name: { required: '' }
-			},
 			submitHandler: function(form) {
 				jTien.callJqDialog('ajax-response', 'Are you sure you want to add new equipment?', dialogOpts)
 						.dialog('open');
@@ -305,9 +285,6 @@ $('#pagelet_addcategory').ready(function() {
 			rules: {
 				name: { required: true }
 			},
-			messages: {
-				name: { required: '' }
-			},
 			submitHandler: function(form) {
 				jTien.callJqDialog('ajax-response', 'Are you sure you want to add new category?', dialogOpts)
 						.dialog('open');
@@ -353,17 +330,6 @@ $('#pagelet_edituser').ready(function() {
 			rules: {
 				email: { required: true,email: true },
 				address: { required:true, minlength:3, maxlength:200 }
-			},
-			messages: {
-				email: {
-					required: '',
-					email:'eg, abc@cba.com'
-				},
-				address: {
-					required: '',
-					minlength: 'Please enter at least {0} characters.',
-					maxlength: 'Please enter no more than {0} characters.'
-				}
 			},
 			submitHandler: function(form) {
 				jTien.callJqDialog('ajax-response', 'Are you sure you want to edit this user?', dialogOpts).dialog('open');
@@ -496,7 +462,7 @@ $('#pagelet_listcomplaint').ready(function() {
 		filterSubmit = '#filter-query-submit',
 		resultList = '#the-list';
 	
-	$(filterForm).delegate(filterSubmit, 'click', function(evt) {
+	$(filterForm).live(filterSubmit, 'click', function(evt) {
 		var dateFrom = $('#dateFrom').val().trim(),
 			dateTo = $('#dateTo').val().trim(),
 			status = $('#status').val(),

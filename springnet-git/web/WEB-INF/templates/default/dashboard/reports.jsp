@@ -228,7 +228,7 @@ weeksChart = new Highcharts.Chart({
 	},
 	tooltip: {
 		formatter: function() {
-			return this.x + '<br/><strong>Complaints: ' + this.y + '</strong>';
+			return 'Week ' + this.x + '<br/><strong>Complaints: ' + this.y + '</strong>';
 		}
 	},
 	series: [{

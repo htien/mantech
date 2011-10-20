@@ -1,5 +1,4 @@
-<%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure"
-	compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
+<%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
 <div id="edituser_pagelet" class="g-pl">
 	<div id="edituser-box" class="wrap">

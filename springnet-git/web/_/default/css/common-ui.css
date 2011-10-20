@@ -111,10 +111,10 @@
 }
 
 .ui-tabs .ui-tabs-nav {
-  padding: 0;
+  padding: 0 10px;
   background: none;
   border: none;
-  border-bottom: 1px solid #dbdbdb;
+  border-bottom: 1px solid #ebebeb;
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;

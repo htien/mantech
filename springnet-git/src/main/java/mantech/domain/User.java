@@ -21,6 +21,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
  * 
  * @author Tien Nguyen
@@ -28,6 +31,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "[user]")
+@org.hibernate.annotations.Entity(dynamicUpdate = true)
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class User implements Serializable {
 
   private static final long serialVersionUID = -5466464499894166834L;

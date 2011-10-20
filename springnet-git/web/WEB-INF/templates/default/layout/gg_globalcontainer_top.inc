@@ -9,7 +9,7 @@
 					<li id="gg-adminbar-role" class="gg-link-top">
 						<a class="ggl sel">
 							<span class="gglb"></span>
-							<span class="ggls">Administrator</span>
+							<span class="ggls">${userSession.user.role.name}</span>
 						</a>
 					</li>
 					<li id="gg-adminbar-about" class="gg-link-top">
@@ -25,7 +25,7 @@
 					<li id="gg-adminbar-account" class="gg-link-top gg-menupop">
 						<a id="lnkAccount" class="ggl" href="javascript:">
 							<span class="gglb"></span>
-							<span class="ggls">Tien Nguyen</span>
+							<span class="ggls">${userSession.user.firstName} ${userSession.user.lastName}</span>
 						</a>
 						<div id="gg-personal-menu" class="gg-menupop">
 							<div class="gg-menupop-inner">
@@ -33,9 +33,9 @@
 									<span id="default-avatar"></span>
 									<%--<img id="avatar" src="" alt="Tien Nguyen" style="display:none" />--%>
 									<div class="personal-info">
-										<span class="gme">Tien Nguyen</span>
-										<span class="gmail">nvhtien@yahoo.co.uk</span>
-										<span class="grole">Administrator</span>
+										<span class="gme">${userSession.user.firstName} ${userSession.user.lastName}</span>
+										<span class="gmail">${userSession.user.email}</span>
+										<span class="grole">${userSession.user.role.name}</span>
 										<ul class="personal-links">
 											<li><a id="profile" class="link">Profile</a></li>
 											<li><a id="blog" class="link" href="<jtien:settings key="author.blog"/>">About Me</a></li>

@@ -186,13 +186,6 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
     		" where datepart(week, c.createDate) = :week")
     		.setInteger("week", week).uniqueResult()).intValue();
   }
-  
-  @Override
-  public int getCurrentWeek() {
-    return ((Integer)session().createSQLQuery("select DISTINCT DATEPART(week, c.createdate) from complaint c" +
-        " where DATEPART(week, c.createdate) = DATEPART(week, GETDATE())")
-        .uniqueResult()).intValue();
-  }
  
   @Override
   public int summaryInMonth(int month) {

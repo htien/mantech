@@ -61,7 +61,7 @@ public class UserController {
   public String list(@RequestParam(value="page", required=false, defaultValue="1") int page, ModelMap model) {
     Pagination pagination = new Pagination(config, page)
         .forUsers(this.userService.countTotalUsers());
-
+    
     model.addAttribute("users", userRepo.findAll())
         .addAttribute("pagination", pagination)
         .addAttribute("totalUsers", pagination.getTotalRecords());
@@ -124,7 +124,7 @@ public class UserController {
   }
   
   @RequestMapping(value = "/user", params = "action=ban", method = RequestMethod.GET)
-  public String trash(@RequestParam("id") int id, ModelMap model) {
+  public String ban(@RequestParam("id") int id, ModelMap model) {
     return null;
   }
   
@@ -151,13 +151,6 @@ public class UserController {
 
   @RequestMapping(value = "/user", params = "action=profile", method = RequestMethod.GET)
   public String profile(ModelMap model) {
-    try {
-      User user = userRepo.get(9);
-      model.addAttribute("user", user);
-    }
-    catch (Exception e) {
-      return TemplateKeys.FILE_NOT_FOUND;
-    }
     return TemplateKeys.USER_PROFILE;
   }
   

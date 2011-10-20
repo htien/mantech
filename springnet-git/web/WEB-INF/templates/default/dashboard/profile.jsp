@@ -10,34 +10,34 @@
 		<table class="grid">
 			<tr>
 				<td class="label">ID:</td>
-				<td><strong>${user.id}</strong></td>
+				<td><strong>${userSession.user.id}</strong></td>
 			</tr>
 			<tr>
 				<td class="label">Username:</td>
-				<td><strong>${user.username}</strong></td>
+				<td><strong>${userSession.user.username}</strong></td>
 			</tr>
 			<tr>
-				<td class="label">Full Name: </td>
-				<td><strong>${user.firstName} ${user.lastName}</strong></td>
+				<td class="label">Full name: </td>
+				<td><strong>${userSession.user.firstName} ${userSession.user.lastName}</strong></td>
 			</tr>
 			<tr>
 				<td class="label">Gender: </td>
 				<td><strong>
-					<c:if test="${user.gender == 'M'}">Male</c:if>
-					<c:if test="${user.gender == 'F'}">Female</c:if>
+					<c:if test="${userSession.user.gender == 'M'}">Male</c:if>
+					<c:if test="${userSession.user.gender == 'F'}">Female</c:if>
 				</strong></td>
 			</tr>
 			<tr>
 				<td class="label">Address:</td>
-				<td><strong>${user.homeAddress}</strong></td>
+				<td><strong>${userSession.user.homeAddress}</strong></td>
 			</tr>
 			<tr>
 				<td class="label">Status:</td>
-				<td><strong>${user.status}</strong></td>
+				<td><strong>${userSession.user.status}</strong></td>
 			</tr>
 			<tr>
 				<td class="label">Join Date:</td>
-				<td><strong>${user.regDate}</strong></td>
+				<td><strong>${userSession.user.regDate}</strong></td>
 			</tr>
 		</table>
 		<div class="buttons">

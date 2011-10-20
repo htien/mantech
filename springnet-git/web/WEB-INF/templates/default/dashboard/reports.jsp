@@ -1,7 +1,8 @@
-<%@page import="java.util.List"%>
-<%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
+<%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="false" compressCss="true" removeIntertagSpaces="true">
+<%@ page import="java.util.List"%>
 
-<div id="statchart-complaints">
+<div id="statchart-complaints" class="g-pl wrap">
+	<h2>Stats</h2>
 	<div id="statchart-complaints-box" class="gg-postbox">
 		<h3>At A Glance</h3>
 		<div id="chartswitch">
@@ -24,6 +25,24 @@
 				This feature will be released in version 2.0.<br />
 				Comming soon...
 				<div id="statyears-chart" class="chart"></div>
+			</div>
+		</div>
+	</div>
+	<div class="gg-postbox-container" style="width:49%">
+		<div class="gg-metabox-sortables">
+			<div class="gg-postbox">
+				<div class="gg-handlediv"></div>
+				<h3 class="gg-title">Under construction 1</h3>
+				<div class="gg-inside">Comming soon.</div>
+			</div>
+		</div>
+	</div>
+	<div class="gg-postbox-container" style="float:right;padding-right:0;width:49%">
+		<div class="gg-metabox-sortables">
+			<div class="gg-postbox">
+				<div class="gg-handlediv"></div>
+				<h3 class="gg-title">Under construction 2</h3>
+				<div class="gg-inside">Comming soon.</div>
 			</div>
 		</div>
 	</div>

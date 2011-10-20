@@ -1,4 +1,4 @@
-.gg-admin a, .gg-admin a:visited {
+.gg-admin a {
   color: #21759b;
 }
 
@@ -862,7 +862,7 @@ body.gg-admin {
   background-image: -o-linear-gradient(top,#ffffff,#f1f1f1);
   background-image: -ms-linear-gradient(top,#ffffff,#f1f1f1);*/
   /*background: #eee url(images/postbox_bg.gif) repeat-x;*/
-  border-bottom: 1px solid #dfdfdf;
+  border-bottom: 1px solid #ebebeb;
   box-shadow: 0 1px 0 #fff;
   -webkit-box-shadow: 0 1px 0 #fff;
   -moz-box-shadow: 0 1px 0 #fff;
@@ -1021,9 +1021,14 @@ body.gg-admin {
 }
 
 #editor-toolbar {
-  margin-bottom: -3px;
-  border: 1px solid #dfdfdf;
+  /*margin-bottom: -3px;
+  border: 1px solid #dfdfdf;*/
   border-bottom-width: 2px;
+}
+
+#editor-toolbar .goog-toolbar {
+  background: none;
+  border: none;
 }
 
 #editor-container {
@@ -1034,9 +1039,13 @@ body.gg-admin {
   -khtml-border-radius: 3px;
 }
 
+#editor-container, #editor {
+  background-color: #f1f6fa !important;
+}
+
 #editor {
   width: 100%;
-  min-height: 290px;
+  min-height: 375px;
   box-shadow: inset 1px 1px 2px rgba(0,0,0,.1);
   -webkit-box-shadow: inset 1px 1px 2px rgba(0,0,0,.1);
   -moz-box-shadow: inset 1px 1px 2px rgba(0,0,0,.1);
@@ -1185,20 +1194,19 @@ body.gg-admin {
 }
 
 #statchart-complaints {
-  margin-top: 1em;
   margin-bottom: 10px;
 }
 
-#statchart-complaints .gg-postbox h3 {
+#statchart-complaints-box h3 {
   background-color: transparent;
   border-bottom: none;
 }
 
-#statchart-complaints .ui-tabs-nav li.ui-tabs-selected {
+#statchart-complaints-box .ui-tabs-nav li.ui-tabs-selected {
   background-image: -webkit-gradient(linear,left top,left bottom,from(#f6f6f6),to(#fefefe));
 }
 
-#statchart-complaints .gg-stat-container .chart {
+#statchart-complaints-box .gg-stat-container .chart {
   height: 300px;
 }
 

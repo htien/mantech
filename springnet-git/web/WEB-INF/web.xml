@@ -30,6 +30,10 @@
 		<filter-name>hibernateSessionFilter</filter-name>
 		<url-pattern>*.html</url-pattern>
 	</filter-mapping>
+	<filter-mapping>
+		<filter-name>hibernateSessionFilter</filter-name>
+		<url-pattern>/</url-pattern>
+	</filter-mapping>
 
 	<servlet>
 		<description>SpringNet Dispatcher</description>

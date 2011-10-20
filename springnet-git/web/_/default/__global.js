@@ -76,7 +76,7 @@ $.ajaxSetup({
 $.validator.setDefaults($validateOpts);
 $.validator.addMethod('vietnameseDate', function(value, element) {
 	return value.match(/^\d\d\d\d\/\d\d?\/\d\d?$/);
-}, 'Invalidate date format yyyy/MM/dd');
+}, 'Required yyyy/MM/dd.');
 
 /* === Global functions === */
 
@@ -112,7 +112,7 @@ applyAjax_adminmenu = function() {
 },
 
 applyAjax_pagelet = function() {
-	$('.g-pl a:not(.na)').each(function(idx, el) {
+	$('.g-pl a:not(.na,.ui-tabs li.ui-state-default a)').each(function(idx, el) {
 		$(this).click(function(evt) {
 			jTien.ajaxFromLink(this, jTien.url('/loader'), '#ggbody-content')
 					.success(function(html) {
@@ -145,6 +145,15 @@ $(function() {
 	jTien.f.autocompleteOff();
 	jTien.f.completeFormAction();
 	jTien.f.disableDrag('{"tags":["a", "img"], "classes":["g-b"]}');
+	
+	$.extend($.validator.messages, {
+		required: '',
+		minlength: 'At least {0} characters.',
+		maxlength: 'Max {0} characters.',
+		email: 'eg, yourname@example.com',
+		digit: 'Must be a positive number.'
+	});
+	
 	$('.ui-datepicker a').live('click', function(evt) {
 		evt.preventDefault();
 	});

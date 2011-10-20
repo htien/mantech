@@ -45,17 +45,15 @@ public class DashboardController {
   
   @RequestMapping(value = "/dashboard", params = "action=overview", method = RequestMethod.GET)
   public String dashboard(ModelMap model) {
-    
     Calendar cal = Calendar.getInstance();
     int year = cal.get(Calendar.YEAR);
     int month = (cal.get(Calendar.MONTH)) + 1;
     int dateMonth = cal.get(Calendar.DAY_OF_MONTH);
-    String s;
+    
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
     Date date = null;
-    
-    s = Integer.toString(year) + "/" +
+    String s = Integer.toString(year) + "/" +
         ((month < 10)? ("0" + Integer.toString(month)): Integer.toString(month))+ "/" +
         ((dateMonth < 10)? ("0" + Integer.toString(dateMonth)): Integer.toString(dateMonth));
     try {
@@ -74,13 +72,13 @@ public class DashboardController {
   }
   
   @RequestMapping(value = "/dashboard", params = "action=viewreports", method = RequestMethod.GET)
-  public String viewReports(ModelMap model) {
+  public String viewReports(ModelMap model) throws Exception {
     Calendar cal = Calendar.getInstance();
     int year = cal.get(Calendar.YEAR);
     int month = (cal.get(Calendar.MONTH)) + 1;
     int dateMonth = cal.get(Calendar.DAY_OF_MONTH);
-    int currWeek = complaintRepo.getCurrentWeek();
-    
+    int currWeek = cal.get(Calendar.WEEK_OF_YEAR);
+
     String s;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 

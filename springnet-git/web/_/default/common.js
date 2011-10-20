@@ -118,7 +118,7 @@ $('#pagelet_signin').ready(function() {
 		$(signInForm).validate({
 			rules: {
 				id: { required: true, minlength: 2 },
-				passwd: { required: true, minlength: 3 }
+				passwd: { required: true, minlength: 1 }
 			},
 			messages: {
 				id: { required: 'Enter your username or email.', minlength: 'ID, at least {0} characters.' },

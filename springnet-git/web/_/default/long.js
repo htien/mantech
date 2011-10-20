@@ -479,9 +479,6 @@ $('#pagelet_listcomplaint').ready(function() {
 				}
 			});	
 	});
-	$(filterForm).delegate(lnkShowAll, 'click', function(evt) {
-		jTien.ajaxConnect(resultList, filterForm, 'q=&f=0&status=0&priority=0');
-	});
 
 });
 

@@ -16,7 +16,7 @@
 		<td><div class="gg-td-wrapper">${user.department.name}</div></td>
 		<td><div class="gg-td-wrapper">${user.firstName} ${user.lastName}</div></td>
 		<td><div class="gg-td-wrapper">${user.gender == "M" ? "Male" : user.gender == "F" ? "Female" : "Gay"}</div></td>
-		<td><div class="gg-td-wrapper">${user.status}</div></td>
+		<td><div class="gg-td-wrapper"><strong style="color: red;">${user.status == "B" ? "Busy" : ""}</strong></div></td>
 	</tr>
 </c:forEach>
 <tr class="gg-list-tr">

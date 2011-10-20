@@ -11,6 +11,7 @@
 				<p>
 					<br />
 				</p>
+				<input type="hidden" name="id" value="${complaint.id}" />
 				<table class="grid">
 					<tr>
 						<td class="label">Complaint ID:</td>

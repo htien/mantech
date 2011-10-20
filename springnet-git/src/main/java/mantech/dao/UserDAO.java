@@ -80,7 +80,7 @@ public class UserDAO extends HibernateGenericDAO<User> implements UserRepository
   @Override
   public List<User> getTechnicianFree() {
     Criteria crit = session().createCriteria(persistClass, "u");
-    crit.createAlias("u.role", "r").add(Restrictions.eq("r.id", 2));
+    crit.createAlias("u.role", "r").add(Restrictions.eq("r.id", (byte)2));
     crit.add(Restrictions.eq("u.status",""));
     return crit.list();
   }

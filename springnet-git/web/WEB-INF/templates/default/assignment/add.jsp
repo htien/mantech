@@ -20,7 +20,6 @@
 		<h2>Add New Assignment</h2>
 		<div id="form">
 			<form id="addassignment-form" class="g-f" method="post" action="/assignment/addSave" >
-				<p id="msg"></p>
 				<div class="row">
 					<label>
 						<strong>Begin Date: </strong>
@@ -61,52 +60,6 @@
 				<div id="btnAdd" class="g-b g-b-r">Add new assignment</div>
 				<div id="btnReset" class="g-b g-b-b">Reset</div>
 			</form>
-		</div>
-		
-		<div id="details">
-			<h2>Complaint Details:</h2>
-			<div class="row">
-				<label>
-					<strong>Id: </strong>
-					${complaint.id}
-				</label>
-			</div>
-			<div class="row">
-				<label>
-					<strong>Employee Name: </strong>
-					${complaint.user.firstName}
-				</label>
-			</div>
-			<div class="row">
-				<label>
-					<strong>Status: </strong>
-					${complaint.status.name}
-				</label>
-			</div>
-			<div class="row">
-				<label>
-					<strong>Title: </strong>
-					${complaint.title}
-				</label>
-			</div>
-			<div class="row">
-				<label>
-					<strong>Content: </strong>
-					${complaint.content}
-				</label>
-			</div>
-			<div class="row">
-				<label>
-					<strong>Prority: </strong>
-					${complaint.priority.name}
-				</label>
-			</div>
-			<div class="row">
-				<label>
-					<strong>CreateDate: </strong>
-					${complaint.createDate}
-				</label>
-			</div>
 		</div>
 	</div>
 </div>

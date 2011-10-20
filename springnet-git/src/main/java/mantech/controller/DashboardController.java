@@ -4,16 +4,13 @@
  */
 package mantech.controller;
 
-import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.tools.ant.types.resources.comparators.Reverse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -48,10 +45,31 @@ public class DashboardController {
   
   @RequestMapping(value = "/dashboard", params = "action=overview", method = RequestMethod.GET)
   public String dashboard(ModelMap model) {
+    
+    Calendar cal = Calendar.getInstance();
+    int year = cal.get(Calendar.YEAR);
+    int month = (cal.get(Calendar.MONTH)) + 1;
+    int dateMonth = cal.get(Calendar.DAY_OF_MONTH);
+    String s;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+
+    Date date = null;
+    
+    s = Integer.toString(year) + "/" +
+        ((month < 10)? ("0" + Integer.toString(month)): Integer.toString(month))+ "/" +
+        ((dateMonth < 10)? ("0" + Integer.toString(dateMonth)): Integer.toString(dateMonth));
+    try {
+      date = sdf.parse(s);
+    }
+    catch (ParseException e) {
+      e.printStackTrace();
+    }
+    
     model.addAttribute("totalUsers", userRepo.count().intValue())
       .addAttribute("totalComplaints", complaintRepo.count().intValue())
       .addAttribute("totalCategories", categoryRepo.count().intValue())
-      .addAttribute("totalEquipments", equipmentRepo.count().intValue());
+      .addAttribute("totalEquipments", equipmentRepo.count().intValue())
+      .addAttribute("totalComplaintsToDay", complaintRepo.countByDate(date));
     return TemplateKeys.DASHBOARD_PAGE;
   }
   
@@ -61,6 +79,8 @@ public class DashboardController {
     int year = cal.get(Calendar.YEAR);
     int month = (cal.get(Calendar.MONTH)) + 1;
     int dateMonth = cal.get(Calendar.DAY_OF_MONTH);
+    int currWeek = complaintRepo.getCurrentWeek();
+    
     String s;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
@@ -69,6 +89,9 @@ public class DashboardController {
     List<Integer> listDateNumber = new ArrayList<Integer>();
     List<Integer> listMonth = new ArrayList<Integer>();
     List<Integer> listMonthNumber = new ArrayList<Integer>();
+    List<Integer> listComplaintsInWeek = new ArrayList<Integer>();
+    List<Integer> listWeeks = new ArrayList<Integer>();
+    
     for (int i = 0; i < 10; i++) {
       if (i > 0) {
         dateMonth--;
@@ -85,15 +108,24 @@ public class DashboardController {
     }
     
     for(int i = 1; i <= 12; i++) {
-      listMonthNumber.add(complaintRepo.sumaryInMonth(i));
+      listMonthNumber.add(complaintRepo.summaryInMonth(i));
       listMonth.add(i);
+    }
+    
+    for (int i = 0; i < 20; i++) {
+      if (i > 0) {
+        currWeek--;
+      }
+      listWeeks.add(currWeek);
+      listComplaintsInWeek.add(complaintRepo.countByWeek(currWeek));
     }
     
     model.addAttribute("list", listDateNumber);
     model.addAttribute("listDate", listDateString);
     model.addAttribute("listInMonth", listMonthNumber);
     model.addAttribute("listMonth", listMonth);
-
+    model.addAttribute("listWeeks", listWeeks);
+    model.addAttribute("listComplaintsInWeek", listComplaintsInWeek);
     
     return TemplateKeys.DASHBOARD_VIEW_REPORTS;
   }
@@ -101,18 +133,18 @@ public class DashboardController {
   @RequestMapping(value = "/dashboard", params = "action=viewcredits", method = RequestMethod.GET)
   public String viewCredits(ModelMap model) {
       // TODO Sẽ cần chỉnh sửa lại userId sẽ được lấy từ session của employee đã đăng nhập.
-    model.addAttribute("currentYear", complaintRepo.sumaryInCurrentYear());
-    model.addAttribute("currentMonth", complaintRepo.sumaryInCurrentMonth());
-    model.addAttribute("currentYearByEducation", complaintRepo.sumaryInCurrentYearByDepart((byte)1));
-    model.addAttribute("currentYearByManagement", complaintRepo.sumaryInCurrentYearByDepart((byte)2));
-    model.addAttribute("currentYearByLearning", complaintRepo.sumaryInCurrentYearByDepart((byte)3));
-    model.addAttribute("currentYearByInternal", complaintRepo.sumaryInCurrentYearByDepart((byte)4));
-    model.addAttribute("currentYearByHuman", complaintRepo.sumaryInCurrentYearByDepart((byte)5));
-    model.addAttribute("currentMonthByEducation", complaintRepo.sumaryInCurrentMonthByDepart((byte)1));
-    model.addAttribute("currentMonthByManagement", complaintRepo.sumaryInCurrentMonthByDepart((byte)2));
-    model.addAttribute("currentMonthByLearning", complaintRepo.sumaryInCurrentMonthByDepart((byte)3));
-    model.addAttribute("currentMonthByInternal", complaintRepo.sumaryInCurrentMonthByDepart((byte)4));
-    model.addAttribute("currentMonthByHuman", complaintRepo.sumaryInCurrentMonthByDepart((byte)5));
+    model.addAttribute("currentYear", complaintRepo.summaryInCurrentYear());
+    model.addAttribute("currentMonth", complaintRepo.summaryInCurrentMonth());
+    model.addAttribute("currentYearByEducation", complaintRepo.summaryInCurrentYearByDepart((byte)1));
+    model.addAttribute("currentYearByManagement", complaintRepo.summaryInCurrentYearByDepart((byte)2));
+    model.addAttribute("currentYearByLearning", complaintRepo.summaryInCurrentYearByDepart((byte)3));
+    model.addAttribute("currentYearByInternal", complaintRepo.summaryInCurrentYearByDepart((byte)4));
+    model.addAttribute("currentYearByHuman", complaintRepo.summaryInCurrentYearByDepart((byte)5));
+    model.addAttribute("currentMonthByEducation", complaintRepo.summaryInCurrentMonthByDepart((byte)1));
+    model.addAttribute("currentMonthByManagement", complaintRepo.summaryInCurrentMonthByDepart((byte)2));
+    model.addAttribute("currentMonthByLearning", complaintRepo.summaryInCurrentMonthByDepart((byte)3));
+    model.addAttribute("currentMonthByInternal", complaintRepo.summaryInCurrentMonthByDepart((byte)4));
+    model.addAttribute("currentMonthByHuman", complaintRepo.summaryInCurrentMonthByDepart((byte)5));
     
     model.addAttribute("listCurrentYearByEducation", complaintRepo.getCurrentYearByDepartment((byte)1));
     model.addAttribute("listCurrentYearByManagement", complaintRepo.getCurrentYearByDepartment((byte)2));

@@ -21,7 +21,7 @@ public class EquipmentService {
   private EquipmentRepository equipmentRepo;
   
   public List<Equipment> paginate(int page){
-    return equipmentRepo.paginate(new int[] {3, page});
+    return equipmentRepo.paginate(new int[] {5, page});
   }
   
 }

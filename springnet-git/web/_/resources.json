@@ -1,7 +1,6 @@
 {
 "path": {
 	"css": [
-		"/_/default/css/reset.css",
 		"/_/jquery/css/closure-theme/jquery-ui-1.8.16.css",
 
 		"/_/closure/goog/css/common.css",
@@ -22,9 +21,7 @@
 		"/_/closure/goog/css/editor/linkdialog.css",
 		"/_/closure/goog/css/editortoolbar.css",
 
-		"/_/default/css/common.css",
-		"/_/default/css/common-ui.css",
-		"/_/default/css/main.css"
+		"/_/default/css/default.css"
 	],
 	"scripts": [
 		"/_/jquery/jquery-ui-1.8.16.js",
@@ -33,9 +30,7 @@
 		"/_/jquery/jquery.history.js",
 		"/_/highchart/highcharts.js",
 		"/_/highchart/modules/exporting.js",
-		"/_/default/__global.js",
-		"/_/default/common.js",
-		"/_/default/long.js"
+		"/_/default/default.js"
 	]
 }
 }

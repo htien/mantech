@@ -8,12 +8,18 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import net.lilylnx.springnet.util.ClientUtils;
+
+import mantech.controller.helpers.RName;
+import mantech.controller.helpers.RStatus;
+import mantech.controller.helpers.ResponseMessage;
 import mantech.controller.helpers.TemplateKeys;
 import mantech.domain.Assignment;
 import mantech.domain.Complaint;
@@ -50,6 +56,9 @@ public class AssignmentController {
   @Autowired
   private UserService userService;
   
+  @Autowired
+  private ClientUtils clientUtils;
+  
   @RequestMapping(value = {"/assignment"}, params = "action=list", method = RequestMethod.GET)
   public String list(ModelMap model) {
     List<Complaint> listComplaint = complaintRepo.getByAssignment();
@@ -73,7 +82,7 @@ public class AssignmentController {
   }
   
   @RequestMapping(value = "/assignment", params = "action=detail", method = RequestMethod.GET)
-  public String detail(@RequestParam(value="id") int compId, ModelMap model) {
+  public String detail(@RequestParam(value="assignmentId") int compId, ModelMap model) {
     Assignment assignment = assignmentRepo.get(compId);
     if (assignment == null) {
       return TemplateKeys.FILE_NOT_FOUND;
@@ -85,8 +94,6 @@ public class AssignmentController {
   
   @RequestMapping(value = "/assignment", params = "action=add", method = RequestMethod.GET)
   public String insert(@RequestParam(value="compId") int compId, ModelMap model) {
-    if (complaintRepo.isExist(compId)) {
-      if (!complaintRepo.hasAssignmentId(compId)) {
         List<User> users = userRepo.getTechnicianFree();
         
         Complaint complaint = complaintRepo.get(compId);
@@ -94,32 +101,36 @@ public class AssignmentController {
         model.addAttribute("technicians", users);
         model.addAttribute("complaint", complaint);
         model.addAttribute("compId", compId);
-        model.addAttribute("listComplaint", complaintRepo.findAll());
         return TemplateKeys.ASSIGNMENT_ADD;
-      }
-    }
-    return list(model);
   }
   
   @RequestMapping(value = "/assignment/addSave", method = RequestMethod.POST)
-  public String insertSave(@RequestParam(value="compId") int compId,
+  public ResponseEntity<String> insertSave(@RequestParam(value="compId") int compId,
       @RequestParam(value="userId") int[] userId,
       @RequestParam(value="beginDate") Date beginDate,
       @RequestParam(value="duration") short duration) {
 
+    ResponseMessage respMessage = new ResponseMessage(RName.ADD, RStatus.FAIL, null);
+    
     List<User> users = userRepo.getUsers(userId);
     Complaint complaint = complaintRepo.get(compId);
 
     complaintService.setStatusAccepted(complaint);
     userService.setUserStatus(users);
     
-    Assignment assignment = new Assignment();
-    assignment.setComplaintId(complaint.getId());
-    assignment.setUsers(users);
-    assignment.setBeginDate(beginDate);
-    assignment.setDuration(duration);
+    try {
+      Assignment assignment = new Assignment();
+      assignment.setComplaintId(complaint.getId());
+      assignment.setUsers(users);
+      assignment.setBeginDate(beginDate);
+      assignment.setDuration(duration);
 
-    assignmentService.add(assignment);
-    return TemplateKeys.ASSIGNMENT_LIST;
+      assignmentService.add(assignment);
+      respMessage.setStatusAndMessage(RStatus.SUCC, String.format("Inserted assignment successfully"));
+    }
+    catch(Exception e) {
+      respMessage.setStatusAndMessage(RStatus.ERROR, e.getMessage());
+    }
+    return clientUtils.createJsonResponse(respMessage);
   }
 }

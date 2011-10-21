@@ -10,6 +10,7 @@
 		<li class="completed"><a href="#">Completed <span class="count">(${countCompleted})</span></a></li>
 	</ul>
 	<form id="complaint-filter-form" method="post" action="/complaint/search">
+		<input type="hidden" name="compId" />
 		<div class="search-box">
 			<select id="field-name" name="f" style="margin-right:0;border-right-color:#fff">
 				<option value="1">Employee</option>

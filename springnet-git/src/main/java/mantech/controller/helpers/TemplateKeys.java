@@ -18,6 +18,7 @@ public class TemplateKeys {
   public static final String MAIN_PAGE = "__index";
   
   public static final String DASHBOARD_PAGE = "dashboard/dashboard";
+  public static final String DASHBOARD_VIEW_REPORTS = "dashboard/reports";
   public static final String DASHBOARD_VIEW_CREDITS = "dashboard/credits";
   public static final String DASHBOARD_VIEW_FAQS = "dashboard/faqs";
   

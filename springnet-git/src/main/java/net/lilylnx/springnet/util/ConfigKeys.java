@@ -32,13 +32,21 @@ public class ConfigKeys {
   public static final String VERSION = "version";
   public static final String CONTEXT_PATH = "context.path";
   public static final String ENCODING = "encoding";
+  public static final String LOGGED = "logged";
   
   public static final String AUTHENTICATION_TYPE = "authentication.type";
   public static final String LOGIN_AUTHENTICATOR = "login.authenticator";
   public static final String TYPE_SSO = "sso";
   public static final String USERPWD_ALGOR = Algorithms.WHIRLPOOL_HASH;
+  public static final String SSO_IMPLEMENTATION = "sso.implementation";
   
+  public static final String SSO_EMAIL_ATTRIBUTE = "sso.email.attribute";
+  public static final String SSO_PASSWORD_ATTRIBUTE = "sso.password.attribute";
+  public static final String SSO_DEFAULT_EMAIL = "sso.default.email";
+  public static final String SSO_DEFAULT_PASSWORD = "sso.default.password";
+  public static final String SSO_REDIRECT = "sso.redirect";
   public static final String SSO_LOGOUT = "sso.logout";
+  public static final String AUTO_LOGIN_ENABLED = "auto.login.enabled";
   
   public static final String ANONYMOUS_USER_ID = "anonymous.userId";
   public static final String ROLE_MANAGER = "roleManager";
@@ -52,6 +60,8 @@ public class ConfigKeys {
   
   public static final String USERS_PER_PAGE = "usersPerPage";
   public static final String COMPLAINTS_PER_PAGE = "complaintsPerPage";
+  
+  public static final String BLOCK_IP = "spring.block_ip";
   
   private ConfigKeys() {}
   

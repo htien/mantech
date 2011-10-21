@@ -32,7 +32,7 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
   }
 
   @Override
-  public Integer countByStatus(byte status) {
+  public int countByStatus(byte status) {
     return session().createQuery("select count(c.status.id) from Complaint as c" +
         " where c.status.id = :id").setByte("id", status).uniqueResult().hashCode();
   }
@@ -58,6 +58,25 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
     return session().createCriteria(persistClass)
         .add(Restrictions.eq("priority.id", id)).list();
   }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<Complaint> getCurrentMonthByDepartment(byte id) {
+    return session().createQuery("select c from" +
+        " Complaint c inner join c.user u inner join u.department d where" +
+        " datepart(month, c.createDate) = datepart(month, getdate())" +
+        " and d.id = :id").setByte("id", id).list();
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<Complaint> getCurrentYearByDepartment(byte id) {
+    return session().createQuery("select c from" +
+        " Complaint c inner join c.user u inner join u.department d where" +
+        " datepart(year, c.createDate) = datepart(year, getdate())" +
+        " and d.id = :id").setByte("id", id).list();
+  }
+
 
   @SuppressWarnings("unchecked")
   @Override
@@ -153,27 +172,66 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
   }
 
   @Override
-  public int sumaryInMonth(int month) {
-    return (Integer)session().createQuery("select count(c.id) from Complaint c" +
-    		" where datepart(month, c.createDate) = :month").setInteger("month", month).uniqueResult();
+  public int countByDate(Date date) {
+    return ((Long)session().createQuery("select count(c.id) from Complaint c" +
+    		" where c.createDate >= :date1 and c.createDate <= :date2)")
+        .setDate("date1", date)
+        .setDate("date2", SpringUtils.increaseDay(date))
+        .uniqueResult()).intValue();
+  }
+  
+  @Override
+  public int countByWeek(int week) {
+    return ((Integer)session().createSQLQuery("select count(c.id) from Complaint c" +
+    		" where datepart(week, c.createDate) = :week")
+    		.setInteger("week", week).uniqueResult()).intValue();
+  }
+ 
+  @Override
+  public int summaryInMonth(int month) {
+    return ((Long)session().createQuery("select count(c.id) from Complaint c" +
+    		" where datepart(month, c.createDate) = :month").setInteger("month", month)
+    		.uniqueResult()).intValue();
   }
 
   @Override
-  public int sumaryInCurrentMonth() {
-    return (Integer)session().createQuery("select count(c.id) from Complaint c" +
-        " where datepart(month, c.createDate) = datepart(month, getdate())").uniqueResult();
+  public int summaryInCurrentMonth() {
+    return ((Long)session().createQuery("select count(c.id) from Complaint c" +
+        " where datepart(month, c.createDate) = datepart(month, getdate())")
+        .uniqueResult()).intValue();
   }
 
   @Override
-  public int sumaryInYear(int year) {
-    return (Integer)session().createQuery("select count(c.id) from Complaint c" +
-        " where datepart(year, c.createDate) = :year").setInteger("year", year).uniqueResult();
+  public int summaryInCurrentMonthByDepart(byte id) {
+    return ((Integer)session().createSQLQuery("select count(c.id) from" +
+        " complaint c, [user] u, department d where" +
+        " c.userid = u.id and u.department_id = d.id" +
+        " and datepart(month, c.createdate) = datepart(month, getdate())" +
+        " and d.id = :id").setByte("id", id).uniqueResult()).intValue();
   }
 
   @Override
-  public int sumaryInCurrentYear() {
-    return (Integer)session().createQuery("select count(c.id) from Complaint c" +
-        " where datepart(year, c.createDate) = datepart(year, getdate())").uniqueResult();
+  public int summaryInYear(int year) {
+    return ((Long)session().createQuery("select count(c.id) from Complaint c" +
+        " where datepart(year, c.createDate) = :year").setInteger("year", year)
+        .uniqueResult()).intValue();
+  }
+
+  @Override
+  public int summaryInCurrentYear() {
+    return ((Long)session().createQuery("select count(c.id) from Complaint c" +
+        " where datepart(year, c.createDate) = datepart(year, getdate())")
+        .uniqueResult()).intValue();
+  }
+  
+
+  @Override
+  public int summaryInCurrentYearByDepart(byte id) {
+    return ((Integer)session().createSQLQuery("select count(c.id) from" +
+        " complaint c, [user] u, department d where" +
+        " c.userid = u.id and u.department_id = d.id" +
+        " and datepart(year, c.createdate) = datepart(year, getdate())" +
+        " and d.id = :id").setByte("id", id).uniqueResult()).intValue();
   }
   
   @SuppressWarnings("unchecked")
@@ -238,5 +296,9 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
     
     return crit.list();
   }
+
+
+
+
 
 }

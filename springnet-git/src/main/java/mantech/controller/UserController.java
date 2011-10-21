@@ -61,7 +61,7 @@ public class UserController {
   public String list(@RequestParam(value="page", required=false, defaultValue="1") int page, ModelMap model) {
     Pagination pagination = new Pagination(config, page)
         .forUsers(this.userService.countTotalUsers());
-
+    
     model.addAttribute("users", userRepo.findAll())
         .addAttribute("pagination", pagination)
         .addAttribute("totalUsers", pagination.getTotalRecords());
@@ -123,6 +123,11 @@ public class UserController {
     return TemplateKeys.USER_EDIT;
   }
   
+  @RequestMapping(value = "/user", params = "action=ban", method = RequestMethod.GET)
+  public String ban(@RequestParam("id") int id, ModelMap model) {
+    return null;
+  }
+  
   @RequestMapping(value = "/user/editSave", method = RequestMethod.POST)
   public ResponseEntity<String> updateSave(@RequestParam("id") int userId, @RequestParam("email") String email,
         @RequestParam("department") byte depart, @RequestParam("role") byte role,
@@ -146,13 +151,6 @@ public class UserController {
 
   @RequestMapping(value = "/user", params = "action=profile", method = RequestMethod.GET)
   public String profile(ModelMap model) {
-    try {
-      User user = userRepo.get(9);
-      model.addAttribute("user", user);
-    }
-    catch (Exception e) {
-      return TemplateKeys.FILE_NOT_FOUND;
-    }
     return TemplateKeys.USER_PROFILE;
   }
   

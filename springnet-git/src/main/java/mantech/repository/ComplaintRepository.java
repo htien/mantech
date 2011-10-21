@@ -20,13 +20,15 @@ public interface ComplaintRepository extends Repository<Complaint> {
   
   List<Complaint> sort(String fieldName, boolean order, int[] range);
   
-  Integer countByStatus(byte status);
+  int countByStatus(byte status);
   
   List<Complaint> getByWeekly(Date begin, Date end);
   List<Complaint> getByDepartment(byte id);
   List<Complaint> getByPriority(byte id);
   List<Complaint> getByAssignment();
   List<Complaint> getWaitingComplaint();
+  List<Complaint> getCurrentMonthByDepartment(byte id);
+  List<Complaint> getCurrentYearByDepartment(byte id);
 
   List<Complaint> searchByFName(String name);
   List<Complaint> searchStartWithFName(String name);
@@ -40,10 +42,15 @@ public interface ComplaintRepository extends Repository<Complaint> {
   List<Complaint> searchByCurrentYear();
   List<Complaint> search(String username, String equipName, Date dateFrom, Date dateTo, byte status, byte priority);
   
-  int sumaryInMonth(int month);
-  int sumaryInCurrentMonth();
-  int sumaryInYear(int year);
-  int sumaryInCurrentYear();
+  int countByDate(Date date);
+  int countByWeek(int week);
+  
+  int summaryInMonth(int month);
+  int summaryInCurrentMonth();
+  int summaryInCurrentMonthByDepart(byte id);
+  int summaryInYear(int year);
+  int summaryInCurrentYear();
+  int summaryInCurrentYearByDepart(byte id);
   
   boolean isExist(int id);
   boolean hasAssignmentId(int id);

@@ -1,4 +1,4 @@
-.gg-admin a, .gg-admin a:visited {
+.gg-admin a {
   color: #21759b;
 }
 
@@ -461,6 +461,7 @@ body.gg-admin {
 /*========== CONTENT ===*/
 
 #ggcontent, #ggfooter {
+  margin-right: 15px;
   margin-left: 210px;
 }
 
@@ -469,14 +470,12 @@ body.gg-admin {
   height: 100%;
 }
 
-#gghead, #ggcontent, #ggfooter {
-  margin-right: 15px;
-}
-
 #gghead {
-  margin-left: 2px;
+  margin-top: -7px;
+  padding-left: 10px;
   height: 32px;
-  border-bottom: 1px solid #dfdfdf;
+  background-color: #edf4ff;
+  border: 1px solid #cdd4ef;
 }
 
 #gghead .site-heading {
@@ -855,15 +854,15 @@ body.gg-admin {
   font-family: MetaBold, Tahoma, sans-serif;
   font-size: 15px;
   font-weight: normal;
-  /*background-color: #f1f1f1;
-  background-image: linear-gradient(top,#ffffff,#f1f1f1);
+  background-color: #efefef;
+  /*background-image: linear-gradient(top,#ffffff,#f1f1f1);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff',endColorstr='#f1f1f1');
   background-image: -webkit-gradient(linear,left top,left bottom,from(#ffffff),to(#f1f1f1));
   background-image: -moz-linear-gradient(top,#ffffff,#f1f1f1);
   background-image: -o-linear-gradient(top,#ffffff,#f1f1f1);
   background-image: -ms-linear-gradient(top,#ffffff,#f1f1f1);*/
-  background: #eee url(images/postbox_bg.gif) repeat-x;
-  border-bottom: 1px solid #dfdfdf;
+  /*background: #eee url(images/postbox_bg.gif) repeat-x;*/
+  border-bottom: 1px solid #ebebeb;
   box-shadow: 0 1px 0 #fff;
   -webkit-box-shadow: 0 1px 0 #fff;
   -moz-box-shadow: 0 1px 0 #fff;
@@ -884,7 +883,6 @@ body.gg-admin {
 }
 
 .gg-postbox .gg-submitbox {
-  background: #eee url(images/postbox_bg.gif) repeat-x;
 }
 
 .gg-postbox .gg-handlediv {
@@ -892,8 +890,7 @@ body.gg-admin {
 }
 
 .gg-postbox .gg-options {
-  padding: 6px 0 16px;
-  border-bottom: 1px solid #dfdfdf;
+  padding: 6px 0 10px;
 }
 
 .gg-postbox .gg-options p {
@@ -902,14 +899,41 @@ body.gg-admin {
 
 .gg-postbox .gg-actions {
   clear: both;
-  padding: 10px 10px 8px;
-  border-top: 1px solid #fff;
+  padding: 10px 10px 15px;
+}
+
+.gg-postbox .gg-stat-container {
+  padding: 10px;
+}
+
+.gg-qa-container {
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.gg-qa-container .entry {
+  margin-top: 15px;
+}
+
+.gg-qa-container .entry:first-child {
+  margin-top: 0;
+}
+
+.gg-qa-container .entry span.q, .gg-qa-container .entry span.a {
+  display: inline-block;
+  width: 30px;
+  font-family: Open Sans, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: normal;
+}
+
+.gg-qa-container .entry .q {
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .misc-pub-section {
   padding: 6px 10px;
-  border-top: 1px solid #fff;
-  border-bottom: 1px solid #dfdfdf;
 }
 
 .misc-pub-section:first-child {
@@ -997,9 +1021,14 @@ body.gg-admin {
 }
 
 #editor-toolbar {
-  margin-bottom: -3px;
-  border: 1px solid #dfdfdf;
+  /*margin-bottom: -3px;
+  border: 1px solid #dfdfdf;*/
   border-bottom-width: 2px;
+}
+
+#editor-toolbar .goog-toolbar {
+  background: none;
+  border: none;
 }
 
 #editor-container {
@@ -1010,9 +1039,13 @@ body.gg-admin {
   -khtml-border-radius: 3px;
 }
 
+#editor-container, #editor {
+  background-color: #f1f6fa !important;
+}
+
 #editor {
   width: 100%;
-  min-height: 290px;
+  min-height: 375px;
   box-shadow: inset 1px 1px 2px rgba(0,0,0,.1);
   -webkit-box-shadow: inset 1px 1px 2px rgba(0,0,0,.1);
   -moz-box-shadow: inset 1px 1px 2px rgba(0,0,0,.1);
@@ -1020,6 +1053,15 @@ body.gg-admin {
 
 #dashboard-widgets .gg-metabox-sortables {
   margin: 0 5px;
+}
+
+#dashboard_right_now {
+  border: 1px solid #c5d5dd;
+}
+
+#dashboard_right_now h3 {
+  background-color: #e6f1f6;
+  border-bottom: 1px solid #d8e6ec;
 }
 
 #dashboard_right_now table td {
@@ -1066,6 +1108,10 @@ body.gg-admin {
 #dashboard_right_now .version em {
   color: #666;
   font-style: italic;
+}
+
+#dashboard_complaint_stats .grid {
+  margin-top: 0;
 }
 
 #dashboard_specialthanks ol {
@@ -1145,4 +1191,25 @@ body.gg-admin {
 
 #user-new .gender label {
   margin-right: 20px;
+}
+
+#statchart-complaints {
+  margin-bottom: 10px;
+}
+
+#statchart-complaints-box h3 {
+  background-color: transparent;
+  border-bottom: none;
+}
+
+#statchart-complaints-box .ui-tabs-nav li.ui-tabs-selected {
+  background-image: -webkit-gradient(linear,left top,left bottom,from(#f6f6f6),to(#fefefe));
+}
+
+#statchart-complaints-box .gg-stat-container .chart {
+  height: 300px;
+}
+
+#faqs-list {
+  margin-top: 25px;
 }

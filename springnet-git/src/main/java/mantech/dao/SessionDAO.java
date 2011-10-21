@@ -21,5 +21,23 @@ public class SessionDAO extends HibernateGenericDAO<Session> implements SessionR
   public SessionDAO(SessionFactory sessionFactory) {
     super(sessionFactory);
   }
+  
+  /**
+   * Always execute saveOrUpdate().
+   * @see net.lilylnx.springnet.core.hibernate.HibernateGenericDAO#save(java.lang.Object)
+   */
+  @Override
+  public void add(Session session) {
+    this.session().saveOrUpdate(session);
+  }
+  
+  /**
+   * Always execute saveOrUpdate().
+   * @see net.lilylnx.springnet.core.hibernate.HibernateGenericDAO#update(java.lang.Object)
+   */
+  @Override
+  public void update(Session session) {
+    this.session().saveOrUpdate(session);
+  }
 
 }

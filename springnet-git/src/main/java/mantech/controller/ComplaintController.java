@@ -187,7 +187,7 @@ public class ComplaintController {
     }
    
     if (complaints.size() != 0) {
-      model.addAttribute("listComplaint", complaints);
+      model.addAttribute("complaints", complaints);
       return TemplateKeys.COMPLAINT_LIST_RESULT;
     }
     else {

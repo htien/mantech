@@ -137,7 +137,7 @@ public class AssignmentController {
     detail.setCompleteDate(date);
     detailRepo.update(detail);
     
-    System.out.println("AAAAAAAAAAAAAAAAAAAA" + detailRepo.countAllCompletedByComplaint(id));
+    System.out.println("AAAAAAAAAAAAAAAAAAAA: " + detailRepo.countAllCompletedByComplaint(id));
     if (detailRepo.countAllCompletedByComplaint(id) == 0) {
       Assignment assignment = assignmentRepo.get(id);
       assignment.setDeleted(true);

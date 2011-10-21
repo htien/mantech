@@ -101,7 +101,10 @@ public class ComplaintController {
   
   @RequestMapping(value = "/complaint", params = "action=add", method = RequestMethod.GET)
   public String insert(ModelMap model){
-    // TODO Sẽ cần chỉnh sửa lại userId sẽ được lấy từ session của employee đã đăng nhập.
+    byte role = sessionManager.getUser().getRole().getId();
+    if (role != UserRole.EMPLOYEE) {
+      return TemplateKeys.FILE_NOT_FOUND;
+    }
     
     model.addAttribute("user", userRepo.get(sessionManager.getUser().getId()));
     model.addAttribute("list", equipmentRepo.findAll());

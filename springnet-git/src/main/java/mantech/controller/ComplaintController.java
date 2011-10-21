@@ -77,8 +77,6 @@ public class ComplaintController {
     
     if (UserRole.ADMIN == role) {
       model.addAttribute("complaints", complaintRepo.findAll());
-      model.addAttribute("listStatus", statusRepo.findAll());
-      model.addAttribute("listPriority", priorityRepo.findAll());
       model.addAttribute("countAll", complaintRepo.count());
       model.addAttribute("countWaiting", complaintRepo.countByStatus((byte)1));
       model.addAttribute("countAccepted", complaintRepo.countByStatus((byte)2));
@@ -88,6 +86,9 @@ public class ComplaintController {
     else {
       model.addAttribute("complaints", complaintRepo.getByUser(sessionManager.getUser().getId()));
     }
+
+    model.addAttribute("listStatus", statusRepo.findAll());
+    model.addAttribute("listPriority", priorityRepo.findAll());
 
     return TemplateKeys.COMPLAINT_LIST;
   }

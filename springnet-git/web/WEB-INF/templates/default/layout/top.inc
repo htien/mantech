@@ -13,4 +13,7 @@ taglib uri="http://code.google.com/p/springnet" prefix="jtien"%><compress:html
 <c:set var="dateFormat"><jtien:settings key="date.format"/></c:set>
 <c:set var="timeFormat"><jtien:settings key="time.format"/></c:set>
 <c:set var="language"><jtien:settings key="i18n.default"/></c:set>
+<c:set var="isAdmin" value="${userSession.user.role.id == 1}"/>
+<c:set var="isTechnician" value="${userSession.user.role.id == 2}"/>
+<c:set var="isEmployee" value="${userSession.user.role.id == 3}"/>
 </compress:html>

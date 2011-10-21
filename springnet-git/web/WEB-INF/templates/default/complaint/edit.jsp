@@ -43,8 +43,11 @@
 						<td class="label">Status:</td>
 						<td><select name="status">
 								<c:forEach items="${listStatus}" var="status">
-									<option value="${status.id}"
-										<c:if test="${complaint.status.id==status.id }">selected="selected"</c:if>>${status.name}</option>
+									<c:if test="${status.id != 4}">
+										<option value="${status.id}"
+											<c:if test="${complaint.status.id==status.id }">selected="selected"</c:if>>${status.name}
+										</option>
+									</c:if>
 								</c:forEach>
 						</select></td>
 					</tr>

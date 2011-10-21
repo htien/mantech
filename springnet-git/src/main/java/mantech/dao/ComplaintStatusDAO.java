@@ -5,6 +5,7 @@
 package mantech.dao;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 
 import mantech.domain.ComplaintStatus;
 import mantech.repository.ComplaintStatusRepository;
@@ -19,6 +20,12 @@ public class ComplaintStatusDAO extends HibernateGenericDAO<ComplaintStatus> imp
 
   public ComplaintStatusDAO(SessionFactory sessionFactory) {
     super(sessionFactory);
+  }
+
+  @Override
+  public ComplaintStatus get(byte id) {
+    return (ComplaintStatus)session().createCriteria(persistClass)
+        .add(Restrictions.eq("id", id)).uniqueResult();
   }
 
 }

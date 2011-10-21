@@ -1,6 +1,6 @@
 <%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
-<div id="adduser_pagelet" class="g-pl">
+<div id="pagelet_adduser" class="g-pl">
 	<div id="adduser-box" class="wrap">
 		<h2>Create a Mantech account</h2>
 		<form id="adduser-form" class="g-f" method="post" action="/user/addSave">
@@ -39,7 +39,9 @@
 							<td>
 								<select name="role">
 									<c:forEach items="${roleList}" var="role">
-										<option value="${role.id}">${role.name}</option>
+										<c:if test="${role.id != 1}">
+											<option value="${role.id}">${role.name}</option>
+										</c:if>
 									</c:forEach>
 								</select>
 							</td>

@@ -48,16 +48,24 @@ public class DashboardController {
     Calendar cal = Calendar.getInstance();
     int year = cal.get(Calendar.YEAR);
     int month = (cal.get(Calendar.MONTH)) + 1;
+    int month2 = month - 1;
     int dateMonth = cal.get(Calendar.DAY_OF_MONTH);
+    int dateMonth2 = dateMonth - 1;
     
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
-    Date date = null;
+    Date date = null,
+        date2 = null;
     String s = Integer.toString(year) + "/" +
         ((month < 10)? ("0" + Integer.toString(month)): Integer.toString(month))+ "/" +
-        ((dateMonth < 10)? ("0" + Integer.toString(dateMonth)): Integer.toString(dateMonth));
+        ((dateMonth < 10)? ("0" + Integer.toString(dateMonth)): Integer.toString(dateMonth)),
+        s2 = Integer.toString(year) + "/" +
+            ((month < 10)? ("0" + Integer.toString(month)): Integer.toString(month))+ "/" +
+            ((dateMonth2 < 10)? ("0" + Integer.toString(dateMonth2)): Integer.toString(dateMonth2));
+      
     try {
       date = sdf.parse(s);
+      date2 = sdf.parse(s2);
     }
     catch (ParseException e) {
       e.printStackTrace();
@@ -67,7 +75,10 @@ public class DashboardController {
       .addAttribute("totalComplaints", complaintRepo.count().intValue())
       .addAttribute("totalCategories", categoryRepo.count().intValue())
       .addAttribute("totalEquipments", equipmentRepo.count().intValue())
-      .addAttribute("totalComplaintsToDay", complaintRepo.countByDate(date));
+      .addAttribute("totalComplaintsToDay", complaintRepo.countByDate(date))
+      .addAttribute("totalComplaintsYesterday", complaintRepo.countByDate(date2))
+      .addAttribute("totalComplaintLastMonth", complaintRepo.summaryInMonth(month2));
+      
     return TemplateKeys.DASHBOARD_PAGE;
   }
   

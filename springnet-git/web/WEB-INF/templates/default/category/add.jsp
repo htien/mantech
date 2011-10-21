@@ -25,7 +25,7 @@
 					</tbody>
 				</table>
 				<div class="buttons">
-					<div id="btnAdd" class="g-b g-b-r">Insert category</div>
+					<div id="btnAdd" class="g-b g-b-r">Add new category</div>
 					<div id="btnReset" class="g-b g-b-b">Reset</div>
 				</div>
 			</div>

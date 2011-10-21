@@ -40,4 +40,23 @@ public class AssignmentDetailDAO extends HibernateGenericDAO<AssignmentDetail> i
     		" and s.completeDate is null").setInteger("id", id).uniqueResult()).intValue();
   }
 
+  @Override
+  public AssignmentDetail getByComplaint(int userId, int complaintId) {
+    return (AssignmentDetail)session().createQuery("select d from AssignmentDetail d" +
+    		" inner join d.user u" +
+        " inner join d.assignment a" +
+    		" where u.id = :userid and a.complaintId = :complaintid")
+      		.setInteger("userid", userId)
+      		.setInteger("complaintid", complaintId)
+      		.uniqueResult();
+  }
+
+  @Override
+  public int countAllCompletedByComplaint(int id) {
+    return ((Integer)session().createSQLQuery("select count(d.id) from assignment_detail d" +
+    		" where d.complaint_id = :id and d.completedate is null")
+    		.setInteger("id", id)
+    		.uniqueResult()).intValue();
+  }
+
 }

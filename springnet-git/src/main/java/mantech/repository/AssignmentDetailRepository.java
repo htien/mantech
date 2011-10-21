@@ -19,6 +19,9 @@ public interface AssignmentDetailRepository extends Repository<AssignmentDetail>
  
   List<AssignmentDetail> getByComplaint(int id);
   
+  AssignmentDetail getByComplaint(int userId, int complaintId);
+  
+  int countAllCompletedByComplaint(int id);
   int countAssignDetailNotCompleted(int id);
 
 }

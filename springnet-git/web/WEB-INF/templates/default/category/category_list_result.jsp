@@ -7,7 +7,7 @@
 			<div class="gg-td-wrapper">
 				<strong>${category.name}</strong>
 				<div class="gg-row-actions">
-					<span><a href="<jtien:url address="/index"/>#editcategory/id=${category.id}">Edit</a></span>
+					<c:if test="${isAdmn}"><span><a href="<jtien:url address="/index"/>#editcategory/id=${category.id}">Edit</a></span></c:if>
 				</div>
 			</div>
 		</td>

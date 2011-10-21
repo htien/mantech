@@ -61,11 +61,11 @@
 									</tr>
 									<tr>
 										<td class="label">Complaints yesterday</td>
-										<td class="n">0</td>
+										<td class="n">${totalComplaintsYesterday}</td>
 									</tr>
 									<tr>
 										<td class="label">Complaints last month</td>
-										<td class="n">0</td>
+										<td class="n">${totalComplaintLastMonth}</td>
 									</tr>
 								</tbody>
 							</table>

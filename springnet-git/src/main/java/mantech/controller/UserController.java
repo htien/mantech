@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import net.lilylnx.springnet.core.SessionManager;
 import net.lilylnx.springnet.util.ClientUtils;
+import net.lilylnx.springnet.util.ConfigKeys;
 import net.lilylnx.springnet.util.Pagination;
 import net.lilylnx.springnet.util.SpringConfig;
+import net.lilylnx.springnet.util.crypto.HashCryptorV1;
 
 import mantech.controller.helpers.RName;
 import mantech.controller.helpers.RStatus;
@@ -38,6 +41,9 @@ import mantech.service.UserService;
  */
 @Controller
 public class UserController {
+  
+  @Autowired
+  private SessionManager sessionManager;
 
   @Autowired
   private SpringConfig config;
@@ -160,16 +166,20 @@ public class UserController {
         @RequestParam(value="confirmpass") String confirmpass)
   {
     ResponseMessage respMessage = new ResponseMessage(RName.UPDATE, RStatus.FAIL, null);
-    User user = userRepo.get(9);
+    User user = sessionManager.getUser();
 
-    if(!newpass.equals(confirmpass) || !user.getPassword().equals(oldpass)) {
-      respMessage.setStatusAndMessage(RStatus.FAIL, "The password you gave is incorrect.");
+    try {
+      if (!newpass.equals(confirmpass) || !HashCryptorV1.verify(oldpass, sessionManager.getUser().getPassword(), ConfigKeys.USERPWD_ALGOR)) {
+        respMessage.setStatusAndMessage(RStatus.FAIL, "The password you gave is incorrect.");
+      }
+    }
+    catch(Exception e) {
     }
 
     if(respMessage.getMessage() == null) {
       try {
-        user.setPassword(newpass);
-        userRepo.save(user);
+        user.setPassword(HashCryptorV1.hash(newpass, 127, ConfigKeys.USERPWD_ALGOR));
+        userRepo.update(user);
         respMessage.setStatusAndMessage(RStatus.SUCC, "Changed password successfully.");
       }
       catch (Exception e){

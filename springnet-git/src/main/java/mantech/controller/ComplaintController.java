@@ -33,6 +33,7 @@ import mantech.repository.EquipmentRepository;
 import mantech.repository.UserRepository;
 import mantech.service.ComplaintService;
 
+import net.lilylnx.springnet.core.SessionManager;
 import net.lilylnx.springnet.util.ClientUtils;
 
 /**
@@ -42,6 +43,9 @@ import net.lilylnx.springnet.util.ClientUtils;
 @Controller
 @SessionAttributes("complaint")
 public class ComplaintController {
+  
+  @Autowired
+  private SessionManager sessionManager;
   
   @Autowired
   private ComplaintService complaintService;
@@ -63,9 +67,13 @@ public class ComplaintController {
   
   @Autowired
   private ClientUtils clientUtils;
+  
+  public ComplaintController () {}
 
   @RequestMapping(value = "/complaint", params = "action=list", method = RequestMethod.GET)
   public String list(ModelMap model) throws Exception {
+    model.addAttribute("list",
+        complaintRepo.getByUser(sessionManager.getUser().getId()));
     model.addAttribute("listComplaint", complaintRepo.findAll());
     model.addAttribute("listStatus", statusRepo.findAll());
     model.addAttribute("listPriority", priorityRepo.findAll());
@@ -87,7 +95,7 @@ public class ComplaintController {
   public String insert(ModelMap model){
     // TODO Sẽ cần chỉnh sửa lại userId sẽ được lấy từ session của employee đã đăng nhập.
     
-    model.addAttribute("user", userRepo.get(2));
+    model.addAttribute("user", userRepo.get(sessionManager.getUser().getId()));
     model.addAttribute("list", equipmentRepo.findAll());
 
     return TemplateKeys.COMPLAINT_ADD;
@@ -101,7 +109,7 @@ public class ComplaintController {
     ResponseMessage respMessage = new ResponseMessage(RName.ADD, RStatus.FAIL, null);
     
     try {
-      User user = userRepo.get(2);
+      User user = userRepo.get(sessionManager.getUser().getId());
       Equipment equipment = equipmentRepo.get(equipId);
       CategoryPriority priority = equipment.getCategory().getPriority();
       
@@ -134,24 +142,23 @@ public class ComplaintController {
       @RequestParam("priority") byte priorityId, ModelMap model)
   {
     ResponseMessage respMessage = new ResponseMessage(RName.UPDATE, RStatus.FAIL, null);
+      try {
+        ComplaintStatus status = statusRepo.get(statusId);
+        CategoryPriority priority = priorityRepo.get(priorityId);
+        
+        if (status == null || priority == null) {
+          throw new Exception("You are hacking :)");
+        }
     
-    try {
-      ComplaintStatus status = statusRepo.get(statusId);
-      CategoryPriority priority = priorityRepo.get(priorityId);
-      
-      if (status == null || priority == null) {
-        throw new Exception("You are hacking :)");
+        Complaint complaint = complaintService.update(id, status, priority);
+        respMessage.setStatusAndMessage(RStatus.SUCC, String.format("Updated complaint: <strong>%s (ID: %d)</strong> successfully.",
+            complaint.getTitle(), complaint.getId()));
       }
-  
-      Complaint complaint = complaintService.update(id, status, priority);
-      respMessage.setStatusAndMessage(RStatus.SUCC, String.format("Updated complaint: <strong>%s (ID: %d)</strong> successfully.",
-          complaint.getTitle(), complaint.getId()));
-    }
-    catch (Exception e) {
-      respMessage.setStatusAndMessage(RStatus.ERROR, e.getMessage());
-    }
-    
-    return clientUtils.createJsonResponse(respMessage);
+      catch (Exception e) {
+        respMessage.setStatusAndMessage(RStatus.ERROR, e.getMessage());
+      }
+      
+      return clientUtils.createJsonResponse(respMessage);
   }
   
   @RequestMapping(value = "/complaint/search", method = RequestMethod.POST)

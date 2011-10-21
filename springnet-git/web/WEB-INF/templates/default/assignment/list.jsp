@@ -13,7 +13,7 @@
 								<col class="list-col-begindate" width="80"/>
 								<col class="list-col-duration" width="60" />
 								<col class="list-col-createdate" width="80"/>
-								<col class="list-col-isdeleted" width="40"/>
+								<col class="list-col-isstatus" width="40"/>
 								<col class="list-col-detail" width="50" />
 							</colgroup>
 							<thead class="gg-list-thead">
@@ -22,7 +22,7 @@
 									<td><span class="gg-inner-block">Begin Date</span></td>
 									<td><span class="gg-inner-block">Duration</span></td>
 									<td><span class="gg-inner-block">Create Date</span></td>
-									<td><span class="gg-inner-block">Deleted</span></td>
+									<td><span class="gg-inner-block">Status</span></td>
 									<td><span class="gg-inner-block">Detail</span></td>
 								</tr>
 							</thead>
@@ -37,7 +37,7 @@
 									<col class="list-col-begindate" width="80"/>
 									<col class="list-col-duration" width="60" />
 									<col class="list-col-createdate" width="80"/>
-									<col class="list-col-isdeleted" width="40"/>
+									<col class="list-col-isstatus" width="40"/>
 									<col class="list-col-detail" width="50" />
 								</colgroup>
 								<thead class="gg-list-thead">

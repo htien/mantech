@@ -2,7 +2,7 @@
 	jsCompressor="closure" compressJavaScript="true" compressCss="true"
 	removeIntertagSpaces="true">
 
-<c:forEach items="${listComplaint}" var="complaint">
+<c:forEach items="${list}" var="complaint">
 	<tr class="gg-list-tr">
 		<td><div class="gg-td-wrapper">${complaint.id}</div>
 		</td>

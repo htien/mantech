@@ -71,7 +71,11 @@
 			</div>
 		</div>
 	</div>
-	<div id="ggaction"><span class="logo-text">Mantech Helpdesk</span> · <span class="path-1">Admin Control Panel</span></div>
+	<div id="ggaction">
+		<img src="<jtien:templateResource item="/${templateName}/css/images/mantech_logo.png"/>" alt="" style="display:inline-block;margin-top:-12px;vertical-align:middle" />
+		<%--<span class="logo-text">Mantech Helpdesk</span>--%>
+		· <span class="path-1">Admin Control Panel</span>
+	</div>
 	<div id="ggshadow"><div></div></div>
 </div>
 <div id="globalContainer">

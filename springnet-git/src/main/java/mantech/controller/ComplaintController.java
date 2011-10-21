@@ -120,8 +120,8 @@ public class ComplaintController {
       Equipment equipment = equipmentRepo.get(equipId);
       CategoryPriority priority = equipment.getCategory().getPriority();
       
-      int newComplaintId = ((Integer)complaintService.add(user, equipment, title, content, priority)).intValue();
-      respMessage.setStatusAndMessage(RStatus.SUCC, String.format("Inserted complaint: <strong>%s (ID: %d)</strong>", title, newComplaintId));
+      complaintService.add(user, equipment, title, content, priority);
+      respMessage.setStatusAndMessage(RStatus.SUCC, String.format("Sent the complaint: <strong>%s</strong>", title));
     }
     catch (Exception e) {
       respMessage.setStatusAndMessage(RStatus.ERROR, e.getMessage());
@@ -187,7 +187,7 @@ public class ComplaintController {
     }
    
     if (complaints.size() != 0) {
-      model.addAttribute("listComplaint", complaints);
+      model.addAttribute("complaints", complaints);
       return TemplateKeys.COMPLAINT_LIST_RESULT;
     }
     else {

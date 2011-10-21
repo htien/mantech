@@ -247,7 +247,7 @@ $(function() {
 		pagelet_addcategory = '#pagelet_addcategory', pagelet_editcategory = '#pagelet_editcategory',
 		pagelet_addequipment = '#pagelet_addequipment', pagelet_editequipment = '#pagelet_editequipment',
 		pagelet_listcomplaint = '#pagelet_listcomplaint', pagelet_addcomplaint = '#pagelet_addcomplaint', pagelet_editcomplaint = '#pagelet_editcomplaint',
-		pagelet_addassignment = '#pagelet_addassignment'
+		pagelet_listequipment = '#pagelet_listequipment', pagelet_addassignment = '#pagelet_addassignment'
 		;
 	var _userlist_filterForm = '#user-filter-form', _userlist_filterSubmit = '#filter-query-submit', _userlist_lnkShowAll =  '#lnkShowAll', _userlist_resultList = '#the-list',
 		_useradd_btnAdd = '#btnAdd', _useradd_btnReset = '#btnReset',
@@ -255,6 +255,7 @@ $(function() {
 		_categorylist_filterForm = '#category-filter-form',
 		_categoryadd_btnAdd = '#btnAdd', _categoryadd_btnReset = '#btnReset',
 		_categoryedit_btnEdit = '#btnEdit',
+		_equipmentlist_filterForm = '#equipment-filter-form', _equipmentlist_filterSubmit = '#filter-query-submit', _equipmentlist_resultList = '#the-list';
 		_equipmentadd_btnAdd = '#btnAdd', _equipmentadd_btnReset = '#btnReset',
 		_equipmentedit_btnEdit = '#btnEdit',
 		_complaintlist_filterForm = '#complaint-filter-form', _complaintlist_filterSubmit = '#filter-query-submit', _complaintlist_resultList = '#the-list',
@@ -267,7 +268,7 @@ $(function() {
 		jTien.ajaxConnect(_userlist_resultList, _userlist_filterForm)
 				.success(function(data) {
 					if (data == null || data.length == 0) {
-						$(_userlist_resultList).html('<tr><td colspan="9" style="padding-top:5px;text-align:center">Nothing to show.</td></tr>');
+						$(_userlist_resultList).html('<tr><td colspan="9" style="padding-top:5px;text-align:center">No data to show.</td></tr>');
 					}
 				});
 	});
@@ -357,6 +358,15 @@ $(function() {
 	
 		_categoryedit_form.validate(_categoryedit_validOpts);
 		_categoryedit_form.submit();
+	});
+	
+	$(_equipmentlist_filterSubmit, pagelet_listequipment).live('click', function(evt) {
+		jTien.ajaxConnect(_equipmentlist_resultList, _equipmentlist_filterForm)
+				.success(function(html) {
+					if (html == null || html.length == 0) {
+						$(_equipmentlist_resultList).html('<tr><td colspan="3" style="padding-top:5px;text-align:center">No data to show.</td></tr>');
+					}
+				});
 	});
 	
 	$(_equipmentadd_btnAdd, pagelet_addequipment).live('click', function(evt) {

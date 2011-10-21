@@ -1,6 +1,6 @@
 <%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
-<div id="adduser_pagelet" class="g-pl">
+<div id="pagelet_adduser" class="g-pl">
 	<div id="adduser-box" class="wrap">
 		<h2>Create a Mantech account</h2>
 		<form id="adduser-form" class="g-f" method="post" action="/user/addSave">

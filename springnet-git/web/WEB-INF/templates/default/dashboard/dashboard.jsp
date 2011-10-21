@@ -15,18 +15,15 @@
 								<table>
 									<tbody>
 										<tr class="first">
-											<td class="first b"><a href="<jtien:url address='/index'/>#listuser">${totalUsers}</a>
-											</td>
+											<td class="first b"><a href="<jtien:url address='/index'/>#listuser">${totalUsers}</a></td>
 											<td class="t"><a href="<jtien:url address='/index'/>#listuser">Users</a></td>
 										</tr>
 										<tr>
-											<td class="first b"><a href="<jtien:url address='/index'/>#listcategory">${totalCategories}</a>
-											</td>
+											<td class="first b"><a href="<jtien:url address='/index'/>#listcategory">${totalCategories}</a></td>
 											<td class="t"><a href="<jtien:url address='/index'/>#listcategory">Categories</a></td>
 										</tr>
 										<tr>
-											<td class="first b"><a href="<jtien:url address='/index'/>#listequipment">${totalEquipments}</a>
-											</td>
+											<td class="first b"><a href="<jtien:url address='/index'/>#listequipment">${totalEquipments}</a></td>
 											<td class="t"><a href="<jtien:url address='/index'/>#listequipment">Equipments</a></td>
 										</tr>
 									</tbody>
@@ -37,8 +34,7 @@
 								<table>
 									<tbody>
 										<tr class="first">
-											<td class="first b"><a href="<jtien:url address='/index'/>#listcomplaint">${totalComplaints}</a>
-											</td>
+											<td class="first b"><a href="<jtien:url address='/index'/>#listcomplaint">${totalComplaints}</a></td>
 											<td class="t"><a href="<jtien:url address='/index'/>#listcomplaint">Complaints</a></td>
 										</tr>
 									</tbody>
@@ -46,8 +42,9 @@
 							</div>
 							<div class="version">
 								<p>
-									Theme <a><strong>SpringNet</strong>
-									</a> is combine Google+ and Wordpress skin.<br /> Designed by T.
+									Theme <a><strong>SpringNet</strong></a> is combine Google+ and Wordpress skin.<br />
+									Designed by T.<br />
+									Development site: <a href="https://github.com/lilylnx/cncaptech/">https://github.com/lilylnx/cncaptech/</a>
 								</p>
 							</div>
 						</div>

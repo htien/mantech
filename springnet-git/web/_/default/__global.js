@@ -54,6 +54,7 @@ $validateOpts = {
 			$(el.form).find('span[class~=' + el.id + ']').removeClass(errorClass);
 		}
 },
+$defaultDlgId = 'ajax-response',
 $adminMenu = '#adminmenu';
 
 /* === Initialize setup default === */
@@ -151,7 +152,8 @@ $(function() {
 		minlength: 'At least {0} characters.',
 		maxlength: 'Max {0} characters.',
 		email: 'eg, yourname@example.com',
-		digit: 'Must be a positive number.'
+		digit: 'Must be a positive number.',
+		equalTo: 'Passwords do not match.'
 	});
 	
 	$('.ui-datepicker a').live('click', function(evt) {

@@ -397,7 +397,7 @@ $(function() {
 		_equipmentadd_form.submit();
 	});
 	
-	$(_complaintlist_filterSubmit, _complaintlist_filterForm).click(function(evt) {
+	$(_complaintlist_filterSubmit, pagelet_listcomplaint).live('click', function(evt) {
 		var dateFrom = $('#dateFrom').val().trim(),
 			dateTo = $('#dateTo').val().trim(),
 			status = $('#status').val(),

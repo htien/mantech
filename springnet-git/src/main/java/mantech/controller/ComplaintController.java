@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import net.lilylnx.springnet.core.SessionManager;
+import net.lilylnx.springnet.util.ClientUtils;
+
 import mantech.controller.helpers.RName;
 import mantech.controller.helpers.RStatus;
 import mantech.controller.helpers.ResponseMessage;
@@ -26,15 +29,13 @@ import mantech.domain.Complaint;
 import mantech.domain.ComplaintStatus;
 import mantech.domain.Equipment;
 import mantech.domain.User;
+import mantech.domain.UserRole;
 import mantech.repository.CategoryPriorityRepository;
 import mantech.repository.ComplaintRepository;
 import mantech.repository.ComplaintStatusRepository;
 import mantech.repository.EquipmentRepository;
 import mantech.repository.UserRepository;
 import mantech.service.ComplaintService;
-
-import net.lilylnx.springnet.core.SessionManager;
-import net.lilylnx.springnet.util.ClientUtils;
 
 /**
  * @author Long Nguyen
@@ -72,16 +73,22 @@ public class ComplaintController {
 
   @RequestMapping(value = "/complaint", params = "action=list", method = RequestMethod.GET)
   public String list(ModelMap model) throws Exception {
-    model.addAttribute("list",
-        complaintRepo.getByUser(sessionManager.getUser().getId()));
-    model.addAttribute("listComplaint", complaintRepo.findAll());
-    model.addAttribute("listStatus", statusRepo.findAll());
-    model.addAttribute("listPriority", priorityRepo.findAll());
-    model.addAttribute("all", ((Long)complaintRepo.count()).toString());
-    model.addAttribute("countWaiting", complaintRepo.countByStatus((byte)1));
-    model.addAttribute("countAccepted", complaintRepo.countByStatus((byte)2));
-    model.addAttribute("countRejected", complaintRepo.countByStatus((byte)3));
-    model.addAttribute("countCompleted", complaintRepo.countByStatus((byte)4));
+    byte role = sessionManager.getUser().getRole().getId();
+    
+    if (UserRole.ADMIN == role) {
+      model.addAttribute("complaints", complaintRepo.findAll());
+      model.addAttribute("listStatus", statusRepo.findAll());
+      model.addAttribute("listPriority", priorityRepo.findAll());
+      model.addAttribute("countAll", complaintRepo.count());
+      model.addAttribute("countWaiting", complaintRepo.countByStatus((byte)1));
+      model.addAttribute("countAccepted", complaintRepo.countByStatus((byte)2));
+      model.addAttribute("countRejected", complaintRepo.countByStatus((byte)3));
+      model.addAttribute("countCompleted", complaintRepo.countByStatus((byte)4));
+    }
+    else {
+      model.addAttribute("complaints", complaintRepo.getByUser(sessionManager.getUser().getId()));
+    }
+
     return TemplateKeys.COMPLAINT_LIST;
   }
   

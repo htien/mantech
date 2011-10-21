@@ -25,7 +25,11 @@
 					<li id="gg-adminbar-account" class="gg-link-top gg-menupop">
 						<a id="lnkAccount" class="ggl" href="javascript:">
 							<span class="gglb"></span>
-							<span class="ggls">${userSession.user.firstName} ${userSession.user.lastName}</span>
+							<span class="ggls">
+								${userSession.user.firstName} ${userSession.user.lastName}
+								<c:if test="${!isAdmin}">[${userSession.user.department.name}]</c:if>
+								<c:if test="${isAdmin}">[ Admin ]</c:if>
+							</span>
 						</a>
 						<div id="gg-personal-menu" class="gg-menupop">
 							<div class="gg-menupop-inner">

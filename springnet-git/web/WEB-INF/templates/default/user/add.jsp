@@ -39,7 +39,9 @@
 							<td>
 								<select name="role">
 									<c:forEach items="${roleList}" var="role">
-										<option value="${role.id}">${role.name}</option>
+										<c:if test="${role.id != 1}">
+											<option value="${role.id}">${role.name}</option>
+										</c:if>
 									</c:forEach>
 								</select>
 							</td>

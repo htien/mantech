@@ -1,9 +1,11 @@
 <%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
 <div id="pagelet_listequipment" class="g-pl wrap">
-	<h2>Equipments<a class="add-new-h2" href="<jtien:url address="/index"/>#addequipment">Add New</a></h2>
-	<form id="equipment-filter-form" method="post" action="/equipment/search">
+	<h2>Equipments
+		<c:if test="${isAdmin}"><a class="add-new-h2" href="<jtien:url address="/index"/>#addequipment">Add New</a></c:if>
+	</h2>
 
+	<form id="equipment-filter-form" method="post" action="/equipment/search">
 		<c:if test="false">
 			<div class="search-box">
 				<input type="text" name="q" />

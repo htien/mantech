@@ -1,7 +1,9 @@
 <%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
 <div id="pagelet_listcomplaint" class="g-pl wrap">
-	<h2>Complaints<a class="add-new-h2" href="<jtien:url address="/index"/>#addcomplaint">Add New</a></h2>
+	<h2>Complaints
+		<c:if test="${isEmployee}"><a class="add-new-h2" href="<jtien:url address="/index"/>#addcomplaint">Add New</a></c:if>
+	</h2>
 
 	<c:if test="${isAdmin}">
 		<ul class="subsubsub">

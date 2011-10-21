@@ -8,7 +8,7 @@
 			<div class="gg-td-wrapper">
 				<strong>${equipment.name}</strong>
 				<div class="gg-row-actions">
-					<span><a href="<jtien:url address="/index"/>#editequipment/id=${equipment.id}">Edit</a></span>
+					<c:if test="${isAdmin}"><span><a href="<jtien:url address="/index"/>#editequipment/id=${equipment.id}">Edit</a></span></c:if>
 				</div>
 			</div>
 		</td>

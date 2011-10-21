@@ -237,6 +237,10 @@ public class SessionManager {
     return us != null ? us : loggedSessions.get(sessionId);
   }
   
+  public User getUser() {
+    return this.getUserSession().getUser();
+  }
+  
   /**
    * Gets the number of session elements.
    * 

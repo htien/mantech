@@ -1,6 +1,6 @@
 <%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
-<div id="edituser_pagelet" class="g-pl">
+<div id="pagelet_edituser" class="g-pl">
 	<div id="edituser-box" class="wrap">
 		<h2>Edit Existing User</h2>
 		<form id="edituser-form" class="g-f" method="post" action="/user/editSave">

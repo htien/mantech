@@ -64,10 +64,10 @@ public class Complaint implements Serializable {
   @PrimaryKeyJoinColumn(name = "complaint_id")
   private Assignment assignment;
 
-  @OneToMany(fetch = FetchType.EAGER)
-  @JoinColumn(name = "id")
+  @OneToMany(mappedBy = "assignment", fetch = FetchType.LAZY)
+  //@JoinColumn(name = "id")
   private List<AssignmentDetail> details;
-
+  
   public Complaint() {}
 
   public int getId() {

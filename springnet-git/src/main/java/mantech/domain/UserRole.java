@@ -23,6 +23,10 @@ public class UserRole implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
+  public static final byte ADMIN = (byte)1;
+  public static final byte TECHNICIAN = (byte)2;
+  public static final byte EMPLOYEE = (byte)3;
+  
   @Id
   @Column(name = "id")
   @GeneratedValue(strategy = GenerationType.IDENTITY)

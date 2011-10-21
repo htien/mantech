@@ -15,4 +15,6 @@ import mantech.domain.ComplaintStatus;
  */
 public interface ComplaintStatusRepository extends Repository<ComplaintStatus> {
 
+  ComplaintStatus get(byte id);
+  
 }

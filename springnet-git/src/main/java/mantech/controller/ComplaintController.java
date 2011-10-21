@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import net.lilylnx.springnet.core.SessionManager;
+import net.lilylnx.springnet.util.ClientUtils;
+
 import mantech.controller.helpers.RName;
 import mantech.controller.helpers.RStatus;
 import mantech.controller.helpers.ResponseMessage;
@@ -26,14 +29,13 @@ import mantech.domain.Complaint;
 import mantech.domain.ComplaintStatus;
 import mantech.domain.Equipment;
 import mantech.domain.User;
+import mantech.domain.UserRole;
 import mantech.repository.CategoryPriorityRepository;
 import mantech.repository.ComplaintRepository;
 import mantech.repository.ComplaintStatusRepository;
 import mantech.repository.EquipmentRepository;
 import mantech.repository.UserRepository;
 import mantech.service.ComplaintService;
-
-import net.lilylnx.springnet.util.ClientUtils;
 
 /**
  * @author Long Nguyen
@@ -42,6 +44,9 @@ import net.lilylnx.springnet.util.ClientUtils;
 @Controller
 @SessionAttributes("complaint")
 public class ComplaintController {
+  
+  @Autowired
+  private SessionManager sessionManager;
   
   @Autowired
   private ComplaintService complaintService;
@@ -63,17 +68,28 @@ public class ComplaintController {
   
   @Autowired
   private ClientUtils clientUtils;
+  
+  public ComplaintController () {}
 
   @RequestMapping(value = "/complaint", params = "action=list", method = RequestMethod.GET)
   public String list(ModelMap model) throws Exception {
-    model.addAttribute("listComplaint", complaintRepo.findAll());
+    byte role = sessionManager.getUser().getRole().getId();
+    
+    if (UserRole.ADMIN == role) {
+      model.addAttribute("complaints", complaintRepo.findAll());
+      model.addAttribute("countAll", complaintRepo.count());
+      model.addAttribute("countWaiting", complaintRepo.countByStatus((byte)1));
+      model.addAttribute("countAccepted", complaintRepo.countByStatus((byte)2));
+      model.addAttribute("countRejected", complaintRepo.countByStatus((byte)3));
+      model.addAttribute("countCompleted", complaintRepo.countByStatus((byte)4));
+    }
+    else {
+      model.addAttribute("complaints", complaintRepo.getByUser(sessionManager.getUser().getId()));
+    }
+
     model.addAttribute("listStatus", statusRepo.findAll());
     model.addAttribute("listPriority", priorityRepo.findAll());
-    model.addAttribute("all", ((Long)complaintRepo.count()).toString());
-    model.addAttribute("countWaiting", complaintRepo.countByStatus((byte)1));
-    model.addAttribute("countAccepted", complaintRepo.countByStatus((byte)2));
-    model.addAttribute("countRejected", complaintRepo.countByStatus((byte)3));
-    model.addAttribute("countCompleted", complaintRepo.countByStatus((byte)4));
+
     return TemplateKeys.COMPLAINT_LIST;
   }
   
@@ -87,7 +103,7 @@ public class ComplaintController {
   public String insert(ModelMap model){
     // TODO Sẽ cần chỉnh sửa lại userId sẽ được lấy từ session của employee đã đăng nhập.
     
-    model.addAttribute("user", userRepo.get(2));
+    model.addAttribute("user", userRepo.get(sessionManager.getUser().getId()));
     model.addAttribute("list", equipmentRepo.findAll());
 
     return TemplateKeys.COMPLAINT_ADD;
@@ -101,12 +117,12 @@ public class ComplaintController {
     ResponseMessage respMessage = new ResponseMessage(RName.ADD, RStatus.FAIL, null);
     
     try {
-      User user = userRepo.get(2);
+      User user = userRepo.get(sessionManager.getUser().getId());
       Equipment equipment = equipmentRepo.get(equipId);
       CategoryPriority priority = equipment.getCategory().getPriority();
       
-      int newComplaintId = ((Integer)complaintService.add(user, equipment, title, content, priority)).intValue();
-      respMessage.setStatusAndMessage(RStatus.SUCC, String.format("Inserted complaint: <strong>%s (ID: %d)</strong>", title, newComplaintId));
+      complaintService.add(user, equipment, title, content, priority);
+      respMessage.setStatusAndMessage(RStatus.SUCC, String.format("Sent the complaint: <strong>%s</strong>", title));
     }
     catch (Exception e) {
       respMessage.setStatusAndMessage(RStatus.ERROR, e.getMessage());
@@ -134,24 +150,23 @@ public class ComplaintController {
       @RequestParam("priority") byte priorityId, ModelMap model)
   {
     ResponseMessage respMessage = new ResponseMessage(RName.UPDATE, RStatus.FAIL, null);
+      try {
+        ComplaintStatus status = statusRepo.get(statusId);
+        CategoryPriority priority = priorityRepo.get(priorityId);
+        
+        if (status == null || priority == null) {
+          throw new Exception("You are hacking :)");
+        }
     
-    try {
-      ComplaintStatus status = statusRepo.get(statusId);
-      CategoryPriority priority = priorityRepo.get(priorityId);
-      
-      if (status == null || priority == null) {
-        throw new Exception("You are hacking :)");
+        Complaint complaint = complaintService.update(id, status, priority);
+        respMessage.setStatusAndMessage(RStatus.SUCC, String.format("Updated complaint: <strong>%s (ID: %d)</strong> successfully.",
+            complaint.getTitle(), complaint.getId()));
       }
-  
-      Complaint complaint = complaintService.update(id, status, priority);
-      respMessage.setStatusAndMessage(RStatus.SUCC, String.format("Updated complaint: <strong>%s (ID: %d)</strong> successfully.",
-          complaint.getTitle(), complaint.getId()));
-    }
-    catch (Exception e) {
-      respMessage.setStatusAndMessage(RStatus.ERROR, e.getMessage());
-    }
-    
-    return clientUtils.createJsonResponse(respMessage);
+      catch (Exception e) {
+        respMessage.setStatusAndMessage(RStatus.ERROR, e.getMessage());
+      }
+      
+      return clientUtils.createJsonResponse(respMessage);
   }
   
   @RequestMapping(value = "/complaint/search", method = RequestMethod.POST)
@@ -173,7 +188,7 @@ public class ComplaintController {
     }
    
     if (complaints.size() != 0) {
-      model.addAttribute("listComplaint", complaints);
+      model.addAttribute("complaints", complaints);
       return TemplateKeys.COMPLAINT_LIST_RESULT;
     }
     else {

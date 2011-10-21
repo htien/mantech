@@ -4,6 +4,9 @@
  */
 package mantech.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -15,21 +18,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import net.lilylnx.springnet.util.ClientUtils;
-
 import mantech.controller.helpers.RName;
 import mantech.controller.helpers.RStatus;
 import mantech.controller.helpers.ResponseMessage;
 import mantech.controller.helpers.TemplateKeys;
 import mantech.domain.Assignment;
+import mantech.domain.AssignmentDetail;
 import mantech.domain.Complaint;
 import mantech.domain.User;
+import mantech.repository.AssignmentDetailRepository;
 import mantech.repository.AssignmentRepository;
 import mantech.repository.ComplaintRepository;
+import mantech.repository.ComplaintStatusRepository;
 import mantech.repository.UserRepository;
 import mantech.service.AssignmentService;
 import mantech.service.ComplaintService;
 import mantech.service.UserService;
+
+import net.lilylnx.springnet.core.SessionManager;
+import net.lilylnx.springnet.util.ClientUtils;
 
 /**
  * @author Long Nguyen
@@ -39,6 +46,9 @@ import mantech.service.UserService;
 public class AssignmentController {
 
   @Autowired
+  private SessionManager sessionManager;
+  
+  @Autowired
   private UserRepository userRepo;
   
   @Autowired
@@ -46,6 +56,9 @@ public class AssignmentController {
   
   @Autowired
   private AssignmentRepository assignmentRepo;
+  
+  @Autowired
+  private AssignmentDetailRepository detailRepo;
   
   @Autowired
   private ComplaintService complaintService;
@@ -59,15 +72,24 @@ public class AssignmentController {
   @Autowired
   private ClientUtils clientUtils;
   
+  @Autowired
+  private ComplaintStatusRepository statusRepo;
+  
+  public AssignmentController() {
+    
+  }
+  
   @RequestMapping(value = {"/assignment"}, params = "action=list", method = RequestMethod.GET)
   public String list(ModelMap model) {
     List<Complaint> listComplaint = complaintRepo.getByAssignment();
     List<Complaint> listAllComplaint = complaintRepo.findAll();
     List<Assignment> listAllAssignment = assignmentRepo.findAll();
-    
+        
     model.addAttribute("listComplaint", listComplaint);
     model.addAttribute("listAllComplaint", listAllComplaint);
     model.addAttribute("listAllAssignment", listAllAssignment);
+    model.addAttribute("listAssignmentsByTechnician", assignmentRepo.
+        getByUserId(sessionManager.getUser().getId()));
     
     for (Complaint c : listAllComplaint) {
       try {
@@ -77,19 +99,55 @@ public class AssignmentController {
         c.setAssignment(null);
       }
     }
-    
+
     return TemplateKeys.ASSIGNMENT_LIST;
   }
   
   @RequestMapping(value = "/assignment", params = "action=detail", method = RequestMethod.GET)
   public String detail(@RequestParam(value="assignmentId") int compId, ModelMap model) {
-    Assignment assignment = assignmentRepo.get(compId);
-    if (assignment == null) {
+    Complaint complaint = complaintRepo.get(compId);
+    
+    if (complaint.getAssignment() == null) {
       return TemplateKeys.FILE_NOT_FOUND;
     }
-    
-    model.addAttribute("details", assignment.getDetails());
+
+    model.addAttribute("complaint", complaint);
     return TemplateKeys.ASSIGNMENT_DETAIL;
+  }
+  
+  @RequestMapping(value = "/assignment", params = "action=complete", method = RequestMethod.GET)
+  public String completedDetail(@RequestParam(value="compId") int id, ModelMap model) {
+    Calendar cal = Calendar.getInstance();
+    int year = cal.get(Calendar.YEAR),
+        month = cal.get(Calendar.MONTH),
+        dateMonth = cal.get(Calendar.DAY_OF_MONTH);
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+    Date date = null;
+    String s = Integer.toString(year) + "/" +
+        ((month < 10)? ("0" + Integer.toString(month)): Integer.toString(month))+ "/" +
+        ((dateMonth < 10)? ("0" + Integer.toString(dateMonth)): Integer.toString(dateMonth));
+    try {
+      date = sdf.parse(s);
+    }
+    catch (ParseException e) {
+      e.printStackTrace();
+    }
+
+    AssignmentDetail detail = detailRepo.getByComplaint(sessionManager.getUser().getId(), id);
+    detail.setCompleteDate(date);
+    detailRepo.update(detail);
+    
+    System.out.println("AAAAAAAAAAAAAAAAAAAA: " + detailRepo.countAllCompletedByComplaint(id));
+    if (detailRepo.countAllCompletedByComplaint(id) == 0) {
+      Assignment assignment = assignmentRepo.get(id);
+      assignment.setDeleted(true);
+      assignmentRepo.update(assignment);
+      Complaint complaint = complaintRepo.get(id);
+      complaint.setStatus(statusRepo.get((byte)4));
+      complaint.setEndDate(date);
+      complaintRepo.update(complaint);
+    }
+    return this.detail(id, model);
   }
   
   @RequestMapping(value = "/assignment", params = "action=add", method = RequestMethod.GET)

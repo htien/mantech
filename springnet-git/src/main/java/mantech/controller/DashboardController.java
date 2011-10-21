@@ -17,7 +17,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import net.lilylnx.springnet.core.SessionManager;
+
 import mantech.controller.helpers.TemplateKeys;
+import mantech.domain.UserRole;
 import mantech.repository.CategoryRepository;
 import mantech.repository.ComplaintRepository;
 import mantech.repository.EquipmentRepository;
@@ -30,6 +33,9 @@ import mantech.repository.UserRepository;
  */
 @Controller
 public class DashboardController {
+  
+  @Autowired
+  private SessionManager sessionManager;
   
   @Autowired
   private UserRepository userRepo;
@@ -84,6 +90,11 @@ public class DashboardController {
   
   @RequestMapping(value = "/dashboard", params = "action=viewreports", method = RequestMethod.GET)
   public String viewReports(ModelMap model) throws Exception {
+    byte role = sessionManager.getUser().getRole().getId();
+    if (role != UserRole.ADMIN) {
+      return TemplateKeys.FILE_NOT_FOUND;
+    }
+    
     Calendar cal = Calendar.getInstance();
     int year = cal.get(Calendar.YEAR);
     int month = (cal.get(Calendar.MONTH)) + 1;

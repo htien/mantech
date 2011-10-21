@@ -453,7 +453,7 @@ $(function() {
 			_complaintedit_dialogOpts = buildJqDialogOpts(_complaintedit_form, 'Edit Complaint Confirmation'),
 			_complaintedit_validOpts = {
 				submitHandler: function(form) {
-					jTien.callJqDialog($defaultDialogId, 'Are you sure want to edit this complaint?',
+					jTien.callJqDialog($defaultDlgId, 'Are you sure want to edit this complaint?',
 							_complaintedit_dialogOpts).dialog('open');
 				}	
 			};

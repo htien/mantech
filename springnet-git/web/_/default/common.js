@@ -246,7 +246,8 @@ $(function() {
 	var pagelet_listuser = '#pagelet_listuser', pagelet_adduser = '#pagelet_adduser', pagelet_edituser = '#pagelet_edituser',
 		pagelet_addcategory = '#pagelet_addcategory', pagelet_editcategory = '#pagelet_editcategory',
 		pagelet_addequipment = '#pagelet_addequipment', pagelet_editequipment = '#pagelet_editequipment',
-		pagelet_listcomplaint = '#pagelet_listcomplaint', pagelet_addcomplaint = '#pagelet_addcomplaint', pagelet_editcomplaint = '#pagelet_editcomplaint'
+		pagelet_listcomplaint = '#pagelet_listcomplaint', pagelet_addcomplaint = '#pagelet_addcomplaint', pagelet_editcomplaint = '#pagelet_editcomplaint',
+		pagelet_listequipment = '#pagelet_listequipment', pagelet_addassignment = '#pagelet_addassignment'
 		;
 	var _userlist_filterForm = '#user-filter-form', _userlist_filterSubmit = '#filter-query-submit', _userlist_lnkShowAll =  '#lnkShowAll', _userlist_resultList = '#the-list',
 		_useradd_btnAdd = '#btnAdd', _useradd_btnReset = '#btnReset',
@@ -254,16 +255,20 @@ $(function() {
 		_categorylist_filterForm = '#category-filter-form',
 		_categoryadd_btnAdd = '#btnAdd', _categoryadd_btnReset = '#btnReset',
 		_categoryedit_btnEdit = '#btnEdit',
+		_equipmentlist_filterForm = '#equipment-filter-form', _equipmentlist_filterSubmit = '#filter-query-submit', _equipmentlist_resultList = '#the-list';
 		_equipmentadd_btnAdd = '#btnAdd', _equipmentadd_btnReset = '#btnReset',
 		_equipmentedit_btnEdit = '#btnEdit',
-		_complaintlist_filterForm = '#complaint-filter-form', _complaintlist_filterSubmit = '#filter-query-submit', _complaintlist_resultList = '#the-list'
+		_complaintlist_filterForm = '#complaint-filter-form', _complaintlist_filterSubmit = '#filter-query-submit', _complaintlist_resultList = '#the-list',
+		_complaintadd_btnAdd = '#btnAdd', _complaintadd_btnReset = '#btnReset',
+		_complaintedit_btnEdit = '#btnEdit',
+		_assignmentadd_btnAdd = '#btnAdd', _assignmentadd_btnReset = '#btnReset'
 		;
 
 	$(_userlist_filterSubmit, pagelet_listuser).live('click', function(evt) {
 		jTien.ajaxConnect(_userlist_resultList, _userlist_filterForm)
 				.success(function(data) {
 					if (data == null || data.length == 0) {
-						$(_userlist_resultList).html('<tr><td colspan="9" style="padding-top:5px;text-align:center">Nothing to show.</td></tr>');
+						$(_userlist_resultList).html('<tr><td colspan="9" style="padding-top:5px;text-align:center">No data to show.</td></tr>');
 					}
 				});
 	});
@@ -355,6 +360,15 @@ $(function() {
 		_categoryedit_form.submit();
 	});
 	
+	$(_equipmentlist_filterSubmit, pagelet_listequipment).live('click', function(evt) {
+		jTien.ajaxConnect(_equipmentlist_resultList, _equipmentlist_filterForm)
+				.success(function(html) {
+					if (html == null || html.length == 0) {
+						$(_equipmentlist_resultList).html('<tr><td colspan="3" style="padding-top:5px;text-align:center">No data to show.</td></tr>');
+					}
+				});
+	});
+	
 	$(_equipmentadd_btnAdd, pagelet_addequipment).live('click', function(evt) {
 		var _equipmentadd_form = $(this).parents('form'),
 			_equipmentadd_dialogOpts = buildJqDialogOpts(_equipmentadd_form, 'Edit Equipment Confirmation'),
@@ -393,7 +407,7 @@ $(function() {
 		_equipmentadd_form.submit();
 	});
 	
-	$(_complaintlist_filterSubmit, _complaintlist_filterForm).click(function(evt) {
+	$(_complaintlist_filterSubmit, pagelet_listcomplaint).live('click', function(evt) {
 		var dateFrom = $('#dateFrom').val().trim(),
 			dateTo = $('#dateTo').val().trim(),
 			status = $('#status').val(),
@@ -410,6 +424,65 @@ $(function() {
 						$(_complaintlist_resultList).html('<tr><td colspan="7">No data to show.</td></tr>');
 					}
 				});
+	});
+	
+	$(_complaintadd_btnAdd, pagelet_addcomplaint).live('click', function(evt) {
+		var _complaintadd_form = $(this).parents('form'),
+			_complaintadd_dialogOpts = buildJqDialogOpts(_complaintadd_form, 'Add Complaint Confirmation'),
+			_complaintadd_validOpts = {
+				rules: {
+					complaint_title: { required: true },
+					complaint_content: { required: true }
+				},
+				submitHandler: function(form) {
+					jTien.callJqDialog($defaultDlgId, 'Are you sure you want to add new complaint?', 
+							_complaintadd_dialogOpts).dialog('open');
+				}
+			};
+
+		_complaintadd_form.validate(_complaintadd_validOpts);
+		_complaintadd_form.submit();
+	});
+
+	$(_complaintadd_btnReset, pagelet_editcomplaint).live('click', function(evt) {
+		jTien.resetForm($(this).parents('form'));
+	});
+	
+	$(_complaintedit_btnEdit, pagelet_editcomplaint).live('click', function(evt) {
+		var _complaintedit_form = $(this).parents('form'),
+			_complaintedit_dialogOpts = buildJqDialogOpts(_complaintedit_form, 'Edit Complaint Confirmation'),
+			_complaintedit_validOpts = {
+				submitHandler: function(form) {
+					jTien.callJqDialog($defaultDialogId, 'Are you sure want to edit this complaint?',
+							_complaintedit_dialogOpts).dialog('open');
+				}	
+			};
+
+		_complaintedit_form.validate(_complaintedit_validOpts);
+		_complaintedit_form.submit();
+	});
+	
+	$(_assignmentadd_btnAdd, pagelet_addassignment).live('click', function(evt) {
+		var _assignmentadd_form = $(this).parents('form'),
+			_assignmentadd_dialogOpts = buildjqDialogOpts(_assignmentadd_form, 'Added assignment successfully.'),
+			_assignmentadd_validOpts = {
+				rules: {
+					beginDate: { required: true, vietnameseDate: true },
+					duration: { required: true, digits: true },
+					userId: { required: true }
+				},
+				submitHandler: function(form) {
+					jTien.callJqDialog($defaultDialogId, 'Are you sure you want to add new assignment?', 
+							_assignmentadd_dialogOpts).dialog('open');
+				}
+			};
+
+		_assignmentadd_form.validate(_assignmentadd_validOpts);
+		_assignmentadd_form.submit();
+	});
+	
+	$(_assignmentadd_btnReset, pagelet_addassignment).live('click', function(evt) {
+		jTien.resetForm($(this).parents('form'));
 	});
 
 });

@@ -25,7 +25,11 @@
 					<li id="gg-adminbar-account" class="gg-link-top gg-menupop">
 						<a id="lnkAccount" class="ggl" href="javascript:">
 							<span class="gglb"></span>
-							<span class="ggls">${userSession.user.firstName} ${userSession.user.lastName}</span>
+							<span class="ggls">
+								${userSession.user.firstName} ${userSession.user.lastName}
+								<c:if test="${!isAdmin}">[${userSession.user.department.name}]</c:if>
+								<c:if test="${isAdmin}">[ Admin ]</c:if>
+							</span>
 						</a>
 						<div id="gg-personal-menu" class="gg-menupop">
 							<div class="gg-menupop-inner">
@@ -67,7 +71,11 @@
 			</div>
 		</div>
 	</div>
-	<div id="ggaction"><span class="logo-text">Mantech Helpdesk</span> · <span class="path-1">Admin Control Panel</span></div>
+	<div id="ggaction">
+		<img src="<jtien:templateResource item="/${templateName}/css/images/mantech_logo.png"/>" alt="" style="display:inline-block;margin-top:-12px;vertical-align:middle" />
+		<%--<span class="logo-text">Mantech Helpdesk</span>--%>
+		· <span class="path-1">Admin Control Panel</span>
+	</div>
 	<div id="ggshadow"><div></div></div>
 </div>
 <div id="globalContainer">

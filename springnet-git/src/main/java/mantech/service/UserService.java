@@ -14,6 +14,9 @@ import mantech.domain.User;
 import mantech.domain.UserRole;
 import mantech.repository.UserRepository;
 
+import net.lilylnx.springnet.util.ConfigKeys;
+import net.lilylnx.springnet.util.crypto.HashCryptorV1;
+
 /**
  * @author Tien Nguyen
  * @version $Id: UserService.java,v 1.0 2011/06/28 16:56:10 lilylnx Exp $
@@ -25,10 +28,11 @@ public class UserService {
   
   public Serializable add(String username, String password, String email, String firstName, String lastName,
         String gender, String address, Department department, UserRole userRole)
+    throws Exception
   {
     User user = new User();
     user.setUsername(username);
-    user.setPassword(password);
+    user.setPassword(HashCryptorV1.hash(password, 127, ConfigKeys.USERPWD_ALGOR));
     user.setEmail(email); 
     user.setFirstName(firstName);
     user.setLastName(lastName);

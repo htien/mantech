@@ -30,6 +30,14 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
   public ComplaintDAO(SessionFactory sessionFactory) {
     super(sessionFactory);
   }
+  
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<Complaint> getByUser(int id) {
+    return session().createCriteria(persistClass, "c")
+        .createCriteria("c.user", "u")
+        .add(Restrictions.eq("u.id", id)).list();
+  }
 
   @Override
   public int countByStatus(byte status) {
@@ -296,9 +304,5 @@ public class ComplaintDAO extends HibernateGenericDAO<Complaint> implements Comp
     
     return crit.list();
   }
-
-
-
-
 
 }

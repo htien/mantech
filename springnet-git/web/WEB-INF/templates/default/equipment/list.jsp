@@ -1,17 +1,23 @@
 <%@ include file="../layout/top.inc" %><compress:html jsCompressor="closure" compressJavaScript="true" compressCss="true" removeIntertagSpaces="true">
 
 <div id="pagelet_listequipment" class="g-pl wrap">
-	<h2>Equipments<a class="add-new-h2" href="<jtien:url address="/index"/>#addequipment">Add New</a></h2>
+	<h2>Equipments
+		<c:if test="${isAdmin}"><a class="add-new-h2" href="<jtien:url address="/index"/>#addequipment">Add New</a></c:if>
+	</h2>
+
 	<form id="equipment-filter-form" method="post" action="/equipment/search">
-		<div class="search-box">
-			<input type="text" name="q" />
-			<select name="f">
-				<option value="1">Equipment</option>
-				<option value="2">Category</option>
-			</select>
-			<div id="filter-query-submit" class="g-b g-b-r">Filter</div>
-			<div id="lnkShowAll" class="g-b g-b-b">Show All</div>
-		</div>
+		<c:if test="false">
+			<div class="search-box">
+				<input type="text" name="q" />
+				<select name="f">
+					<option value="1">Equipment</option>
+					<option value="2">Category</option>
+				</select>
+				<div id="filter-query-submit" class="g-b g-b-r">Filter</div>
+				<div id="lnkShowAll" class="g-b g-b-b">Show All</div>
+			</div>
+		</c:if>
+
 		<div class="tablenav">
 		</div>
 		<div id="equipment-viewmanager">

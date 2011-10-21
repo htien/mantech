@@ -22,6 +22,7 @@ public interface ComplaintRepository extends Repository<Complaint> {
   
   int countByStatus(byte status);
   
+  List<Complaint> getByUser(int id);
   List<Complaint> getByWeekly(Date begin, Date end);
   List<Complaint> getByDepartment(byte id);
   List<Complaint> getByPriority(byte id);

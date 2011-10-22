@@ -4,12 +4,11 @@
 
 	<groupId>net.lilylnx.springnet</groupId>
 	<artifactId>springnet-git</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.5</version>
 	<packaging>war</packaging>
 
 	<name>springnet-git</name>
-	<description>Java Web Application</description>
-	<url>http://www.assembla.com/spaces/cncaptech</url>
+	<url>https://github.com/lilylnx/cncaptech/</url>
 	<inceptionYear>2011</inceptionYear>
 
 	<licenses>
@@ -111,6 +110,7 @@
 					<warSourceDirectory>${basedir}/web</warSourceDirectory>
 					<webappDirectory>${basedir}/web</webappDirectory>
 					<webXml>${basedir}/web/WEB-INF/web.xml</webXml>
+					<packagingExcludes>_raw/**</packagingExcludes>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -479,4 +479,5 @@
 		</profile>
 	</profiles>
 
+	<description>Mantech Helpdesk</description>
 </project>

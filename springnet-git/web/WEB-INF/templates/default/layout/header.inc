@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <script type="text/javascript"><%@ include file="/_/default/__init.js"%></script>
-<script type="text/javascript" src="<jtien:templateResource item="/jquery/jquery-1.6.4.js"/>"></script>
 <script type="text/javascript" src="<jtien:templateResource item="/closure/goog/base.js"/>"></script>
+<script type="text/javascript" src="<jtien:templateResource item="/default/default.js"/>"></script>
 <script type="text/javascript" src="<jtien:templateResource item="/default/__global_runonce.js"/>"></script>
 <meta http-equiv="X-UA-Compatible" content="IE=9, IE=8, chrome=1" />
 <meta http-equiv="Content-Type" content="text/html; charset=<jtien:settings key="encoding"/>" />

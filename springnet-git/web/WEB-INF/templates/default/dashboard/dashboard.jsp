@@ -49,7 +49,7 @@
 								<div class="version">
 									<p>
 										Theme <a><strong>SpringNet</strong></a> is combine Google+ and Wordpress skin.<br />
-										Designed by T.<br />
+										Designed by <jtien:settings key="author"/><br />
 										Development site: <a href="https://github.com/lilylnx/cncaptech/">https://github.com/lilylnx/cncaptech/</a>
 									</p>
 								</div>

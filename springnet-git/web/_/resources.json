@@ -24,13 +24,6 @@
 		"/_/default/css/default.css"
 	],
 	"scripts": [
-		"/_/jquery/jquery-ui-1.8.16.js",
-		"/_/jquery/jquery.validate.js",
-		"/_/jquery/jquery.validate.additional.js",
-		"/_/jquery/jquery.history.js",
-		"/_/highchart/highcharts.js",
-		"/_/highchart/modules/exporting.js",
-		"/_/default/default.js"
 	]
 }
 }
